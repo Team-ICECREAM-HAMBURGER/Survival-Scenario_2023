@@ -1,2 +1,2 @@
-# Survival-Scenario_2023
+# Survival Scenario(2023)
 Made by 'Team ICECREAM HAMBURGER'
