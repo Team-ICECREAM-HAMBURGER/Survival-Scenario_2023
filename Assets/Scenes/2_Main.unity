@@ -8027,7 +8027,7 @@ GameObject:
   - component: {fileID: 633248254}
   - component: {fileID: 633248253}
   m_Layer: 5
-  m_Name: OK Button
+  m_Name: OK (A)
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18109,7 +18109,7 @@ GameObject:
   - component: {fileID: 1234693839}
   - component: {fileID: 1234693840}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18139,10 +18139,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234693838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d638a0fd2f445a4942db37e6ef15d1, type: 3}
+  m_Script: {fileID: 11500000, guid: da97d29dceab64b87aee2d0541ea8369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons: []
+  moveButton: {fileID: 741171208}
+  searchButton: {fileID: 1439055909}
+  fireButton: {fileID: 2025738765}
+  shelterButton: {fileID: 562794156}
+  rainGutterButton: {fileID: 1102190017}
+  planA: {fileID: 633248253}
+  planB: {fileID: 2035330199}
+  planC: {fileID: 1646434019}
 --- !u!1 &1243670412
 GameObject:
   m_ObjectHideFlags: 0
@@ -22890,7 +22897,7 @@ GameObject:
   - component: {fileID: 1646434020}
   - component: {fileID: 1646434019}
   m_Layer: 5
-  m_Name: OK Button
+  m_Name: OK (C)
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27632,7 +27639,7 @@ GameObject:
   - component: {fileID: 2035330200}
   - component: {fileID: 2035330199}
   m_Layer: 5
-  m_Name: OK Button
+  m_Name: OK (B)
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28628,6 +28635,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 963194228}
   - {fileID: 705507995}
+  - {fileID: 1234693839}
   - {fileID: 1589722236}
   - {fileID: 464852526}
-  - {fileID: 1234693839}
