@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    private static GameManager _instance;
+    public static GameManager Instance;
     
     private void Init() {
-        if (_instance != null) {
+        if (Instance != null) {
             return;
         }
 
-        _instance = this;
+        Instance = this;
         DontDestroyOnLoad(this.gameObject);
+        
+        GameOptionLoad();
     }
 
     private void Awake() {
@@ -27,6 +29,14 @@ public class GameManager : MonoBehaviour {
         
     }
 
+    public void GameFileCreate() {
+        
+    }
+
+    public bool GameFileCheck() {
+        return true;
+    }
+    
     public void GameOptionSave() {
         
     }
@@ -35,7 +45,7 @@ public class GameManager : MonoBehaviour {
         
     }
 
-    public void GameSessionInfo() {
+    private void GameSessionInfo() {
         
     }
 }

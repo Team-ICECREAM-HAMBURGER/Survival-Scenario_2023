@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Button
+  - Canvas Main
+  - Canvas Quit
   layers:
   - Default
   - TransparentFX
