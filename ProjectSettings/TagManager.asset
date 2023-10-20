@@ -5,8 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Button
-  - Canvas Main
-  - Canvas Quit
+  - Canvas
   layers:
   - Default
   - TransparentFX
@@ -43,4 +42,37 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Main
+    uniqueID: 710438449
+    locked: 0
+  - name: Infomation
+    uniqueID: 689891951
+    locked: 0
+  - name: Move
+    uniqueID: 4253351495
+    locked: 0
+  - name: Search
+    uniqueID: 1927280067
+    locked: 0
+  - name: Fire
+    uniqueID: 3709103453
+    locked: 0
+  - name: Shelter
+    uniqueID: 2191968949
+    locked: 0
+  - name: Sleep
+    uniqueID: 1147434551
+    locked: 0
+  - name: Rest
+    uniqueID: 3796749827
+    locked: 0
+  - name: Inventory
+    uniqueID: 1373147317
+    locked: 0
+  - name: Crafting
+    uniqueID: 1100065345
+    locked: 0
+  - name: Pause
+    uniqueID: 4288980303
     locked: 0

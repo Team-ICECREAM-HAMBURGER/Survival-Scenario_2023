@@ -4,34 +4,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerBehaviour : MonoBehaviour {
-    public static PlayerBehaviour Instance;
+public enum Behaviour {
+    MOVE,
+    SEARCH,
+    REST,
+    SLEEP,
+    CRAFT,
+    INVENTORY,
+    COOK
+}
 
+public enum CanvasLayer {
+    PAUSE,  // 0
+    CRAFTING,
+    INVENTORY,
+    REST,
+    SLEEP,  
+    SHELTER,    // 5
+    FIRE,
+    SEARCH,
+    INFO,
+    MOVE,
+    MAIN    // 10
+}
+
+public class PlayerBehaviour : MonoBehaviour {
+    private int _searchCounter = 1;
+
+    private List<Canvas> _canvasArray = new List<Canvas>();
+    
     [Header("Main")]
     [SerializeField] private Button moveButton;
     [SerializeField] private Button searchButton;
     [SerializeField] private Button fireButton;
     [SerializeField] private Button shelterButton;
-    [SerializeField] private Button rainGutterButton;
+    [SerializeField] private Button rainGutter;
 
-    [Header("Move")] 
-    [SerializeField] private Button planA;
-    [SerializeField] private Button planB;
-    [SerializeField] private Button planC;
-    
     
     private void Init() {
-        if (Instance != null) {
-            return;
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Canvas")) {
+            this._canvasArray.Add(obj.GetComponent<Canvas>());
         }
 
-        Instance = this;
+        foreach (var VARIABLE in this._canvasArray) {
+            Debug.Log(VARIABLE);
+        }
         
         this.moveButton.onClick.AddListener(Move);
-        this.searchButton.onClick.AddListener(Search);
-        this.fireButton.onClick.AddListener(Fire);
-        this.shelterButton.onClick.AddListener(Shelter);
-        this.rainGutterButton.onClick.AddListener(RainGutter);
     }
 
     private void Awake() {
@@ -39,62 +58,29 @@ public class PlayerBehaviour : MonoBehaviour {
     }
 
     private void Move() {
-        // Move
-        /*
-         * if (Search() > 1) :
-         *  True -> Show Move Screen 
-         *  False -> Show Error Screen
-         *
-         * Plan A, B, C
-         *  -> Button Listener
-         *
-         * if (Player.CanMove()) :
-         *  True -> Show Moving Ani, Update Pos.
-         *  False -> Show Error Screen
-         */
-    }
+        if (this._searchCounter >= 1) {
+            if (Player.Instance.CanBehaviour(Behaviour.MOVE)) {
+                // Change Canvas
+                foreach (var VARIABLE in this._canvasArray) {
+                    VARIABLE.enabled = false;
+                }
+                
+                this._canvasArray[(int)CanvasLayer.MOVE].enabled = true;
+                
+                // MOVE ANI. Screen
+                
+                // Status Update
+                Player.Instance.PlayerStatus.Stamina -= 25;
+                Player.Instance.PlayerStatus.BodyHeat -= 25;
+                Player.Instance.PlayerStatus.Calories -= 25;
+                Player.Instance.PlayerStatus.Hydration -= 25;
 
-    public void Search() {
-        // Search
-        /*
-         * if (Player.CanMove()) :
-         *  True -> Use Player Status, Show Searching Ani, Event()
-         *  False -> Show Error Screen
-         */
-    }
+                // RESULT
 
-    public void Shelter() {
-        // Shelter
-        /*
-         * 
-         */
-    }
-
-    public void RainGutter() {
-        
-    }
-    
-    public void Rest() {
-        
-    }
-
-    public void Sleep() {
-        
-    }
-
-    public void Fire() {
-        
-    }
-
-    public void Inventory() {
-        
-    }
-
-    public void Craft() {
-        
-    }
-
-    public void Build() {
-        
+            }
+            else {
+                // ERROR
+            }
+        }
     }
 }
