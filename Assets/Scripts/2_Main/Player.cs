@@ -2,46 +2,48 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
-    public class Status {
-        public int Stamina { get; set; }
-        public int BodyHeat { get; set; }
-        public int Hydration { get; set; }
-        public int Calories { get; set; }
-        public Dictionary<string, bool> CurrentStatusEffect = new Dictionary<string, bool>();
-    }
+public enum StatusType {
+    STAMINA,
+    BODY_HEAT,
+    HYDRATION,
+    CALORIES
+}
 
-    public static Player Instance;
-    public Status PlayerStatus;
+public enum EffectType {
+    INJURE
+}
+
+public class Player : MonoBehaviour {
+    public static Player instance;
+    public List<Canvas> CanvasList;
+    public Dictionary<StatusType, int> Status { get; private set; }
+    public Dictionary<EffectType, bool> Effect { get; private set; }
     
     
     private void Init() {
-        if (Instance != null) {
+        if (instance != null) {
             return;
         }
         
-        Instance = this;
+        instance = this;
+
+        this.Status = new Dictionary<StatusType, int>();
+        this.Effect = new Dictionary<EffectType, bool>();
+        this.CanvasList = new List<Canvas>();
         
-        this.PlayerStatus = new Status();
+        foreach (var VARIABLE in GameObject.FindGameObjectsWithTag("Canvas")) {
+            this.CanvasList.Add(VARIABLE.GetComponent<Canvas>());
+        }
+        
+        // TODO: (Json -> Load) or (Create)
+        this.Status.Add(StatusType.STAMINA, 100);
+        this.Status.Add(StatusType.BODY_HEAT, 100);
+        this.Status.Add(StatusType.CALORIES, 100);
+        this.Status.Add(StatusType.HYDRATION, 100);
+        this.Effect.Add(EffectType.INJURE, false);
     }
 
     private void Awake() {
         Init();
-    }
-    
-    public bool CanBehaviour(Behaviour behaviour) {
-        switch (behaviour) {
-            case Behaviour.MOVE :
-                if (this.PlayerStatus.Stamina > 25 && this.PlayerStatus.BodyHeat > 25 &&
-                    this.PlayerStatus.Calories > 25 && this.PlayerStatus.Hydration > 25) {
-                    if (!this.PlayerStatus.CurrentStatusEffect["Injured"]) {
-                        return true;
-                    }
-                }
-                
-                return false;
-        }
-        
-        return false;
     }
 }
