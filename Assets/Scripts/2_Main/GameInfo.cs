@@ -17,7 +17,11 @@ public enum WeatherType {
 
 public class GameInfo : MonoBehaviour {
     public static GameInfo Instance;
-    
+
+    public bool IsSearched { get; set; } = true;
+    public bool IsShelterInstalled { get; set; } = true;
+    public bool IsRainGutterInstalled { get; set; } = true;
+    public bool IsFireInstalled { get; set; } = false;
     public int CurrentTerm { get; private set; }
     public int CurrentDay { get; private set; }
     public DayNightType CurrentDayNight { get; private set; }

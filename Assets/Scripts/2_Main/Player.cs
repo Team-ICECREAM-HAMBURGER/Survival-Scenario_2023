@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum StatusType {
     STAMINA,
@@ -26,9 +25,7 @@ public enum ItemType {
     MEDICINE,
     ROASTED_MEAT,
     ROPE,
-    
-    WATER,
-    FIRE,
+    //
     RAW_MEAT,
     PLASTIC_BAG,
     MISCELLANEOUS,
@@ -49,6 +46,7 @@ public class Player : MonoBehaviour {
     public Dictionary<EffectType, bool> Effect { get; private set; }
     public Dictionary<ItemType, int> Inventory { get; private set; }
     
+    
     private void Init() {
         if (Instance != null) {
             return;
@@ -62,7 +60,7 @@ public class Player : MonoBehaviour {
         
         this.canvasList = new List<Canvas>();
         
-        foreach (var VARIABLE in GameObject.FindGameObjectsWithTag("Canvas")) {
+        foreach (GameObject VARIABLE in GameObject.FindGameObjectsWithTag("Canvas")) {
             this.canvasList.Add(VARIABLE.GetComponent<Canvas>());
         }
         
@@ -73,9 +71,30 @@ public class Player : MonoBehaviour {
         this.Status.Add(StatusType.HYDRATION, 100);
         this.Effect.Add(EffectType.INJURE, false);
         this.Inventory.Add(ItemType.TORCH, 1);
+        this.Inventory.Add(ItemType.FIRE_TOOL, 1);
+        this.Inventory.Add(ItemType.KINDLING, 3);
+        this.Inventory.Add(ItemType.WOOD, 1);
     }
 
     private void Awake() {
         Init();
+    }
+    
+    public void CanvasChange(string canvasName) {
+        foreach (Canvas VARIABLE in this.canvasList) {  // Canvas Change
+            VARIABLE.enabled = false || VARIABLE.name == canvasName;
+        }    
+    }
+
+    public void CanvasOn(string canvasName) {
+        foreach (Canvas VARIABLE in this.canvasList.Where(VARIABLE => VARIABLE.name == canvasName)) {
+            VARIABLE.enabled = true;
+        }
+    }
+
+    public void CanvasOff(string canvasName) {
+        foreach (Canvas VARIABLE in this.canvasList.Where(VARIABLE => VARIABLE.name == canvasName)) {
+            VARIABLE.enabled = false;
+        }
     }
 }

@@ -13,8 +13,6 @@ public class PlayerMain : MonoBehaviour {
     [SerializeField] private Button shelterButton;
     [SerializeField] private Button rainGutter;
 
-    private int searchCounter = 1;
-    
     
     private void Init() {
         this.moveButton.onClick.AddListener(Move);
@@ -22,21 +20,18 @@ public class PlayerMain : MonoBehaviour {
         this.fireButton.onClick.AddListener(Fire);
         this.shelterButton.onClick.AddListener(Shelter);
         this.rainGutter.onClick.AddListener(RainGutter);
+        
+        // TODO: Background Change
+        // Player.Instance.BackgroundChange("Canvas Main");
     }
 
     private void Awake() {
         Init();
     }
 
-    private void CanvasChange(string canvasName) {
-        foreach (var VARIABLE in Player.Instance.canvasList) {  // Canvas Change
-            VARIABLE.enabled = false || VARIABLE.name == canvasName;
-        }    
-    }
-
     private void Move() {
         if (CanMove()) {
-            CanvasChange("Canvas Move");
+            Player.Instance.CanvasChange("Canvas Move");
         }
     }
 
@@ -44,7 +39,7 @@ public class PlayerMain : MonoBehaviour {
         // Movable Conditions; All of Status over 25%, Search at least once more, Not injured.
         if (Player.Instance.Status[StatusType.STAMINA] > 25 && Player.Instance.Status[StatusType.BODY_HEAT] > 25 &&
             Player.Instance.Status[StatusType.CALORIES] > 25 && Player.Instance.Status[StatusType.HYDRATION] > 25) {    // Status OK
-            if (this.searchCounter >= 1) {  // Searched
+            if (GameInfo.Instance.IsSearched) {  // Searched
                 if (!Player.Instance.Effect[EffectType.INJURE]) {   // Not Injured
                     // GOOD TO GO
                     return true;
@@ -57,7 +52,7 @@ public class PlayerMain : MonoBehaviour {
     
     private void Search() {
         if (CanSearch()) {
-            CanvasChange("Canvas Search");
+            Player.Instance.CanvasChange("Canvas Search");
         }
     }
 
@@ -84,59 +79,52 @@ public class PlayerMain : MonoBehaviour {
 
     private void Fire() {
         if (CanFire()) {
-            CanvasChange("Canvas Fire");
+            Player.Instance.CanvasChange("Canvas Fire");
+            Player.Instance.CanvasOn("Canvas Info");
         }
     }
 
     private bool CanFire() {
-        // Fire Conditions; 점화도구 1개, 불쏘시개 1개, 나무 3개 -> 날씨 맑음: 70%, 날씨 비: 30%, 날씨 눈: 30% 
-        if (Player.Instance.Inventory[ItemType.FIRE_TOOL] >= 1 && Player.Instance.Inventory[ItemType.KINDLING] >= 1 && 
-            Player.Instance.Inventory[ItemType.WOOD] >= 3) {    // Material OK
-            switch (GameInfo.Instance.CurrentWeather) {
-                case WeatherType.Sunny :
-                    if (Random.Range(0, 10) > 3) {    // 70%
-                        return true;
-                    }
+        if (!GameInfo.Instance.IsFireInstalled) {
+            // Fire Conditions; 점화도구 1개, 불쏘시개 3개, 나무 1개 -> 날씨 맑음: 70%, 날씨 비: 30%, 날씨 눈: 30% 
+            if (Player.Instance.Inventory[ItemType.FIRE_TOOL] >= 1 && Player.Instance.Inventory[ItemType.KINDLING] >= 3 && 
+                Player.Instance.Inventory[ItemType.WOOD] >= 1) {    // Material OK
+                switch (GameInfo.Instance.CurrentWeather) {
+                    case WeatherType.Sunny :
+                        if (Random.Range(0, 10) > 3) {    // 70%
+                            return true;
+                        }
 
-                    return false;
+                        return false;
                 
-                case WeatherType.Rain :
-                    if (Random.Range(0, 10) > 7) {  // 30%
-                        return true;
-                    }
+                    case WeatherType.Rain :
+                        if (Random.Range(0, 10) > 7) {  // 30%
+                            return true;
+                        }
                     
-                    return false;
+                        return false;
                 
-                case WeatherType.Snow :
-                    if (Random.Range(0, 10) > 7) {  // 30%
-                        return true;
-                    }
-                    return false;
+                    case WeatherType.Snow :
+                        if (Random.Range(0, 10) > 7) {  // 30%
+                            return true;
+                        }
+                    
+                        return false;
+                }
             }
         }
         
-        return false;
+        return true;
     }
     
+    // Constructions
     private void Shelter() {
-        if (CanShelter()) {
-            CanvasChange("Canvas Shelter");
-        }
-    }
-
-    private bool CanShelter() {
-        
-        return false;
+        Player.Instance.CanvasChange("Canvas Shelter");
+        Player.Instance.CanvasOn("Canvas Info");
     }
 
     private void RainGutter() {
-        if (CanRainGutter()) {
-            CanvasChange("Canvas RainGutter");
-        }
-    }
-
-    private bool CanRainGutter() {
-        
-        return false;
+        Player.Instance.CanvasChange("Canvas RainGutter");
+        Player.Instance.CanvasOn("Canvas Info");
     }
 }
