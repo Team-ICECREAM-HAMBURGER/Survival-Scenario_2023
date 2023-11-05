@@ -1085,6 +1085,7 @@ GameObject:
   - component: {fileID: 63434308}
   - component: {fileID: 63434307}
   - component: {fileID: 63434306}
+  - component: {fileID: 63434310}
   m_Layer: 5
   m_Name: Canvas Background
   m_TagString: Untagged
@@ -1178,6 +1179,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &63434310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63434305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532e896758debba42bd2b76b4d82d075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgrounds:
+  - {fileID: 819611313}
+  - {fileID: 1010561090}
+  - {fileID: 444831329}
+  - {fileID: 742302054}
 --- !u!1 &67678960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,7 +2327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 18134856}
+  m_AnchoredPosition: {x: -399.9992, y: 19321690}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -8578,7 +8596,7 @@ GameObject:
   - component: {fileID: 444831333}
   - component: {fileID: 444831331}
   m_Layer: 5
-  m_Name: Background_Shelter
+  m_Name: Background Shelter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13529,7 +13547,7 @@ GameObject:
   - component: {fileID: 742302057}
   - component: {fileID: 742302056}
   m_Layer: 5
-  m_Name: Background_Fire
+  m_Name: Background Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15007,7 +15025,7 @@ GameObject:
   - component: {fileID: 819611317}
   - component: {fileID: 819611315}
   m_Layer: 5
-  m_Name: Background_Day
+  m_Name: Background Day
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18451,7 +18469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 18134856}
+  m_AnchoredPosition: {x: -399.9992, y: 19321690}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -19092,7 +19110,7 @@ GameObject:
   - component: {fileID: 1010561093}
   - component: {fileID: 1010561092}
   m_Layer: 5
-  m_Name: Background_Night
+  m_Name: Background Night
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

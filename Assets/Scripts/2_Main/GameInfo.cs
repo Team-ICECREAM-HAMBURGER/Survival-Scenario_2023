@@ -38,7 +38,7 @@ public class GameInfo : MonoBehaviour {
         // TODO: (Json -> Load) or (Create)
         this.CurrentTerm = 0;
         this.CurrentDay = 0;
-        this.CurrentDayNight = DayNightType.Day;
+        this.CurrentDayNight = DayNightType.Night;
         this.CurrentWeather = WeatherType.Sunny;
     }
 

@@ -22,7 +22,12 @@ public class PlayerMain : MonoBehaviour {
         this.rainGutter.onClick.AddListener(RainGutter);
         
         // TODO: Background Change
-        // Player.Instance.BackgroundChange("Canvas Main");
+        if (GameInfo.Instance.CurrentDayNight == DayNightType.Day) {
+            GameBackground.Instance.BackgroundChange("Background Day");
+        } 
+        else if (GameInfo.Instance.CurrentDayNight == DayNightType.Night) {
+            GameBackground.Instance.BackgroundChange("Background Night");
+        }
     }
 
     private void Awake() {
