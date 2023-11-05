@@ -97,6 +97,22 @@ public class Player : MonoBehaviour {
             VARIABLE.enabled = false;
         }
     }
-    
-    
+
+    public void StatusUpdate(int value) {
+        foreach (var VARIABLE in this.Status) {
+            Debug.Log(VARIABLE.Value);
+        }
+        
+        for (int i = 0; i < this.Status.Count; i++) {
+            this.Status[(StatusType)i] += value;
+        }
+
+        foreach (var VARIABLE in this.Status) {
+            Debug.Log(VARIABLE.Value);
+        }
+    }
+
+    public void StatusUpdate(int stamina, int bodyHeat, int hydration, int calories) {
+        
+    }
 }
