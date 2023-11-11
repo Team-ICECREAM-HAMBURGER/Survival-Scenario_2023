@@ -30,12 +30,13 @@ public class PlayerMain : MonoBehaviour {
         }
     }
 
-    private void Awake() {
+    private void Start() {
         Init();
     }
 
     private void Move() {
         if (CanMove()) {
+            // TODO : Player.Instance.PlayerMove.Init();
             Player.Instance.CanvasChange("Canvas Move");
         }
     }
@@ -57,7 +58,7 @@ public class PlayerMain : MonoBehaviour {
     
     private void Search() {
         if (CanSearch()) {
-            Player.Instance.CanvasChange("Canvas Search");
+            Player.Instance.PlayerSearch.Init();
         }
     }
 
@@ -84,6 +85,7 @@ public class PlayerMain : MonoBehaviour {
 
     private void Fire() {
         if (CanFire()) {
+            // TODO : Player.Instance.PlayerFire.Init();
             Player.Instance.CanvasChange("Canvas Fire");
             Player.Instance.CanvasOn("Canvas Info");
         }
@@ -124,11 +126,13 @@ public class PlayerMain : MonoBehaviour {
     
     // Constructions
     private void Shelter() {
+        // TODO : Player.Instance.PlayerShelter.Init();
         Player.Instance.CanvasChange("Canvas Shelter");
         Player.Instance.CanvasOn("Canvas Info");
     }
 
     private void RainGutter() {
+        // TODO : Player.Instance.PlayerRainGutter.Init();
         Player.Instance.CanvasChange("Canvas RainGutter");
         Player.Instance.CanvasOn("Canvas Info");
     }

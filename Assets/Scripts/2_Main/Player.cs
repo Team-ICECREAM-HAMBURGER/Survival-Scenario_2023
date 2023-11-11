@@ -45,6 +45,10 @@ public class Player : MonoBehaviour {
     public Dictionary<StatusType, int> Status { get; private set; }
     public Dictionary<EffectType, bool> Effect { get; private set; }
     public Dictionary<ItemType, int> Inventory { get; private set; }
+
+    public PlayerMain PlayerMain { get; private set; }
+    public PlayerMove PlayerMove { get; private set; }
+    public PlayerSearch PlayerSearch { get; private set; }
     
     
     private void Init() {
@@ -53,6 +57,10 @@ public class Player : MonoBehaviour {
         }
         
         Instance = this;
+
+        this.PlayerMain = this.gameObject.GetComponent<PlayerMain>();
+        this.PlayerMove = this.gameObject.GetComponent<PlayerMove>();
+        this.PlayerSearch = this.gameObject.GetComponent<PlayerSearch>();
 
         this.Status = new Dictionary<StatusType, int>();
         this.Effect = new Dictionary<EffectType, bool>();

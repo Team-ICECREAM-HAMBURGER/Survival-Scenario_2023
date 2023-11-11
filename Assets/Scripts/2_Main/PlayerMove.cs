@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour {
         this.noButton.onClick.AddListener(ReturnToMain);
     }
 
-    private void Awake() {
+    private void Start() {
         Init();
     }
 
