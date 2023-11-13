@@ -96,7 +96,7 @@ public class PlayerMain : MonoBehaviour {
             // Fire Conditions; 점화도구 1개, 불쏘시개 3개, 나무 1개 -> 날씨 맑음: 70%, 날씨 비: 30%, 날씨 눈: 30% 
             if (Player.Instance.Inventory[ItemType.FIRE_TOOL] >= 1 && Player.Instance.Inventory[ItemType.KINDLING] >= 3 && 
                 Player.Instance.Inventory[ItemType.WOOD] >= 1) {    // Material OK
-                switch (GameInfo.Instance.CurrentWeather) {
+                switch (GameInfo.Instance.CurrentWeather) { // TODO : 가중치 랜덤 뽑기 적용 -> https://rito15.github.io/posts/unity-toy-weighted-random-picker/
                     case WeatherType.Sunny :
                         if (Random.Range(0, 10) > 3) {    // 70%
                             return true;

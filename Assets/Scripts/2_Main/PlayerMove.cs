@@ -40,5 +40,4 @@ public class PlayerMove : MonoBehaviour {
     private void ReturnToMain() {
         Player.Instance.CanvasChange("Canvas Move");
     }
-    
 }
