@@ -17,16 +17,15 @@ public enum EffectType {
 public enum ItemType {
     HAND_AXE,
     TORCH,
-    BOTTLE_WATER,
-    BOTTLE_EMPTY,
+    BOTTLE,
     HUNTING_TOOL,
     FIRE_TOOL,
     KINDLING,
     MEDICINE,
-    ROASTED_MEAT,
-    ROPE,
+    MRE,
     //
-    RAW_MEAT,
+    ROPE,
+    MEAT,
     PLASTIC_BAG,
     MISCELLANEOUS,
     WOOD,
@@ -35,7 +34,6 @@ public enum ItemType {
     FLINT,
     CLOTH,
     STONE,
-    MRE
 }
 
 public class Player : MonoBehaviour {
@@ -44,7 +42,25 @@ public class Player : MonoBehaviour {
     public List<Canvas> canvasList;
     public Dictionary<StatusType, int> Status { get; private set; }
     public Dictionary<EffectType, bool> Effect { get; private set; }
-    public Dictionary<ItemType, int> Inventory { get; private set; }
+    public Dictionary<ItemType, IGameItem> Inventory { get; private set; } = new Dictionary<ItemType, IGameItem>() {
+        { ItemType.CAN, new GameItemCan() },
+        { ItemType.MRE, new GameItemMre() },
+        { ItemType.ROPE, new GameItemRope() },
+        { ItemType.WOOD, new GameItemWood() },
+        { ItemType.CLOTH, new GameItemCloth() },
+        { ItemType.FLINT, new GameItemFlint() },
+        { ItemType.HERBS, new GameItemHerbs() },
+        { ItemType.STONE, new GameItemStone() },
+        { ItemType.TORCH, new GameItemTorch() },
+        { ItemType.MEAT, new GameItemMeat() },
+        { ItemType.FIRE_TOOL, new GameItemFireTool() },
+        { ItemType.KINDLING, new GameItemKindling() },
+        { ItemType.MEDICINE, new GameItemMedicine() },
+        { ItemType.PLASTIC_BAG, new GameItemPlasticBag() },
+        { ItemType.BOTTLE, new GameItemBottle() },
+        { ItemType.HUNTING_TOOL, new GameItemHuntingTool() },
+        { ItemType.MISCELLANEOUS, new GameItemMiscellaneous() }
+    }; // TODO: Init (All of Items!!)
 
     public PlayerMain PlayerMain { get; private set; }
     public PlayerMove PlayerMove { get; private set; }
@@ -64,7 +80,7 @@ public class Player : MonoBehaviour {
 
         this.Status = new Dictionary<StatusType, int>();
         this.Effect = new Dictionary<EffectType, bool>();
-        this.Inventory = new Dictionary<ItemType, int>();
+        this.Inventory = new Dictionary<ItemType, IGameItem>();
         
         this.canvasList = new List<Canvas>();
         
@@ -78,10 +94,9 @@ public class Player : MonoBehaviour {
         this.Status.Add(StatusType.CALORIES, 100);
         this.Status.Add(StatusType.HYDRATION, 100);
         this.Effect.Add(EffectType.INJURE, false);
-        this.Inventory.Add(ItemType.TORCH, 1);
-        this.Inventory.Add(ItemType.FIRE_TOOL, 1);
-        this.Inventory.Add(ItemType.KINDLING, 3);
-        this.Inventory.Add(ItemType.WOOD, 1);
+        
+        //this.Inventory.Add(ItemType.TORCH, new GameItemFireTool());
+        // TODO: JSON -> Value Edit
     }
 
     private void Awake() {

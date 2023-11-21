@@ -11,6 +11,17 @@ public class PlayerEventFarming : MonoBehaviour, IPlayerEvent {
     }
     
     public void Event() {
+        // Debug
         Debug.Log("FarmingEvent");
+        
+        // Item Random select
+        
+        
+        
+        // Item -> Inventory 
+        
+        
+        
+        
     }
 }

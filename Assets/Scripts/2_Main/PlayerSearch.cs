@@ -24,7 +24,7 @@ public class PlayerSearch : MonoBehaviour {
     public void Init() {
         Player.Instance.CanvasChange("Canvas Search");
         
-        // 가중치 랜덤 뽑기
+        // weight random select
         float randomPivot = Random.Range(0, 100);
         float weight = 0;
         
@@ -38,9 +38,13 @@ public class PlayerSearch : MonoBehaviour {
         }
         
         this.okButton.onClick.AddListener(SearchingResultOk);
-        searchingGameObject.SetActive(true);
+        this.searchingGameObject.SetActive(true);
     }
 
     private void SearchingResultOk() {
+        // Return to Main Screen
+        Player.Instance.CanvasChange("Canvas Main");
+        Player.Instance.CanvasOn("Canvas Background");
+        Player.Instance.CanvasOn("Canvas Info");
     }
 }
