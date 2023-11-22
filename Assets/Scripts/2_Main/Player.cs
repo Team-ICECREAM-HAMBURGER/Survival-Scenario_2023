@@ -42,25 +42,25 @@ public class Player : MonoBehaviour {
     public List<Canvas> canvasList;
     public Dictionary<StatusType, int> Status { get; private set; }
     public Dictionary<EffectType, bool> Effect { get; private set; }
-    public Dictionary<ItemType, IGameItem> Inventory { get; private set; } = new Dictionary<ItemType, IGameItem>() {
-        { ItemType.CAN, new GameItemCan() },
-        { ItemType.MRE, new GameItemMre() },
-        { ItemType.ROPE, new GameItemRope() },
-        { ItemType.WOOD, new GameItemWood() },
-        { ItemType.CLOTH, new GameItemCloth() },
-        { ItemType.FLINT, new GameItemFlint() },
-        { ItemType.HERBS, new GameItemHerbs() },
-        { ItemType.STONE, new GameItemStone() },
-        { ItemType.TORCH, new GameItemTorch() },
-        { ItemType.MEAT, new GameItemMeat() },
-        { ItemType.FIRE_TOOL, new GameItemFireTool() },
-        { ItemType.KINDLING, new GameItemKindling() },
-        { ItemType.MEDICINE, new GameItemMedicine() },
-        { ItemType.PLASTIC_BAG, new GameItemPlasticBag() },
-        { ItemType.BOTTLE, new GameItemBottle() },
-        { ItemType.HUNTING_TOOL, new GameItemHuntingTool() },
-        { ItemType.MISCELLANEOUS, new GameItemMiscellaneous() }
-    }; // TODO: Init (All of Items!!)
+    public Dictionary<ItemType, IItem> Inventory { get; private set; } = new Dictionary<ItemType, IItem>() {
+        { ItemType.CAN, new ItemCan() },
+        { ItemType.MRE, new ItemMre() },
+        { ItemType.ROPE, new ItemRope() },
+        { ItemType.WOOD, new ItemWood() },
+        { ItemType.CLOTH, new ItemCloth() },
+        { ItemType.FLINT, new ItemFlint() },
+        { ItemType.HERBS, new ItemHerbs() },
+        { ItemType.STONE, new ItemStone() },
+        { ItemType.TORCH, new ItemTorch() },
+        { ItemType.MEAT, new ItemMeat() },
+        { ItemType.FIRE_TOOL, new ItemFireTool() },
+        { ItemType.KINDLING, new ItemKindling() },
+        { ItemType.MEDICINE, new ItemMedicine() },
+        { ItemType.PLASTIC_BAG, new ItemPlasticBag() },
+        { ItemType.BOTTLE, new ItemBottle() },
+        { ItemType.HUNTING_TOOL, new ItemHuntingTool() },
+        { ItemType.MISCELLANEOUS, new ItemMiscellaneous() }
+    };
 
     public PlayerMain PlayerMain { get; private set; }
     public PlayerMove PlayerMove { get; private set; }
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour {
 
         this.Status = new Dictionary<StatusType, int>();
         this.Effect = new Dictionary<EffectType, bool>();
-        this.Inventory = new Dictionary<ItemType, IGameItem>();
+        this.Inventory = new Dictionary<ItemType, IItem>();
         
         this.canvasList = new List<Canvas>();
         
@@ -95,7 +95,7 @@ public class Player : MonoBehaviour {
         this.Status.Add(StatusType.HYDRATION, 100);
         this.Effect.Add(EffectType.INJURE, false);
         
-        //this.Inventory.Add(ItemType.TORCH, new GameItemFireTool());
+        //this.Inventory.Add(ItemType.TORCH, new ItemFireTool());
         // TODO: JSON -> Value Edit
     }
 
@@ -136,6 +136,6 @@ public class Player : MonoBehaviour {
     }
 
     public void StatusUpdate(int stamina, int bodyHeat, int hydration, int calories) {
-        
+        // TODO: Each Status value update.
     }
 }

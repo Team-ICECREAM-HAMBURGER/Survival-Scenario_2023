@@ -9,7 +9,7 @@ public enum EventType {
     IN_DANGER
 }
 
-public interface IPlayerEvent {
+public interface IPlayerSearchEvent {
     float Weight { get; set; }
     void Event();
 }

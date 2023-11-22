@@ -12,23 +12,23 @@ public class PlayerSearch : MonoBehaviour {
     [Space(10f)]
     [SerializeField] private GameObject searchingGameObject;
     
-    private readonly Dictionary<EventType, IPlayerEvent> eventActions =
-        new Dictionary<EventType, IPlayerEvent>() {
-            { EventType.FARMING, new PlayerEventFarming(90f) },
-            { EventType.HUNTING, new PlayerEventHunting(5f) },
-            { EventType.INJURED, new PlayerEventInjured(2.5f) },
-            { EventType.IN_DANGER, new PlayerEventInDanger(2.5f) }
+    private readonly Dictionary<EventType, IPlayerSearchEvent> eventActions =
+        new Dictionary<EventType, IPlayerSearchEvent>() {
+            { EventType.FARMING, new PlayerSearchEventFarming(90f) },
+            { EventType.HUNTING, new PlayerSearchEventHunting(5f) },
+            { EventType.INJURED, new PlayerSearchEventInjured(2.5f) },
+            { EventType.IN_DANGER, new PlayerSearchEventInDanger(2.5f) }
         };
     
     
     public void Init() {
         Player.Instance.CanvasChange("Canvas Search");
         
-        // weight random select
+        // Weight random select
         float randomPivot = Random.Range(0, 100);
         float weight = 0;
         
-        foreach (IPlayerEvent VARIABLE in this.eventActions.Values) {
+        foreach (IPlayerSearchEvent VARIABLE in this.eventActions.Values) {
             if (VARIABLE.Weight + weight >= randomPivot) {   // Selected!
                 VARIABLE.Event();
                 break;

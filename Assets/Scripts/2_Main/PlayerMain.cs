@@ -68,7 +68,7 @@ public class PlayerMain : MonoBehaviour {
             Player.Instance.Status[StatusType.CALORIES] > 10 && Player.Instance.Status[StatusType.HYDRATION] > 10) {    // Status OK
             if (!Player.Instance.Effect[EffectType.INJURE]) {   // Not Injured
                 if (GameInfo.Instance.CurrentDayNight == DayNightType.Night) {  // Night
-                     if (Player.Instance.Inventory[ItemType.TORCH] >= 1) {    // Torch OK
+                     if (Player.Instance.Inventory[ItemType.TORCH].Count >= 1) {    // Torch OK
                          // GOOD TO GO; Ani Scene
                          return true;
                      }
@@ -94,8 +94,8 @@ public class PlayerMain : MonoBehaviour {
     private bool CanFire() {
         if (!GameInfo.Instance.IsFireInstalled) {
             // Fire Conditions; 점화도구 1개, 불쏘시개 3개, 나무 1개 -> 날씨 맑음: 70%, 날씨 비: 30%, 날씨 눈: 30% 
-            if (Player.Instance.Inventory[ItemType.FIRE_TOOL] >= 1 && Player.Instance.Inventory[ItemType.KINDLING] >= 3 && 
-                Player.Instance.Inventory[ItemType.WOOD] >= 1) {    // Material OK
+            if (Player.Instance.Inventory[ItemType.FIRE_TOOL].Count >= 1 && Player.Instance.Inventory[ItemType.KINDLING].Count >= 3 && 
+                Player.Instance.Inventory[ItemType.WOOD].Count >= 1) {    // Material OK
                 switch (GameInfo.Instance.CurrentWeather) {
                     case WeatherType.Sunny :
                         if (Random.Range(0, 10) > 3) {    // 70%
