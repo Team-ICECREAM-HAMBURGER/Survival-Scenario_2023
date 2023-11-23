@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class ItemCloth : MonoBehaviour, IItem {
+public class itemCloth : MonoBehaviour, IItem {
     public int Count { get; set; }
     public float Weight { get; set; }
     public bool IsAcquirable { get; set; }
-    public ItemType ItemType { get; set; }
+    public itemType ItemType { get; set; }
 
     
-    public ItemCloth(float weight = 0f, int count = 0) {
+    public itemCloth(float weight = 0f, int count = 0) {
         this.Count = count;
         this.Weight = weight;
-        this.ItemType = ItemType.CLOTH;
+        this.ItemType = itemType.CLOTH;
     }
     
     public void ItemFarming() {

@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
-    public static GameManager Instance;
+public class gameManager : MonoBehaviour {
+    public static gameManager instance;
     
     private void Init() {
-        if (Instance != null) {
+        if (instance != null) {
             return;
         }
 
-        Instance = this;
+        instance = this;
         DontDestroyOnLoad(this.gameObject);
         
         GameOptionLoad();

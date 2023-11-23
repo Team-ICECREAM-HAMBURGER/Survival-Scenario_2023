@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
+public class playerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
 
     
-    public PlayerSearchEventInjured(float weight) {
+    public playerSearchEventInjured(float weight) {
         this.Weight = weight;
     }
     

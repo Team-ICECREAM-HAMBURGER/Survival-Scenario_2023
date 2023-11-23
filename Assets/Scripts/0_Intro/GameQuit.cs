@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameQuit : MonoBehaviour {
+public class gameQuit : MonoBehaviour {
     [SerializeField] protected GameObject canvasQuit;
     private Button _quitButton;
-    protected Button NoButton;
-    protected Button YesButton;
+    protected Button noButton;
+    protected Button yesButton;
     
     
     private void Init() {

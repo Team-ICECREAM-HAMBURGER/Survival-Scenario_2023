@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameBackground : MonoBehaviour {
-    public static GameBackground Instance;
+public class gameBackground : MonoBehaviour {
+    public static gameBackground instance;
     
     [SerializeField] private GameObject[] backgrounds;
 
 
     private void Init() {
-        if (Instance != null) {
+        if (instance != null) {
             return;
         }
 
-        Instance = this;
+        instance = this;
     }
     
     private void Awake() {
@@ -22,13 +22,13 @@ public class GameBackground : MonoBehaviour {
     }
 
     public void BackgroundChange(string backgroundName) {
-        foreach (var VARIABLE in this.backgrounds) {
-            if (VARIABLE.name == backgroundName) {
-                VARIABLE.SetActive(true);
+        foreach (var variable in this.backgrounds) {
+            if (variable.name == backgroundName) {
+                variable.SetActive(true);
                 continue;
             }
             
-            VARIABLE.SetActive(false);
+            variable.SetActive(false);
         }
     }
 }

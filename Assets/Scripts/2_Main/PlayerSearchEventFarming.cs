@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
+public class playerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
 
     
-    public PlayerSearchEventFarming(float weight) {
+    public playerSearchEventFarming(float weight) {
         this.Weight = weight;
     }
     
@@ -17,17 +17,27 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
         
         // Item Random select
         float randomPivot = Random.Range(0, 100);
-        float weight = 0;
+        float weight = 0; 
 
-        foreach (var VARIABLE in Player.Instance.Inventory) {
-            if (VARIABLE.Value.IsAcquirable) {
-                if (VARIABLE.Value.Weight + weight >= randomPivot) {
-                    VARIABLE.Value.ItemFarming();
+        // Debug
+        Debug.Log("random pivot : " + randomPivot);
+        
+        foreach (var variable in player.instance.inventory) {
+            if (variable.Value.IsAcquirable) {
+                if (variable.Value.Weight + weight >= randomPivot) {
+                    variable.Value.ItemFarming();
+
+                    // Debug
+                    Debug.Log("item type: " + variable.Key);
+                    Debug.Log("item weight: " + variable.Value.Weight);
+                    Debug.Log("item get: " + variable.Value.Count);
                 }
+                
+                weight += variable.Value.Weight;
             }
         }
         
         // Player Status Update
-        Player.Instance.StatusUpdate(20, 10, 10, 10);
+        player.instance.StatusUpdate(20, 10, 10, 10);
     }
 }

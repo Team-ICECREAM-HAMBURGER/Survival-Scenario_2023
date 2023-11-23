@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum StatusType {
+public enum statusType {
     STAMINA,
     BODY_HEAT,
     HYDRATION,
     CALORIES
 }
 
-public enum EffectType {
+public enum effectType {
     INJURE
 }
 
-public enum ItemType {
+public enum itemType {
     HAND_AXE,
     TORCH,
     BOTTLE,
@@ -36,64 +36,66 @@ public enum ItemType {
     STONE,
 }
 
-public class Player : MonoBehaviour {
-    public static Player Instance;
+public class player : MonoBehaviour {
+    public static player instance;
     
     public List<Canvas> canvasList;
-    public Dictionary<StatusType, int> Status { get; private set; }
-    public Dictionary<EffectType, bool> Effect { get; private set; }
-    public Dictionary<ItemType, IItem> Inventory { get; private set; } = new Dictionary<ItemType, IItem>() {
-        { ItemType.CAN, new ItemCan() },
-        { ItemType.MRE, new ItemMre() },
-        { ItemType.ROPE, new ItemRope() },
-        { ItemType.WOOD, new ItemWood() },
-        { ItemType.CLOTH, new ItemCloth() },
-        { ItemType.FLINT, new ItemFlint() },
-        { ItemType.HERBS, new ItemHerbs() },
-        { ItemType.STONE, new ItemStone() },
-        { ItemType.TORCH, new ItemTorch() },
-        { ItemType.MEAT, new ItemMeat() },
-        { ItemType.FIRE_TOOL, new ItemFireTool() },
-        { ItemType.KINDLING, new ItemKindling() },
-        { ItemType.MEDICINE, new ItemMedicine() },
-        { ItemType.PLASTIC_BAG, new ItemPlasticBag() },
-        { ItemType.BOTTLE, new ItemBottle() },
-        { ItemType.HUNTING_TOOL, new ItemHuntingTool() },
-        { ItemType.MISCELLANEOUS, new ItemMiscellaneous() }
+    
+    public playerMain PlayerMain { get; private set; }
+    public playerMove PlayerMove { get; private set; }
+    public playerSearch PlayerSearch { get; private set; }
+    
+    // TODO: Readonly
+    public Dictionary<statusType, int> Status { get; private set; }
+    public Dictionary<effectType, bool> Effect { get; private set; }
+    
+    public readonly Dictionary<itemType, IItem> inventory = new Dictionary<itemType, IItem>() {
+        { itemType.CAN, new itemCan() },
+        { itemType.MRE, new itemMre() },
+        { itemType.ROPE, new itemRope() },
+        { itemType.WOOD, new itemWood() },
+        { itemType.CLOTH, new itemCloth() },
+        { itemType.FLINT, new itemFlint() },
+        { itemType.HERBS, new itemHerbs() },
+        { itemType.STONE, new itemStone() },
+        { itemType.TORCH, new itemTorch() },
+        { itemType.MEAT, new itemMeat() },
+        { itemType.FIRE_TOOL, new itemFireTool() },
+        { itemType.KINDLING, new itemKindling() },
+        { itemType.MEDICINE, new itemMedicine() },
+        { itemType.PLASTIC_BAG, new itemPlasticBag() },
+        { itemType.BOTTLE, new itemBottle() },
+        { itemType.HUNTING_TOOL, new itemHuntingTool() },
+        { itemType.MISCELLANEOUS, new itemMiscellaneous() }
     };
 
-    public PlayerMain PlayerMain { get; private set; }
-    public PlayerMove PlayerMove { get; private set; }
-    public PlayerSearch PlayerSearch { get; private set; }
-    
     
     private void Init() {
-        if (Instance != null) {
+        if (instance != null) {
             return;
         }
         
-        Instance = this;
+        instance = this;
 
-        this.PlayerMain = this.gameObject.GetComponent<PlayerMain>();
-        this.PlayerMove = this.gameObject.GetComponent<PlayerMove>();
-        this.PlayerSearch = this.gameObject.GetComponent<PlayerSearch>();
+        this.PlayerMain = this.gameObject.GetComponent<playerMain>();
+        this.PlayerMove = this.gameObject.GetComponent<playerMove>();
+        this.PlayerSearch = this.gameObject.GetComponent<playerSearch>();
 
-        this.Status = new Dictionary<StatusType, int>();
-        this.Effect = new Dictionary<EffectType, bool>();
-        this.Inventory = new Dictionary<ItemType, IItem>();
+        this.Status = new Dictionary<statusType, int>();
+        this.Effect = new Dictionary<effectType, bool>();
         
         this.canvasList = new List<Canvas>();
         
-        foreach (GameObject VARIABLE in GameObject.FindGameObjectsWithTag("Canvas")) {
-            this.canvasList.Add(VARIABLE.GetComponent<Canvas>());
+        foreach (GameObject variable in GameObject.FindGameObjectsWithTag("Canvas")) {
+            this.canvasList.Add(variable.GetComponent<Canvas>());
         }
         
         // TODO: (Json -> Load) or (Create)
-        this.Status.Add(StatusType.STAMINA, 100);
-        this.Status.Add(StatusType.BODY_HEAT, 100);
-        this.Status.Add(StatusType.CALORIES, 100);
-        this.Status.Add(StatusType.HYDRATION, 100);
-        this.Effect.Add(EffectType.INJURE, false);
+        this.Status.Add(statusType.STAMINA, 100);
+        this.Status.Add(statusType.BODY_HEAT, 100);
+        this.Status.Add(statusType.CALORIES, 100);
+        this.Status.Add(statusType.HYDRATION, 100);
+        this.Effect.Add(effectType.INJURE, false);
         
         //this.Inventory.Add(ItemType.TORCH, new ItemFireTool());
         // TODO: JSON -> Value Edit
@@ -104,34 +106,34 @@ public class Player : MonoBehaviour {
     }
     
     public void CanvasChange(string canvasName) {
-        foreach (Canvas VARIABLE in this.canvasList) {  // Canvas Change
-            VARIABLE.enabled = false || VARIABLE.name == canvasName;
+        foreach (Canvas variable in this.canvasList) {  // Canvas Change
+            variable.enabled = false || variable.name == canvasName;
         }    
     }
 
     public void CanvasOn(string canvasName) {
-        foreach (Canvas VARIABLE in this.canvasList.Where(VARIABLE => VARIABLE.name == canvasName)) {
-            VARIABLE.enabled = true;
+        foreach (Canvas variable in this.canvasList.Where(variable => variable.name == canvasName)) {
+            variable.enabled = true;
         }
     }
 
     public void CanvasOff(string canvasName) {
-        foreach (Canvas VARIABLE in this.canvasList.Where(VARIABLE => VARIABLE.name == canvasName)) {
-            VARIABLE.enabled = false;
+        foreach (Canvas variable in this.canvasList.Where(variable => variable.name == canvasName)) {
+            variable.enabled = false;
         }
     }
 
     public void StatusUpdate(int value) {
-        foreach (var VARIABLE in this.Status) {
-            Debug.Log(VARIABLE.Value);
+        foreach (var variable in this.Status) {
+            Debug.Log(variable.Value);
         }
         
         for (int i = 0; i < this.Status.Count; i++) {
-            this.Status[(StatusType)i] += value;
+            this.Status[(statusType)i] += value;
         }
 
-        foreach (var VARIABLE in this.Status) {
-            Debug.Log(VARIABLE.Value);
+        foreach (var variable in this.Status) {
+            Debug.Log(variable.Value);
         }
     }
 

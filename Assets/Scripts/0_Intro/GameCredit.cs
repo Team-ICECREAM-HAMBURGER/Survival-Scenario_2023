@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameCredit : MonoBehaviour {
+public class gameCredit : MonoBehaviour {
     private Button _button;
 
 

@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class ItemStone : MonoBehaviour, IItem {
+public class itemStone : MonoBehaviour, IItem {
     public int Count { get; set; }
     public float Weight { get; set; }
     public bool IsAcquirable { get; set; }
-    public ItemType ItemType { get; set; }
+    public itemType ItemType { get; set; }
 
     
-    public ItemStone(float weight = 0f, int count = 0, bool isAcquirable = true) {
+    public itemStone(float weight = 0f, int count = 0, bool isAcquirable = true) {
         this.Count = count;
         this.Weight = weight;
         this.IsAcquirable = isAcquirable;
-        this.ItemType = ItemType.STONE;
+        this.ItemType = itemType.STONE;
     }
 
     public void ItemFarming() {

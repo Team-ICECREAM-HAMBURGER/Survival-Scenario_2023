@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMove : MonoBehaviour {
+public class playerMove : MonoBehaviour {
     [Header("Move")] 
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
@@ -31,13 +31,13 @@ public class PlayerMove : MonoBehaviour {
         this.resultGameObject.SetActive(true);
         
         // Update the Player Status Values
-        Player.Instance.StatusUpdate(-25);
+        player.instance.StatusUpdate(-25);
         
         // Result
         // TODO : this.resultGameObject -> Text(Title, Content) Update
     }
 
     private void ReturnToMain() {
-        Player.Instance.CanvasChange("Canvas Move");
+        player.instance.CanvasChange("Canvas Move");
     }
 }

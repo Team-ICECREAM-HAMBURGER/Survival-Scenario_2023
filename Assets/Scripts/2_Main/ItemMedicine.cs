@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class ItemMedicine : MonoBehaviour, IItem {
+public class itemMedicine : MonoBehaviour, IItem {
     public int Count { get; set; }
     public float Weight { get; set; }
     public bool IsAcquirable { get; set; }
-    public ItemType ItemType { get; set; }
+    public itemType ItemType { get; set; }
 
 
-    public ItemMedicine(float weight = 0f, int count = 0) {
+    public itemMedicine(float weight = 0f, int count = 0) {
         this.Count = count;
         this.Weight = weight;
-        this.ItemType = ItemType.MEDICINE;
+        this.ItemType = itemType.MEDICINE;
     }
     
     public void ItemFarming() {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameActionLoading : MonoBehaviour {
+public class gameActionLoading : MonoBehaviour {
     [SerializeField] private Slider indicator;
     
     

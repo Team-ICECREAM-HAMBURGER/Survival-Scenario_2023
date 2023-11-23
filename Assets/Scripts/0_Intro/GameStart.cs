@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameStart : MonoBehaviour {
+public class gameStart : MonoBehaviour {
     private Button _button;
     
     
@@ -15,12 +15,12 @@ public class GameStart : MonoBehaviour {
             SceneManager.LoadScene("LoadingScene");
         
             // Has Previous Save Data?
-            if (GameManager.Instance.GameFileCheck()) {  // True -> Load data
-                GameManager.Instance.GameFileLoad();
+            if (gameManager.instance.GameFileCheck()) {  // True -> Load data
+                gameManager.instance.GameFileLoad();
             }
             else {  // False -> Create Data + Load Data
-                GameManager.Instance.GameFileCreate();
-                GameManager.Instance.GameFileLoad();
+                gameManager.instance.GameFileCreate();
+                gameManager.instance.GameFileLoad();
             }
         });
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class NewGame : MonoBehaviour {
+public class newGame : MonoBehaviour {
     private Button _button;
     
     
@@ -12,12 +12,12 @@ public class NewGame : MonoBehaviour {
         this._button = this.gameObject.GetComponent<Button>();
         this._button.onClick.AddListener(() => {
             // Has Save File?
-            if (GameManager.Instance.GameFileCheck()) {
+            if (gameManager.instance.GameFileCheck()) {
                 // Warn -> T or F -> Create or Return
             }
             else {
-                GameManager.Instance.GameFileCreate();
-                GameManager.Instance.GameFileLoad();
+                gameManager.instance.GameFileCreate();
+                gameManager.instance.GameFileLoad();
             }
         
             // Game Loading...

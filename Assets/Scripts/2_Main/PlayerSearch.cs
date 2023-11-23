@@ -6,35 +6,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PlayerSearch : MonoBehaviour {
+public class playerSearch : MonoBehaviour {
     [Header("Search")]
     [SerializeField] private Button okButton;
     [Space(10f)]
     [SerializeField] private GameObject searchingGameObject;
     
-    private readonly Dictionary<EventType, IPlayerSearchEvent> eventActions =
-        new Dictionary<EventType, IPlayerSearchEvent>() {
-            { EventType.FARMING, new PlayerSearchEventFarming(90f) },
-            { EventType.HUNTING, new PlayerSearchEventHunting(5f) },
-            { EventType.INJURED, new PlayerSearchEventInjured(2.5f) },
-            { EventType.IN_DANGER, new PlayerSearchEventInDanger(2.5f) }
+    private readonly Dictionary<eventType, IPlayerSearchEvent> _eventActions =
+        new Dictionary<eventType, IPlayerSearchEvent>() {
+            { eventType.FARMING, new playerSearchEventFarming(90f) },
+            { eventType.HUNTING, new playerSearchEventHunting(5f) },
+            { eventType.INJURED, new playerSearchEventInjured(2.5f) },
+            { eventType.IN_DANGER, new playerSearchEventInDanger(2.5f) }
         };
     
     
     public void Init() {
-        Player.Instance.CanvasChange("Canvas Search");
+        player.instance.CanvasChange("Canvas Search");
         
         // Weight random select
         float randomPivot = Random.Range(0, 100);
         float weight = 0;
         
-        foreach (IPlayerSearchEvent VARIABLE in this.eventActions.Values) {
-            if (VARIABLE.Weight + weight >= randomPivot) {   // Selected!
-                VARIABLE.Event();
+        foreach (IPlayerSearchEvent variable in this._eventActions.Values) {
+            if (variable.Weight + weight >= randomPivot) {   // Selected!
+                variable.Event();
                 break;
             }
             
-            weight += VARIABLE.Weight;
+            weight += variable.Weight;
         }
         
         this.okButton.onClick.AddListener(SearchingResultOk);
@@ -43,8 +43,8 @@ public class PlayerSearch : MonoBehaviour {
 
     private void SearchingResultOk() {
         // Return to Main Screen
-        Player.Instance.CanvasChange("Canvas Main");
-        Player.Instance.CanvasOn("Canvas Background");
-        Player.Instance.CanvasOn("Canvas Info");
+        player.instance.CanvasChange("Canvas Main");
+        player.instance.CanvasOn("Canvas Background");
+        player.instance.CanvasOn("Canvas Info");
     }
 }

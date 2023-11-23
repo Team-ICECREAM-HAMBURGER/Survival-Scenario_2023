@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
+public class playerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
     
     
-    public PlayerSearchEventHunting(float weight) {
+    public playerSearchEventHunting(float weight) {
         this.Weight = weight;
     }
     
