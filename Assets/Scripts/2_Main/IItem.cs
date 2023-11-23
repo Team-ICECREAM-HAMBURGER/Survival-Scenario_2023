@@ -3,6 +3,6 @@ public interface IItem {
     float Weight { get; set; }
     bool IsAcquirable { get; set; }
     ItemType ItemType { get; set; }
-
+    
     void ItemFarming();
 }
