@@ -2,20 +2,19 @@ using UnityEngine;
 
 public class itemHandAxe : MonoBehaviour, IItem {
     public int Count { get; set; }
-    public float Weight { get; set; }
-    public bool IsAcquirable { get; set; }
+    public float Weight { get; }
+    public bool IsAcquirable { get; } = false;
     public int Durability { get; set; }
-    public itemType ItemType { get; set; }
+    public itemType ItemType { get; } = itemType.HAND_AXE;
 
 
-    public itemHandAxe(float weight = 0f, int count = 0, int durability = 5, bool isAcquirable = false) {
+    public itemHandAxe(float weight = 0f, int count = 0, int durability = 5) {
         this.Count = count;
         this.Weight = weight;
         this.Durability = durability;
-        this.IsAcquirable = isAcquirable;
-        this.ItemType = itemType.HAND_AXE;
     }
     
-    public void ItemFarming() { // TODO: 탐색하기 파밍 이벤트 결과 (수집 불가 아이템)
+    public void ItemFarming() {
+        return;
     }
 }

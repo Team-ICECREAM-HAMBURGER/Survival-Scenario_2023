@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public class itemTorch : MonoBehaviour, IItem {
+public class ItemTorch : MonoBehaviour, IItem {
     public int Count { get; set; }
-    public float Weight { get; set; }
-    public bool IsAcquirable { get; set; }
-    public itemType ItemType { get; set; }
+    public float Weight { get; }
+    public bool IsAcquirable { get; } = false;
+    public itemType ItemType { get; } = itemType.TORCH;
+
+    private int _durability = 1;
     
     
-    public itemTorch(float weight = 0f, int count = 0, bool isAcquirable = false) {
+    public ItemTorch(float weight = 0f, int count = 0) {
         this.Count = count;
         this.Weight = weight;
-        this.IsAcquirable = isAcquirable;
-        this.ItemType = itemType.TORCH;
     }
     
-    public void ItemFarming() {
+    public void ItemFarming() { 
+        // IsAcquirable = false
+        return;
     }
 }

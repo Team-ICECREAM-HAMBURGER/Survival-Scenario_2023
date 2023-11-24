@@ -1,8 +1,8 @@
 public interface IItem {
     int Count { get; set; }
-    float Weight { get; set; }
-    bool IsAcquirable { get; set; }
-    itemType ItemType { get; set; }
+    float Weight { get; }
+    bool IsAcquirable { get; }
+    itemType ItemType { get; }
     
     void ItemFarming();
 }
