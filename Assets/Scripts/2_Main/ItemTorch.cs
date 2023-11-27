@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class ItemTorch : MonoBehaviour, IItem {
-    public int Count { get; set; }
-    public float Weight { get; }
-    public bool IsAcquirable { get; } = false;
-    public itemType ItemType { get; } = itemType.TORCH;
+public class ItemTorch : Item {
+    public override int Count { get; set; }
+    public override float Weight { get; }
+    public override bool IsAcquirable { get; } = false;
+    public override itemType ItemType { get; } = itemType.TORCH;
+    public override eventType EventType { get; } = eventType.NONE;
 
     private int _durability = 1;
     
@@ -13,9 +14,5 @@ public class ItemTorch : MonoBehaviour, IItem {
         this.Count = count;
         this.Weight = weight;
     }
-    
-    public void ItemFarming() { 
-        // IsAcquirable = false
-        return;
-    }
+
 }

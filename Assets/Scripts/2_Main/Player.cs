@@ -45,28 +45,29 @@ public class player : MonoBehaviour {
     public playerMove PlayerMove { get; private set; }
     public playerSearch PlayerSearch { get; private set; }
     
-    // TODO: Readonly
+    // TODO: Readonly, Initialize
     public Dictionary<statusType, int> Status { get; private set; }
     public Dictionary<effectType, bool> Effect { get; private set; }
     
-    public readonly Dictionary<itemType, IItem> inventory = new Dictionary<itemType, IItem>() {
-        { itemType.CAN, new itemCan() },
-        { itemType.MRE, new itemMre() },
-        { itemType.ROPE, new itemRope() },
+    public readonly Dictionary<itemType, Item> inventory = new Dictionary<itemType, Item>() {
+        { itemType.HERBS, new ItemHerbs() },
+        { itemType.ROPE, new ItemRope() },
+        { itemType.CAN, new ItemCan() },
+        { itemType.CLOTH, new ItemCloth() },
+        { itemType.PLASTIC_BAG, new ItemPlasticBag() },
+        { itemType.MISCELLANEOUS, new ItemMiscellaneous() },
+        { itemType.STONE, new ItemStone() },
         { itemType.WOOD, new ItemWood() },
-        { itemType.CLOTH, new itemCloth() },
+        //
+        { itemType.MRE, new itemMre() },
         { itemType.FLINT, new itemFlint() },
-        { itemType.HERBS, new itemHerbs() },
-        { itemType.STONE, new itemStone() },
         { itemType.TORCH, new ItemTorch() },
         { itemType.MEAT, new itemMeat() },
         { itemType.FIRE_TOOL, new ItemFireTool() },
         { itemType.KINDLING, new ItemKindling() },
         { itemType.MEDICINE, new itemMedicine() },
-        { itemType.PLASTIC_BAG, new itemPlasticBag() },
         { itemType.BOTTLE, new ItemBottle() },
-        { itemType.HUNTING_TOOL, new itemHuntingTool() },
-        { itemType.MISCELLANEOUS, new itemMiscellaneous() }
+        { itemType.HUNTING_TOOL, new itemHuntingTool() }
     };
 
     
@@ -90,15 +91,14 @@ public class player : MonoBehaviour {
             this.canvasList.Add(variable.GetComponent<Canvas>());
         }
         
-        // TODO: (Json -> Load) or (Create)
+        // TODO: JSON -> Status Value Load
         this.Status.Add(statusType.STAMINA, 100);
         this.Status.Add(statusType.BODY_HEAT, 100);
         this.Status.Add(statusType.CALORIES, 100);
         this.Status.Add(statusType.HYDRATION, 100);
         this.Effect.Add(effectType.INJURE, false);
         
-        //this.Inventory.Add(ItemType.TORCH, new ItemFireTool());
-        // TODO: JSON -> Value Edit
+        // TODO: JSON -> Inventory Value Load
     }
 
     private void Awake() {

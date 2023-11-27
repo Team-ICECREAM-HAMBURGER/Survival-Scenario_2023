@@ -16,24 +16,36 @@ public class playerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
         Debug.Log("FarmingEvent");
         
         // Item Random select
-        float randomPivot = Random.Range(0, 100);
-        float weight = 0; 
+        for (int i = 0; i < Random.Range(2, 4); i++) {
+            float randomPivot = Random.Range(0, 100);
+            float weight = 0;
+            
+            // Debug
+            Debug.Log("random pivot : " + randomPivot + 
+                      " weight : " + weight);
+            
+            foreach (var variable in player.instance.inventory) {
+                if (variable.Value.IsAcquirable && variable.Value.EventType == eventType.FARMING) {
+                    if (weight + variable.Value.Weight >= randomPivot) {
+                        variable.Value.ItemAcquire();
 
-        // Debug
-        Debug.Log("random pivot : " + randomPivot);
-        
-        foreach (var variable in player.instance.inventory) {
-            if (variable.Value.IsAcquirable) {
-                if (variable.Value.Weight + weight >= randomPivot) {
-                    variable.Value.ItemFarming();
-
+                        // Debug
+                        Debug.Log("----------//RESULT//----------");
+                        Debug.Log("item type: " + variable.Key + 
+                                  " item weight: " + variable.Value.Weight + 
+                                  " item count: " + variable.Value.Count);
+                        Debug.Log("----------//--!!--//----------");
+                        break;
+                    }
+                    
                     // Debug
-                    Debug.Log("item type: " + variable.Key);
-                    Debug.Log("item weight: " + variable.Value.Weight);
-                    Debug.Log("item get: " + variable.Value.Count);
+                    Debug.Log("item type: " + variable.Key + 
+                              " item weight: " + variable.Value.Weight + 
+                              " item count: " + variable.Value.Count);
+                    
+                    // TODO: Farming Result -> Text UI
+                    weight += variable.Value.Weight;
                 }
-                
-                weight += variable.Value.Weight;
             }
         }
         

@@ -1,18 +1,22 @@
 using UnityEngine;
 
-public class itemPlasticBag : MonoBehaviour, IItem {
-    public int Count { get; set; }
-    public float Weight { get; set; }
-    public bool IsAcquirable { get; set; }
-    public itemType ItemType { get; set; }
+public class ItemPlasticBag : Item {
+    public override int Count { get; set; }
+    public override float Weight { get; }
+    public override bool IsAcquirable { get; } = true;
+    public override itemType ItemType { get; } = itemType.PLASTIC_BAG;
+    public override eventType EventType { get; } = eventType.FARMING;
+
+    private readonly int _maxValue;
 
 
-    public itemPlasticBag(float weight = 0f, int count = 0) {
+    public ItemPlasticBag(float weight = 12f, int count = 0) {
         this.Count = count;
         this.Weight = weight;
-        this.ItemType = itemType.PLASTIC_BAG;
     }
     
-    public void ItemFarming() {
+    public override void ItemAcquire() {
+        // Count Update -> Item get
+        this.Count += Random.Range(0, (this._maxValue + 1));
     }
 }

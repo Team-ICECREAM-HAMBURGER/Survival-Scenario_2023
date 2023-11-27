@@ -1,18 +1,15 @@
 using UnityEngine;
 
-public class itemMedicine : MonoBehaviour, IItem {
-    public int Count { get; set; }
-    public float Weight { get; set; }
-    public bool IsAcquirable { get; set; }
-    public itemType ItemType { get; set; }
+public class itemMedicine : Item {
+    public override int Count { get; set; }
+    public override float Weight { get; }
+    public override bool IsAcquirable { get; } = false;
+    public override itemType ItemType { get; } = itemType.MEDICINE;
+    public override eventType EventType { get; } = eventType.NONE;
 
 
     public itemMedicine(float weight = 0f, int count = 0) {
         this.Count = count;
         this.Weight = weight;
-        this.ItemType = itemType.MEDICINE;
-    }
-    
-    public void ItemFarming() {
     }
 }
