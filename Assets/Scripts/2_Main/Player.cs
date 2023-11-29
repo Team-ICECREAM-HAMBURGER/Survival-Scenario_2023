@@ -59,15 +59,14 @@ public class player : MonoBehaviour {
         { itemType.STONE, new ItemStone() },
         { itemType.WOOD, new ItemWood() },
         //
-        { itemType.MRE, new itemMre() },
-        { itemType.FLINT, new itemFlint() },
+        { itemType.MRE, new ItemMre() },
         { itemType.TORCH, new ItemTorch() },
-        { itemType.MEAT, new itemMeat() },
+        { itemType.MEAT, new ItemMeat() },
         { itemType.FIRE_TOOL, new ItemFireTool() },
         { itemType.KINDLING, new ItemKindling() },
-        { itemType.MEDICINE, new itemMedicine() },
+        { itemType.MEDICINE, new ItemMedicine() },
         { itemType.BOTTLE, new ItemBottle() },
-        { itemType.HUNTING_TOOL, new itemHuntingTool() }
+        { itemType.HUNTING_TOOL, new ItemHuntingTool() }
     };
 
     

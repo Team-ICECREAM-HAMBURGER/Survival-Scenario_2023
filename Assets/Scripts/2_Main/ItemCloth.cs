@@ -2,16 +2,19 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ItemCloth : Item {
+    public override string ItemName { get; set; }
     public override int Count { get; set; }
-    public override float Weight { get; }
+    public override float Weight { get; set; }
+    
     public override bool IsAcquirable { get; } = true;
     public override itemType ItemType { get; } = itemType.CLOTH;
     public override eventType EventType { get; } = eventType.FARMING;
 
-    private readonly int _maxValue;
+    private readonly int _maxValue = 2;
     
     
-    public ItemCloth(float weight = 10f, int count = 0, int maxValue = 2) {
+    public ItemCloth(string itemName = "천", int count = 0, float weight = 0f) {
+        this.ItemName = itemName;
         this.Count = count;
         this.Weight = weight;
     }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class playerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
+public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
 
     
-    public playerSearchEventFarming(float weight) {
+    public PlayerSearchEventFarming(float weight) {
         this.Weight = weight;
     }
     
@@ -20,30 +20,21 @@ public class playerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
             float randomPivot = Random.Range(0, 100);
             float weight = 0;
             
-            // Debug
-            Debug.Log("random pivot : " + randomPivot + 
-                      " weight : " + weight);
+            Dictionary<Item, int> acquiredItems = new Dictionary<Item, int>();
             
             foreach (var variable in player.instance.inventory) {
                 if (variable.Value.IsAcquirable && variable.Value.EventType == eventType.FARMING) {
                     if (weight + variable.Value.Weight >= randomPivot) {
+                        int count = variable.Value.Count;
+                        
                         variable.Value.ItemAcquire();
-
-                        // Debug
-                        Debug.Log("----------//RESULT//----------");
-                        Debug.Log("item type: " + variable.Key + 
-                                  " item weight: " + variable.Value.Weight + 
-                                  " item count: " + variable.Value.Count);
-                        Debug.Log("----------//--!!--//----------");
+                        acquiredItems.Add(variable.Value, (variable.Value.Count - count));
                         break;
                     }
                     
-                    // Debug
-                    Debug.Log("item type: " + variable.Key + 
-                              " item weight: " + variable.Value.Weight + 
-                              " item count: " + variable.Value.Count);
-                    
                     // TODO: Farming Result -> Text UI
+                    PlayerSearchResultView.Instance.Farming(acquiredItems);
+                    
                     weight += variable.Value.Weight;
                 }
             }
