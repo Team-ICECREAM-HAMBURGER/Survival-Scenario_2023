@@ -15,30 +15,34 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
         // Debug
         Debug.Log("FarmingEvent");
         
+        Dictionary<string, int> acquiredItems = new Dictionary<string, int>();
+
         // Item Random select
         for (int i = 0; i < Random.Range(2, 4); i++) {
             float randomPivot = Random.Range(0, 100);
             float weight = 0;
             
-            Dictionary<Item, int> acquiredItems = new Dictionary<Item, int>();
             
             foreach (var variable in player.instance.inventory) {
                 if (variable.Value.IsAcquirable && variable.Value.EventType == eventType.FARMING) {
                     if (weight + variable.Value.Weight >= randomPivot) {
-                        int count = variable.Value.Count;
+                        if (!acquiredItems.ContainsKey(variable.Value.ItemName)) {
+                            int count = variable.Value.Count;
+                            
+                            variable.Value.ItemAcquire();
+                            acquiredItems.Add(variable.Value.ItemName, (variable.Value.Count - count));
+                        }
                         
-                        variable.Value.ItemAcquire();
-                        acquiredItems.Add(variable.Value, (variable.Value.Count - count));
                         break;
                     }
-                    
-                    // TODO: Farming Result -> Text UI
-                    PlayerSearchResultView.Instance.Farming(acquiredItems);
                     
                     weight += variable.Value.Weight;
                 }
             }
         }
+        
+        // Farming Result -> Text UI
+        PlayerSearchResultView.Instance.Farming(acquiredItems);
         
         // Player Status Update
         player.instance.StatusUpdate(20, 10, 10, 10);

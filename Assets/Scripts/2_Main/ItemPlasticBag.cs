@@ -12,7 +12,7 @@ public class ItemPlasticBag : Item {
     private readonly int _maxValue = 2;
 
 
-    public ItemPlasticBag(string itemName = "비닐", int count = 0, float weight = 0f) {
+    public ItemPlasticBag(string itemName = "비닐", int count = 0, float weight = 12f) {
         this.ItemName = itemName;
         this.Count = count;
         this.Weight = weight;
@@ -20,6 +20,6 @@ public class ItemPlasticBag : Item {
     
     public override void ItemAcquire() {
         // Count Update -> Item get
-        this.Count += Random.Range(0, (this._maxValue + 1));
+        this.Count += Random.Range(1, (this._maxValue + 1));
     }
 }

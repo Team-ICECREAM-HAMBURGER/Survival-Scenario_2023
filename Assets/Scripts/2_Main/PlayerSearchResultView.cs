@@ -8,6 +8,8 @@ public class PlayerSearchResultView : MonoBehaviour {
 
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text contentText;
+
+    private string content = "";
     
     
     private void Init() {
@@ -22,15 +24,14 @@ public class PlayerSearchResultView : MonoBehaviour {
         Init();
     }
 
-    public void Farming(Dictionary<Item, int> acquiredItems) {
-        
-        
-        
-        
-        
+    public void Farming(Dictionary<string, int> acquiredItems) {
+        foreach (var VARIABLE in acquiredItems) {
+            this.content += "- " + VARIABLE.Key + " x" + VARIABLE.Value + "\n";
+            Debug.Log(this.content);
+        }
         
         this.titleText.text = "쓸만한 것들을 찾았다.";
-        this.contentText.text = @"";
+        this.contentText.text = this.content;
     }
 
     public void Hunting() {

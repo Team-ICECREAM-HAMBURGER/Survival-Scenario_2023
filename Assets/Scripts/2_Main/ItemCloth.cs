@@ -13,7 +13,7 @@ public class ItemCloth : Item {
     private readonly int _maxValue = 2;
     
     
-    public ItemCloth(string itemName = "천", int count = 0, float weight = 0f) {
+    public ItemCloth(string itemName = "천", int count = 0, float weight = 10f) {
         this.ItemName = itemName;
         this.Count = count;
         this.Weight = weight;
@@ -21,6 +21,6 @@ public class ItemCloth : Item {
     
     public override void ItemAcquire() {
         // Count Update -> Item get
-        this.Count += Random.Range(0, (this._maxValue + 1));
+        this.Count += Random.Range(1, (this._maxValue + 1));
     }
 }
