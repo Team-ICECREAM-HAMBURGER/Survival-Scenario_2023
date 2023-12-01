@@ -22,7 +22,6 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
             float randomPivot = Random.Range(0, 100);
             float weight = 0;
             
-            
             foreach (var variable in player.instance.inventory) {
                 if (variable.Value.IsAcquirable && variable.Value.EventType == eventType.FARMING) {
                     if (weight + variable.Value.Weight >= randomPivot) {
@@ -40,7 +39,7 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
                 }
             }
         }
-        
+   
         // Farming Result -> Text UI
         PlayerSearchResultView.Instance.Farming(acquiredItems);
         

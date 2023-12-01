@@ -14,10 +14,10 @@ public class playerSearch : MonoBehaviour {
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> _eventActions =
         new Dictionary<eventType, IPlayerSearchEvent>() {
-            { eventType.FARMING, new PlayerSearchEventFarming(90f) },
-            { eventType.HUNTING, new playerSearchEventHunting(5f) },
-            { eventType.INJURED, new playerSearchEventInjured(2.5f) },
-            { eventType.IN_DANGER, new playerSearchEventInDanger(2.5f) }
+            { eventType.FARMING, new PlayerSearchEventFarming(1f) },
+            { eventType.HUNTING, new playerSearchEventHunting(98f) },
+            { eventType.INJURED, new playerSearchEventInjured(0.5f) },
+            { eventType.IN_DANGER, new playerSearchEventInDanger(0.5f) }
         };
     
     

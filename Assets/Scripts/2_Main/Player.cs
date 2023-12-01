@@ -17,15 +17,16 @@ public enum effectType {
 public enum itemType {
     HAND_AXE,
     TORCH,
-    BOTTLE,
+    EMPTY_BOTTLE,
+    FILLED_BOTTLE,
     HUNTING_TOOL,
     FIRE_TOOL,
     KINDLING,
     MEDICINE,
     MRE,
-    //
     ROPE,
-    MEAT,
+    RAW_MEAT,
+    COOKED_MEAT,
     PLASTIC_BAG,
     MISCELLANEOUS,
     WOOD,
@@ -61,11 +62,13 @@ public class player : MonoBehaviour {
         //
         { itemType.MRE, new ItemMre() },
         { itemType.TORCH, new ItemTorch() },
-        { itemType.MEAT, new ItemMeat() },
+        { itemType.RAW_MEAT, new ItemMeatRaw() },
+        { itemType.COOKED_MEAT, new ItemMeatCooked() },
         { itemType.FIRE_TOOL, new ItemFireTool() },
         { itemType.KINDLING, new ItemKindling() },
         { itemType.MEDICINE, new ItemMedicine() },
-        { itemType.BOTTLE, new ItemBottle() },
+        { itemType.EMPTY_BOTTLE, new ItemBottleEmpty() },
+        { itemType.FILLED_BOTTLE, new ItemBottleFilled() },
         { itemType.HUNTING_TOOL, new ItemHuntingTool() }
     };
 

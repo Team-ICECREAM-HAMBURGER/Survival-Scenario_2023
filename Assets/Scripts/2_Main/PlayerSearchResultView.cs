@@ -9,7 +9,7 @@ public class PlayerSearchResultView : MonoBehaviour {
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text contentText;
 
-    private string content = "";
+    private string content;
     
     
     private void Init() {
@@ -18,6 +18,8 @@ public class PlayerSearchResultView : MonoBehaviour {
         }
         
         Instance = this;
+        
+        this.content = "";
     }
 
     private void Awake() {
@@ -25,9 +27,10 @@ public class PlayerSearchResultView : MonoBehaviour {
     }
 
     public void Farming(Dictionary<string, int> acquiredItems) {
+        this.content = "";
+
         foreach (var VARIABLE in acquiredItems) {
             this.content += "- " + VARIABLE.Key + " x" + VARIABLE.Value + "\n";
-            Debug.Log(this.content);
         }
         
         this.titleText.text = "쓸만한 것들을 찾았다.";
