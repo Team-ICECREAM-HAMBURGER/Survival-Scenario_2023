@@ -9,23 +9,25 @@ public class ItemHuntingTool : Item {
     public override itemType ItemType { get; } = itemType.HUNTING_TOOL;
     public override eventType EventType { get; } = eventType.NONE;
 
-    private int durability = 1;
+    private int durability = 0;
     private readonly int _durability;
     
-    public ItemHuntingTool(int count = 0, float weight = 0f) {
+    
+    public ItemHuntingTool(int count = 1, float weight = 0f) {
         this.Count = count;
         this.Weight = weight;
         this._durability = this.durability;
     }
 
-    public override void ItemUse() {
-        if (this.durability >= 1) {
+    public override int ItemUse() {
+        if (this.durability > 0) {
             this.durability -= 1;
         }
         else {
             this.Count -= 1;
             this.durability = this._durability;
         }
-    }
 
+        return this.Count;
+    }
 }

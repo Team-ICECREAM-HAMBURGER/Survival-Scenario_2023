@@ -18,7 +18,7 @@ public class ItemMeatRaw : Item {
         this.Weight = weight;
     }
     
-    public override void ItemAcquire() {
-        this.Count += Random.Range(1, (this.maxValue + 1));
+    public override int ItemAcquire() {
+        return this.Count += Random.Range(1, (this.maxValue + 1));
     }
 }

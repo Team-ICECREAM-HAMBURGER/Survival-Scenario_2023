@@ -11,11 +11,11 @@ public abstract class Item : MonoBehaviour {
     public abstract eventType EventType { get; }
 
 
-    public virtual void ItemUse() {
-        return;
+    public virtual int ItemUse() {
+        return 0;
     }
     
-    public virtual void ItemAcquire() {
-        return;
+    public virtual int ItemAcquire() {
+        return 0;
     }
 }

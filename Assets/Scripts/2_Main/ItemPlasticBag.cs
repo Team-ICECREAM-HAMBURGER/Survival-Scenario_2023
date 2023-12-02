@@ -17,8 +17,8 @@ public class ItemPlasticBag : Item {
         this.Weight = weight;
     }
     
-    public override void ItemAcquire() {
+    public override int ItemAcquire() {
         // Count Update -> Item get
-        this.Count += Random.Range(1, (this.maxValue + 1));
+        return this.Count += Random.Range(1, (this.maxValue + 1));
     }
 }
