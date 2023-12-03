@@ -21,9 +21,6 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
    
         // Farming Result -> Text UI
         PlayerSearchResultView.Instance.Farming(this.acquiredItems);
-        
-        // Player Status Update
-        player.instance.StatusUpdate(20, 10, 10, 10);
     }
 
     private void ItemRandomSelect() {
@@ -33,7 +30,7 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
             float randomPivot = Random.Range(0, 100);
             float weight = 0;
             
-            foreach (var variable in player.instance.inventory) {
+            foreach (var variable in Player.instance.inventory) {
                 if (variable.Value.IsAcquirable && variable.Value.EventType == eventType.FARMING) {
                     if (weight + variable.Value.Weight >= randomPivot) {
                         if (!this.acquiredItems.ContainsKey(variable.Value.ItemName)) {

@@ -15,10 +15,10 @@ public enum weatherType {
 }
 
 
-public class gameInfo : MonoBehaviour {
-    public static gameInfo instance;
+public class GameInfo : MonoBehaviour {
+    public static GameInfo instance;
 
-    public bool IsSearched { get; set; } = true;
+    public bool IsSearched { get; set; }
     public bool IsShelterInstalled { get; set; } = true;
     public bool IsRainGutterInstalled { get; set; } = true;
     public bool IsFireInstalled { get; set; } = false;

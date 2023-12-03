@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class playerSearch : MonoBehaviour {
+public class PlayerSearch : MonoBehaviour {
     [Header("Search")]
     [SerializeField] private Button okButton;
     [Space(10f)]
@@ -16,13 +16,13 @@ public class playerSearch : MonoBehaviour {
         new Dictionary<eventType, IPlayerSearchEvent>() {
             { eventType.FARMING, new PlayerSearchEventFarming(98f) },
             { eventType.HUNTING, new playerSearchEventHunting(1f) },
-            { eventType.INJURED, new playerSearchEventInjured(0.5f) },
+            { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
             { eventType.IN_DANGER, new playerSearchEventInDanger(0.5f) }
         };
     
     
     public void Init() {
-        player.instance.CanvasChange("Canvas Search");
+        Player.instance.CanvasChange("Canvas Search");
         
         // Weight random select
         float randomPivot = Random.Range(0, 100);
@@ -31,6 +31,10 @@ public class playerSearch : MonoBehaviour {
         foreach (IPlayerSearchEvent variable in this._eventActions.Values) {
             if (variable.Weight + weight >= randomPivot) {   // Selected!
                 variable.Event();
+                
+                // Player Status Update
+                Player.instance.StatusUpdate(-20f, -10f, -10f, -10f);
+                
                 break;
             }
             
@@ -39,12 +43,14 @@ public class playerSearch : MonoBehaviour {
         
         this.okButton.onClick.AddListener(SearchingResultOk);
         this.searchingGameObject.SetActive(true);
+        
+        GameInfo.instance.IsSearched = true;
     }
 
     private void SearchingResultOk() {
         // Return to Main Screen
-        player.instance.CanvasChange("Canvas Main");
-        player.instance.CanvasOn("Canvas Background");
-        player.instance.CanvasOn("Canvas Info");
+        Player.instance.CanvasChange("Canvas Main");
+        Player.instance.CanvasOn("Canvas Background");
+        Player.instance.CanvasOn("Canvas Info");
     }
 }

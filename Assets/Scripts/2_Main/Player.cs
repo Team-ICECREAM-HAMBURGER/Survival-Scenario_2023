@@ -10,8 +10,14 @@ public enum statusType {
     CALORIES
 }
 
-public enum effectType {
-    INJURE
+public enum statusEffectType {
+    INJURED,
+    HYPOTHERMIA,
+    DEHYDRATION,
+    EXHAUSTION,
+    //
+    HEALING,
+    ADRENALINE
 }
 
 public enum itemType {
@@ -37,40 +43,42 @@ public enum itemType {
     STONE,
 }
 
-public class player : MonoBehaviour {
-    public static player instance;
+public class Player : MonoBehaviour {
+    public static Player instance;
     
-    public List<Canvas> canvasList;
+    [SerializeField] private List<Canvas> canvasList;
+
+    public float StatusMultiplier { get; set; } = 1f;
+    public PlayerMain PlayerMain { get; private set; }
+    public PlayerMove PlayerMove { get; private set; }
+    public PlayerSearch PlayerSearch { get; private set; }
     
-    public playerMain PlayerMain { get; private set; }
-    public playerMove PlayerMove { get; private set; }
-    public playerSearch PlayerSearch { get; private set; }
+    public Dictionary<statusType, float> Status { get; set; }
+    public Dictionary<statusEffectType, PlayerStatusEffect> StatusEffect { get; set; }
     
-    // TODO: Readonly, Initialize
-    public Dictionary<statusType, int> Status { get; private set; }
-    public Dictionary<effectType, bool> Effect { get; private set; }
-    
-    public readonly Dictionary<itemType, Item> inventory = new Dictionary<itemType, Item>() {
-        { itemType.HERBS, new ItemHerbs() },
-        { itemType.ROPE, new ItemRope() },
-        { itemType.CAN, new ItemCan() },
-        { itemType.CLOTH, new ItemCloth() },
-        { itemType.PLASTIC_BAG, new ItemPlasticBag() },
-        { itemType.MISCELLANEOUS, new ItemMiscellaneous() },
-        { itemType.STONE, new ItemStone() },
-        { itemType.WOOD, new ItemWood() },
-        //
-        { itemType.MRE, new ItemMre() },
-        { itemType.TORCH, new ItemTorch() },
-        { itemType.RAW_MEAT, new ItemMeatRaw() },
-        { itemType.COOKED_MEAT, new ItemMeatCooked() },
-        { itemType.FIRE_TOOL, new ItemFireTool() },
-        { itemType.KINDLING, new ItemKindling() },
-        { itemType.MEDICINE, new ItemMedicine() },
-        { itemType.EMPTY_BOTTLE, new ItemBottleEmpty() },
-        { itemType.FILLED_BOTTLE, new ItemBottleFilled() },
-        { itemType.HUNTING_TOOL, new ItemHuntingTool() }
-    };
+    // TODO: Player -> Item
+    public readonly Dictionary<itemType, Item> inventory = 
+        new Dictionary<itemType, Item>() {
+            { itemType.HERBS, new ItemHerbs() },
+            { itemType.ROPE, new ItemRope() },
+            { itemType.CAN, new ItemCan() },
+            { itemType.CLOTH, new ItemCloth() },
+            { itemType.PLASTIC_BAG, new ItemPlasticBag() },
+            { itemType.MISCELLANEOUS, new ItemMiscellaneous() },
+            { itemType.STONE, new ItemStone() },
+            { itemType.WOOD, new ItemWood() },
+            //
+            { itemType.MRE, new ItemMre() },
+            { itemType.TORCH, new ItemTorch() },
+            { itemType.RAW_MEAT, new ItemMeatRaw() },
+            { itemType.COOKED_MEAT, new ItemMeatCooked() },
+            { itemType.FIRE_TOOL, new ItemFireTool() },
+            { itemType.KINDLING, new ItemKindling() },
+            { itemType.MEDICINE, new ItemMedicine() },
+            { itemType.EMPTY_BOTTLE, new ItemBottleEmpty() },
+            { itemType.FILLED_BOTTLE, new ItemBottleFilled() },
+            { itemType.HUNTING_TOOL, new ItemHuntingTool() }
+        };
 
     
     private void Init() {
@@ -80,27 +88,24 @@ public class player : MonoBehaviour {
         
         instance = this;
 
-        this.PlayerMain = this.gameObject.GetComponent<playerMain>();
-        this.PlayerMove = this.gameObject.GetComponent<playerMove>();
-        this.PlayerSearch = this.gameObject.GetComponent<playerSearch>();
+        this.PlayerMain = this.gameObject.GetComponent<PlayerMain>();
+        this.PlayerMove = this.gameObject.GetComponent<PlayerMove>();
+        this.PlayerSearch = this.gameObject.GetComponent<PlayerSearch>();
 
-        this.Status = new Dictionary<statusType, int>();
-        this.Effect = new Dictionary<effectType, bool>();
-        
+        this.Status = new Dictionary<statusType, float>();
+        this.StatusEffect = new Dictionary<statusEffectType, PlayerStatusEffect>();
         this.canvasList = new List<Canvas>();
         
         foreach (GameObject variable in GameObject.FindGameObjectsWithTag("Canvas")) {
             this.canvasList.Add(variable.GetComponent<Canvas>());
         }
         
-        // TODO: JSON -> Status Value Load
-        this.Status.Add(statusType.STAMINA, 100);
-        this.Status.Add(statusType.BODY_HEAT, 100);
-        this.Status.Add(statusType.CALORIES, 100);
-        this.Status.Add(statusType.HYDRATION, 100);
-        this.Effect.Add(effectType.INJURE, false);
+        // TODO: JSON Load
+        this.Status.Add(statusType.STAMINA, 100f);
+        this.Status.Add(statusType.BODY_HEAT, 100f);
+        this.Status.Add(statusType.CALORIES, 100f);
+        this.Status.Add(statusType.HYDRATION, 100f);
         
-        // TODO: JSON -> Inventory Value Load
     }
 
     private void Awake() {
@@ -125,21 +130,18 @@ public class player : MonoBehaviour {
         }
     }
 
-    public void StatusUpdate(int value) {
-        foreach (var variable in this.Status) {
-            Debug.Log(variable.Value);
-        }
-        
+    public void StatusUpdate(float value) {
         for (int i = 0; i < this.Status.Count; i++) {
-            this.Status[(statusType)i] += value;
-        }
-
-        foreach (var variable in this.Status) {
-            Debug.Log(variable.Value);
+            this.Status[(statusType)i] += value * this.StatusMultiplier;
         }
     }
 
-    public void StatusUpdate(int stamina, int bodyHeat, int hydration, int calories) {
+    public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
+        float[] values = { stamina, bodyHeat, hydration, calories };
+        
         // TODO: Each Status value update.
+        for (int i = 0; i < this.Status.Count; i++) {
+            this.Status[(statusType)i] += values[i] * this.StatusMultiplier;
+        }
     }
 }
