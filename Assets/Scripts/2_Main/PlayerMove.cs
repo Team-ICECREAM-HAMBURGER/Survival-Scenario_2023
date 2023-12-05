@@ -31,13 +31,13 @@ public class PlayerMove : MonoBehaviour {
         this.resultGameObject.SetActive(true);
         
         // Update the Player Status Values
-        Player.instance.StatusUpdate(-25f);
+        Player.Instance.StatusUpdate(-25f);
         
         // Result
         // TODO : this.resultGameObject -> Text(Title, Content) Update
     }
 
     private void ReturnToMain() {
-        Player.instance.CanvasChange("Canvas Move");
+        Player.Instance.CanvasChange("Canvas Move");
     }
 }

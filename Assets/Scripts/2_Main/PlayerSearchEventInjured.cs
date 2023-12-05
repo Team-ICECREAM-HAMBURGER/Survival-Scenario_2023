@@ -14,7 +14,19 @@ public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
         // Debug
         Debug.Log("InjuredEvent");
         
-        // Player Injured
-        Player.instance.StatusEffect.Add(statusEffectType.INJURED, new PlayerStatusEffectInjured());
+        // Event
+        Injured();
+        
+        // UI Update
+        PlayerSearchResultView.Instance.Injured();
+    }
+
+    private void Injured() {
+        if (!Player.Instance.StatusEffect.ContainsKey(statusEffectType.INJURED)) {
+            Player.Instance.StatusEffect.Add(statusEffectType.INJURED, new PlayerStatusEffectInjured());
+        }
+        else {
+            Player.Instance.StatusEffect[statusEffectType.INJURED].StatusEffect();
+        }
     }
 }

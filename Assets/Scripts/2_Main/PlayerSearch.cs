@@ -14,15 +14,15 @@ public class PlayerSearch : MonoBehaviour {
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> _eventActions = 
         new Dictionary<eventType, IPlayerSearchEvent>() {
-            { eventType.FARMING, new PlayerSearchEventFarming(98f) },
-            { eventType.HUNTING, new playerSearchEventHunting(1f) },
-            { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
-            { eventType.IN_DANGER, new playerSearchEventInDanger(0.5f) }
+            { eventType.FARMING, new PlayerSearchEventFarming(0.5f) },
+            { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
+            { eventType.INJURED, new PlayerSearchEventInjured(98f) },
+            { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) }
         };
     
     
     public void Init() {
-        Player.instance.CanvasChange("Canvas Search");
+        Player.Instance.CanvasChange("Canvas Search");
         
         // Weight random select
         float randomPivot = Random.Range(0, 100);
@@ -33,7 +33,7 @@ public class PlayerSearch : MonoBehaviour {
                 variable.Event();
                 
                 // Player Status Update
-                Player.instance.StatusUpdate(-20f, -10f, -10f, -10f);
+                Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
                 
                 break;
             }
@@ -49,8 +49,8 @@ public class PlayerSearch : MonoBehaviour {
 
     private void SearchingResultOk() {
         // Return to Main Screen
-        Player.instance.CanvasChange("Canvas Main");
-        Player.instance.CanvasOn("Canvas Background");
-        Player.instance.CanvasOn("Canvas Info");
+        Player.Instance.CanvasChange("Canvas Main");
+        Player.Instance.CanvasOn("Canvas Background");
+        Player.Instance.CanvasOn("Canvas Info");
     }
 }

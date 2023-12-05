@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
+public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
 
     
-    public playerSearchEventInDanger(float weight) {
+    public PlayerSearchEventInDanger(float weight) {
         this.Weight = weight;
     }
     
     public void Event() {
+        // Debug
         Debug.Log("InDangerEvent");
+        
+        // Event
+        
     }
 }

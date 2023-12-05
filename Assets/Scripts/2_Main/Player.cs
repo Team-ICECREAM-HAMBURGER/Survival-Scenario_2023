@@ -44,11 +44,11 @@ public enum itemType {
 }
 
 public class Player : MonoBehaviour {
-    public static Player instance;
+    public static Player Instance;
     
     [SerializeField] private List<Canvas> canvasList;
 
-    public float StatusMultiplier { get; set; } = 1f;
+    public float StatusReduceMultiplier { get; set; } = 1f;
     public PlayerMain PlayerMain { get; private set; }
     public PlayerMove PlayerMove { get; private set; }
     public PlayerSearch PlayerSearch { get; private set; }
@@ -82,11 +82,11 @@ public class Player : MonoBehaviour {
 
     
     private void Init() {
-        if (instance != null) {
+        if (Instance != null) {
             return;
         }
         
-        instance = this;
+        Instance = this;
 
         this.PlayerMain = this.gameObject.GetComponent<PlayerMain>();
         this.PlayerMove = this.gameObject.GetComponent<PlayerMove>();
@@ -105,7 +105,6 @@ public class Player : MonoBehaviour {
         this.Status.Add(statusType.BODY_HEAT, 100f);
         this.Status.Add(statusType.CALORIES, 100f);
         this.Status.Add(statusType.HYDRATION, 100f);
-        
     }
 
     private void Awake() {
@@ -132,7 +131,7 @@ public class Player : MonoBehaviour {
 
     public void StatusUpdate(float value) {
         for (int i = 0; i < this.Status.Count; i++) {
-            this.Status[(statusType)i] += value * this.StatusMultiplier;
+            this.Status[(statusType)i] += value * this.StatusReduceMultiplier;
         }
     }
 
@@ -141,7 +140,7 @@ public class Player : MonoBehaviour {
         
         // TODO: Each Status value update.
         for (int i = 0; i < this.Status.Count; i++) {
-            this.Status[(statusType)i] += values[i] * this.StatusMultiplier;
+            this.Status[(statusType)i] += values[i] * this.StatusReduceMultiplier;
         }
     }
 }
