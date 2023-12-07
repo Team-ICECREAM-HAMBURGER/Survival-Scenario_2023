@@ -16,7 +16,7 @@ public enum weatherType {
 
 
 public class GameInfo : MonoBehaviour {
-    public static GameInfo instance;
+    public static GameInfo Instance;
 
     public bool IsSearched { get; set; }
     public bool IsShelterInstalled { get; set; } = true;
@@ -29,11 +29,11 @@ public class GameInfo : MonoBehaviour {
     
 
     private void Init() {
-        if (instance != null) {
+        if (Instance != null) {
             return;
         }
 
-        instance = this;
+        Instance = this;
         
         // TODO: (Json -> Load) or (Create)
         this.CurrentTerm = 0;

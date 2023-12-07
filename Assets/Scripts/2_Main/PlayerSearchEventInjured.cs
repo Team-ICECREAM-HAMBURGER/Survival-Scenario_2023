@@ -9,24 +9,26 @@ public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
     public PlayerSearchEventInjured(float weight) {
         this.Weight = weight;
     }
-    
+
     public void Event() {
         // Debug
         Debug.Log("InjuredEvent");
         
         // Event
-        Injured();
-        
-        // UI Update
-        PlayerSearchResultView.Instance.Injured();
+        PlayerSearchResultView.Instance.Injured(Injured());
     }
 
-    private void Injured() {
-        if (!Player.Instance.StatusEffect.ContainsKey(statusEffectType.INJURED)) {
-            Player.Instance.StatusEffect.Add(statusEffectType.INJURED, new PlayerStatusEffectInjured());
+    private int Injured() {
+        Player.Instance.StatusEffect.TryAdd(statusEffectType.INJURED, new PlayerStatusEffectInjured());
+        
+        int duration = Player.Instance.StatusEffect[statusEffectType.INJURED].Duration;
+        
+        if (duration <= 0) {
+            Player.Instance.StatusEffect.Remove(statusEffectType.INJURED);
         }
-        else {
-            Player.Instance.StatusEffect[statusEffectType.INJURED].StatusEffect();
-        }
+        
+        Player.Instance.StatusEffect[statusEffectType.INJURED].StatusEffect();
+
+        return duration;
     }
 }

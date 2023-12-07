@@ -5,8 +5,6 @@ using Random = UnityEngine.Random;
 
 public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
-
-    private Dictionary<string, int> acquiredItems = new Dictionary<string, int>();
     
     
     public PlayerSearchEventFarming(float weight) {
@@ -16,15 +14,13 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
     public void Event() {
         // Debug
         Debug.Log("FarmingEvent");
-        
-        ItemRandomSelect();
    
         // Farming Result -> Text UI
-        PlayerSearchResultView.Instance.Farming(this.acquiredItems);
+        PlayerSearchResultView.Instance.Farming(Farming());
     }
 
-    private void ItemRandomSelect() {
-        this.acquiredItems.Clear();
+    private Dictionary<string, int> Farming() {
+        Dictionary<string, int> acquiredItems = new Dictionary<string, int>();
         
         for (int i = 0; i < Random.Range(2, 4); i++) {
             float randomPivot = Random.Range(0, 100);
@@ -33,11 +29,11 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
             foreach (var variable in Player.Instance.inventory) {
                 if (variable.Value.IsAcquirable && variable.Value.EventType == eventType.FARMING) {
                     if (weight + variable.Value.Weight >= randomPivot) {
-                        if (!this.acquiredItems.ContainsKey(variable.Value.ItemName)) {
+                        if (!acquiredItems.ContainsKey(variable.Value.ItemName)) {
                             int count = variable.Value.Count;
                             
                             variable.Value.ItemAcquire();
-                            this.acquiredItems.Add(variable.Value.ItemName, (variable.Value.Count - count));
+                            acquiredItems.Add(variable.Value.ItemName, (variable.Value.Count - count));
                         }
                         
                         break;
@@ -47,5 +43,7 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
                 }
             }
         }
+
+        return acquiredItems;
     }
 }

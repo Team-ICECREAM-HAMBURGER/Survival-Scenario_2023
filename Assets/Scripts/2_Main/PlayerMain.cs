@@ -22,10 +22,10 @@ public class PlayerMain : MonoBehaviour {
         this.rainGutter.onClick.AddListener(RainGutter);
         
         // TODO: Background Change
-        if (GameInfo.instance.CurrentDayNight == dayNightType.DAY) {
+        if (GameInfo.Instance.CurrentDayNight == dayNightType.DAY) {
             gameBackground.instance.BackgroundChange("Background Day");
         } 
-        else if (GameInfo.instance.CurrentDayNight == dayNightType.NIGHT) {
+        else if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT) {
             gameBackground.instance.BackgroundChange("Background Night");
         }
     }
@@ -45,7 +45,7 @@ public class PlayerMain : MonoBehaviour {
         // Movable Conditions; All of Status over 25%, Search at least once more, Not injured.
         if (Player.Instance.Status[statusType.STAMINA] > 25 && Player.Instance.Status[statusType.BODY_HEAT] > 25 &&
             Player.Instance.Status[statusType.CALORIES] > 25 && Player.Instance.Status[statusType.HYDRATION] > 25) {    // Status OK
-            if (GameInfo.instance.IsSearched) {  // Searched
+            if (GameInfo.Instance.IsSearched) {  // Searched
                 if (!Player.Instance.StatusEffect.ContainsKey(statusEffectType.INJURED)) {   // Not Injured
                     return true;
                 }
@@ -77,7 +77,7 @@ public class PlayerMain : MonoBehaviour {
         // Search Conditions; All of Status over 10%, Not injured, (Night) Need a 'Torch' item.
         if (Player.Instance.Status[statusType.STAMINA] > 10 && Player.Instance.Status[statusType.BODY_HEAT] > 10 &&
             Player.Instance.Status[statusType.CALORIES] > 10 && Player.Instance.Status[statusType.HYDRATION] > 10) {    // Status OK
-            if (GameInfo.instance.CurrentDayNight == dayNightType.NIGHT) {  // Night
+            if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT) {  // Night
                 if (Player.Instance.inventory[itemType.TORCH].Count >= 1) {    // Torch OK
                     return true;
                 }
@@ -102,11 +102,11 @@ public class PlayerMain : MonoBehaviour {
     }
 
     private bool CanFire() {
-        if (!GameInfo.instance.IsFireInstalled) {
+        if (!GameInfo.Instance.IsFireInstalled) {
             // Fire Conditions; 점화도구 1개, 불쏘시개 3개, 나무 1개 -> 날씨 맑음: 70%, 날씨 비: 30%, 날씨 눈: 30% 
             if (Player.Instance.inventory[itemType.FIRE_TOOL].Count >= 1 && Player.Instance.inventory[itemType.KINDLING].Count >= 3 && 
                 Player.Instance.inventory[itemType.WOOD].Count >= 1) {    // Material OK
-                switch (GameInfo.instance.CurrentWeather) {
+                switch (GameInfo.Instance.CurrentWeather) {
                     case weatherType.SUNNY :
                         if (Random.Range(0, 10) > 3) {    // 70%
                             return true;

@@ -14,10 +14,10 @@ public class PlayerSearch : MonoBehaviour {
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> _eventActions = 
         new Dictionary<eventType, IPlayerSearchEvent>() {
-            { eventType.FARMING, new PlayerSearchEventFarming(0.5f) },
-            { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
             { eventType.INJURED, new PlayerSearchEventInjured(98f) },
-            { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) }
+            { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) },
+            { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
+            { eventType.FARMING, new PlayerSearchEventFarming(0.5f) }
         };
     
     
@@ -44,7 +44,7 @@ public class PlayerSearch : MonoBehaviour {
         this.okButton.onClick.AddListener(SearchingResultOk);
         this.searchingGameObject.SetActive(true);
         
-        GameInfo.instance.IsSearched = true;
+        GameInfo.Instance.IsSearched = true;
     }
 
     private void SearchingResultOk() {
