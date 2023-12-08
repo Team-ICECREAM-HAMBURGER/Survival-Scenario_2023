@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
     public PlayerMove PlayerMove { get; private set; }
     public PlayerSearch PlayerSearch { get; private set; }
     
-    public Dictionary<statusType, float> Status { get; set; }
+    public Dictionary<statusType, float> Status { get; private set; }
     public Dictionary<statusEffectType, PlayerStatusEffect> StatusEffect { get; set; }
     
     // TODO: Player -> Item
@@ -103,8 +103,9 @@ public class Player : MonoBehaviour {
         // TODO: JSON Load
         this.Status.Add(statusType.STAMINA, 100f);
         this.Status.Add(statusType.BODY_HEAT, 100f);
+        this.Status.Add(statusType.HYDRATION, 100f);        
         this.Status.Add(statusType.CALORIES, 100f);
-        this.Status.Add(statusType.HYDRATION, 100f);
+
     }
 
     private void Awake() {
@@ -138,9 +139,16 @@ public class Player : MonoBehaviour {
     public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
         float[] values = { stamina, bodyHeat, hydration, calories };
         
-        // TODO: Each Status value update.
         for (int i = 0; i < this.Status.Count; i++) {
             this.Status[(statusType)i] += values[i] * this.StatusReduceMultiplier;
         }
+    }
+
+    public bool StatusCheck(float stamina, float bodyHeat, float hydration, float calories) {
+        return this.Status.All(statusEntry =>
+            (statusEntry.Key == statusType.STAMINA && statusEntry.Value >= stamina) ||
+            (statusEntry.Key == statusType.BODY_HEAT && statusEntry.Value > bodyHeat) ||
+            (statusEntry.Key == statusType.HYDRATION && statusEntry.Value > hydration) ||
+            (statusEntry.Key == statusType.CALORIES && statusEntry.Value > calories));
     }
 }

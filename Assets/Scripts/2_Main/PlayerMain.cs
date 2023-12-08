@@ -43,8 +43,7 @@ public class PlayerMain : MonoBehaviour {
 
     private bool CanMove() {
         // Movable Conditions; All of Status over 25%, Search at least once more, Not injured.
-        if (Player.Instance.Status[statusType.STAMINA] > 25 && Player.Instance.Status[statusType.BODY_HEAT] > 25 &&
-            Player.Instance.Status[statusType.CALORIES] > 25 && Player.Instance.Status[statusType.HYDRATION] > 25) {    // Status OK
+        if (Player.Instance.StatusCheck(25f, 25f, 25f, 25f)) {    // Status OK
             if (GameInfo.Instance.IsSearched) {  // Searched
                 if (!Player.Instance.StatusEffect.ContainsKey(statusEffectType.INJURED)) {   // Not Injured
                     return true;
@@ -75,8 +74,7 @@ public class PlayerMain : MonoBehaviour {
 
     private bool CanSearch() {
         // Search Conditions; All of Status over 10%, Not injured, (Night) Need a 'Torch' item.
-        if (Player.Instance.Status[statusType.STAMINA] > 10 && Player.Instance.Status[statusType.BODY_HEAT] > 10 &&
-            Player.Instance.Status[statusType.CALORIES] > 10 && Player.Instance.Status[statusType.HYDRATION] > 10) {    // Status OK
+        if (Player.Instance.StatusCheck(20f, 10f, 10f, 10f)) {    // Status OK
             if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT) {  // Night
                 if (Player.Instance.inventory[itemType.TORCH].Count >= 1) {    // Torch OK
                     return true;

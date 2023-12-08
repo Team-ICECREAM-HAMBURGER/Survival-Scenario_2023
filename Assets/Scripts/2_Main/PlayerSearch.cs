@@ -14,10 +14,10 @@ public class PlayerSearch : MonoBehaviour {
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> _eventActions = 
         new Dictionary<eventType, IPlayerSearchEvent>() {
-            { eventType.INJURED, new PlayerSearchEventInjured(98f) },
+            { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
             { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) },
             { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
-            { eventType.FARMING, new PlayerSearchEventFarming(0.5f) }
+            { eventType.FARMING, new PlayerSearchEventFarming(98f) }
         };
     
     
@@ -28,18 +28,19 @@ public class PlayerSearch : MonoBehaviour {
         float randomPivot = Random.Range(0, 100);
         float weight = 0;
         
+        // Event Select
         foreach (IPlayerSearchEvent variable in this._eventActions.Values) {
-            if (variable.Weight + weight >= randomPivot) {   // Selected!
+            if (variable.Weight + weight >= randomPivot) {
                 variable.Event();
-                
-                // Player Status Update
-                Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
                 
                 break;
             }
             
             weight += variable.Weight;
         }
+        
+        // Player Status Update
+        Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
         
         this.okButton.onClick.AddListener(SearchingResultOk);
         this.searchingGameObject.SetActive(true);
