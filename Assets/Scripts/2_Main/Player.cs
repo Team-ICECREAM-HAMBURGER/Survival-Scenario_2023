@@ -129,6 +129,8 @@ public class Player : MonoBehaviour {
             variable.enabled = false;
         }
     }
+    
+    // TODO: Player Status Value -> (0 ~ 100)
 
     public void StatusUpdate(float value) {
         for (int i = 0; i < this.Status.Count; i++) {

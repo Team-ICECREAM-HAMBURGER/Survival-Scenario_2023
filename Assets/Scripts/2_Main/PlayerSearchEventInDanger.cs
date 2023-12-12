@@ -15,6 +15,23 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
         Debug.Log("InDangerEvent");
         
         // Event
+        PlayerSearchResultView.Instance.InDanger(InDanger());
+    }
+
+    private int InDanger() {
+        var itemHuntingTool = Player.Instance.inventory[itemType.HUNTING_TOOL];
         
+        Player.Instance.StatusEffect.TryAdd(statusEffectType.EXHAUSTION, new PlayerStatusEffectExhaustion());
+        
+        if (itemHuntingTool.Count > 0) {
+            itemHuntingTool.ItemUse();
+
+            return 0;
+        }
+
+        Player.Instance.StatusEffect.TryAdd(statusEffectType.INJURED, new PlayerStatusEffectInjured());
+        int duration = Player.Instance.StatusEffect[statusEffectType.INJURED].Duration;
+        
+        return duration;
     }
 }

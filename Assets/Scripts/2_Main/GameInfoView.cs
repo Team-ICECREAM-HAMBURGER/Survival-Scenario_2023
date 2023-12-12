@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum dayNightType {
     DAY,
@@ -15,8 +17,10 @@ public enum weatherType {
 }
 
 
-public class GameInfo : MonoBehaviour {
-    public static GameInfo Instance;
+public class GameInfoView : MonoBehaviour {
+    public static GameInfoView Instance;
+
+    [SerializeField] private TMP_Text currentStatusEffect;
 
     public bool IsSearched { get; set; }
     public bool IsShelterInstalled { get; set; } = true;
@@ -44,5 +48,9 @@ public class GameInfo : MonoBehaviour {
 
     private void Awake() {
         Init();
+    }
+
+    public void StatusEffectUpdate(string value) {
+        this.currentStatusEffect.text = "현재 적용된 상태 이상: " + value;
     }
 }

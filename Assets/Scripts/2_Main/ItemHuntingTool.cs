@@ -13,7 +13,7 @@ public class ItemHuntingTool : Item {
     private readonly int _durability;
     
     
-    public ItemHuntingTool(int count = 1, float weight = 0f) {
+    public ItemHuntingTool(int count = 0, float weight = 0f) {
         this.Count = count;
         this.Weight = weight;
         this._durability = this.durability;

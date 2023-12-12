@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -10,14 +11,14 @@ public class PlayerSearch : MonoBehaviour {
     [Header("Search")]
     [SerializeField] private Button okButton;
     [Space(10f)]
-    [SerializeField] private GameObject searchingGameObject;
+    [SerializeField] private GameObject searchingScreen;
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> _eventActions = 
         new Dictionary<eventType, IPlayerSearchEvent>() {
             { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
-            { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) },
+            { eventType.IN_DANGER, new PlayerSearchEventInDanger(98f) },
             { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
-            { eventType.FARMING, new PlayerSearchEventFarming(98f) }
+            { eventType.FARMING, new PlayerSearchEventFarming(0.5f) }
         };
     
     
@@ -43,9 +44,9 @@ public class PlayerSearch : MonoBehaviour {
         Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
         
         this.okButton.onClick.AddListener(SearchingResultOk);
-        this.searchingGameObject.SetActive(true);
+        this.searchingScreen.SetActive(true);
         
-        GameInfo.Instance.IsSearched = true;
+        GameInfoView.Instance.IsSearched = true;
     }
 
     private void SearchingResultOk() {
