@@ -23,20 +23,20 @@ public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
     private bool Hunting() {
         this.resultItems.Clear();
         
-        if (Player.Instance.inventory[itemType.HUNTING_TOOL].Count >= 1) {
+        if (Player.Instance.Inventory[itemType.HUNTING_TOOL].Count >= 1) {
             int count = 0;
             
             // Item Acquire
-            count = Player.Instance.inventory[itemType.RAW_MEAT].Count;
+            count = Player.Instance.Inventory[itemType.RAW_MEAT].Count;
             this.resultItems.Add(
-                Player.Instance.inventory[itemType.RAW_MEAT].ItemName, 
-                (Player.Instance.inventory[itemType.RAW_MEAT].ItemAcquire() - count));
+                Player.Instance.Inventory[itemType.RAW_MEAT].ItemName, 
+                (Player.Instance.Inventory[itemType.RAW_MEAT].ItemAcquire() - count));
             
             // Item Use
-            count = Player.Instance.inventory[itemType.HUNTING_TOOL].Count;
+            count = Player.Instance.Inventory[itemType.HUNTING_TOOL].Count;
             this.resultItems.Add(
-                Player.Instance.inventory[itemType.HUNTING_TOOL].ItemName, 
-                (Player.Instance.inventory[itemType.HUNTING_TOOL].ItemUse() - count));
+                Player.Instance.Inventory[itemType.HUNTING_TOOL].ItemName, 
+                (Player.Instance.Inventory[itemType.HUNTING_TOOL].ItemUse() - count));
             
             return true;
         }

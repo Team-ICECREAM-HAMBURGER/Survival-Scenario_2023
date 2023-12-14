@@ -19,7 +19,7 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
     }
 
     private int InDanger() {
-        var itemHuntingTool = Player.Instance.inventory[itemType.HUNTING_TOOL];
+        var itemHuntingTool = Player.Instance.Inventory[itemType.HUNTING_TOOL];
         
         Player.Instance.StatusEffect.TryAdd(statusEffectType.EXHAUSTION, new PlayerStatusEffectExhaustion());
         

@@ -52,13 +52,15 @@ public class Player : MonoBehaviour {
     public PlayerMain PlayerMain { get; private set; }
     public PlayerMove PlayerMove { get; private set; }
     public PlayerSearch PlayerSearch { get; private set; }
+    public Dictionary<statusEffectType, PlayerStatusEffect> StatusEffect { get; private set; }
     
-    public Dictionary<statusType, float> Status { get; private set; }
-    public Dictionary<statusEffectType, PlayerStatusEffect> StatusEffect { get; set; }
-    
-    // TODO: Player -> Item
-    public readonly Dictionary<itemType, Item> inventory = 
-        new Dictionary<itemType, Item>() {
+    public readonly Dictionary<statusType, float> Status = new Dictionary<statusType, float>() {
+        { statusType.STAMINA, 100f },
+        { statusType.BODY_HEAT, 100f },
+        { statusType.HYDRATION, 100f },
+        { statusType.CALORIES, 100f }
+    };
+    public readonly Dictionary<itemType, Item> Inventory = new Dictionary<itemType, Item>() {
             { itemType.HERBS, new ItemHerbs() },
             { itemType.ROPE, new ItemRope() },
             { itemType.CAN, new ItemCan() },
@@ -79,7 +81,7 @@ public class Player : MonoBehaviour {
             { itemType.FILLED_BOTTLE, new ItemBottleFilled() },
             { itemType.HUNTING_TOOL, new ItemHuntingTool() }
         };
-
+    
     
     private void Init() {
         if (Instance != null) {
@@ -92,7 +94,6 @@ public class Player : MonoBehaviour {
         this.PlayerMove = this.gameObject.GetComponent<PlayerMove>();
         this.PlayerSearch = this.gameObject.GetComponent<PlayerSearch>();
 
-        this.Status = new Dictionary<statusType, float>();
         this.StatusEffect = new Dictionary<statusEffectType, PlayerStatusEffect>();
         this.canvasList = new List<Canvas>();
         
@@ -100,12 +101,7 @@ public class Player : MonoBehaviour {
             this.canvasList.Add(variable.GetComponent<Canvas>());
         }
         
-        // TODO: JSON Load
-        this.Status.Add(statusType.STAMINA, 100f);
-        this.Status.Add(statusType.BODY_HEAT, 100f);
-        this.Status.Add(statusType.HYDRATION, 100f);        
-        this.Status.Add(statusType.CALORIES, 100f);
-
+        // TODO: Player Status -> JSON Load ( StatusUpdate() )
     }
 
     private void Awake() {
@@ -134,7 +130,7 @@ public class Player : MonoBehaviour {
 
     public void StatusUpdate(float value) {
         for (int i = 0; i < this.Status.Count; i++) {
-            this.Status[(statusType)i] += value * this.StatusReduceMultiplier;
+            this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + value * this.StatusReduceMultiplier, 0, 100);
         }
     }
 
@@ -142,7 +138,7 @@ public class Player : MonoBehaviour {
         float[] values = { stamina, bodyHeat, hydration, calories };
         
         for (int i = 0; i < this.Status.Count; i++) {
-            this.Status[(statusType)i] += values[i] * this.StatusReduceMultiplier;
+            this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + values[i] * this.StatusReduceMultiplier, 0, 100);
         }
     }
 
