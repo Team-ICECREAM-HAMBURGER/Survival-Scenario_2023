@@ -26,11 +26,11 @@ public class GameInfoView : MonoBehaviour {
     public bool IsShelterInstalled { get; set; } = true;
     public bool IsRainGutterInstalled { get; set; } = true;
     public bool IsFireInstalled { get; set; } = false;
-    public int CurrentTerm { get; private set; }
-    public int CurrentDay { get; private set; }
-    public dayNightType CurrentDayNight { get; private set; }
-    public weatherType CurrentWeather { get; private set; }
-    
+    public int CurrentTerm { get; private set; } = 0;
+    public int CurrentDay { get; private set; } = 0;
+    public dayNightType CurrentDayNight { get; private set; } = dayNightType.DAY;
+    public weatherType CurrentWeather { get; private set; } = weatherType.SUNNY;
+
 
     private void Init() {
         if (Instance != null) {
@@ -38,12 +38,6 @@ public class GameInfoView : MonoBehaviour {
         }
 
         Instance = this;
-        
-        // TODO: (Json -> Load) or (Create)
-        this.CurrentTerm = 0;
-        this.CurrentDay = 0;
-        this.CurrentDayNight = dayNightType.DAY;
-        this.CurrentWeather = weatherType.SUNNY;
     }
 
     private void Awake() {

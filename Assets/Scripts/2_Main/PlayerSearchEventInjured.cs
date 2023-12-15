@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
-
+    
     
     public PlayerSearchEventInjured(float weight) {
         this.Weight = weight;
@@ -27,7 +27,7 @@ public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
             Player.Instance.StatusEffect.Remove(statusEffectType.INJURED);
         }
         
-        Player.Instance.StatusEffect[statusEffectType.INJURED].StatusEffect();
+        Player.Instance.StatusEffect[statusEffectType.INJURED].Event();
 
         return duration;
     }

@@ -5,6 +5,6 @@ public class PlayerStatusEffectAdrenaline : PlayerStatusEffect {
     
     
     public PlayerStatusEffectAdrenaline() {
-        StatusEffect();
+        Event();
     }
 }

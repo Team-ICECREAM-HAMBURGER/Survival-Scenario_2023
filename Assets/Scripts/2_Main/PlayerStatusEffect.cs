@@ -7,7 +7,7 @@ public abstract class PlayerStatusEffect : MonoBehaviour {
     public abstract statusEffectType StatusEffectType { get; }
 
     
-    public virtual int StatusEffect() {
+    public virtual int Event() {
         return 0;
     }
 }

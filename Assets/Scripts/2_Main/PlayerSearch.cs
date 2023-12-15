@@ -13,7 +13,7 @@ public class PlayerSearch : MonoBehaviour {
     [Space(10f)]
     [SerializeField] private GameObject searchingScreen;
     
-    private readonly Dictionary<eventType, IPlayerSearchEvent> _eventActions = 
+    private readonly Dictionary<eventType, IPlayerSearchEvent> eventActions = 
         new Dictionary<eventType, IPlayerSearchEvent>() {
             { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
             { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) },
@@ -30,7 +30,7 @@ public class PlayerSearch : MonoBehaviour {
         float weight = 0;
         
         // Event Select
-        foreach (IPlayerSearchEvent variable in this._eventActions.Values) {
+        foreach (IPlayerSearchEvent variable in this.eventActions.Values) {
             if (variable.Weight + weight >= randomPivot) {
                 variable.Event();
                 
