@@ -1,5 +1,8 @@
-public class PlayerStatusEffectHealing : PlayerStatusEffect {
-    public override int Duration { get; set; }
-    public override string StatusEffectName { get; }
-    public override statusEffectType StatusEffectType { get; }
+public class PlayerStatusEffectHealing : IPlayerStatusEffect {
+    public int Duration { get; set; }
+    public string StatusEffectName { get; }
+    public statusEffectType StatusEffectType { get; }
+    
+    public void Event() {
+    }
 }

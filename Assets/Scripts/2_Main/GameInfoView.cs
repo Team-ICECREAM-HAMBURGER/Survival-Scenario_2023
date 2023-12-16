@@ -30,21 +30,35 @@ public class GameInfoView : MonoBehaviour {
     public int CurrentDay { get; private set; } = 0;
     public dayNightType CurrentDayNight { get; private set; } = dayNightType.DAY;
     public weatherType CurrentWeather { get; private set; } = weatherType.SUNNY;
+    
+    public delegate void StatusEffectUIActiveHandler(string value);
+    public static StatusEffectUIActiveHandler OnStatusEffectUIActive;
 
+    public delegate void StatusEffectUIDeactivateHandler();
+    public static StatusEffectUIDeactivateHandler OnStatusEffectUIReset;
 
+    
     private void Init() {
         if (Instance != null) {
             return;
         }
 
         Instance = this;
+        
+        OnStatusEffectUIActive += StatusEffectUpdate;
+        OnStatusEffectUIReset += StatusEffectReset;
     }
 
     private void Awake() {
         Init();
     }
 
-    public void StatusEffectUpdate(string value) {
+    private void StatusEffectUpdate(string value) {
         this.currentStatusEffect.text = "현재 적용된 상태 이상: " + value;
     }
+
+    private void StatusEffectReset() {
+        this.currentStatusEffect.text = "현재 적용된 상태 이상: 없음";
+    }
+
 }

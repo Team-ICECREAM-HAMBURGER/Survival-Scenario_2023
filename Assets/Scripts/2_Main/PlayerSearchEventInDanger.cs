@@ -21,7 +21,7 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
     private int InDanger() {
         var itemHuntingTool = Player.Instance.Inventory[itemType.HUNTING_TOOL];
         
-        Player.Instance.StatusEffect.TryAdd(statusEffectType.EXHAUSTION, new PlayerStatusEffectExhaustion());
+        //Player.Instance.CurrentStatusEffect.TryAdd(statusEffectType.EXHAUSTION, new PlayerStatusEffectInjured());
         
         if (itemHuntingTool.Count > 0) {
             itemHuntingTool.ItemUse();
@@ -29,8 +29,8 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
             return 0;
         }
 
-        Player.Instance.StatusEffect.TryAdd(statusEffectType.INJURED, new PlayerStatusEffectInjured());
-        int duration = Player.Instance.StatusEffect[statusEffectType.INJURED].Duration;
+        //Player.Instance.CurrentStatusEffect.TryAdd(statusEffectType.INJURED, new PlayerStatusEffectInjured());
+        int duration = Player.Instance.CurrentStatusEffect[statusEffectType.INJURED];
         
         return duration;
     }

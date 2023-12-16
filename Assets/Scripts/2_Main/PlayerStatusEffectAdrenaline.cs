@@ -1,10 +1,8 @@
-public class PlayerStatusEffectAdrenaline : PlayerStatusEffect {
-    public override int Duration { get; set; } = 50;
-    public override string StatusEffectName { get; } = "체력 증진";
-    public override statusEffectType StatusEffectType { get; } = statusEffectType.ADRENALINE;
-    
-    
-    public PlayerStatusEffectAdrenaline() {
-        Event();
+public class PlayerStatusEffectAdrenaline : IPlayerStatusEffect {
+    public int Duration { get; set; } = 50;
+    public string StatusEffectName { get; } = "체력 증진";
+    public statusEffectType StatusEffectType { get; } = statusEffectType.ADRENALINE;
+
+    public void Event() {
     }
 }

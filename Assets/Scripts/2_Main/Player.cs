@@ -15,7 +15,6 @@ public enum statusEffectType {
     HYPOTHERMIA,
     DEHYDRATION,
     EXHAUSTION,
-    //
     HEALING,
     ADRENALINE
 }
@@ -38,7 +37,6 @@ public enum itemType {
     WOOD,
     CAN,
     HERBS,
-    FLINT,
     CLOTH,
     STONE,
 }
@@ -52,8 +50,16 @@ public class Player : MonoBehaviour {
     public PlayerMain PlayerMain { get; private set; }
     public PlayerMove PlayerMove { get; private set; }
     public PlayerSearch PlayerSearch { get; private set; }
-    public Dictionary<statusEffectType, PlayerStatusEffect> StatusEffect { get; private set; }
-    
+    public Dictionary<statusEffectType, int> CurrentStatusEffect { get; private set; }
+
+    public readonly Dictionary<statusEffectType, IPlayerStatusEffect> StatusEffect = new Dictionary<statusEffectType, IPlayerStatusEffect>() {
+            { statusEffectType.HEALING, new PlayerStatusEffectHealing() },
+            { statusEffectType.INJURED, new PlayerStatusEffectInjured() },
+            { statusEffectType.ADRENALINE, new PlayerStatusEffectAdrenaline() },
+            { statusEffectType.EXHAUSTION, new PlayerStatusEffectExhaustion() },
+            { statusEffectType.DEHYDRATION, new PlayerStatusEffectExhaustion() },
+            { statusEffectType.HYPOTHERMIA, new PlayerStatusEffectHypothermia() }
+        };
     public readonly Dictionary<statusType, float> Status = new Dictionary<statusType, float>() {
         { statusType.STAMINA, 100f },
         { statusType.BODY_HEAT, 100f },
@@ -94,7 +100,7 @@ public class Player : MonoBehaviour {
         this.PlayerMove = this.gameObject.GetComponent<PlayerMove>();
         this.PlayerSearch = this.gameObject.GetComponent<PlayerSearch>();
 
-        this.StatusEffect = new Dictionary<statusEffectType, PlayerStatusEffect>();
+        this.CurrentStatusEffect = new Dictionary<statusEffectType, int>();
         this.canvasList = new List<Canvas>();
         
         foreach (GameObject variable in GameObject.FindGameObjectsWithTag("Canvas")) {
@@ -108,30 +114,33 @@ public class Player : MonoBehaviour {
         Init();
     }
     
+    // TODO: CanvasController
     public void CanvasChange(string canvasName) {
         foreach (Canvas variable in this.canvasList) {  // Canvas Change
             variable.enabled = false || variable.name == canvasName;
         }    
     }
 
+    // TODO: CanvasController
     public void CanvasOn(string canvasName) {
         foreach (Canvas variable in this.canvasList.Where(variable => variable.name == canvasName)) {
             variable.enabled = true;
         }
     }
 
+    // TODO: CanvasController
     public void CanvasOff(string canvasName) {
         foreach (Canvas variable in this.canvasList.Where(variable => variable.name == canvasName)) {
             variable.enabled = false;
         }
     }
-    
-    // TODO: Player Status Value -> (0 ~ 100)
 
     public void StatusUpdate(float value) {
         for (int i = 0; i < this.Status.Count; i++) {
             this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + value * this.StatusReduceMultiplier, 0, 100);
         }
+        
+        // TODO: UI Update Event
     }
 
     public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
@@ -140,6 +149,8 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < this.Status.Count; i++) {
             this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + values[i] * this.StatusReduceMultiplier, 0, 100);
         }
+        
+        // TODO: UI Update Event
     }
 
     public bool StatusCheck(float stamina, float bodyHeat, float hydration, float calories) {
@@ -148,5 +159,19 @@ public class Player : MonoBehaviour {
             (statusEntry.Key == statusType.BODY_HEAT && statusEntry.Value > bodyHeat) ||
             (statusEntry.Key == statusType.HYDRATION && statusEntry.Value > hydration) ||
             (statusEntry.Key == statusType.CALORIES && statusEntry.Value > calories));
+    }
+
+    public void StatusEffectActivate(statusEffectType statusEffectType, int duration, string statusEffectName) {
+        this.CurrentStatusEffect.TryAdd(statusEffectType, duration);
+        GameInfoView.OnStatusEffectUIActive(statusEffectName + " " + "(" + duration + " " + "텀 남음" + ")");
+    }
+    
+    public void StatusEffectRemove(statusEffectType statusEffectType) {
+        this.CurrentStatusEffect.Remove(statusEffectType);
+        GameInfoView.OnStatusEffectUIReset();
+    }
+
+    public void PlayerBehaviour() {
+        
     }
 }
