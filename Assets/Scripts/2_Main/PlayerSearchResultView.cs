@@ -6,8 +6,6 @@ using TMPro;
 using Unity.VisualScripting;
 
 public class PlayerSearchResultView : MonoBehaviour {
-    public static PlayerSearchResultView Instance;
-
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text contentText;
 
@@ -21,12 +19,6 @@ public class PlayerSearchResultView : MonoBehaviour {
     
     
     private void Init() {
-        if (Instance != null) {
-            return;
-        }
-        
-        Instance = this;
-        
         OnSearchResultUIInjured += Injured;
     }
 

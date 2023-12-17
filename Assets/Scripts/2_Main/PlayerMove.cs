@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour {
-    [Header("Move")] 
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
     [Space(10f)]
@@ -38,6 +37,6 @@ public class PlayerMove : MonoBehaviour {
     }
 
     private void ReturnToMain() {
-        Player.Instance.CanvasChange("Canvas Move");
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Move");
     }
 }

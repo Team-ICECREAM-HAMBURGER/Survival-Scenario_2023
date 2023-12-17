@@ -17,12 +17,11 @@ public enum weatherType {
 }
 
 
-public class GameInfoView : MonoBehaviour {
-    public static GameInfoView Instance;
+public class GameInfo : MonoBehaviour {
+    public static GameInfo Instance;
 
     [SerializeField] private TMP_Text currentStatusEffect;
 
-    public bool IsSearched { get; set; }
     public bool IsShelterInstalled { get; set; } = true;
     public bool IsRainGutterInstalled { get; set; } = true;
     public bool IsFireInstalled { get; set; } = false;
@@ -53,10 +52,13 @@ public class GameInfoView : MonoBehaviour {
         Init();
     }
 
+    
+    // TODO: GameInfoView
     private void StatusEffectUpdate(string value) {
         this.currentStatusEffect.text = "현재 적용된 상태 이상: " + value;
     }
 
+    // TODO: GameInfoView
     private void StatusEffectReset() {
         this.currentStatusEffect.text = "현재 적용된 상태 이상: 없음";
     }

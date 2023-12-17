@@ -8,22 +8,31 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerSearch : MonoBehaviour {
-    [Header("Search")]
     [SerializeField] private Button okButton;
     [Space(10f)]
     [SerializeField] private GameObject searchingScreen;
     
-    private readonly Dictionary<eventType, IPlayerSearchEvent> eventActions = 
-        new Dictionary<eventType, IPlayerSearchEvent>() {
-            { eventType.INJURED, new PlayerSearchEventInjured(98f) },
+    private readonly Dictionary<eventType, IPlayerSearchEvent> eventActions = new Dictionary<eventType, IPlayerSearchEvent>() {
+            { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
             { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) },
             { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
-            { eventType.FARMING, new PlayerSearchEventFarming(0.5f) }
+            { eventType.FARMING, new PlayerSearchEventFarming(98f) }
         };
+
+    public delegate void SearchEventHandler();
+    public static SearchEventHandler OnSearchEvent;
+
+
+    private void Init() {
+        OnSearchEvent += Search;
+    }
+
+    private void Start() {
+        Init();
+    }
     
-    
-    public void Init() {
-        Player.Instance.CanvasChange("Canvas Search");
+    private void Search() {
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Search");
         
         // Weight random select
         float randomPivot = Random.Range(0, 100);
@@ -45,14 +54,12 @@ public class PlayerSearch : MonoBehaviour {
         
         this.okButton.onClick.AddListener(SearchingResultOk);
         this.searchingScreen.SetActive(true);
-        
-        GameInfoView.Instance.IsSearched = true;
     }
 
     private void SearchingResultOk() {
         // Return to Main Screen
-        Player.Instance.CanvasChange("Canvas Main");
-        Player.Instance.CanvasOn("Canvas Background");
-        Player.Instance.CanvasOn("Canvas Info");
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Main");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Background");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Info");
     }
 }

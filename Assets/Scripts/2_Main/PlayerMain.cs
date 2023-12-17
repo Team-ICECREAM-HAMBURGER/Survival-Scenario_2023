@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerMain : MonoBehaviour {
-    [Header("Main")]
     [SerializeField] private Button moveButton;
     [SerializeField] private Button searchButton;
     [SerializeField] private Button fireButton;
@@ -22,10 +21,10 @@ public class PlayerMain : MonoBehaviour {
         this.rainGutter.onClick.AddListener(RainGutter);
         
         // TODO: Background Change
-        if (GameInfoView.Instance.CurrentDayNight == dayNightType.DAY) {
+        if (GameInfo.Instance.CurrentDayNight == dayNightType.DAY) {
             gameBackground.instance.BackgroundChange("Background Day");
         } 
-        else if (GameInfoView.Instance.CurrentDayNight == dayNightType.NIGHT) {
+        else if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT) {
             gameBackground.instance.BackgroundChange("Background Night");
         }
     }
@@ -36,112 +35,92 @@ public class PlayerMain : MonoBehaviour {
 
     private void Move() {
         if (CanMove()) {
-            // TODO : Player.Instance.PlayerMove.Init();
-            Player.Instance.CanvasChange("Canvas Move");
+            GameCanvasControl.OnCanvasChangeEvent("Canvas Move");
         }
     }
 
     private bool CanMove() {
-        // Movable Conditions; All of Status over 25%, Search at least once more, Not injured.
-        if (Player.Instance.StatusCheck(25f, 25f, 25f, 25f)) {    // Status OK
-            if (GameInfoView.Instance.IsSearched) {  // Searched
-                if (!Player.Instance.CurrentStatusEffect.ContainsKey(statusEffectType.INJURED)) {   // Not Injured
-                    return true;
-                }
-            }
-        }
+        // 이동하기 조건
+        /*
+         * 모든 스테이터스가 25% 이상.
+         * 부상을 입지 않음.
+        */
         
-        return false;
+        return Player.Instance.StatusCheck(25f) && !Player.Instance.CurrentStatusEffect.ContainsKey(statusEffectType.INJURED);
     }
     
     private void Search() {
-        // Debug
-        Debug.Log("STAMINA: " + Player.Instance.Status[statusType.STAMINA] + 
-                  ", BODY_HEAT: " + Player.Instance.Status[statusType.BODY_HEAT] +
-                  ", CALORIES: " + Player.Instance.Status[statusType.CALORIES] +
-                  ", HYDRATION: " + Player.Instance.Status[statusType.HYDRATION]);
-        
         if (CanSearch()) {
-            Player.Instance.PlayerSearch.Init();
+            PlayerSearch.OnSearchEvent();
         }
-        
-        // Debug
-        Debug.Log("STAMINA: " + Player.Instance.Status[statusType.STAMINA] + 
-                  ", BODY_HEAT: " + Player.Instance.Status[statusType.BODY_HEAT] +
-                  ", CALORIES: " + Player.Instance.Status[statusType.CALORIES] +
-                  ", HYDRATION: " + Player.Instance.Status[statusType.HYDRATION]);
     }
 
     private bool CanSearch() {
-        // Search Conditions; All of Status over 10%, (Night) Need a 'Torch' item.
-        if (Player.Instance.StatusCheck(20f, 10f, 10f, 10f)) {    // Status OK
-            if (GameInfoView.Instance.CurrentDayNight == dayNightType.NIGHT) {  // Night
-                if (Player.Instance.Inventory[itemType.TORCH].Count >= 1) {    // Torch OK
-                    return true;
-                }
-                
-                Debug.Log("NO TORCH");
-                return false;
-            }
+        // 탐색하기 조건
+        /*
+         * 체력 20% 이상, 체온 10% 이상, 수분 10% 이상 허기 10% 이상.
+         * 밤일 경우, '횃불' 아이템 1개 이상.
+        */
 
+        if (!Player.Instance.StatusCheck(20f, 10f, 10f, 10f)) {
+            return false;
+        }
+
+        if (GameInfo.Instance.CurrentDayNight == dayNightType.DAY) {
             return true;
         }
         
-        Debug.Log("NOT ENOUGH STATUS");
-        return false;
+        return Player.Instance.Inventory[itemType.TORCH].Count >= 1;
     }
 
     private void Fire() {
         if (CanFire()) {
-            // TODO : Player.Instance.PlayerFire.Init();
-            Player.Instance.CanvasChange("Canvas Fire");
-            Player.Instance.CanvasOn("Canvas Info");
+            GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
+            GameCanvasControl.OnCanvasOnEvent("Canvas Info");
         }
     }
 
     private bool CanFire() {
-        if (!GameInfoView.Instance.IsFireInstalled) {
-            // Fire Conditions; 점화도구 1개, 불쏘시개 3개, 나무 1개 -> 날씨 맑음: 70%, 날씨 비: 30%, 날씨 눈: 30% 
-            if (Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= 1 && Player.Instance.Inventory[itemType.KINDLING].Count >= 3 && 
-                Player.Instance.Inventory[itemType.WOOD].Count >= 1) {    // Material OK
-                switch (GameInfoView.Instance.CurrentWeather) {
-                    case weatherType.SUNNY :
-                        if (Random.Range(0, 10) > 3) {    // 70%
-                            return true;
-                        }
+        // 불 피우기 조건
+        /*
+         * 점화 도구 1개, 불쏘시개 3개, 나무 1개 이상.
+         * 날씨 맑음: 성공 확률 70%, 날씨 비: 성공 확률 30%, 날씨 눈: 성공 확률 30%
+         * 성공 여부와 상관 없이 재료 소비.
+        */
 
-                        return false;
-                
-                    case weatherType.RAIN :
-                        if (Random.Range(0, 10) > 7) {  // 30%
-                            return true;
-                        }
-                    
-                        return false;
-                
-                    case weatherType.SNOW :
-                        if (Random.Range(0, 10) > 7) {  // 30%
-                            return true;
-                        }
-                    
-                        return false;
-                }
-            }
+        if (GameInfo.Instance.IsFireInstalled) {
+            return false;
         }
-        
-        return true;
+
+        if (!(Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= 1) &&
+            !(Player.Instance.Inventory[itemType.KINDLING].Count >= 3) &&
+            !(Player.Instance.Inventory[itemType.WOOD].Count >= 1)) {
+            return false;
+        }
+
+        switch (GameInfo.Instance.CurrentWeather) {
+            case weatherType.SUNNY :
+                return Random.Range(0, 10) > 3; // 70%
+
+            case weatherType.RAIN :
+                return Random.Range(0, 10) > 7; // 30%
+
+            case weatherType.SNOW :
+                return Random.Range(0, 10) > 7; // 30%
+
+            default:
+                return true;
+        }
     }
     
     // Constructions
     private void Shelter() {
-        // TODO : Player.Instance.PlayerShelter.Init();
-        Player.Instance.CanvasChange("Canvas Shelter");
-        Player.Instance.CanvasOn("Canvas Info");
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Shelter");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Info");
     }
 
     private void RainGutter() {
-        // TODO : Player.Instance.PlayerRainGutter.Init();
-        Player.Instance.CanvasChange("Canvas RainGutter");
-        Player.Instance.CanvasOn("Canvas Info");
+        GameCanvasControl.OnCanvasChangeEvent("Canvas RainGutter");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Info");
     }
 }
