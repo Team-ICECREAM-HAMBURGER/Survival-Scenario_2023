@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -61,7 +60,7 @@ public class Player : MonoBehaviour {
         { statusType.HYDRATION, 100f },
         { statusType.CALORIES, 100f }
     };
-    public readonly Dictionary<itemType, Item> Inventory = new Dictionary<itemType, Item>() {
+    public readonly Dictionary<itemType, IItem> Inventory = new Dictionary<itemType, IItem>() {
             { itemType.HERBS, new ItemHerbs() },
             { itemType.ROPE, new ItemRope() },
             { itemType.CAN, new ItemCan() },
@@ -94,7 +93,7 @@ public class Player : MonoBehaviour {
         this.StatusReduceMultiplier = 1f;
         this.CurrentStatusEffect = new Dictionary<statusEffectType, int>();
         
-        // TODO: Player Status -> JSON Load ( StatusUpdate() )
+        // TODO: Json Save File Load
     }
 
     private void Awake() {
@@ -137,11 +136,11 @@ public class Player : MonoBehaviour {
     
     public void StatusEffectActivate(statusEffectType statusEffectType, int duration, string statusEffectName) {
         this.CurrentStatusEffect.TryAdd(statusEffectType, duration);
-        GameInfo.OnStatusEffectUIActive(statusEffectName + " " + "(" + duration + " " + "텀 남음" + ")");
+        GameInfoView.OnStatusEffectUIUpdate(statusEffectName + " " + "(" + duration + " " + "텀 남음" + ")");
     }
     
     public void StatusEffectRemove(statusEffectType statusEffectType) {
         this.CurrentStatusEffect.Remove(statusEffectType);
-        GameInfo.OnStatusEffectUIReset();
+        GameInfoView.OnStatusEffectUIReset();
     }
 }

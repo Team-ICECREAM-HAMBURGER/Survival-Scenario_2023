@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class ItemStone : Item {
-    public override int Count { get; set; }
-    public override float Weight { get; set; }
+public class ItemStone : IItem {
+    public int Count { get; set; }
+    public float Weight { get; set; }
 
-    public override string ItemName { get; } = "돌";
-    public override bool IsAcquirable { get; } = true;
-    public override itemType ItemType { get; } = itemType.STONE;
-    public override eventType EventType { get; } = eventType.FARMING;
-
+    public string ItemName { get; } = "돌";
+    public bool IsAcquirable { get; } = true;
+    public itemType ItemType { get; } = itemType.STONE;
+    public eventType EventType { get; } = eventType.FARMING;
+    
     private readonly int maxValue = 5;
 
     
@@ -16,9 +16,16 @@ public class ItemStone : Item {
         this.Count = count;
         this.Weight = weight;
     }
+    
+    public int ItemUse() {
+        return 0;
+    }
+    
+    public string ItemAcquire() {
+        int acquireValue = Random.Range(1, (this.maxValue + 1));
 
-    public override int ItemAcquire() {
-        // Count Update -> Item get
-        return this.Count += Random.Range(1, (this.maxValue + 1));
+        this.Count += acquireValue;
+        
+        return "- " + this.ItemName + " " + acquireValue.ToString("+#; -#; 0") + "\n";
     }
 }

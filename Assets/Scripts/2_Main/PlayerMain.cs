@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -11,7 +8,7 @@ public class PlayerMain : MonoBehaviour {
     [SerializeField] private Button fireButton;
     [SerializeField] private Button shelterButton;
     [SerializeField] private Button rainGutter;
-
+    
     
     private void Init() {
         this.moveButton.onClick.AddListener(Move);

@@ -16,34 +16,26 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
         // Debug
         Debug.Log("FarmingEvent");
    
-        // Farming Result -> Text UI
-        
-        
-        
-        
-        PlayerSearchResultView.Instance.Farming(Farming());
+        PlayerSearchResultView.OnSearchResultUIFarming(Farming());
     }
 
-    // TODO: OnSearchResultUIFarming();
-    private Dictionary<string, int> Farming() {
-        Dictionary<string, int> acquiredItems = new Dictionary<string, int>();
+    private string Farming() {
+        string acquiredItems = "";
         
         for (int i = 0; i < Random.Range(2, 4); i++) {
             float randomPivot = Random.Range(0, 100);
             float weight = 0;
             
-            foreach (var variable in Player.Instance.Inventory.Where(variable => variable.Value.IsAcquirable && variable.Value.EventType == eventType.FARMING)) {
+            foreach (var variable in 
+                     Player.Instance.Inventory.Where(variable => 
+                         variable.Value.IsAcquirable && variable.Value.EventType == eventType.FARMING)) {
                 if (weight + variable.Value.Weight >= randomPivot) {
-                    if (!acquiredItems.ContainsKey(variable.Value.ItemName)) {
-                        int count = variable.Value.Count;
-                            
-                        variable.Value.ItemAcquire();
-                        acquiredItems.Add(variable.Value.ItemName, (variable.Value.Count - count));
-                    }
-                        
+                    // IItem GET!
+                    acquiredItems += variable.Value.ItemAcquire();   // return string "- 나무 +3 \n"
+                    
                     break;
                 }
-                    
+                
                 weight += variable.Value.Weight;
             }
         }

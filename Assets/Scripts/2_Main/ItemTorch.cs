@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class ItemTorch : Item {
-    public override int Count { get; set; }
-    public override float Weight { get; set; }
+public class ItemTorch : IItem {
+    public int Count { get; set; }
+    public float Weight { get; set; }
 
-    public override string ItemName { get; } = "횃불";
-    public override bool IsAcquirable { get; } = false;
-    public override itemType ItemType { get; } = itemType.TORCH;
-    public override eventType EventType { get; } = eventType.NONE;
+    public string ItemName { get; } = "횃불";
+    public bool IsAcquirable { get; } = false;
+    public itemType ItemType { get; } = itemType.TORCH;
+    public eventType EventType { get; } = eventType.NONE;   // TODO: eventType.CRAFT
 
     private int durability = 1;
     
@@ -16,5 +16,12 @@ public class ItemTorch : Item {
         this.Count = count;
         this.Weight = weight;
     }
+    
+    public int ItemUse() {
+        return 0;
+    }
 
+    public string ItemAcquire() {
+        return "";
+    }
 }

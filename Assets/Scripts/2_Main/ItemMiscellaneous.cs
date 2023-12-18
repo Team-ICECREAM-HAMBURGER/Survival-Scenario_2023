@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class ItemMiscellaneous : Item {
-    public override int Count { get; set; }
-    public override float Weight { get; set; }
+public class ItemMiscellaneous : IItem {
+    public int Count { get; set; }
+    public float Weight { get; set; }
 
-    public override string ItemName { get; } = "잡동사니";
-    public override bool IsAcquirable { get; } = true;
-    public override itemType ItemType { get; } = itemType.MISCELLANEOUS;
-    public override eventType EventType { get; } = eventType.FARMING;
+    public string ItemName { get; } = "잡동사니";
+    public bool IsAcquirable { get; } = true;
+    public itemType ItemType { get; } = itemType.MISCELLANEOUS;
+    public eventType EventType { get; } = eventType.FARMING;
 
     private readonly int maxValue = 5;
     
@@ -17,8 +17,15 @@ public class ItemMiscellaneous : Item {
         this.Weight = weight;
     }
     
-    public override int ItemAcquire() {
-        // Count Update -> Item get
-        return this.Count += Random.Range(1, (this.maxValue + 1));
+    public int ItemUse() {
+        return 0;
+    }
+    
+    public string ItemAcquire() {
+        int acquireValue = Random.Range(1, (this.maxValue + 1));
+
+        this.Count += acquireValue;
+        
+        return "- " + this.ItemName + " " + acquireValue.ToString("+#; -#; 0") + "\n";
     }
 }

@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class ItemHuntingTool : Item {
-    public override int Count { get; set; }
-    public override float Weight { get; set; }
+public class ItemHuntingTool : IItem {
+    public int Count { get; set; }
+    public float Weight { get; set; }
 
-    public override string ItemName { get; } = "사냥 도구";
-    public override bool IsAcquirable { get; } = false;
-    public override itemType ItemType { get; } = itemType.HUNTING_TOOL;
-    public override eventType EventType { get; } = eventType.NONE;
+    public string ItemName { get; } = "사냥 도구";
+    public bool IsAcquirable { get; } = false;
+    public itemType ItemType { get; } = itemType.HUNTING_TOOL;
+    public eventType EventType { get; } = eventType.NONE;
 
     private int durability = 0;
     private readonly int _durability;
@@ -19,7 +19,7 @@ public class ItemHuntingTool : Item {
         this._durability = this.durability;
     }
 
-    public override int ItemUse() {
+    public int ItemUse() {
         if (this.durability > 0) {
             this.durability -= 1;
         }
@@ -29,5 +29,9 @@ public class ItemHuntingTool : Item {
         }
 
         return this.Count;
+    }
+
+    public string ItemAcquire() {
+        return "";
     }
 }

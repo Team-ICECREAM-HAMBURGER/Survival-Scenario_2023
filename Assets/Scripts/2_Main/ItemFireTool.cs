@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class ItemFireTool : Item {
-    public override int Count { get; set; }
-    public override float Weight { get; set; }
+public class ItemFireTool : IItem {
+    public int Count { get; set; }
+    public float Weight { get; set; }
 
-    public override string ItemName { get; } = "점화 도구";
-    public override bool IsAcquirable { get; } = false;
-    public override itemType ItemType { get; } = itemType.FIRE_TOOL;
-    public override eventType EventType { get; } = eventType.NONE;
+    public string ItemName { get; } = "점화 도구";
+    public bool IsAcquirable { get; } = false;
+    public itemType ItemType { get; } = itemType.FIRE_TOOL;
+    public eventType EventType { get; } = eventType.NONE;
 
     private int durability = 1;
     
@@ -15,5 +15,13 @@ public class ItemFireTool : Item {
     public ItemFireTool(int count = 0, float weight = 0f) {
         this.Count = count;
         this.Weight = weight;
+    }
+    
+    public int ItemUse() {
+        return 0;
+    }
+    
+    public string ItemAcquire() {
+        return "";
     }
 }

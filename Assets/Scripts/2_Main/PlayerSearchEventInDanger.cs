@@ -15,7 +15,7 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
         Debug.Log("InDangerEvent");
         
         // Event
-        PlayerSearchResultView.Instance.InDanger(InDanger());
+        //PlayerSearchResultView.Instance.InDanger(InDanger());
     }
 
     private int InDanger() {

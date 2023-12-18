@@ -16,11 +16,12 @@ public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
     public void Event() {
         // Debug
         Debug.Log("HuntingEvent");
-        
-        PlayerSearchResultView.Instance.Hunting((Hunting()) ? this.resultItems : null);
+        PlayerSearchResultView.OnSearchResultUIHunting(Hunting);
+
+        //PlayerSearchResultView.Instance.Hunting((Hunting()) ? this.resultItems : null);
     }
 
-    private bool Hunting() {
+    private string Hunting() {
         this.resultItems.Clear();
         
         if (Player.Instance.Inventory[itemType.HUNTING_TOOL].Count >= 1) {

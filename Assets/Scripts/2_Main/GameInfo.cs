@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum dayNightType {
     DAY,
@@ -19,48 +14,38 @@ public enum weatherType {
 
 public class GameInfo : MonoBehaviour {
     public static GameInfo Instance;
-
-    [SerializeField] private TMP_Text currentStatusEffect;
-
-    public bool IsShelterInstalled { get; set; } = true;
-    public bool IsRainGutterInstalled { get; set; } = true;
-    public bool IsFireInstalled { get; set; } = false;
-    public int CurrentTerm { get; private set; } = 0;
-    public int CurrentDay { get; private set; } = 0;
-    public dayNightType CurrentDayNight { get; private set; } = dayNightType.DAY;
-    public weatherType CurrentWeather { get; private set; } = weatherType.SUNNY;
     
-    public delegate void StatusEffectUIActiveHandler(string value);
-    public static StatusEffectUIActiveHandler OnStatusEffectUIActive;
+    public bool IsFireInstalled { get; private set; }
+    public bool IsShelterInstalled { get; private set; }
+    public bool IsRainGutterInstalled { get; private set; }
 
-    public delegate void StatusEffectUIDeactivateHandler();
-    public static StatusEffectUIDeactivateHandler OnStatusEffectUIReset;
-
+    public int CurrentDay { get; private set; }
+    public int CurrentTerm { get; private set; }
     
+    public dayNightType CurrentDayNight { get; private set; }
+    public weatherType CurrentWeather { get; private set; }
+
+
     private void Init() {
         if (Instance != null) {
             return;
         }
-
+        
         Instance = this;
         
-        OnStatusEffectUIActive += StatusEffectUpdate;
-        OnStatusEffectUIReset += StatusEffectReset;
+        // TODO: Json Save File Load
+        this.IsFireInstalled = false;
+        this.IsShelterInstalled = false;
+        this.IsRainGutterInstalled = false;
+
+        this.CurrentDay = 0;
+        this.CurrentTerm = 0;
+
+        this.CurrentDayNight = dayNightType.DAY;
+        this.CurrentWeather = weatherType.SUNNY;
     }
 
     private void Awake() {
         Init();
     }
-
-    
-    // TODO: GameInfoView
-    private void StatusEffectUpdate(string value) {
-        this.currentStatusEffect.text = "현재 적용된 상태 이상: " + value;
-    }
-
-    // TODO: GameInfoView
-    private void StatusEffectReset() {
-        this.currentStatusEffect.text = "현재 적용된 상태 이상: 없음";
-    }
-
 }
