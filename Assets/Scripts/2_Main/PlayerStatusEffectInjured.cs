@@ -16,6 +16,6 @@ public class PlayerStatusEffectInjured : IPlayerStatusEffect {
         }
         
         Player.Instance.StatusReduceMultiplier = 2f;
-        Player.Instance.StatusEffectActivate(this.StatusEffectType, this.Duration, this.StatusEffectName);
+        Player.Instance.StatusEffectAdd(this.StatusEffectType, this.Duration, this.StatusEffectName);
     }
 }

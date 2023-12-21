@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,7 +7,6 @@ public class ItemMeatRaw : IItem {
     public float Weight { get; set; }
 
     public string ItemName { get; } = "생고기";
-    public bool IsAcquirable { get; } = true;
     public itemType ItemType { get; } = itemType.RAW_MEAT;
     public eventType EventType { get; } = eventType.HUNTING;
 
@@ -23,10 +23,10 @@ public class ItemMeatRaw : IItem {
     }
     
     public string ItemAcquire() {
-        int acquireValue = Random.Range(1, (this.maxValue + 1));
+        int value = Random.Range(1, (this.maxValue + 1));
 
-        this.Count += acquireValue;
-        
-        return "- " + this.ItemName + " " + acquireValue.ToString("+#; -#; 0") + "\n";
+        this.Count += value;
+
+        return $"- {this.ItemName} {value:+#; -#; 0}\n";
     }
 }

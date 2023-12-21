@@ -134,7 +134,8 @@ public class Player : MonoBehaviour {
             (statusEntry.Key == statusType.CALORIES && statusEntry.Value > calories));
     }
     
-    public void StatusEffectActivate(statusEffectType statusEffectType, int duration, string statusEffectName) {
+    public void StatusEffectAdd(statusEffectType statusEffectType, int duration, string statusEffectName) {
+        // TODO: IPlayerStatusEffect -> Dict <IPlayerStatusEffect, int>
         this.CurrentStatusEffect.TryAdd(statusEffectType, duration);
         GameInfoView.OnStatusEffectUIUpdate(statusEffectName + " " + "(" + duration + " " + "텀 남음" + ")");
     }

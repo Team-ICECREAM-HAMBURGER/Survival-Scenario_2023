@@ -3,7 +3,6 @@ public interface IItem {
     public float Weight { get; set; }
     
     public string ItemName { get; }
-    public bool IsAcquirable { get; }
     public itemType ItemType { get; }
     public eventType EventType { get; }
     
