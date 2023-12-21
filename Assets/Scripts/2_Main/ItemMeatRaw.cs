@@ -18,15 +18,15 @@ public class ItemMeatRaw : IItem {
         this.Weight = weight;
     }
     
-    public int ItemUse() {
-        return 0;
+    public bool ItemUse() {
+        return true;
     }
     
-    public string ItemAcquire() {
+    public int ItemAcquire() {
         int value = Random.Range(1, (this.maxValue + 1));
 
         this.Count += value;
 
-        return $"- {this.ItemName} {value:+#; -#; 0}\n";
+        return value;
     }
 }

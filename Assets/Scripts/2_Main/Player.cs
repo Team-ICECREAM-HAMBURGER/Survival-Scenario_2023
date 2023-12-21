@@ -135,7 +135,6 @@ public class Player : MonoBehaviour {
     }
     
     public void StatusEffectAdd(statusEffectType statusEffectType, int duration, string statusEffectName) {
-        // TODO: IPlayerStatusEffect -> Dict <IPlayerStatusEffect, int>
         this.CurrentStatusEffect.TryAdd(statusEffectType, duration);
         GameInfoView.OnStatusEffectUIUpdate(statusEffectName + " " + "(" + duration + " " + "텀 남음" + ")");
     }

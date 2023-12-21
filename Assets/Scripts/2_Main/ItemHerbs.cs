@@ -17,15 +17,15 @@ public class ItemHerbs : IItem {
         this.Weight = weight;
     }
     
-    public int ItemUse() {
-        return 0;
+    public bool ItemUse() {
+        return true;
     }
-    
-    public string ItemAcquire() {
+
+    public int ItemAcquire() {
         int acquireValue = Random.Range(1, (this.maxValue + 1));
 
         this.Count += acquireValue;
-        
-        return "- " + this.ItemName + " " + acquireValue.ToString("+#; -#; 0") + "\n";
+
+        return acquireValue;
     }
 }

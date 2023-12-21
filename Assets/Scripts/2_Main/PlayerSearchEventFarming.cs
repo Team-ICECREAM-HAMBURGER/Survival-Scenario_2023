@@ -32,8 +32,11 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
                      Player.Instance.Inventory.Where(
                          variable => variable.Value.EventType == eventType.FARMING)) {
                 if (weight + variable.Value.Weight >= randomPivot) {
-                    // IItem GET!
-                    this.acquiredItems.Append(variable.Value.ItemAcquire());   // return string "- 나무 +3 \n"
+                    // "- 나무 +3 \n"
+                    this.acquiredItems.Append("- ");
+                    this.acquiredItems.Append(variable.Value.ItemName);
+                    this.acquiredItems.Append(variable.Value.ItemAcquire().ToString("+#; -#; 0"));
+                    this.acquiredItems.Append("\n");
                     
                     break;
                 }

@@ -1,5 +1,5 @@
 public class PlayerStatusEffectDehydration : IPlayerStatusEffect {
-    public int Duration { get; set; }
+    public int DurationTerm { get; set; }
     public string StatusEffectName { get; }
     public statusEffectType StatusEffectType { get; }
     

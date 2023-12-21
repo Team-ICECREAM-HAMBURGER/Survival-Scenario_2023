@@ -15,11 +15,11 @@ public class ItemMre : IItem {
         this.Weight = weight;
     }
     
-    public int ItemUse() {
-        return 0;
+    public bool ItemUse() {
+        return true;
     }
 
-    public string ItemAcquire() {
-        return "";
+    public int ItemAcquire() {
+        return 0;
     }
 }
