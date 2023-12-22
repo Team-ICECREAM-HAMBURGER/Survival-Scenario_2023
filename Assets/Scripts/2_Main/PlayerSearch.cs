@@ -13,10 +13,10 @@ public class PlayerSearch : MonoBehaviour {
     [SerializeField] private GameObject searchingScreen;
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> eventActions = new Dictionary<eventType, IPlayerSearchEvent>() {
-            { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
+            { eventType.INJURED, new PlayerSearchEventInjured(98f) },
             { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) },
             { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
-            { eventType.FARMING, new PlayerSearchEventFarming(98f) }
+            { eventType.FARMING, new PlayerSearchEventFarming(0.5f) }
         };
 
     public delegate void SearchEventHandler();

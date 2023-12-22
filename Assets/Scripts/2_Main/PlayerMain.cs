@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -16,13 +17,16 @@ public class PlayerMain : MonoBehaviour {
         this.fireButton.onClick.AddListener(Fire);
         this.shelterButton.onClick.AddListener(Shelter);
         this.rainGutter.onClick.AddListener(RainGutter);
-        
-        // TODO: Background Change
-        if (GameInfo.Instance.CurrentDayNight == dayNightType.DAY) {
-            gameBackground.instance.BackgroundChange("Background Day");
-        } 
-        else if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT) {
-            gameBackground.instance.BackgroundChange("Background Night");
+
+        // Background Init
+        switch (GameInfo.Instance.CurrentDayNight) {
+            case dayNightType.DAY:
+                GameBackground.instance.BackgroundChange("Background Day");
+                break;
+            
+            case dayNightType.NIGHT:
+                GameBackground.instance.BackgroundChange("Background Night");
+                break;
         }
     }
 

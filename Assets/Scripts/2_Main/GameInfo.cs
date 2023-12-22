@@ -30,7 +30,7 @@ public class GameInfo : MonoBehaviour {
         if (Instance != null) {
             return;
         }
-        
+
         Instance = this;
         
         // TODO: Json Save File Load

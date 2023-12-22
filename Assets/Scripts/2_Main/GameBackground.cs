@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameBackground : MonoBehaviour {
-    public static gameBackground instance;
+public class GameBackground : MonoBehaviour {
+    public static GameBackground instance;
     
     [SerializeField] private GameObject[] backgrounds;
 
@@ -25,6 +25,7 @@ public class gameBackground : MonoBehaviour {
         foreach (var variable in this.backgrounds) {
             if (variable.name == backgroundName) {
                 variable.SetActive(true);
+                
                 continue;
             }
             

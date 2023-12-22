@@ -8,12 +8,12 @@ using Random = UnityEngine.Random;
 public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
 
-    private readonly StringBuilder acquiredItems;
+    private readonly StringBuilder resultText;
     
     
     public PlayerSearchEventFarming(float weight) {
         this.Weight = weight;
-        this.acquiredItems = new StringBuilder();
+        this.resultText = new StringBuilder();
     }
     
     public void Event() {
@@ -24,19 +24,24 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
     }
 
     private string Farming() {
+        this.resultText.Clear();
+        
         for (int i = 0; i < Random.Range(2, 4); i++) {
             float randomPivot = Random.Range(0, 100);
             float weight = 0;
             
-            foreach (var variable in 
-                     Player.Instance.Inventory.Where(
+            foreach (var variable in Player.Instance.Inventory.Where(
                          variable => variable.Value.EventType == eventType.FARMING)) {
                 if (weight + variable.Value.Weight >= randomPivot) {
-                    // "- 나무 +3 \n"
-                    this.acquiredItems.Append("- ");
-                    this.acquiredItems.Append(variable.Value.ItemName);
-                    this.acquiredItems.Append(variable.Value.ItemAcquire().ToString("+#; -#; 0"));
-                    this.acquiredItems.Append("\n");
+                    // Item Get
+                    var acquiredItemCount = variable.Value.ItemAcquire();
+                    
+                    // UI Text
+                    this.resultText.Append("- ");
+                    this.resultText.Append(variable.Value.ItemName);
+                    this.resultText.Append(" ");
+                    this.resultText.Append(acquiredItemCount.ToString("+#; -#; 0"));
+                    this.resultText.Append("\n");
                     
                     break;
                 }
@@ -45,6 +50,6 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
             }
         }
 
-        return this.acquiredItems.ToString();
+        return this.resultText.ToString();
     }
 }
