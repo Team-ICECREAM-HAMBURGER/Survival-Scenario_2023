@@ -37,6 +37,7 @@ public class PlayerMain : MonoBehaviour {
     private void Move() {
         if (CanMove()) {
             GameCanvasControl.OnCanvasChangeEvent("Canvas Move");
+            GameInfo.OnTimeUpdateEvent(1);
         }
     }
 
@@ -53,6 +54,7 @@ public class PlayerMain : MonoBehaviour {
     private void Search() {
         if (CanSearch()) {
             PlayerSearch.OnSearchEvent();
+            GameInfo.OnTimeUpdateEvent(1);
         }
     }
 

@@ -25,6 +25,7 @@ public class PlayerSearch : MonoBehaviour {
 
     private void Init() {
         OnSearchEvent += Search;
+        this.okButton.onClick.AddListener(SearchingResultOk);
     }
 
     private void Start() {
@@ -33,6 +34,7 @@ public class PlayerSearch : MonoBehaviour {
     
     private void Search() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Search");
+        this.searchingScreen.SetActive(true);
         
         // Weight random select
         float randomPivot = Random.Range(0, 100);
@@ -51,9 +53,6 @@ public class PlayerSearch : MonoBehaviour {
         
         // Player Status Update
         Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
-        
-        this.okButton.onClick.AddListener(SearchingResultOk);
-        this.searchingScreen.SetActive(true);
     }
 
     private void SearchingResultOk() {

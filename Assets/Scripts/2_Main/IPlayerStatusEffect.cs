@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public interface IPlayerStatusEffect {
     public int DurationTerm { get; set; }
     public string StatusEffectName { get; }

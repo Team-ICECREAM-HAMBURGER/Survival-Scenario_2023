@@ -136,11 +136,11 @@ public class Player : MonoBehaviour {
     
     public void StatusEffectAdd(statusEffectType statusEffectType, int duration, string statusEffectName) {
         this.CurrentStatusEffect.TryAdd(statusEffectType, duration);
-        GameInfoView.OnStatusEffectUIUpdate(statusEffectName + " " + "(" + duration + " " + "텀 남음" + ")");
+        GameInfoView.OnStatusEffectUIUpdateEvent(statusEffectName + " " + "(" + duration + " " + "텀 남음" + ")");
     }
     
     public void StatusEffectRemove(statusEffectType statusEffectType) {
         this.CurrentStatusEffect.Remove(statusEffectType);
-        GameInfoView.OnStatusEffectUIReset();
+        GameInfoView.OnStatusEffectUIResetEvent();
     }
 }

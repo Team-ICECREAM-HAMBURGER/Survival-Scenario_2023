@@ -25,7 +25,10 @@ public class GameInfo : MonoBehaviour {
     public dayNightType CurrentDayNight { get; private set; }
     public weatherType CurrentWeather { get; private set; }
 
+    public delegate void TimeUpdateEventHandler(int value);
+    public static TimeUpdateEventHandler OnTimeUpdateEvent;
 
+    
     private void Init() {
         if (Instance != null) {
             return;
@@ -43,9 +46,25 @@ public class GameInfo : MonoBehaviour {
 
         this.CurrentDayNight = dayNightType.DAY;
         this.CurrentWeather = weatherType.SUNNY;
+
+        OnTimeUpdateEvent += TimeUpdate;
     }
 
     private void Awake() {
         Init();
+    }
+
+    private void TimeUpdate(int value) {
+        if (this.CurrentTerm >= 250) {
+            // TODO: DayNight Update
+        }
+        else if (this.CurrentTerm >= 500) {
+            this.CurrentDay += 1;
+        }
+        else {
+            this.CurrentTerm += value;
+        }
+
+        GameInfoView.OnCurrentTimeUIUpdateEvent(this.CurrentTerm, this.CurrentDay);
     }
 }

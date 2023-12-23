@@ -9,15 +9,19 @@ public class GameInfoView : MonoBehaviour {
     [SerializeField] private TMP_Text currentWeather;
     
     public delegate void StatusEffectUIActiveHandler(string value);
-    public static StatusEffectUIActiveHandler OnStatusEffectUIUpdate;
+    public static StatusEffectUIActiveHandler OnStatusEffectUIUpdateEvent;
 
-    public delegate void StatusEffectUIDeactivateHandler();
-    public static StatusEffectUIDeactivateHandler OnStatusEffectUIReset;
+    public delegate void StatusEffectUIDeActivateHandler();
+    public static StatusEffectUIDeActivateHandler OnStatusEffectUIResetEvent;
+
+    public delegate void CurrentTimeUIUpdateHandler(int term, int day);
+    public static CurrentTimeUIUpdateHandler OnCurrentTimeUIUpdateEvent;
     
     
     private void Init() {
-        OnStatusEffectUIUpdate += StatusEffectUIUpdate;
-        OnStatusEffectUIReset += StatusEffectUIReset;
+        OnStatusEffectUIUpdateEvent += StatusEffectUIUpdate;
+        OnStatusEffectUIResetEvent += StatusEffectUIReset;
+        OnCurrentTimeUIUpdateEvent += CurrentTimeUIUpdate;
     }
 
     private void Awake() {
@@ -33,4 +37,8 @@ public class GameInfoView : MonoBehaviour {
     }
     
     // TODO: CurrentDay, Term, DayNight, Weather
+    private void CurrentTimeUIUpdate(int term, int day) {
+        this.currentDay.text = $"{day} 일";
+        this.currentTerm.text = $"{term} 텀";
+    }
 }

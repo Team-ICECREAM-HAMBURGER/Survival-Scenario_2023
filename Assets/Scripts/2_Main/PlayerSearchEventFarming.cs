@@ -37,11 +37,7 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
                     var acquiredItemCount = variable.Value.ItemAcquire();
                     
                     // UI Text
-                    this.resultText.Append("- ");
-                    this.resultText.Append(variable.Value.ItemName);
-                    this.resultText.Append(" ");
-                    this.resultText.Append(acquiredItemCount.ToString("+#; -#; 0"));
-                    this.resultText.Append("\n");
+                    this.resultText.Append($"- {variable.Value.ItemName} {acquiredItemCount:+#; -#; 0}\n");
                     
                     break;
                 }
