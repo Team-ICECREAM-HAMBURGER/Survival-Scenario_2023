@@ -29,11 +29,11 @@ public class GameInfoView : MonoBehaviour {
     }
     
     private void StatusEffectUIUpdate(string value) {
-        this.currentStatusEffect.text = "현재 적용된 상태 이상: " + value;
+        this.currentStatusEffect.text = $"현재 적용된 상태 이상: {value}";
     }
 
     private void StatusEffectUIReset() {
-        this.currentStatusEffect.text = "현재 적용된 상태 이상: " + "없음";
+        this.currentStatusEffect.text = "현재 적용된 상태 이상: 없음";
     }
     
     // TODO: CurrentDay, Term, DayNight, Weather

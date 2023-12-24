@@ -134,11 +134,6 @@ public class Player : MonoBehaviour {
             (statusEntry.Key == statusType.CALORIES && statusEntry.Value > calories));
     }
     
-    public void StatusEffectAdd(statusEffectType statusEffectType, int duration, string statusEffectName) {
-        this.CurrentStatusEffect.TryAdd(statusEffectType, duration);
-        GameInfoView.OnStatusEffectUIUpdateEvent(statusEffectName + " " + "(" + duration + " " + "텀 남음" + ")");
-    }
-    
     public void StatusEffectRemove(statusEffectType statusEffectType) {
         this.CurrentStatusEffect.Remove(statusEffectType);
         GameInfoView.OnStatusEffectUIResetEvent();

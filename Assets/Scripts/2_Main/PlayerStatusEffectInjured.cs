@@ -5,12 +5,24 @@ public class PlayerStatusEffectInjured : IPlayerStatusEffect {
     public string StatusEffectName { get; } = "부상";
     public statusEffectType StatusEffectType { get; } = statusEffectType.INJURED;
 
-
+    
     public void Event() {
         this.DurationTerm = Random.Range(3, 8) * 500;
-        Player.Instance.StatusReduceMultiplier = 2f;
-        Player.Instance.StatusEffectAdd(this.StatusEffectType, this.DurationTerm, this.StatusEffectName);
+
+        if (!Player.Instance.CurrentStatusEffect.TryAdd(this.StatusEffectType, this.DurationTerm)) {
+            Player.Instance.CurrentStatusEffect[this.StatusEffectType] = this.DurationTerm;
+        }
+        else {
+            GameInfo.OnTimeUpdateEvent += DurationTermUpdate;
+            Player.Instance.StatusReduceMultiplier = 2f;
+        }
+        
+        GameInfoView.OnStatusEffectUIUpdateEvent($"{this.StatusEffectName} ({this.DurationTerm}텀)");
     }
     
-    // TODO : 시간이 흐를 때마다 DurationTerm -= 1
+    private void DurationTermUpdate(int value) {
+        this.DurationTerm -= value;
+        
+        GameInfoView.OnStatusEffectUIUpdateEvent($"{this.StatusEffectName} ({this.DurationTerm}텀)");
+    }
 }

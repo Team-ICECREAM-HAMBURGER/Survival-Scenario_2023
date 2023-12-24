@@ -60,6 +60,7 @@ public class GameInfo : MonoBehaviour {
         }
         else if (this.CurrentTerm >= 500) {
             this.CurrentDay += 1;
+            this.CurrentTerm = 0;
         }
         else {
             this.CurrentTerm += value;
