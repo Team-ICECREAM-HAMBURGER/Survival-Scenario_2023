@@ -106,6 +106,7 @@ public class Player : MonoBehaviour {
         }
         
         // TODO: UI Graph Update Event
+        GameInfoView.OnPlayerStatusUIUpdateEvent();
     }
 
     public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
@@ -116,6 +117,7 @@ public class Player : MonoBehaviour {
         }
         
         // TODO: UI Graph Update Event
+        GameInfoView.OnPlayerStatusUIUpdateEvent();
     }
 
     public bool StatusCheck(float value) {

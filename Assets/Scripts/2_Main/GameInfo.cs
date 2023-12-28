@@ -56,7 +56,8 @@ public class GameInfo : MonoBehaviour {
 
     private void TimeUpdate(int value) {
         if (this.CurrentTerm >= 250) {
-            // TODO: DayNight Update
+            this.CurrentDayNight = (this.CurrentDayNight == dayNightType.DAY) ? dayNightType.NIGHT : dayNightType.DAY;
+            GameInfoView.OnDayNightUIUpdateEvent((this.CurrentDayNight == dayNightType.DAY) ? "낮" : "밤");
         }
         else if (this.CurrentTerm >= 500) {
             this.CurrentDay += 1;
@@ -66,6 +67,6 @@ public class GameInfo : MonoBehaviour {
             this.CurrentTerm += value;
         }
 
-        GameInfoView.OnCurrentTimeUIUpdateEvent(this.CurrentTerm, this.CurrentDay);
+        GameInfoView.OnTimeUIUpdateEvent(this.CurrentTerm, this.CurrentDay);
     }
 }

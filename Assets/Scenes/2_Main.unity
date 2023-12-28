@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311924, g: 0.38073963, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2210,7 +2210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 37577880}
+  m_AnchoredPosition: {x: -399.9992, y: 39326068}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -2457,9 +2457,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.802
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3996,9 +3996,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.802
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8938,11 +8938,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79eaa286c734dd8946af3b138d7df8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStatusEffect: {fileID: 1421462052}
-  currentDay: {fileID: 1502108877}
-  currentTerm: {fileID: 1179872497}
-  currentDayNight: {fileID: 869625075}
-  currentWeather: {fileID: 1091223458}
+  statusEffect: {fileID: 1421462052}
+  day: {fileID: 1502108877}
+  term: {fileID: 1179872497}
+  dayNight: {fileID: 869625075}
+  weather: {fileID: 1091223458}
+  playerStatusGauges:
+  - {fileID: 557702705}
+  - {fileID: 170220096}
+  - {fileID: 260111966}
+  - {fileID: 1381146738}
 --- !u!114 &538704324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9114,9 +9119,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.802
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -15855,7 +15860,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 37577880}
+  m_AnchoredPosition: {x: -399.9992, y: 39326068}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -20939,9 +20944,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.802
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -21643,7 +21648,7 @@ GameObject:
   - component: {fileID: 1421462053}
   - component: {fileID: 1421462052}
   m_Layer: 5
-  m_Name: Current Status Effect
+  m_Name: Status Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
