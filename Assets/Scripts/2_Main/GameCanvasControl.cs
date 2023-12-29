@@ -6,7 +6,6 @@ public class GameCanvasControl : MonoBehaviour {
     [SerializeField] private List<Canvas> canvasList;
     
     public delegate void CanvasUpdateHandler(string value);
-
     public static CanvasUpdateHandler OnCanvasChangeEvent;
     public static CanvasUpdateHandler OnCanvasOnEvent;
     public static CanvasUpdateHandler OnCanvasOffEvent;

@@ -105,7 +105,6 @@ public class Player : MonoBehaviour {
             this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + value * this.StatusReduceMultiplier, 0, 100);
         }
         
-        // TODO: UI Graph Update Event
         GameInfoView.OnPlayerStatusUIUpdateEvent();
     }
 
@@ -116,7 +115,6 @@ public class Player : MonoBehaviour {
             this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + values[i] * this.StatusReduceMultiplier, 0, 100);
         }
         
-        // TODO: UI Graph Update Event
         GameInfoView.OnPlayerStatusUIUpdateEvent();
     }
 

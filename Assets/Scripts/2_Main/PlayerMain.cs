@@ -1,4 +1,4 @@
-using System;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -9,7 +9,10 @@ public class PlayerMain : MonoBehaviour {
     [SerializeField] private Button fireButton;
     [SerializeField] private Button shelterButton;
     [SerializeField] private Button rainGutter;
-    
+
+    private string warningMessageContent;
+    private string warningMessageTitle;
+        
     
     private void Init() {
         this.moveButton.onClick.AddListener(Move);
@@ -46,8 +49,31 @@ public class PlayerMain : MonoBehaviour {
          * 모든 스테이터스가 25% 이상.
          * 부상을 입지 않음.
         */
+
+        float status = 50f;
         
-        return Player.Instance.StatusCheck(25f) && !Player.Instance.CurrentStatusEffect.ContainsKey(statusEffectType.INJURED);
+        // TODO: 조건 불충족으로 인해 다른 지역 이동 불가. -> 경고창 출력
+        if (!Player.Instance.StatusCheck(status)) {
+            this.warningMessageTitle = "스테이터스가 충분하지 않음";
+            this.warningMessageContent = "다른 지역으로 이동할 수 있을만큼 스테이터스가 충분하지 않다.\n" +
+                                         $"다른 지역으로 이동하기 위해서는 최소한 모든 스테이터스가 {status}% 이상이어야 한다.\n";
+            
+            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
+            
+            return false;
+        }
+        
+        if (Player.Instance.CurrentStatusEffect.ContainsKey(statusEffectType.INJURED)) {
+            this.warningMessageTitle = "현재 부상을 입었음";
+            this.warningMessageContent = "부상을 입은 상태에서는 스테이터스 소모량이 증가하며, 다른 지역으로 이동할 수 없다.\n" +
+                                         $"부상은 휴식과 잠을 통해 빠르게 회복할 수 있다. 아플 때는 우선 쉬어주자.\n";
+            
+            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
+            
+            return false;
+        }
+
+        return true;
     }
     
     private void Search() {
@@ -64,15 +90,32 @@ public class PlayerMain : MonoBehaviour {
          * 밤일 경우, '횃불' 아이템 1개 이상.
         */
 
-        if (!Player.Instance.StatusCheck(20f, 10f, 10f, 10f)) {
+        float stamina = 20f;
+        float bodyHeat = 15f;
+        float hydration = 5f;
+        float calories = 10f;
+        
+        if (!Player.Instance.StatusCheck(stamina, bodyHeat, hydration, calories)) {
+            this.warningMessageTitle = "스테이터스가 너무 낮음";
+            this.warningMessageContent = "탐색에 나설만큼 스테이터스가 충분하지 않다.\n" +
+                                         $"탐색에는 최소한 체력 {stamina}%, 체온 {bodyHeat}%, 수분 {hydration}%, 허기 {calories}% 이상이 필요하다.\n";
+            
+            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
+            
             return false;
         }
 
-        if (GameInfo.Instance.CurrentDayNight == dayNightType.DAY) {
-            return true;
+        if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT && Player.Instance.Inventory[itemType.TORCH].Count < 1) {
+            this.warningMessageTitle = "횃불이 준비되지 않음";
+            this.warningMessageContent = "빛이 없는 야간에 탐색을 나서기 위해서는 횃불이 필요하다.\n " +
+                                         "횃불은 인벤토리에서 제작할 수 있다. 우선 제작에 필요한 재료를 모아보자.\n";
+            
+            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
+
+            return false;
         }
-        
-        return Player.Instance.Inventory[itemType.TORCH].Count >= 1;
+
+        return true;
     }
 
     private void Fire() {
@@ -94,7 +137,7 @@ public class PlayerMain : MonoBehaviour {
             return false;
         }
 
-        if (!(Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= 1) &&
+        if (!(Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= 1) && 
             !(Player.Instance.Inventory[itemType.KINDLING].Count >= 3) &&
             !(Player.Instance.Inventory[itemType.WOOD].Count >= 1)) {
             return false;

@@ -73,6 +73,9 @@ TagManager:
   - name: Crafting
     uniqueID: 1100065345
     locked: 0
+  - name: Warning
+    uniqueID: 309118611
+    locked: 0
   - name: Pause
     uniqueID: 4288980303
     locked: 0
