@@ -6,12 +6,11 @@ using UnityEngine;
 public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
 
-    private readonly StringBuilder resultText;
+    private string resultText;
     
     
     public PlayerSearchEventHunting(float weight) {
         this.Weight = weight;
-        this.resultText = new StringBuilder();
     }
     
     public void Event() {
@@ -22,23 +21,21 @@ public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
     }
 
     private string Hunting() {
-        this.resultText.Clear();
-        
         if (Player.Instance.Inventory[itemType.HUNTING_TOOL].Count >= 1) {
-            int count = 0;
-            
-            // Item Use; Hunting Tool
-            this.resultText.Append(Player.Instance.Inventory[itemType.HUNTING_TOOL].ItemUse());
-            
-            // Item Acquire; Raw Meat
-            this.resultText.Append(Player.Instance.Inventory[itemType.RAW_MEAT].ItemAcquire());
+            int usedValue = 1;
+
+            Player.Instance.Inventory[itemType.HUNTING_TOOL].ItemUse(usedValue);
+            int acquiredValue = Player.Instance.Inventory[itemType.RAW_MEAT].ItemAcquire();
+
+            this.resultText = $"끈질긴 추격전 끝에 사냥에 성공했다. 사냥 도구 {usedValue}개가 소모되었다.\n" +
+                              $"잡은 사냥감을 손질해서 생고기 {acquiredValue}개를 가지고 돌아왔다.\n";
         }
         else {
-            this.resultText.Append("마땅한 도구가 없어 사냥감을 놓치고 말았다.\n");
-            this.resultText.Append("도구 제작은 '인벤토리' 메뉴에서 할 수 있다.\n");
-            this.resultText.Append("우선 제작에 필요한 재료를 모아보자.\n");
+            this.resultText = "마땅한 도구가 없어 사냥감을 놓치고 말았다.\n" + 
+                              "도구 제작은 '인벤토리' 메뉴에서 할 수 있다.\n" +
+                              "우선 제작에 필요한 재료를 모아보자.\n";
         }
-        
-        return resultText.ToString();
+
+        return resultText;
     }
 }

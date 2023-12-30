@@ -7,6 +7,6 @@ public interface IItem {
     public eventType EventType { get; }
     
     
-    public bool ItemUse();
+    public bool ItemUse(int value);
     public int ItemAcquire();
 }

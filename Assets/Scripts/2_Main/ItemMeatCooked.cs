@@ -18,13 +18,12 @@ public class ItemMeatCooked : IItem {
         this.Weight = weight;
     }
     
-    public bool ItemUse() {
+    public bool ItemUse(int value) {
         return true;
     }
     
     public int ItemAcquire() {
         int acquireValue = Random.Range(1, (this.maxValue + 1));
-
         this.Count += acquireValue;
 
         return acquireValue;

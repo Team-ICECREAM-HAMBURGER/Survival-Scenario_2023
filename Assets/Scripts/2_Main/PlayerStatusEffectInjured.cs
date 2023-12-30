@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerStatusEffectInjured : IPlayerStatusEffect {
     public int DurationTerm { get; set; }
+    
     public string StatusEffectName { get; } = "부상";
     public statusEffectType StatusEffectType { get; } = statusEffectType.INJURED;
 
@@ -22,7 +23,6 @@ public class PlayerStatusEffectInjured : IPlayerStatusEffect {
     
     private void DurationTermUpdate(int value) {
         this.DurationTerm -= value;
-        
         GameInfoView.OnStatusEffectUIUpdateEvent($"{this.StatusEffectName} ({this.DurationTerm}텀)");
     }
 }

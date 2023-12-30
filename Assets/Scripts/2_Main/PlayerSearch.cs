@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -34,6 +30,7 @@ public class PlayerSearch : MonoBehaviour {
     
     private void Search() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Search");
+        
         this.searchingScreen.SetActive(true);
         
         // Weight random select

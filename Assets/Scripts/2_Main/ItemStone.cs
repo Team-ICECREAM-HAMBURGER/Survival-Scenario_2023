@@ -17,7 +17,7 @@ public class ItemStone : IItem {
         this.Weight = weight;
     }
     
-    public bool ItemUse() {
+    public bool ItemUse(int value) {
         return true;
     }
     

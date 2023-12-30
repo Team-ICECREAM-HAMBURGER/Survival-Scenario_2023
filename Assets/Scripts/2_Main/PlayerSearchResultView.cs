@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 public class PlayerSearchResultView : MonoBehaviour {
     [SerializeField] private TMP_Text titleText;
