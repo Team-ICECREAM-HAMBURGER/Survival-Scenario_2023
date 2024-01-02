@@ -53,7 +53,7 @@ public class GameInfoView : MonoBehaviour {
     
     private void TimeUIUpdate(int term, int day) {
         this.day.text = $"{day} 일";
-        this.term.text = $"{term} 텀";
+        //this.term.text = $"{term} 텀";
     }
 
     private void DayNightUIUpdate(string value) {

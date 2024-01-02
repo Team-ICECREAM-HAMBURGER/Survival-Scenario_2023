@@ -1,4 +1,3 @@
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -7,28 +6,26 @@ public class PlayerMain : MonoBehaviour {
     [SerializeField] private Button moveButton;
     [SerializeField] private Button searchButton;
     [SerializeField] private Button fireButton;
-    [SerializeField] private Button shelterButton;
     [SerializeField] private Button rainGutter;
 
     private string warningMessageContent;
     private string warningMessageTitle;
-        
+    
     
     private void Init() {
         this.moveButton.onClick.AddListener(Move);
         this.searchButton.onClick.AddListener(Search);
         this.fireButton.onClick.AddListener(Fire);
-        this.shelterButton.onClick.AddListener(Shelter);
         this.rainGutter.onClick.AddListener(RainGutter);
 
         // Background Init
         switch (GameInfo.Instance.CurrentDayNight) {
             case dayNightType.DAY:
-                GameBackground.instance.BackgroundChange("Background Day");
+                GameBackgroundControl.OnBackgroundChangeEvent("Background Day");
                 break;
             
             case dayNightType.NIGHT:
-                GameBackground.instance.BackgroundChange("Background Night");
+                GameBackgroundControl.OnBackgroundChangeEvent("Background Night");
                 break;
         }
     }
@@ -52,14 +49,11 @@ public class PlayerMain : MonoBehaviour {
 
         float status = 50f;
         
-        // TODO: 조건 불충족으로 인해 다른 지역 이동 불가. -> 경고창 출력
         if (!Player.Instance.StatusCheck(status)) {
             this.warningMessageTitle = "스테이터스가 충분하지 않음";
             this.warningMessageContent = "다른 지역으로 이동할 수 있을만큼 스테이터스가 충분하지 않다.\n" +
                                          $"다른 지역으로 이동하기 위해서는 최소한 모든 스테이터스가 {status}% 이상이어야 한다.\n";
-            
             GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
-            
             return false;
         }
         
@@ -67,9 +61,7 @@ public class PlayerMain : MonoBehaviour {
             this.warningMessageTitle = "현재 부상을 입었음";
             this.warningMessageContent = "부상을 입은 상태에서는 스테이터스 소모량이 증가하며, 다른 지역으로 이동할 수 없다.\n" +
                                          $"부상은 휴식과 잠을 통해 빠르게 회복할 수 있다. 아플 때는 우선 쉬어주자.\n";
-            
             GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
-            
             return false;
         }
 
@@ -99,9 +91,7 @@ public class PlayerMain : MonoBehaviour {
             this.warningMessageTitle = "스테이터스가 너무 낮음";
             this.warningMessageContent = "탐색에 나설만큼 스테이터스가 충분하지 않다.\n" +
                                          $"탐색에는 최소한 체력 {stamina}%, 체온 {bodyHeat}%, 수분 {hydration}%, 허기 {calories}% 이상이 필요하다.\n";
-            
             GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
-            
             return false;
         }
 
@@ -109,9 +99,7 @@ public class PlayerMain : MonoBehaviour {
             this.warningMessageTitle = "횃불이 준비되지 않음";
             this.warningMessageContent = "빛이 없는 야간에 탐색을 나서기 위해서는 횃불이 필요하다.\n " +
                                          "횃불은 인벤토리에서 제작할 수 있다. 우선 제작에 필요한 재료를 모아보자.\n";
-            
             GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
-
             return false;
         }
 
@@ -158,12 +146,6 @@ public class PlayerMain : MonoBehaviour {
         }
     }
     
-    // Constructions
-    private void Shelter() {
-        GameCanvasControl.OnCanvasChangeEvent("Canvas Shelter");
-        GameCanvasControl.OnCanvasOnEvent("Canvas Info");
-    }
-
     private void RainGutter() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas RainGutter");
         GameCanvasControl.OnCanvasOnEvent("Canvas Info");

@@ -41,7 +41,6 @@ public class PlayerSearch : MonoBehaviour {
         foreach (IPlayerSearchEvent variable in this.eventActions.Values) {
             if (variable.Weight + weight >= randomPivot) {
                 variable.Event();
-                
                 break;
             }
             
