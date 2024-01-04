@@ -104,8 +104,8 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < this.Status.Count; i++) {
             this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + value * this.StatusReduceMultiplier, 0, 100);
         }
-        
-        GameInfoView.OnPlayerStatusUIUpdateEvent();
+
+        PlayerInfoView.OnStatusGaugeUpdateEvent();
     }
 
     public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour {
             this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + values[i] * this.StatusReduceMultiplier, 0, 100);
         }
         
-        GameInfoView.OnPlayerStatusUIUpdateEvent();
+        PlayerInfoView.OnStatusGaugeUpdateEvent();
     }
 
     public bool StatusCheck(float value) {
@@ -133,9 +133,19 @@ public class Player : MonoBehaviour {
             (statusEntry.Key == statusType.HYDRATION && statusEntry.Value > hydration) ||
             (statusEntry.Key == statusType.CALORIES && statusEntry.Value > calories));
     }
+
+    public void StatusEffectAdd(statusEffectType statusEffectType, int durationTerm) {
+        if (!this.CurrentStatusEffect.TryAdd(statusEffectType, durationTerm)) {
+            this.CurrentStatusEffect[statusEffectType] = durationTerm;
+        }
+        else {
+            this.StatusReduceMultiplier = 2f;
+            
+        }
+    }
     
     public void StatusEffectRemove(statusEffectType statusEffectType) {
         this.CurrentStatusEffect.Remove(statusEffectType);
-        GameInfoView.OnStatusEffectUIResetEvent();
+        PlayerInfoView.OnStatusEffectRemoveEvent("건강함");
     }
 }

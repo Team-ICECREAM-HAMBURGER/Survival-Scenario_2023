@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PlayerMain : MonoBehaviour {
+public class PlayerOutside : MonoBehaviour {
     [SerializeField] private Button moveButton;
     [SerializeField] private Button searchButton;
     [SerializeField] private Button fireButton;
@@ -60,7 +60,7 @@ public class PlayerMain : MonoBehaviour {
         if (Player.Instance.CurrentStatusEffect.ContainsKey(statusEffectType.INJURED)) {
             this.warningMessageTitle = "현재 부상을 입었음";
             this.warningMessageContent = "부상을 입은 상태에서는 스테이터스 소모량이 증가하며, 다른 지역으로 이동할 수 없다.\n" +
-                                         $"부상은 휴식과 잠을 통해 빠르게 회복할 수 있다. 아플 때는 우선 쉬어주자.\n";
+                                         "부상은 휴식과 잠을 통해 빠르게 회복할 수 있다. 아플 때는 우선 쉬어주자.\n";
             GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
             return false;
         }

@@ -9,20 +9,11 @@ public class PlayerStatusEffectInjured : IPlayerStatusEffect {
     
     public void Event() {
         this.DurationTerm = Random.Range(3, 8) * 500;
-
-        if (!Player.Instance.CurrentStatusEffect.TryAdd(this.StatusEffectType, this.DurationTerm)) {
-            Player.Instance.CurrentStatusEffect[this.StatusEffectType] = this.DurationTerm;
-        }
-        else {
-            GameInfo.OnTimeUpdateEvent += DurationTermUpdate;
-            Player.Instance.StatusReduceMultiplier = 2f;
-        }
-        
-        GameInfoView.OnStatusEffectUIUpdateEvent($"{this.StatusEffectName} ({this.DurationTerm}텀)");
+        Player.Instance.StatusEffectAdd(this.StatusEffectType, this.DurationTerm);
+        PlayerInfoView.OnStatusEffectAddEvent(this.StatusEffectName);
     }
     
     private void DurationTermUpdate(int value) {
         this.DurationTerm -= value;
-        GameInfoView.OnStatusEffectUIUpdateEvent($"{this.StatusEffectName} ({this.DurationTerm}텀)");
     }
 }
