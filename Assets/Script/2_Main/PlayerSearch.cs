@@ -9,10 +9,10 @@ public class PlayerSearch : MonoBehaviour {
     [SerializeField] private GameObject searchingScreen;
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> eventActions = new Dictionary<eventType, IPlayerSearchEvent>() {
-            { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
-            { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.5f) },
-            { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
-            { eventType.FARMING, new PlayerSearchEventFarming(98f) }
+            { eventType.INJURED, new PlayerSearchEventInjured(50f) },
+            { eventType.IN_DANGER, new PlayerSearchEventInDanger(0f) },
+            { eventType.HUNTING, new PlayerSearchEventHunting(0f) },
+            { eventType.FARMING, new PlayerSearchEventFarming(50f) }
         };
 
     public delegate void SearchEventHandler();
@@ -52,9 +52,8 @@ public class PlayerSearch : MonoBehaviour {
     }
 
     private void SearchingResultOk() {
-        // Return to Main Screen
-        GameCanvasControl.OnCanvasChangeEvent("Canvas Main");
-        GameCanvasControl.OnCanvasOnEvent("Canvas Background");
-        GameCanvasControl.OnCanvasOnEvent("Canvas Info");
+        // Return to Outside Screen
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Outside");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Information");
     }
 }

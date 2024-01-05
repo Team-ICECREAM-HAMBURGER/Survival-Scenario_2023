@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,26 +16,23 @@ public class PlayerInfoView : MonoBehaviour {
 
     public delegate void PlayerInfoUpdateHandler(string value);
     public static PlayerInfoUpdateHandler OnDayCountUpdateEvent;
-    public static PlayerInfoUpdateHandler OnStatusEffectAddEvent;
-    public static PlayerInfoUpdateHandler OnStatusEffectRemoveEvent;
-    public static PlayerInfoUpdateHandler OnStatusEffectUpdateEvent;
+    public static PlayerInfoUpdateHandler OnStatusEffectTextUpdateEvent;
     
-    public delegate void PlayerInfoGaugeUpdateHandler();
+    public delegate void PlayerInfoGaugeUpdateHandler(float value);
     public static PlayerInfoGaugeUpdateHandler OnStatusEffectGaugeUpdateEvent;
-    public static PlayerInfoGaugeUpdateHandler OnStatusGaugeUpdateEvent;
+    
+    public delegate void PlayerInfoGaugesUpdateHandler(Dictionary<statusType, float> values);
+    public static PlayerInfoGaugesUpdateHandler OnStatusGaugesUpdateEvent;
     
     
     private void Init() {
         // TODO: Player Profile, Player Name Set; JSON
         
         OnDayCountUpdateEvent += DayCountUpdate;
+        OnStatusGaugesUpdateEvent += StatusGaugesUpdate;
         
-        OnStatusEffectAddEvent += StatusEffectAdd;
-        OnStatusEffectRemoveEvent += StatusEffectRemove;
-        OnStatusEffectUpdateEvent += StatusEffectUpdate;
-        
+        OnStatusEffectTextUpdateEvent += StatusEffectTextUpdate;
         OnStatusEffectGaugeUpdateEvent += StatusEffectGaugeUpdate;
-        OnStatusGaugeUpdateEvent += StatusGaugeUpdate;
     }
 
     private void Awake() {
@@ -44,20 +42,21 @@ public class PlayerInfoView : MonoBehaviour {
     private void DayCountUpdate(string value) {
         this.dayCount.text = $"{value}일 째 생존 중";
     }
-
-    private void StatusEffectAdd(string value) {
-        this.statusEffectName.text = $"{value}";
+    
+    private void StatusEffectTextUpdate(string value) {
+        this.statusEffectName.text = value;
     }
 
-    private void StatusEffectRemove(string value) {
+    private void StatusEffectGaugeUpdate(float value) {
+        this.statusEffectGauge.value = value;
     }
 
-    private void StatusEffectUpdate(string value) {
-    }
-
-    private void StatusEffectGaugeUpdate() {
-    }
-
-    private void StatusGaugeUpdate() {
+    private void StatusGaugesUpdate(Dictionary<statusType, float> values) {
+        int i = 0;
+        
+        foreach (var VARIABLE in values.Values) {
+            this.statusGauges[i].value = VARIABLE;
+            i += 1;
+        }
     }
 }

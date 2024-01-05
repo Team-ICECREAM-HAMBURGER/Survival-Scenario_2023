@@ -66,7 +66,5 @@ public class GameInfo : MonoBehaviour {
         else {
             this.CurrentTerm += value;
         }
-
-        //GameInfoView.OnTimeUIUpdateEvent(this.CurrentTerm, this.CurrentDay);
     }
 }
