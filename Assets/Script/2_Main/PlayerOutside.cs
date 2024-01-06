@@ -109,7 +109,7 @@ public class PlayerOutside : MonoBehaviour {
     private void Fire() {
         if (CanFire()) {
             GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
-            GameCanvasControl.OnCanvasOnEvent("Canvas Info");
+            GameCanvasControl.OnCanvasOnEvent("Canvas Information");
         }
     }
 
@@ -147,7 +147,7 @@ public class PlayerOutside : MonoBehaviour {
     }
     
     private void RainGutter() {
-        GameCanvasControl.OnCanvasChangeEvent("Canvas RainGutter");
-        GameCanvasControl.OnCanvasOnEvent("Canvas Info");
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Rain Gutter");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Information");
     }
 }

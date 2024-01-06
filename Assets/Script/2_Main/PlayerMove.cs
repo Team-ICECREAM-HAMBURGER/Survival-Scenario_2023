@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour {
     }
 
     private void ReturnToMain() {
-        GameCanvasControl.OnCanvasChangeEvent("Canvas Move");
-        GameCanvasControl.OnCanvasOnEvent("Canvas Background");
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Outside");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Information");
     }
 }
