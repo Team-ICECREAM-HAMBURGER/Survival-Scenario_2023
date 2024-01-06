@@ -29,8 +29,7 @@ public class GameWarningView : MonoBehaviour {
     }
     
     private void ReturnToMain() {
-        GameCanvasControl.OnCanvasChangeEvent("Canvas Main");
-        GameCanvasControl.OnCanvasOnEvent("Canvas Background");
-        GameCanvasControl.OnCanvasOnEvent("Canvas Info");
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Outside");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Information");
     }
 }

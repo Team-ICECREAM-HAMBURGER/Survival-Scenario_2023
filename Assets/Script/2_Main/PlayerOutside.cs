@@ -110,6 +110,7 @@ public class PlayerOutside : MonoBehaviour {
         if (CanFire()) {
             GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
             GameCanvasControl.OnCanvasOnEvent("Canvas Information");
+            GameBackgroundControl.OnBackgroundChangeEvent("Background Fire");   // TODO: Move to PlayerFire.cs
         }
     }
 
@@ -121,13 +122,24 @@ public class PlayerOutside : MonoBehaviour {
          * 성공 여부와 상관 없이 재료 소비.
         */
 
+        int fireTool = 1;
+        int kindling = 3;
+        int wood = 1;
+        
         if (GameInfo.Instance.IsFireInstalled) {
             return false;
         }
 
-        if (!(Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= 1) && 
-            !(Player.Instance.Inventory[itemType.KINDLING].Count >= 3) &&
-            !(Player.Instance.Inventory[itemType.WOOD].Count >= 1)) {
+        if (!(Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= fireTool) || 
+            !(Player.Instance.Inventory[itemType.KINDLING].Count >= kindling) ||
+            !(Player.Instance.Inventory[itemType.WOOD].Count >= wood)) {
+            this.warningMessageTitle = "재료가 준비되지 않음";
+            this.warningMessageContent = "불을 피울 재료가 모두 준비되지 않았다.\n" +
+                                         $"불을 피우기 위해서는 점화 도구 {fireTool}개, 불쏘시개 {kindling}개, 나무 {wood}개 이상이 필요하다.\n" +
+                                         "우선 주변을 탐색하여 제작에 필요한 재료를 모아보자.\n";
+            
+            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
+            
             return false;
         }
 
