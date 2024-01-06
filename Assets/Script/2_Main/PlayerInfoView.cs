@@ -20,6 +20,7 @@ public class PlayerInfoView : MonoBehaviour {
     
     public delegate void PlayerInfoGaugeUpdateHandler(float value);
     public static PlayerInfoGaugeUpdateHandler OnStatusEffectGaugeUpdateEvent;
+    public static PlayerInfoGaugeUpdateHandler OnStatusEffectGaugeInitEvent;
     
     public delegate void PlayerInfoGaugesUpdateHandler(Dictionary<statusType, float> values);
     public static PlayerInfoGaugesUpdateHandler OnStatusGaugesUpdateEvent;
@@ -29,7 +30,9 @@ public class PlayerInfoView : MonoBehaviour {
         // TODO: Player Profile, Player Name Set; JSON
         
         OnDayCountUpdateEvent += DayCountUpdate;
+        OnStatusEffectGaugeInitEvent += StatusEffectGaugeInit;
         OnStatusGaugesUpdateEvent += StatusGaugesUpdate;
+        
         
         OnStatusEffectTextUpdateEvent += StatusEffectTextUpdate;
         OnStatusEffectGaugeUpdateEvent += StatusEffectGaugeUpdate;
@@ -47,8 +50,12 @@ public class PlayerInfoView : MonoBehaviour {
         this.statusEffectName.text = value;
     }
 
+    private void StatusEffectGaugeInit(float value) {
+        this.statusEffectGauge.maxValue = value;
+    }
+    
     private void StatusEffectGaugeUpdate(float value) {
-        this.statusEffectGauge.value = value;
+        this.statusEffectGauge.value = value;   
     }
 
     private void StatusGaugesUpdate(Dictionary<statusType, float> values) {

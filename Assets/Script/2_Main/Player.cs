@@ -143,7 +143,7 @@ public class Player : MonoBehaviour {
         return false;
     }
     
-    public void StatusEffectUpdate(statusEffectType statusEffectType) {
+    public void StatusEffectRemove(statusEffectType statusEffectType) {
         this.CurrentStatusEffect.Remove(statusEffectType);
     }
 }
