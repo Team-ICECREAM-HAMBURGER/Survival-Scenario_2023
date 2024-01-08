@@ -108,23 +108,22 @@ public class PlayerOutside : MonoBehaviour {
 
     private void Fire() {
         if (CanFire()) {
-            GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
-            GameCanvasControl.OnCanvasOnEvent("Canvas Information");
-            GameBackgroundControl.OnBackgroundChangeEvent("Background Fire");   // TODO: Move to PlayerFire.cs
+            GameInfo.OnTimeUpdateEvent(1);
+            PlayerFire.OnMakingFireEvent();
         }
     }
 
     private bool CanFire() {
         // 불 피우기 조건
         /*
-         * 점화 도구 1개, 불쏘시개 3개, 나무 1개 이상.
+         * 점화 도구 1개, 불쏘시개 1개, 나무 3개 이상.
          * 날씨 맑음: 성공 확률 70%, 날씨 비: 성공 확률 30%, 날씨 눈: 성공 확률 30%
          * 성공 여부와 상관 없이 재료 소비.
         */
 
         int fireTool = 1;
-        int kindling = 3;
-        int wood = 1;
+        int kindling = 1;
+        int wood = 3;
         
         if (GameInfo.Instance.IsFireInstalled) {
             return false;
