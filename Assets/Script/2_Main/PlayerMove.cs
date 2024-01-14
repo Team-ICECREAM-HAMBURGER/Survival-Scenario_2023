@@ -2,19 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour {
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
     [Space(10f)]
-    [SerializeField] private GameObject movingGameObject;
-    [SerializeField] private GameObject resultGameObject;
+    [SerializeField] private GameObject movingScreen; 
+    [SerializeField] private GameObject resultScreen;
     
     
     private void Init() {
-        this.movingGameObject.SetActive(false);
-        this.resultGameObject.SetActive(false);
+        this.movingScreen.SetActive(false);
+        this.resultScreen.SetActive(false);
         
         this.yesButton.onClick.AddListener(Move);
         this.noButton.onClick.AddListener(ReturnToMain);
@@ -26,14 +27,14 @@ public class PlayerMove : MonoBehaviour {
 
     private void Move() {
         // Loading...
-        this.movingGameObject.SetActive(true);
-        this.resultGameObject.SetActive(true);
+        this.movingScreen.SetActive(true);
+        this.resultScreen.SetActive(true);
         
         // Update the Player Status Values
         Player.Instance.StatusUpdate(-25f);
         
         // Result
-        // TODO : this.resultGameObject -> Text(Title, Content) Update
+        // TODO : this.resultScreen -> Text(Title, Content) Update
     }
 
     private void ReturnToMain() {
