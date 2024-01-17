@@ -26,8 +26,11 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
         int value = 1;
         
         effect.Event();
+
+        var huntingTool = Player.Instance.Inventory[itemType.HUNTING_TOOL];
         
-        if (Player.Instance.Inventory[itemType.HUNTING_TOOL].ItemUse(value)) {
+        if (huntingTool.Count > 0) {
+            huntingTool.ItemUse(value);
             this.resultText = $"무사히 탈출에 성공했지만, 사냥 도구 {value}개를 잃고 체력을 모두 소모해 탈진 상태가 되었다.\n";
         }
         else {

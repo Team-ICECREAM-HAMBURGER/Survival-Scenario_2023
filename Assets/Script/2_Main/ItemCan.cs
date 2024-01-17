@@ -18,8 +18,10 @@ public class ItemCan : IItem {
         this.Weight = weight;
     }
     
-    public bool ItemUse(int value) {
-        return true;
+    public int ItemUse(int value) {
+        this.Count -= value;
+        
+        return value;
     }
     
     public int ItemAcquire() {

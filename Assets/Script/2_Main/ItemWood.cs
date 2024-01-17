@@ -12,13 +12,15 @@ public class ItemWood : IItem {
     private readonly int maxValue = 3;
     
     
-    public ItemWood(int count = 0, float weight = 25f) {
+    public ItemWood(int count = 100, float weight = 25f) {
         this.Count = count;
         this.Weight = weight;
     }
 
-    public bool ItemUse(int value) {
-        return true;
+    public int ItemUse(int value) {
+        this.Count -= value;
+        
+        return value;
     }
     
     public int ItemAcquire() {

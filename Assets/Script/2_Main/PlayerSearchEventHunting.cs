@@ -24,9 +24,10 @@ public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
         if (Player.Instance.Inventory[itemType.HUNTING_TOOL].Count >= 1) {
             int usedValue = 1;
 
-            Player.Instance.Inventory[itemType.HUNTING_TOOL].ItemUse(usedValue);
+            var huntingTool = Player.Instance.Inventory[itemType.HUNTING_TOOL];
+            huntingTool.ItemUse(usedValue);
+            
             int acquiredValue = Player.Instance.Inventory[itemType.RAW_MEAT].ItemAcquire();
-
             this.resultText = $"끈질긴 추격전 끝에 사냥에 성공했다. 사냥 도구 {usedValue}개가 소모되었다.\n" +
                               $"잡은 사냥감을 손질해서 생고기 {acquiredValue}개를 가지고 돌아왔다.\n";
         }

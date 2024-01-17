@@ -21,11 +21,13 @@ public class PlayerOutside : MonoBehaviour {
         // Background Init
         switch (GameInfo.Instance.CurrentDayNight) {
             case dayNightType.DAY:
-                GameBackgroundControl.OnBackgroundChangeEvent("Background Day");
+                GamePanelControl.OnGamePanelOffEvent("Background Night");
+                GamePanelControl.OnGamePanelOnEvent("Background Day");
                 break;
             
             case dayNightType.NIGHT:
-                GameBackgroundControl.OnBackgroundChangeEvent("Background Night");
+                GamePanelControl.OnGamePanelOffEvent("Background Day");
+                GamePanelControl.OnGamePanelOnEvent("Background Night");
                 break;
         }
     }

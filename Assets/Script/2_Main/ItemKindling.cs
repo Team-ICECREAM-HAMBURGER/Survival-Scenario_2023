@@ -12,13 +12,15 @@ public class ItemKindling : IItem {
     private int durability = 1;
     
     
-    public ItemKindling(int count = 0, float weight = 0f) {
+    public ItemKindling(int count = 100, float weight = 0f) {
         this.Count = count;
         this.Weight = weight;
     }
     
-    public bool ItemUse(int value) {
-        return true;
+    public int ItemUse(int value) {
+        this.Count -= value;
+        
+        return value;
     }
     
     public int ItemAcquire() {

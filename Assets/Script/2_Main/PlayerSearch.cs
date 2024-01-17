@@ -4,8 +4,6 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerSearch : MonoBehaviour {
-    [SerializeField] private Button okButton;
-    [Space(10f)]
     [SerializeField] private GameObject searchingScreen;
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> eventActions = new Dictionary<eventType, IPlayerSearchEvent>() {
@@ -21,7 +19,6 @@ public class PlayerSearch : MonoBehaviour {
 
     private void Init() {
         OnSearchEvent += Search;
-        this.okButton.onClick.AddListener(SearchingResultOk);
     }
 
     private void Start() {
@@ -49,11 +46,5 @@ public class PlayerSearch : MonoBehaviour {
         
         // Player Status Update
         Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
-    }
-
-    private void SearchingResultOk() {
-        // Return to Outside Screen
-        GameCanvasControl.OnCanvasChangeEvent("Canvas Outside");
-        GameCanvasControl.OnCanvasOnEvent("Canvas Information");
     }
 }

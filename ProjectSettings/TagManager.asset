@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Button
   - Canvas
+  - Panel
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum dayNightType {
@@ -15,16 +16,22 @@ public enum weatherType {
 public class GameInfo : MonoBehaviour {
     public static GameInfo Instance;
     
-    public bool IsFireInstalled { get; private set; }
-    public bool IsShelterInstalled { get; private set; }
-    public bool IsRainGutterInstalled { get; private set; }
+    public bool IsFireInstalled { get; set; }
+    public bool IsShelterInstalled { get; set; }
+    public bool IsRainGutterInstalled { get; set; }
 
     public int CurrentDay { get; private set; }
     public int CurrentTerm { get; private set; }
     
     public dayNightType CurrentDayNight { get; private set; }
-    public weatherType CurrentWeather { get; private set; }
+    public IWeather CurrentWeather { get; private set; }
 
+    public readonly Dictionary<weatherType, IWeather> Weather = new Dictionary<weatherType, IWeather>() {
+        { weatherType.SUNNY, new WeatherSunny() },
+        { weatherType.RAIN, new WeatherRain() },
+        { weatherType.SNOW, new WeatherSnow() }
+    };
+    
     public delegate void TimeUpdateEventHandler(int value);
     public static TimeUpdateEventHandler OnTimeUpdateEvent;
 
@@ -45,7 +52,7 @@ public class GameInfo : MonoBehaviour {
         this.CurrentTerm = 0;
 
         this.CurrentDayNight = dayNightType.DAY;
-        this.CurrentWeather = weatherType.SUNNY;
+        this.CurrentWeather = this.Weather[weatherType.SUNNY];
 
         OnTimeUpdateEvent += TimeUpdate;
     }

@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerSearchResultView : MonoBehaviour {
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text contentText;
-    
+    [SerializeField] private Button okButton;
+
     public delegate void SearchResultUIUpdateHandler(string value);
     public static SearchResultUIUpdateHandler OnSearchResultUIInjured;
     public static SearchResultUIUpdateHandler OnSearchResultUIFarming;
@@ -17,6 +19,8 @@ public class PlayerSearchResultView : MonoBehaviour {
         OnSearchResultUIFarming += Farming;
         OnSearchResultUIHunting += Hunting;
         OnSearchResultUIInDanger += InDanger;
+        
+        this.okButton.onClick.AddListener(SearchingResultOk);
     }
 
     private void Awake() {
@@ -41,5 +45,11 @@ public class PlayerSearchResultView : MonoBehaviour {
     private void InDanger(string value) {
         this.titleText.text = "맹수의 추격에서 가까스로 도망쳤다.";
         this.contentText.text = value;
+    }
+    
+    private void SearchingResultOk() {
+        // Return to Outside Screen
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Outside");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Information");
     }
 }
