@@ -31,7 +31,7 @@ public class GameInfo : MonoBehaviour {
         { weatherType.RAIN, new WeatherRain() },
         { weatherType.SNOW, new WeatherSnow() }
     };
-    
+    // TODO: DayNight Dictionary
     public delegate void TimeUpdateEventHandler(int value);
     public static TimeUpdateEventHandler OnTimeUpdateEvent;
 

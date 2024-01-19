@@ -1,9 +1,15 @@
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerFire : MonoBehaviour {
     [SerializeField] private GameObject makingFireScreen;
-
+    
+    [Space(10f)]
+    [SerializeField] private Button addWoodButton;
+    [SerializeField] private Button cookingButton;
+    [SerializeField] private Button returnToMenuButton;
+    
     public delegate void MakingFireEventHandler();
     public static MakingFireEventHandler OnMakingFireEvent;
 
@@ -13,6 +19,10 @@ public class PlayerFire : MonoBehaviour {
     private void Init() {
         this.makingFireScreen.SetActive(false);
         this.resultStringBuilder = new StringBuilder();
+        
+        this.addWoodButton.onClick.AddListener(AddWood);
+        this.cookingButton.onClick.AddListener(Cooking);
+        this.returnToMenuButton.onClick.AddListener(ReturnToMenu);
         
         OnMakingFireEvent += MakingFire;
     }
@@ -93,5 +103,19 @@ public class PlayerFire : MonoBehaviour {
             // 결과 보고; 실패 시 OK 버튼 -> Outside 캔버스
             PlayerFireResultView.OnFireResultFail(this.resultStringBuilder.ToString());
         }
+    }
+
+    private void AddWood() {
+        // TODO: Wood +5 -> Term +25
+        PlayerFireTermView.OnFireTermUpdateEvent(+25);
+    }
+
+    private void Cooking() {
+        // TODO: 
+    }
+
+    private void ReturnToMenu() {
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Outside");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Information");
     }
 }

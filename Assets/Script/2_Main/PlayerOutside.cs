@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -6,7 +7,7 @@ public class PlayerOutside : MonoBehaviour {
     [SerializeField] private Button moveButton;
     [SerializeField] private Button searchButton;
     [SerializeField] private Button fireButton;
-    [SerializeField] private Button rainGutter;
+    [SerializeField] private Button rainGutterButton;
 
     private string warningMessageContent;
     private string warningMessageTitle;
@@ -16,9 +17,9 @@ public class PlayerOutside : MonoBehaviour {
         this.moveButton.onClick.AddListener(Move);
         this.searchButton.onClick.AddListener(Search);
         this.fireButton.onClick.AddListener(Fire);
-        this.rainGutter.onClick.AddListener(RainGutter);
+        this.rainGutterButton.onClick.AddListener(RainGutter);
 
-        // Background Init
+        // TODO: Background Change -> DayNight Dictionary
         switch (GameInfo.Instance.CurrentDayNight) {
             case dayNightType.DAY:
                 GamePanelControl.OnGamePanelOffEvent("Background Night");
