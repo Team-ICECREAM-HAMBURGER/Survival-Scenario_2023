@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerSearch : MonoBehaviour {
-    [SerializeField] private GameObject searchingScreen;
+    [SerializeField] private GameObject searchLoadingScreen;
     
     private readonly Dictionary<eventType, IPlayerSearchEvent> eventActions = new Dictionary<eventType, IPlayerSearchEvent>() {
             { eventType.INJURED, new PlayerSearchEventInjured(0.5f) },
@@ -28,7 +29,7 @@ public class PlayerSearch : MonoBehaviour {
     private void Search() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Search");
         
-        this.searchingScreen.SetActive(true);
+        this.searchLoadingScreen.SetActive(true);
         
         // Weight random select
         float randomPivot = Random.Range(0, 100);

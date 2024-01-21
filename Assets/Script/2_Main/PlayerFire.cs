@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerFire : MonoBehaviour {
-    [SerializeField] private GameObject makingFireScreen;
+    [SerializeField] private GameObject fireLoadingScreen;
+    [SerializeField] private GameObject fireResultScreen;
     
     [Space(10f)]
     [SerializeField] private Button addWoodButton;
@@ -17,7 +18,9 @@ public class PlayerFire : MonoBehaviour {
     
     
     private void Init() {
-        this.makingFireScreen.SetActive(false);
+        this.fireLoadingScreen.SetActive(false);
+        this.fireResultScreen.SetActive(true);
+        
         this.resultStringBuilder = new StringBuilder();
         
         this.addWoodButton.onClick.AddListener(AddWood);
@@ -32,10 +35,18 @@ public class PlayerFire : MonoBehaviour {
     }
 
     private void MakingFire() {
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
+        
+        if (GameInfo.Instance.IsFireInstalled) {    // 이미 불이 피워져 있음.
+            GameCanvasControl.OnCanvasOnEvent("Canvas Information");
+            
+            return;
+        }
+        
         this.resultStringBuilder.Clear();
         
         // 불 피우는 중 애니메이션
-        this.makingFireScreen.SetActive(true);
+        this.fireLoadingScreen.SetActive(true);
         
         // 아이템 소모; 성공 여부와 상관없이 무조건 아이템은 소모함; 점화 도구 1개, 불쏘시개 2개, 나무 3개 이상.
         var fireTool = Player.Instance.Inventory[itemType.FIRE_TOOL]; 
@@ -86,6 +97,9 @@ public class PlayerFire : MonoBehaviour {
             
             // 결과 보고; 성공 시 OK 버튼 -> Fire 캔버스
             PlayerFireResultView.OnFireResultSuccess(this.resultStringBuilder.ToString());
+            
+            // 모닥불 텀 업데이트
+            PlayerFireTermView.OnFireTermUpdateEvent(term);
         }
         else {
             string fireResult = "- 결과\n" +

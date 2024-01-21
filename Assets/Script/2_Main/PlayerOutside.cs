@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class PlayerOutside : MonoBehaviour {
     [SerializeField] private Button moveButton;
@@ -116,15 +114,7 @@ public class PlayerOutside : MonoBehaviour {
     }
 
     private void Fire() {
-        if (GameInfo.Instance.IsFireInstalled) {    // 이미 불이 피워져 있음.
-            GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
-            GameCanvasControl.OnCanvasOnEvent("Canvas Information");
-            return;
-        }
-        
         if (CanFire()) {
-            GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
-            
             GameInfo.OnTimeUpdateEvent(1);
             PlayerFire.OnMakingFireEvent();
         }

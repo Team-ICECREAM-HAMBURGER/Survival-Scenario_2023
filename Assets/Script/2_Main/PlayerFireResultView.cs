@@ -25,6 +25,7 @@ public class PlayerFireResultView : MonoBehaviour {
         this.titleText.text = "불이 붙었다.";
         this.contentText.text = value;
         
+        this.okButton.onClick.RemoveListener(MakingFireResultFail);
         this.okButton.onClick.AddListener(MakingFireResultSuccess);
     }
 
@@ -32,6 +33,7 @@ public class PlayerFireResultView : MonoBehaviour {
         this.titleText.text = "불을 붙이지 못했다.";
         this.contentText.text = value;
         
+        this.okButton.onClick.RemoveListener(MakingFireResultSuccess);
         this.okButton.onClick.AddListener(MakingFireResultFail);
     }
     
