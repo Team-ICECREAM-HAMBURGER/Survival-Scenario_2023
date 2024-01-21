@@ -11,10 +11,10 @@ public class PlayerFire : MonoBehaviour {
     [SerializeField] private Button cookingButton;
     [SerializeField] private Button returnToMenuButton;
     
+    private StringBuilder resultStringBuilder;
+    
     public delegate void MakingFireEventHandler();
     public static MakingFireEventHandler OnMakingFireEvent;
-
-    private StringBuilder resultStringBuilder;
     
     
     private void Init() {
@@ -42,7 +42,8 @@ public class PlayerFire : MonoBehaviour {
             
             return;
         }
-        
+
+        GameInfo.OnTimeUpdateEvent(1);
         this.resultStringBuilder.Clear();
         
         // 불 피우는 중 애니메이션
@@ -82,9 +83,9 @@ public class PlayerFire : MonoBehaviour {
              * 1일 수면 -> 뗄감 8회 ~ 4회
             */
 
-            int term = Random.Range(300, 401);
+            int value = Random.Range(300, 401);
             string fireResult = "- 결과\n" +
-                            $"모닥불은 최대 {term}텀까지 유지된다.\n" +
+                            $"모닥불은 최대 {value}텀까지 유지된다.\n" +
                             $"불이 꺼지기 전에 {wood.ItemName}를 넣으면 텀이 연장된다.\n";
 
             this.resultStringBuilder.Append(fireResult);    // - 결과
@@ -99,7 +100,7 @@ public class PlayerFire : MonoBehaviour {
             PlayerFireResultView.OnFireResultSuccess(this.resultStringBuilder.ToString());
             
             // 모닥불 텀 업데이트
-            PlayerFireTermView.OnFireTermUpdateEvent(term);
+            GameInfo.OnFireTimeUpdateEvent(value);
         }
         else {
             string fireResult = "- 결과\n" +
@@ -118,10 +119,10 @@ public class PlayerFire : MonoBehaviour {
             PlayerFireResultView.OnFireResultFail(this.resultStringBuilder.ToString());
         }
     }
-
+    
     private void AddWood() {
         // TODO: Wood +5 -> Term +25
-        PlayerFireTermView.OnFireTermUpdateEvent(+25);
+        GameInfo.OnFireTimeUpdateEvent(25);
     }
 
     private void Cooking() {

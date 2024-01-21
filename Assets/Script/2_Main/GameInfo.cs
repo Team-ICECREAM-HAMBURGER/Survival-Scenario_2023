@@ -22,6 +22,7 @@ public class GameInfo : MonoBehaviour {
 
     public int CurrentDay { get; private set; }
     public int CurrentTerm { get; private set; }
+    public int CurrentFireTerm { get; private set; }
     
     public dayNightType CurrentDayNight { get; private set; }
     public IWeather CurrentWeather { get; private set; }
@@ -34,6 +35,7 @@ public class GameInfo : MonoBehaviour {
     // TODO: DayNight Dictionary
     public delegate void TimeUpdateEventHandler(int value);
     public static TimeUpdateEventHandler OnTimeUpdateEvent;
+    public static TimeUpdateEventHandler OnFireTimeUpdateEvent;
 
     
     private void Init() {
@@ -50,11 +52,13 @@ public class GameInfo : MonoBehaviour {
 
         this.CurrentDay = 0;
         this.CurrentTerm = 0;
+        this.CurrentFireTerm = 0;
 
         this.CurrentDayNight = dayNightType.DAY;
         this.CurrentWeather = this.Weather[weatherType.SUNNY];
 
         OnTimeUpdateEvent += TimeUpdate;
+        OnFireTimeUpdateEvent += FireTimeUpdate;
     }
 
     private void Awake() {
@@ -62,6 +66,10 @@ public class GameInfo : MonoBehaviour {
     }
 
     private void TimeUpdate(int value) {
+        if (this.IsFireInstalled) {
+            FireTimeUpdate(-value);
+        }
+        
         if (this.CurrentTerm >= 250) {
             this.CurrentDayNight = (this.CurrentDayNight == dayNightType.DAY) ? dayNightType.NIGHT : dayNightType.DAY;
             GameInfoView.OnDayNightUpdateEvent((this.CurrentDayNight == dayNightType.DAY) ? "낮" : "밤");
@@ -73,5 +81,10 @@ public class GameInfo : MonoBehaviour {
         else {
             this.CurrentTerm += value;
         }
+    }
+
+    private void FireTimeUpdate(int value) {
+        this.CurrentFireTerm += value;
+        GameInfoView.OnFireTimeUpdateEvent($"모닥불 ({this.CurrentFireTerm}텀 남음)");
     }
 }

@@ -2059,7 +2059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 194162530}
+  m_AnchoredPosition: {x: -399.9992, y: 194784350}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -17021,7 +17021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 194162530}
+  m_AnchoredPosition: {x: -399.9992, y: 194784350}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -34051,6 +34051,7 @@ MonoBehaviour:
   location: {fileID: 1758758067}
   weather: {fileID: 1091223458}
   dayNight: {fileID: 869625075}
+  fireTime: {fileID: 1477319391}
 --- !u!114 &2025123721
 MonoBehaviour:
   m_ObjectHideFlags: 0

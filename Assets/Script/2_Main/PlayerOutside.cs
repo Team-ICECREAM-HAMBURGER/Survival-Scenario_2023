@@ -74,7 +74,6 @@ public class PlayerOutside : MonoBehaviour {
     
     private void Search() {
         if (CanSearch()) {            
-            GameInfo.OnTimeUpdateEvent(1);
             PlayerSearch.OnSearchEvent();
         }
         else {
@@ -115,7 +114,6 @@ public class PlayerOutside : MonoBehaviour {
 
     private void Fire() {
         if (CanFire()) {
-            GameInfo.OnTimeUpdateEvent(1);
             PlayerFire.OnMakingFireEvent();
         }
         else {

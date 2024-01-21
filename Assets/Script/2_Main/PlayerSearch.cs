@@ -19,16 +19,17 @@ public class PlayerSearch : MonoBehaviour {
 
 
     private void Init() {
-        OnSearchEvent += Search;
+        OnSearchEvent += Searching;
     }
 
     private void Start() {
         Init();
     }
     
-    private void Search() {
-        GameCanvasControl.OnCanvasChangeEvent("Canvas Search");
+    private void Searching() {
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Searching");
         
+        GameInfo.OnTimeUpdateEvent(1);
         this.searchLoadingScreen.SetActive(true);
         
         // Weight random select
