@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
 public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
 
-    private string resultText;
+    private readonly StringBuilder resultText;
     
     
     public PlayerSearchEventHunting(float weight) {
         this.Weight = weight;
+        this.resultText = new StringBuilder();
     }
     
     public void Event() {
@@ -21,22 +20,71 @@ public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
     }
 
     private string Hunting() {
+        this.resultText.Clear();
+        
         if (Player.Instance.Inventory[itemType.HUNTING_TOOL].Count >= 1) {
-            int usedValue = 1;
-
+            var acquiredItem = Player.Instance.Inventory[itemType.RAW_MEAT];
             var huntingTool = Player.Instance.Inventory[itemType.HUNTING_TOOL];
+            
+            int usedValue = 1;
+            int acquiredValue = acquiredItem.ItemAcquire();
+            
             huntingTool.ItemUse(usedValue);
             
-            int acquiredValue = Player.Instance.Inventory[itemType.RAW_MEAT].ItemAcquire();
-            this.resultText = $"끈질긴 추격전 끝에 사냥에 성공했다. 사냥 도구 {usedValue}개가 소모되었다.\n" +
-                              $"잡은 사냥감을 손질해서 생고기 {acquiredValue}개를 가지고 돌아왔다.\n";
+            // UI Text; Result
+            this.resultText.Append("- 결과\n");
+            this.resultText.Append("끈질긴 추격전 끝에 사냥에 성공했다.\n");
+            
+            this.resultText.Append("\n");
+            
+            // UI Text; Status
+            this.resultText.Append("- 스테이터스 잔여량\n");
+            this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
+            this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
+            this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
+            this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+            
+            this.resultText.Append("\n");
+            
+            // UI Text; Items
+            this.resultText.Append("- 획득한 아이템\n");
+            this.resultText.Append($"{acquiredItem.ItemName}: {acquiredValue}개\n");
+            
+            this.resultText.Append("\n");
+            
+            // UI Text; Items
+            this.resultText.Append("- 소모된 아이템\n");
+            this.resultText.Append($"{huntingTool.ItemName}: {usedValue}개\n");
         }
         else {
-            this.resultText = "마땅한 도구가 없어 사냥감을 놓치고 말았다.\n" + 
-                              "도구 제작은 '인벤토리' 메뉴에서 할 수 있다.\n" +
-                              "우선 제작에 필요한 재료를 모아보자.\n";
+            // UI Text; Result
+            this.resultText.Append("- 결과\n");
+            this.resultText.Append("사냥감을 잡을 마땅한 도구가 없어 놓치고 말았다.\n");
+            this.resultText.Append("도구 제작은 '인벤토리' 메뉴에서 할 수 있다.\n");
+            this.resultText.Append("우선 제작에 필요한 재료를 모아보자.\n");
+            
+            this.resultText.Append("\n");
+            
+            // UI Text; Status
+            this.resultText.Append("- 스테이터스 잔여량\n");
+            this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
+            this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
+            this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
+            this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+            
+            this.resultText.Append("\n");
+            
+            // UI Text; Items
+            this.resultText.Append("- 획득한 아이템\n");
+            this.resultText.Append("없음\n");
+            
+            this.resultText.Append("\n");
+            
+            // UI Text; Items
+            this.resultText.Append("- 소모된 아이템\n");
+            this.resultText.Append("없음\n");
         }
 
-        return resultText;
+        return resultText.ToString();
     }
 }

@@ -69,7 +69,6 @@ public class Player : MonoBehaviour {
             { itemType.MISCELLANEOUS, new ItemMiscellaneous() },
             { itemType.STONE, new ItemStone() },
             { itemType.WOOD, new ItemWood() },
-            //
             { itemType.MRE, new ItemMre() },
             { itemType.TORCH, new ItemTorch() },
             { itemType.RAW_MEAT, new ItemMeatRaw() },
