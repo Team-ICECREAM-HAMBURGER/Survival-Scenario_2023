@@ -15,6 +15,7 @@ public class PlayerFire : MonoBehaviour {
     
     public delegate void MakingFireEventHandler();
     public static MakingFireEventHandler OnMakingFireEvent;
+    public static MakingFireEventHandler OnResetFireEvent;
     
     
     private void Init() {
@@ -28,18 +29,24 @@ public class PlayerFire : MonoBehaviour {
         this.returnToMenuButton.onClick.AddListener(ReturnToMenu);
         
         OnMakingFireEvent += MakingFire;
+        OnResetFireEvent += ResetFire;
     }
     
     private void Start() {
         Init();
     }
 
+    private void ResetFire() {
+        this.fireLoadingScreen.SetActive(false);
+        this.fireResultScreen.SetActive(true);
+    }
+    
     private void MakingFire() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
-        
+
         if (GameInfo.Instance.IsFireInstalled) {    // 이미 불이 피워져 있음.
             GameCanvasControl.OnCanvasOnEvent("Canvas Information");
-            
+
             return;
         }
 
@@ -121,12 +128,12 @@ public class PlayerFire : MonoBehaviour {
     }
     
     private void AddWood() {
-        // TODO: Wood +5 -> Term +25
         GameInfo.OnFireTimeUpdateEvent(25);
     }
 
     private void Cooking() {
         // TODO: 
+        
     }
 
     private void ReturnToMenu() {

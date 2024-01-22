@@ -27,7 +27,7 @@ public class PlayerSearch : MonoBehaviour {
     }
     
     private void Searching() {
-        GameCanvasControl.OnCanvasChangeEvent("Canvas Searching");
+        GameCanvasControl.OnCanvasChangeEvent("Canvas Search");
         
         GameInfo.OnTimeUpdateEvent(1);
         this.searchLoadingScreen.SetActive(true);

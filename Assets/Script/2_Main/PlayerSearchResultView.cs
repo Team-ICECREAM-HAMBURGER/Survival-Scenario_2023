@@ -33,12 +33,12 @@ public class PlayerSearchResultView : MonoBehaviour {
     }
 
     private void Hunting(string value) {
-        this.titleText.text = "주변을 탐색하던 도중, 사냥감을 발견했다.";
+        this.titleText.text = "사냥감을 발견했다.";
         this.contentText.text = value;
     }
     
     private void Injured(string value) {
-        this.titleText.text = "주변을 탐색하던 도중, 발을 헛딛어 큰 부상을 입었다.";
+        this.titleText.text = "탐색 도중 큰 부상을 입었다.";
         this.contentText.text = value;
     }
 

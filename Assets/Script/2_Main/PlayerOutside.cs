@@ -139,6 +139,10 @@ public class PlayerOutside : MonoBehaviour {
         float hydration = 8f;
         float calories = 9f;
         
+        if (GameInfo.Instance.IsFireInstalled) {
+            return true;
+        }
+        
         if (!Player.Instance.StatusCheck(stamina, bodyHeat, hydration, calories)) {
             this.warningMessageTitle = "스테이터스가 너무 낮음";
             this.warningMessageContent = "불을 피울 수 있을만큼 스테이터스가 충분하지 않다.\n" +
