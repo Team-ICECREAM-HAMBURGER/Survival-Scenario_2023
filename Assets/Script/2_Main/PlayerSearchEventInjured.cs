@@ -1,13 +1,15 @@
+using System.Text;
 using UnityEngine;
 
 public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
     public float Weight { get; set; }
 
-    private string resultText; 
+    private StringBuilder resultText; 
     
     
     public PlayerSearchEventInjured(float weight) {
         this.Weight = weight;
+        this.resultText = new StringBuilder();
     }
 
     public void Event() {
@@ -20,11 +22,37 @@ public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
 
     private string Injured() {
         var effect = Player.Instance.StatusEffect[statusEffectType.INJURED];
-        effect.Event();
 
-        this.resultText = $"부상이 회복될 때까지 {effect.DurationTerm / 500}일({effect.DurationTerm}텀)이 걸린다.\n" +
-                          "그 동안은 다른 지역으로 이동할 수 없으며, 상태 수치의 소모량이 2배 증가한다.\n";
+        effect.Event();
+        this.resultText.Clear();
         
-        return this.resultText;
+        // UI Text; Result
+        this.resultText.Append("- 결과\n");
+        this.resultText.Append("탐색 도중 위험에 빠졌다.\n");
+        this.resultText.Append("가까스로 돌아오기는 했지만 부상을 입고 말았다.\n");
+        this.resultText.Append($"부상 회복까지 {effect.DurationTerm / 500}일({effect.DurationTerm}텀)이 걸린다.\n");
+        this.resultText.Append("부상 회복이 먼저다. 의약품을 만들고 휴식을 취하자.\n");
+        
+        this.resultText.Append("\n");
+        
+        // UI Text; Status
+        this.resultText.Append("- 스테이터스 잔여량\n");
+        this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
+        this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
+        this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
+        this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+            
+        this.resultText.Append("\n");
+            
+        // UI Text; Items
+        this.resultText.Append("- 획득한 아이템\n");
+        this.resultText.Append("없음\n");
+
+        this.resultText.Append("\n");
+            
+        this.resultText.Append("- 소모한 아이템\n");
+        this.resultText.Append("없음\n");
+        
+        return this.resultText.ToString();
     }
 }

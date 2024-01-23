@@ -2059,7 +2059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 198410450}
+  m_AnchoredPosition: {x: -399.9992, y: 202859940}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -17021,7 +17021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 198410450}
+  m_AnchoredPosition: {x: -399.9992, y: 202859940}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -17331,8 +17331,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC8FC\uBCC0 \uC9C0\uC5ED\uC744 \uD0D0\uC0C9\uD558\uC5EC \uC0DD\uC874\uC5D0
-    \uC720\uC6A9\uD55C \uAC83\uB4E4\uC744 \uCC3E\uC2B5\uB2C8\uB2E4."
+  m_text: "\uC8FC\uBCC0\uC744 \uD0D0\uC0C9\uD558\uC5EC \uC720\uC6A9\uD55C \uAC83\uB4E4\uC744
+    \uCC3E\uC2B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -17359,7 +17359,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.85
+  m_fontSize: 30
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -27476,7 +27476,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70.7
+  m_fontSize: 75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -27658,8 +27658,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCCB4\uC628\uC744 \uB2E4\uB8E8\uB294 \uBD88\uC740 \uC57C\uC0DD\uC5D0\uC11C
-    \uC0DD\uC874\uACFC \uC9C1\uACB0\uB418\uB294 \uC874\uC7AC\uC785\uB2C8\uB2E4."
+  m_text: "\uC57C\uC0DD\uC5D0\uC11C \uBD88\uC740 \uC0DD\uC874\uACFC \uC9C1\uACB0\uB418\uB294
+    \uC874\uC7AC\uC785\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -27686,7 +27686,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.75
+  m_fontSize: 30
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -30035,7 +30035,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -400, y: 400}
+  m_AnchoredPosition: {x: -373, y: 430}
   m_SizeDelta: {x: 1500, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1769513684
@@ -35217,8 +35217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBE57\uBB3C \uBC1B\uC774\uB97C \uC124\uCE58\uD574\uB450\uBA74 \uBE44\uAC00
-    \uC62C \uB54C \uBB3C\uC774 \uBAA8\uC785\uB2C8\uB2E4."
+  m_text: "\uBE57\uBB3C\uC744 \uBAA8\uC544 \uC2DD\uC218\uB85C \uC4F8 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -35245,7 +35244,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.95
+  m_fontSize: 30
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,9 @@ public class PlayerOutside : MonoBehaviour {
     [SerializeField] private Button fireButton;
     [SerializeField] private Button rainGutterButton;
 
-    private string warningMessageContent;
     private string warningMessageTitle;
-    
+    private StringBuilder warningMessageContent;
+
     
     private void Init() {
         this.moveButton.onClick.AddListener(Move);
@@ -17,6 +18,8 @@ public class PlayerOutside : MonoBehaviour {
         this.fireButton.onClick.AddListener(Fire);
         this.rainGutterButton.onClick.AddListener(RainGutter);
 
+        this.warningMessageContent = new StringBuilder();
+        
         // TODO: Background Change -> DayNight Dictionary
         switch (GameInfo.Instance.CurrentDayNight) {
             case dayNightType.DAY:
@@ -40,7 +43,7 @@ public class PlayerOutside : MonoBehaviour {
             GameCanvasControl.OnCanvasChangeEvent("Canvas Move");
         }
         else {
-            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
+            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent.ToString());
         }
     }
 
@@ -50,21 +53,34 @@ public class PlayerOutside : MonoBehaviour {
          * 모든 스테이터스가 25% 이상.
          * 부상을 입지 않음.
         */
-
-        float status = 50f;
         
-        if (!Player.Instance.StatusCheck(status)) {
-            this.warningMessageTitle = "스테이터스가 충분하지 않음";
-            this.warningMessageContent = "다른 지역으로 이동할 수 있을만큼 스테이터스가 충분하지 않다.\n" +
-                                         $"다른 지역으로 이동하기 위해서는 최소한 모든 스테이터스가 {status}% 이상이어야 한다.\n";
+        float status = 50f;
+
+        this.warningMessageContent.Clear();
+        
+        if (Player.Instance.CurrentStatusEffect.ContainsKey(statusEffectType.INJURED)) {
+            this.warningMessageTitle = "부상을 입음";
+            
+            this.warningMessageContent.Append("부상을 입은 상태에서는 다른 지역으로 이동할 수 없다.\n");
+            this.warningMessageContent.Append("부상을 회복하기 위해서는 휴식과 잠이 중요하다.\n");
+            this.warningMessageContent.Append("만약 의료품이 있다면 더욱 빠르게 회복이 가능하다.\n");
             
             return false;
         }
         
-        if (Player.Instance.CurrentStatusEffect.ContainsKey(statusEffectType.INJURED)) {
-            this.warningMessageTitle = "현재 부상을 입었음";
-            this.warningMessageContent = "부상을 입은 상태에서는 스테이터스 소모량이 증가하며, 다른 지역으로 이동할 수 없다.\n" +
-                                         "부상은 휴식과 잠을 통해 빠르게 회복할 수 있다. 아플 때는 우선 쉬어주자.\n";
+        if (!Player.Instance.StatusCheck(status)) {
+            this.warningMessageTitle = "스테이터스가 너무 낮음";
+
+            this.warningMessageContent.Append("다른 지역으로 이동할 수 있을만큼 스테이터스가 충분하지 않다.\n");
+            this.warningMessageContent.Append("스테이터스는 음식, 물, 휴식 등으로 회복할 수 있다.\n");
+            
+            this.warningMessageContent.Append("\n");
+            
+            this.warningMessageContent.Append("- 스테이터스 요구 사항\n");
+            this.warningMessageContent.Append($"체력: {status}% 이상\n");
+            this.warningMessageContent.Append($"체온: {status}% 이상\n");
+            this.warningMessageContent.Append($"수분: {status}% 이상\n");
+            this.warningMessageContent.Append($"허기: {status}% 이상\n");
             
             return false;
         }
@@ -77,7 +93,7 @@ public class PlayerOutside : MonoBehaviour {
             PlayerSearch.OnSearchEvent();
         }
         else {
-            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
+            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent.ToString());
         }
     }
 
@@ -92,23 +108,35 @@ public class PlayerOutside : MonoBehaviour {
         float bodyHeat = 15f;
         float hydration = 5f;
         float calories = 10f;
+
+        this.warningMessageContent.Clear();
+        
+        if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT && Player.Instance.Inventory[itemType.TORCH].Count < 1) {
+            this.warningMessageTitle = "횃불이 없음";
+            
+            this.warningMessageContent.Append("빛이 없는 야간에 탐색을 나서기 위해서는 횃불이 필요하다.\n");
+            this.warningMessageContent.Append("횃불은 인벤토리에서 제작할 수 있다. 제작에 필요한 재료를 확인해보자.\n");
+            
+            return false;
+        }
         
         if (!Player.Instance.StatusCheck(stamina, bodyHeat, hydration, calories)) {
             this.warningMessageTitle = "스테이터스가 너무 낮음";
-            this.warningMessageContent = "탐색에 나설만큼 스테이터스가 충분하지 않다.\n" +
-                                         $"탐색에는 최소한 체력 {stamina}%, 체온 {bodyHeat}%, 수분 {hydration}%, 허기 {calories}% 이상이 필요하다.\n";
+
+            this.warningMessageContent.Append("탐색에 나설만큼 스테이터스가 충분하지 않다.\n");
+            this.warningMessageContent.Append("스테이터스는 음식, 물, 휴식 등으로 회복할 수 있다.\n");
+
+            this.warningMessageContent.Append("\n");
+            
+            this.warningMessageContent.Append("- 스테이터스 요구 사항\n");
+            this.warningMessageContent.Append($"체력: {stamina}% 이상\n");
+            this.warningMessageContent.Append($"체온: {bodyHeat}% 이상\n");
+            this.warningMessageContent.Append($"수분: {hydration}% 이상\n");
+            this.warningMessageContent.Append($"허기: {calories}% 이상\n");
             
             return false;
         }
-
-        if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT && Player.Instance.Inventory[itemType.TORCH].Count < 1) {
-            this.warningMessageTitle = "횃불이 준비되지 않음";
-            this.warningMessageContent = "빛이 없는 야간에 탐색을 나서기 위해서는 횃불이 필요하다.\n " +
-                                         "횃불은 인벤토리에서 제작할 수 있다. 우선 제작에 필요한 재료를 모아보자.\n";
-            
-            return false;
-        }
-
+        
         return true;
     }
 
@@ -117,7 +145,7 @@ public class PlayerOutside : MonoBehaviour {
             PlayerFire.OnMakingFireEvent();
         }
         else {
-            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent);
+            GameWarningView.OnWarningMessageEvent(this.warningMessageTitle, this.warningMessageContent.ToString());
         }
     }
 
@@ -139,25 +167,40 @@ public class PlayerOutside : MonoBehaviour {
         float hydration = 8f;
         float calories = 9f;
         
+        this.warningMessageContent.Clear();
+        
         if (GameInfo.Instance.IsFireInstalled) {
             return true;
         }
         
-        if (!Player.Instance.StatusCheck(stamina, bodyHeat, hydration, calories)) {
-            this.warningMessageTitle = "스테이터스가 너무 낮음";
-            this.warningMessageContent = "불을 피울 수 있을만큼 스테이터스가 충분하지 않다.\n" +
-                                         $"불을 피우기 위해서는 최소한 체력 {stamina}%, 체온 {bodyHeat}%, 수분 {hydration}%, 허기 {calories}% 이상이 필요하다.\n";
+        if (!(Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= fireTool) || !(Player.Instance.Inventory[itemType.KINDLING].Count >= kindling) || !(Player.Instance.Inventory[itemType.WOOD].Count >= wood)) {    // 불을 피울 재료가 부족함.
+            this.warningMessageTitle = "재료가 부족함";
+            
+            this.warningMessageContent.Append("불을 피울 재료가 모두 준비되지 않았다.\n");
+            
+            this.warningMessageContent.Append("\n");
 
+            this.warningMessageContent.Append("- 필요한 재료들\n");
+            this.warningMessageContent.Append($"점화 도구: {fireTool}개 이상\n");
+            this.warningMessageContent.Append($"불쏘시개: {kindling}개 이상\n");
+            this.warningMessageContent.Append($"나무: {wood}개 이상\n");
+            
             return false;
         }
         
-        if (!(Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= fireTool) || 
-            !(Player.Instance.Inventory[itemType.KINDLING].Count >= kindling) ||
-            !(Player.Instance.Inventory[itemType.WOOD].Count >= wood)) {    // 불을 피울 재료가 부족함.
-            this.warningMessageTitle = "재료가 준비되지 않음";
-            this.warningMessageContent = "불을 피울 재료가 모두 준비되지 않았다.\n" +
-                                         $"불을 피우기 위해서는 점화 도구 {fireTool}개, 불쏘시개 {kindling}개, 나무 {wood}개 이상이 필요하다.\n" +
-                                         "우선 주변을 탐색하여 제작에 필요한 재료를 모아보자.\n";
+        if (!Player.Instance.StatusCheck(stamina, bodyHeat, hydration, calories)) {
+            this.warningMessageTitle = "스테이터스가 너무 낮음";
+
+            this.warningMessageContent.Append("불을 피울 수 있을만큼 스테이터스가 충분하지 않다.\n");
+            this.warningMessageContent.Append("스테이터스는 음식, 물, 휴식 등으로 회복할 수 있다.\n");
+            
+            this.warningMessageContent.Append("\n");
+            
+            this.warningMessageContent.Append("- 스테이터스 요구 사항\n");
+            this.warningMessageContent.Append($"체력: {stamina}% 이상\n");
+            this.warningMessageContent.Append($"체온: {bodyHeat}% 이상\n");
+            this.warningMessageContent.Append($"수분: {hydration}% 이상\n");
+            this.warningMessageContent.Append($"허기: {calories}% 이상\n");
             
             return false;
         }

@@ -20,8 +20,6 @@ public class PlayerSearchResultView : MonoBehaviour {
         OnSearchResultUIHunting += Hunting;
         OnSearchResultUIInDanger += InDanger;
         
-        this.titleText.text = "탐색 결과";
-        
         this.okButton.onClick.AddListener(SearchingResultOk);
     }
 
@@ -30,18 +28,22 @@ public class PlayerSearchResultView : MonoBehaviour {
     }
 
     private void Farming(string value) {
+        this.titleText.text = "탐색 결과";
         this.contentText.text = value;
     }
 
     private void Hunting(string value) {
+        this.titleText.text = "사냥감 발견";
         this.contentText.text = value;
     }
     
     private void Injured(string value) {
+        this.titleText.text = "부상을 입음";
         this.contentText.text = value;
     }
 
     private void InDanger(string value) {
+        this.titleText.text = "위험에 빠짐";
         this.contentText.text = value;
     }
     
