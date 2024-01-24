@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class PlayerFire : MonoBehaviour {
     [SerializeField] private GameObject fireLoadingScreen;
     [SerializeField] private GameObject fireResultScreen;
-    
+    [Space(10f)]
+    [SerializeField] private GameObject cookLoadingScreen;
+    [SerializeField] private GameObject cookResultScreen;
     [Space(10f)]
     [SerializeField] private Button addWoodButton;
     [SerializeField] private Button cookingButton;
@@ -21,6 +23,9 @@ public class PlayerFire : MonoBehaviour {
     private void Init() {
         this.fireLoadingScreen.SetActive(false);
         this.fireResultScreen.SetActive(true);
+        
+        this.cookLoadingScreen.SetActive(false);
+        this.cookResultScreen.SetActive(false);
         
         this.resultStringBuilder = new StringBuilder();
         
@@ -86,8 +91,7 @@ public class PlayerFire : MonoBehaviour {
              * 성공; 몇 텀?
              * 불 1회 300텀 ~ 400텀
              * 1일 500텀, 0.5일 250텀
-             * 뗄감 1회 추가 -> 나무 1개 소모 -> 불 25텀 추가
-             * 1일 수면 -> 뗄감 8회 ~ 4회
+             * 뗄감 1회 추가 -> 나무 5개 소모 -> 불 10텀 추가
             */
 
             int value = Random.Range(300, 401);
@@ -128,12 +132,68 @@ public class PlayerFire : MonoBehaviour {
     }
     
     private void AddWood() {
-        GameInfo.OnFireTimeUpdateEvent(25);
+        var wood = Player.Instance.Inventory[itemType.WOOD];
+        int woodRequire = 5;
+        string warningTitle = "나무가 없음";
+        
+        this.resultStringBuilder.Clear();
+        
+        // TODO: SFX
+
+        // Wood -5
+        if (wood.Count >= woodRequire) {
+            wood.ItemUse(woodRequire);
+
+            // Time Update
+            GameInfo.OnTimeUpdateEvent(10);
+        }
+        else {
+            this.resultStringBuilder.Append("뗄감으로 사용할 나무가 부족하다.\n");
+            this.resultStringBuilder.Append("주변을 탐색하여 쓸만한 나무를 모아보자.\n");
+            
+            GameWarningView.OnWarningMessageEvent(warningTitle, this.resultStringBuilder.ToString());
+        }
     }
 
     private void Cooking() {
-        // TODO: 
+        var rawMeat = Player.Instance.Inventory[itemType.RAW_MEAT];
+        var cookedMeat = Player.Instance.Inventory[itemType.COOKED_MEAT];
+        string warningTitle = "재료가 없음";
         
+        this.resultStringBuilder.Clear();
+
+        // TODO: SFX
+        
+        // Cooking
+        if (rawMeat.Count >= 0) {
+            // Loading Ani.
+            this.cookLoadingScreen.SetActive(true);
+            
+            // Result
+            this.resultStringBuilder.Append("- 결과\n");
+            this.resultStringBuilder.Append("먹음직스러운 즉석 요리가 탄생했다.\n");
+            
+            this.resultStringBuilder.Append("\n");
+            
+            this.resultStringBuilder.Append("- 소모된 아이템\n");
+            this.resultStringBuilder.Append($"{rawMeat.ItemName}: {rawMeat.ItemUse(1)}개\n");
+            
+            this.resultStringBuilder.Append("\n");
+            
+            this.resultStringBuilder.Append("- 획득한 아이템\n");
+            this.resultStringBuilder.Append($"{cookedMeat.ItemName}: {cookedMeat.ItemAcquire()}개\n");
+            
+            PlayerFireResultView.OnCookingResult(this.resultStringBuilder.ToString());
+            
+            // Time Update
+            GameInfo.OnTimeUpdateEvent(5);
+        }
+        else {
+            this.resultStringBuilder.Append("조리할 재료가 없다.\n");
+            this.resultStringBuilder.Append("사냥 도구가 있다면 사냥을 통해 생고기를 얻을 수 있다.\n");
+            
+            GameWarningView.OnWarningMessageEvent(warningTitle, this.resultStringBuilder.ToString());
+        }
     }
 
     private void ReturnToMenu() {

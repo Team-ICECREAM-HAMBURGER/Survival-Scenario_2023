@@ -13,7 +13,7 @@ public class ItemMeatRaw : IItem {
     private readonly int maxValue = 2;
     
     
-    public ItemMeatRaw(int count = 0, float weight = 0f) {
+    public ItemMeatRaw(int count = 3, float weight = 0f) {
         this.Count = count;
         this.Weight = weight;
     }

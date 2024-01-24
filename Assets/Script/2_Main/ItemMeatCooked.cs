@@ -25,7 +25,8 @@ public class ItemMeatCooked : IItem {
     }
     
     public int ItemAcquire() {
-        int acquireValue = Random.Range(1, (this.maxValue + 1));
+        int acquireValue = 1;
+        
         this.Count += acquireValue;
 
         return acquireValue;

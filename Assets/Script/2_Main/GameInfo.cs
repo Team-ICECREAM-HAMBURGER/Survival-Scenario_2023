@@ -85,6 +85,7 @@ public class GameInfo : MonoBehaviour {
 
     private void FireTimeUpdate(int value) {
         this.CurrentFireTerm += value;
+        
         GameInfoView.OnFireTimeUpdateEvent($"모닥불 ({this.CurrentFireTerm}텀 남음)");
 
         if (this.CurrentFireTerm <= 0) {

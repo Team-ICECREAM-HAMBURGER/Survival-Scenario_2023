@@ -10,11 +10,13 @@ public class PlayerFireResultView : MonoBehaviour {
     public delegate void FireResultUIUpdateHandler(string value);
     public static FireResultUIUpdateHandler OnFireResultSuccess;
     public static FireResultUIUpdateHandler OnFireResultFail;
+    public static FireResultUIUpdateHandler OnCookingResult;
 
     
     private void Init() {
         OnFireResultSuccess += FireResultSuccess;
         OnFireResultFail += FireResultFail;
+        OnCookingResult += CookingResult;
     }
 
     private void Awake() {
@@ -25,25 +27,37 @@ public class PlayerFireResultView : MonoBehaviour {
         this.titleText.text = "불이 붙었다.";
         this.contentText.text = value;
         
-        this.okButton.onClick.RemoveListener(MakingFireResultFail);
-        this.okButton.onClick.AddListener(MakingFireResultSuccess);
+        this.okButton.onClick.RemoveAllListeners();
+        this.okButton.onClick.AddListener(FireResultSuccessListener);
     }
 
     private void FireResultFail(string value) {
         this.titleText.text = "불을 붙이지 못했다.";
         this.contentText.text = value;
         
-        this.okButton.onClick.RemoveListener(MakingFireResultSuccess);
-        this.okButton.onClick.AddListener(MakingFireResultFail);
+        this.okButton.onClick.RemoveAllListeners();
+        this.okButton.onClick.AddListener(FireResultFailListener);
+    }
+
+    private void CookingResult(string value) {
+        this.titleText.text = "조리 완료";
+        this.contentText.text = value;
+        
+        this.okButton.onClick.RemoveAllListeners();
+        this.okButton.onClick.AddListener(CookingResultListener);
+    }
+
+    private void CookingResultListener() {
+        GamePanelControl.OnGamePanelOffEvent("Cooking Result");
     }
     
-    private void MakingFireResultSuccess() {
+    private void FireResultSuccessListener() {
         GameCanvasControl.OnCanvasOnEvent("Canvas Information");
         GamePanelControl.OnGamePanelOffEvent("Fire Result");
         GamePanelControl.OnGamePanelOnEvent("Fire Menu");
     }
 
-    private void MakingFireResultFail() {
+    private void FireResultFailListener() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Outside");
         GameCanvasControl.OnCanvasOnEvent("Canvas Information");
     }
