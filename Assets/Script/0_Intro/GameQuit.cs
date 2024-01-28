@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class gameQuit : MonoBehaviour {
+public class GameQuit : MonoBehaviour {
     [SerializeField] protected GameObject canvasQuit;
-    private Button _quitButton;
-    protected Button noButton;
-    protected Button yesButton;
+    private Button quitButton;
+    protected Button NoButton;
+    protected Button YesButton;
     
     
     private void Init() {
         this.canvasQuit.SetActive(false);
         
-        this._quitButton = this.gameObject.GetComponent<Button>();
-        this._quitButton.onClick.AddListener(() => {
+        this.quitButton = this.gameObject.GetComponent<Button>();
+        this.quitButton.onClick.AddListener(() => {
             this.canvasQuit.SetActive(true);
         });
     }

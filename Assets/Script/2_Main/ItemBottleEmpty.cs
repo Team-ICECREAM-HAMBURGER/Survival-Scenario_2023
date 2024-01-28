@@ -4,8 +4,8 @@ public class ItemBottleEmpty : IItem {
 
     public string ItemName { get; } = "빈 물통";
     public bool IsAcquirable { get; } = false;
-    public itemType ItemType { get; } = itemType.EMPTY_BOTTLE;
-    public eventType EventType { get; } = eventType.NONE;   // TODO: eventType.CRAFT
+    public ItemType ItemType { get; } = ItemType.EMPTY_BOTTLE;
+    public EventType EventType { get; } = EventType.NONE;   // TODO: eventType.CRAFT
     
     
     public ItemBottleEmpty(int count = 0, float weight = 0f) {

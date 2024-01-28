@@ -1,11 +1,11 @@
 public class PlayerStatusEffectExhaustion : IPlayerStatusEffect {
     public int DurationTerm { get; set; } = 0;
     public string StatusEffectName { get; } = "탈진";
-    public statusEffectType StatusEffectType { get; } = statusEffectType.EXHAUSTION;
+    public StatusEffectType StatusEffectType { get; } = StatusEffectType.EXHAUSTION;
     
 
     public void Event() {
-        float stamina = Player.Instance.Status[statusType.STAMINA];
+        var stamina = Player.Instance.Status[StatusType.STAMINA];
         
         Player.Instance.StatusUpdate(-stamina);
     }

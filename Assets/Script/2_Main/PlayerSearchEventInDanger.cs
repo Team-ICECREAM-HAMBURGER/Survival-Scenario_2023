@@ -21,9 +21,9 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
     }
 
     private string InDanger() {
-        var effect = Player.Instance.StatusEffect[statusEffectType.EXHAUSTION];
-        var huntingTool = Player.Instance.Inventory[itemType.HUNTING_TOOL];
-        int value = 1;
+        var effect = Player.Instance.StatusEffect[StatusEffectType.EXHAUSTION];
+        var huntingTool = Player.Instance.Inventory[ItemType.HUNTING_TOOL];
+        var value = 1;
         
         effect.Event();
         this.resultText.Clear();
@@ -41,10 +41,10 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
             
             // UI Text; Status
             this.resultText.Append("- 스테이터스 잔여량\n");
-            this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
-            this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
-            this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
-            this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+            this.resultText.Append($"체력: {Player.Instance.Status[StatusType.STAMINA]}%\n");
+            this.resultText.Append($"체온: {Player.Instance.Status[StatusType.BODY_HEAT]}%\n");
+            this.resultText.Append($"수분: {Player.Instance.Status[StatusType.HYDRATION]}%\n");
+            this.resultText.Append($"열량: {Player.Instance.Status[StatusType.CALORIES]}%\n");
 
             this.resultText.Append("\n");
             
@@ -58,7 +58,7 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
             this.resultText.Append($"{huntingTool.ItemName}: {value}개\n");
         }
         else {
-            effect = Player.Instance.StatusEffect[statusEffectType.INJURED];
+            effect = Player.Instance.StatusEffect[StatusEffectType.INJURED];
             effect.Event();
 
             // UI Text; Result
@@ -72,10 +72,10 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
             
             // UI Text; Status
             this.resultText.Append("- 스테이터스 잔여량\n");
-            this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
-            this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
-            this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
-            this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+            this.resultText.Append($"체력: {Player.Instance.Status[StatusType.STAMINA]}%\n");
+            this.resultText.Append($"체온: {Player.Instance.Status[StatusType.BODY_HEAT]}%\n");
+            this.resultText.Append($"수분: {Player.Instance.Status[StatusType.HYDRATION]}%\n");
+            this.resultText.Append($"열량: {Player.Instance.Status[StatusType.CALORIES]}%\n");
 
             this.resultText.Append("\n");
 

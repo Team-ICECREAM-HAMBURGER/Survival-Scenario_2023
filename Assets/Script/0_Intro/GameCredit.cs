@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class gameCredit : MonoBehaviour {
-    private Button _button;
+public class GameCredit : MonoBehaviour {
+    private Button button;
 
 
     private void Init() {
-        this._button = this.gameObject.GetComponent<Button>();
-        this._button.onClick.AddListener(() => {
+        this.button = this.gameObject.GetComponent<Button>();
+        this.button.onClick.AddListener(() => {
             
         });
     }

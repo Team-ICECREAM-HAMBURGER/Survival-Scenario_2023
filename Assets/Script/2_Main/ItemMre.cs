@@ -6,8 +6,8 @@ public class ItemMre : IItem {
 
     public string ItemName { get; } = "비상식량";
     public bool IsAcquirable { get; } = false;
-    public itemType ItemType { get; } = itemType.MRE;
-    public eventType EventType { get; } = eventType.NONE;
+    public ItemType ItemType { get; } = ItemType.MRE;
+    public EventType EventType { get; } = EventType.NONE;
     
 
     public ItemMre(int count = 0, float weight = 0f) {

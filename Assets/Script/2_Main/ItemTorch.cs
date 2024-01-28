@@ -6,8 +6,8 @@ public class ItemTorch : IItem {
 
     public string ItemName { get; } = "횃불";
     public bool IsAcquirable { get; } = false;
-    public itemType ItemType { get; } = itemType.TORCH;
-    public eventType EventType { get; } = eventType.NONE;   // TODO: eventType.CRAFT
+    public ItemType ItemType { get; } = ItemType.TORCH;
+    public EventType EventType { get; } = EventType.NONE;   // TODO: eventType.CRAFT
 
     private int durability = 1;
     

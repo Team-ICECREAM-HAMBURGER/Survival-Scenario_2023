@@ -4,23 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class gameStart : MonoBehaviour {
-    private Button _button;
+public class GameStart : MonoBehaviour {
+    private Button button;
     
     
     private void Init() {
-        this._button = this.gameObject.GetComponent<Button>();
-        this._button.onClick.AddListener(() => {
+        this.button = this.gameObject.GetComponent<Button>();
+        this.button.onClick.AddListener(() => {
             // Game Loading...
             SceneManager.LoadScene("LoadingScene");
         
             // Has Previous Save Data?
-            if (gameManager.instance.GameFileCheck()) {  // True -> Load data
-                gameManager.instance.GameFileLoad();
+            if (GameManager.Instance.GameFileCheck()) {  // True -> Load data
+                GameManager.Instance.GameFileLoad();
             }
             else {  // False -> Create Data + Load Data
-                gameManager.instance.GameFileCreate();
-                gameManager.instance.GameFileLoad();
+                GameManager.Instance.GameFileCreate();
+                GameManager.Instance.GameFileLoad();
             }
         });
     }

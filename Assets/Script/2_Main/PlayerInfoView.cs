@@ -22,7 +22,7 @@ public class PlayerInfoView : MonoBehaviour {
     public static PlayerInfoGaugeUpdateHandler OnStatusEffectGaugeUpdateEvent;
     public static PlayerInfoGaugeUpdateHandler OnStatusEffectGaugeInitEvent;
     
-    public delegate void PlayerInfoGaugesUpdateHandler(Dictionary<statusType, float> values);
+    public delegate void PlayerInfoGaugesUpdateHandler(Dictionary<StatusType, float> values);
     public static PlayerInfoGaugesUpdateHandler OnStatusGaugesUpdateEvent;
     
     
@@ -58,11 +58,11 @@ public class PlayerInfoView : MonoBehaviour {
         this.statusEffectGauge.value = value;   
     }
 
-    private void StatusGaugesUpdate(Dictionary<statusType, float> values) {
-        int i = 0;
+    private void StatusGaugesUpdate(Dictionary<StatusType, float> values) {
+        var i = 0;
         
-        foreach (var VARIABLE in values.Values) {
-            this.statusGauges[i].value = VARIABLE;
+        foreach (var variable in values.Values) {
+            this.statusGauges[i].value = variable;
             i += 1;
         }
     }

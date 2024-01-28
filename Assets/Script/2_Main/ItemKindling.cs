@@ -6,8 +6,8 @@ public class ItemKindling : IItem {
 
     public string ItemName { get; } = "불쏘시개";
     public bool IsAcquirable { get; } = false;
-    public itemType ItemType { get; } = itemType.KINDLING;
-    public eventType EventType { get; } = eventType.NONE;
+    public ItemType ItemType { get; } = ItemType.KINDLING;
+    public EventType EventType { get; } = EventType.NONE;
 
     private int durability = 1;
     

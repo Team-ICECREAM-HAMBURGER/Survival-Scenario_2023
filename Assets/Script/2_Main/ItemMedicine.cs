@@ -6,8 +6,8 @@ public class ItemMedicine : IItem {
 
     public string ItemName { get; } = "약품";
     public bool IsAcquirable { get; } = false;
-    public itemType ItemType { get; } = itemType.MEDICINE;
-    public eventType EventType { get; } = eventType.NONE;
+    public ItemType ItemType { get; } = ItemType.MEDICINE;
+    public EventType EventType { get; } = EventType.NONE;
     
     public ItemMedicine(int count = 0, float weight = 0f) {
         this.Count = count;

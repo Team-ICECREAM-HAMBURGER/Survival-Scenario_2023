@@ -7,11 +7,11 @@ using Random = UnityEngine.Random;
 public class PlayerSearch : MonoBehaviour {
     [SerializeField] private GameObject searchLoadingScreen;
     
-    private readonly Dictionary<eventType, IPlayerSearchEvent> eventActions = new Dictionary<eventType, IPlayerSearchEvent>() {
-            { eventType.INJURED, new PlayerSearchEventInjured(0.2f) },
-            { eventType.IN_DANGER, new PlayerSearchEventInDanger(0.2f) },
-            { eventType.HUNTING, new PlayerSearchEventHunting(1f) },
-            { eventType.FARMING, new PlayerSearchEventFarming(98f) }
+    private readonly Dictionary<EventType, IPlayerSearchEvent> eventActions = new Dictionary<EventType, IPlayerSearchEvent>() {
+            { EventType.INJURED, new PlayerSearchEventInjured(0.2f) },
+            { EventType.IN_DANGER, new PlayerSearchEventInDanger(0.2f) },
+            { EventType.HUNTING, new PlayerSearchEventHunting(1f) },
+            { EventType.FARMING, new PlayerSearchEventFarming(98f) }
         };
 
     public delegate void SearchEventHandler();
@@ -40,7 +40,7 @@ public class PlayerSearch : MonoBehaviour {
         float weight = 0;
         
         // Event Select
-        foreach (IPlayerSearchEvent variable in this.eventActions.Values) {
+        foreach (var variable in this.eventActions.Values) {
             if (variable.Weight + weight >= randomPivot) {
                 variable.Event();
                 

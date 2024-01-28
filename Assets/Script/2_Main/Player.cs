@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum statusType {
+public enum StatusType {
     STAMINA,
     BODY_HEAT,
     HYDRATION,
     CALORIES
 }
 
-public enum statusEffectType {
+public enum StatusEffectType {
     INJURED,
     HYPOTHERMIA,
     DEHYDRATION,
@@ -18,7 +18,7 @@ public enum statusEffectType {
     ADRENALINE
 }
 
-public enum itemType {
+public enum ItemType {
     HAND_AXE,
     TORCH,
     EMPTY_BOTTLE,
@@ -44,41 +44,41 @@ public class Player : MonoBehaviour {
     public static Player Instance;
     
     public float StatusReduceMultiplier { get; set; }
-    public Dictionary<statusEffectType, int> CurrentStatusEffect { get; private set; }
+    public Dictionary<StatusEffectType, int> CurrentStatusEffect { get; private set; }
 
-    public readonly Dictionary<statusEffectType, IPlayerStatusEffect> StatusEffect = new Dictionary<statusEffectType, IPlayerStatusEffect>() {
-            { statusEffectType.HEALING, new PlayerStatusEffectHealing() },
-            { statusEffectType.INJURED, new PlayerStatusEffectInjured() },
-            { statusEffectType.ADRENALINE, new PlayerStatusEffectAdrenaline() },
-            { statusEffectType.EXHAUSTION, new PlayerStatusEffectExhaustion() },
-            { statusEffectType.DEHYDRATION, new PlayerStatusEffectExhaustion() },
-            { statusEffectType.HYPOTHERMIA, new PlayerStatusEffectHypothermia() }
+    public readonly Dictionary<StatusEffectType, IPlayerStatusEffect> StatusEffect = new Dictionary<StatusEffectType, IPlayerStatusEffect>() {
+            { StatusEffectType.HEALING, new PlayerStatusEffectHealing() },
+            { StatusEffectType.INJURED, new PlayerStatusEffectInjured() },
+            { StatusEffectType.ADRENALINE, new PlayerStatusEffectAdrenaline() },
+            { StatusEffectType.EXHAUSTION, new PlayerStatusEffectExhaustion() },
+            { StatusEffectType.DEHYDRATION, new PlayerStatusEffectExhaustion() },
+            { StatusEffectType.HYPOTHERMIA, new PlayerStatusEffectHypothermia() }
         };
-    public readonly Dictionary<statusType, float> Status = new Dictionary<statusType, float>() {
-        { statusType.STAMINA, 100f },
-        { statusType.BODY_HEAT, 100f },
-        { statusType.HYDRATION, 100f },
-        { statusType.CALORIES, 100f }
+    public readonly Dictionary<StatusType, float> Status = new Dictionary<StatusType, float>() {
+        { StatusType.STAMINA, 100f },
+        { StatusType.BODY_HEAT, 100f },
+        { StatusType.HYDRATION, 100f },
+        { StatusType.CALORIES, 100f }
     };
-    public readonly Dictionary<itemType, IItem> Inventory = new Dictionary<itemType, IItem>() {
-            { itemType.HERBS, new ItemHerbs() },
-            { itemType.ROPE, new ItemRope() },
-            { itemType.CAN, new ItemCan() },
-            { itemType.CLOTH, new ItemCloth() },
-            { itemType.PLASTIC_BAG, new ItemPlasticBag() },
-            { itemType.MISCELLANEOUS, new ItemMiscellaneous() },
-            { itemType.STONE, new ItemStone() },
-            { itemType.WOOD, new ItemWood() },
-            { itemType.MRE, new ItemMre() },
-            { itemType.TORCH, new ItemTorch() },
-            { itemType.RAW_MEAT, new ItemMeatRaw() },
-            { itemType.COOKED_MEAT, new ItemMeatCooked() },
-            { itemType.FIRE_TOOL, new ItemFireTool() },
-            { itemType.KINDLING, new ItemKindling() },
-            { itemType.MEDICINE, new ItemMedicine() },
-            { itemType.EMPTY_BOTTLE, new ItemBottleEmpty() },
-            { itemType.FILLED_BOTTLE, new ItemBottleFilled() },
-            { itemType.HUNTING_TOOL, new ItemHuntingTool() }
+    public readonly Dictionary<ItemType, IItem> Inventory = new Dictionary<ItemType, IItem>() {
+            { ItemType.HERBS, new ItemHerbs() },
+            { ItemType.ROPE, new ItemRope() },
+            { ItemType.CAN, new ItemCan() },
+            { ItemType.CLOTH, new ItemCloth() },
+            { ItemType.PLASTIC_BAG, new ItemPlasticBag() },
+            { ItemType.MISCELLANEOUS, new ItemMiscellaneous() },
+            { ItemType.STONE, new ItemStone() },
+            { ItemType.WOOD, new ItemWood() },
+            { ItemType.MRE, new ItemMre() },
+            { ItemType.TORCH, new ItemTorch() },
+            { ItemType.RAW_MEAT, new ItemMeatRaw() },
+            { ItemType.COOKED_MEAT, new ItemMeatCooked() },
+            { ItemType.FIRE_TOOL, new ItemFireTool() },
+            { ItemType.KINDLING, new ItemKindling() },
+            { ItemType.MEDICINE, new ItemMedicine() },
+            { ItemType.EMPTY_BOTTLE, new ItemBottleEmpty() },
+            { ItemType.FILLED_BOTTLE, new ItemBottleFilled() },
+            { ItemType.HUNTING_TOOL, new ItemHuntingTool() }
         };
     
     
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour {
         Instance = this;
 
         this.StatusReduceMultiplier = 1f;
-        this.CurrentStatusEffect = new Dictionary<statusEffectType, int>();
+        this.CurrentStatusEffect = new Dictionary<StatusEffectType, int>();
         
         // TODO: Json Save File Load
     }
@@ -100,8 +100,8 @@ public class Player : MonoBehaviour {
     }
     
     public void StatusUpdate(float value) {
-        for (int i = 0; i < this.Status.Count; i++) {
-            this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + value * this.StatusReduceMultiplier, 0, 100);
+        for (var i = 0; i < this.Status.Count; i++) {
+            this.Status[(StatusType)i] = Mathf.Clamp(this.Status[(StatusType)i] + value * this.StatusReduceMultiplier, 0, 100);
         }
         
         PlayerInfoView.OnStatusGaugesUpdateEvent(this.Status);
@@ -110,8 +110,8 @@ public class Player : MonoBehaviour {
     public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
         float[] values = { stamina, bodyHeat, hydration, calories };
         
-        for (int i = 0; i < this.Status.Count; i++) {
-            this.Status[(statusType)i] = Mathf.Clamp(this.Status[(statusType)i] + values[i] * this.StatusReduceMultiplier, 0, 100);
+        for (var i = 0; i < this.Status.Count; i++) {
+            this.Status[(StatusType)i] = Mathf.Clamp(this.Status[(StatusType)i] + values[i] * this.StatusReduceMultiplier, 0, 100);
         }
         
         PlayerInfoView.OnStatusGaugesUpdateEvent(this.Status);
@@ -119,30 +119,31 @@ public class Player : MonoBehaviour {
 
     public bool StatusCheck(float value) {
         return this.Status.All(statusEntry =>
-            (statusEntry.Key == statusType.STAMINA && statusEntry.Value >= value) ||
-            (statusEntry.Key == statusType.BODY_HEAT && statusEntry.Value > value) ||
-            (statusEntry.Key == statusType.HYDRATION && statusEntry.Value > value) ||
-            (statusEntry.Key == statusType.CALORIES && statusEntry.Value > value));
+            (statusEntry.Key == StatusType.STAMINA && statusEntry.Value >= value) ||
+            (statusEntry.Key == StatusType.BODY_HEAT && statusEntry.Value > value) ||
+            (statusEntry.Key == StatusType.HYDRATION && statusEntry.Value > value) ||
+            (statusEntry.Key == StatusType.CALORIES && statusEntry.Value > value));
     }
     
     public bool StatusCheck(float stamina, float bodyHeat, float hydration, float calories) {
         return this.Status.All(statusEntry =>
-            (statusEntry.Key == statusType.STAMINA && statusEntry.Value >= stamina) ||
-            (statusEntry.Key == statusType.BODY_HEAT && statusEntry.Value > bodyHeat) ||
-            (statusEntry.Key == statusType.HYDRATION && statusEntry.Value > hydration) ||
-            (statusEntry.Key == statusType.CALORIES && statusEntry.Value > calories));
+            (statusEntry.Key == StatusType.STAMINA && statusEntry.Value >= stamina) ||
+            (statusEntry.Key == StatusType.BODY_HEAT && statusEntry.Value > bodyHeat) ||
+            (statusEntry.Key == StatusType.HYDRATION && statusEntry.Value > hydration) ||
+            (statusEntry.Key == StatusType.CALORIES && statusEntry.Value > calories));
     }
 
-    public bool StatusEffectAdd(statusEffectType statusEffectType, int durationTerm) {
+    public bool StatusEffectAdd(StatusEffectType statusEffectType, int durationTerm) {
         if (this.CurrentStatusEffect.TryAdd(statusEffectType, durationTerm)) {
             return true;
         }
         
         this.CurrentStatusEffect[statusEffectType] = durationTerm;
+        
         return false;
     }
     
-    public void StatusEffectRemove(statusEffectType statusEffectType) {
+    public void StatusEffectRemove(StatusEffectType statusEffectType) {
         this.CurrentStatusEffect.Remove(statusEffectType);
     }
 }

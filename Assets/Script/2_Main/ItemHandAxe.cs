@@ -6,8 +6,8 @@ public class ItemHandAxe : IItem {
 
     public string ItemName { get; } = "손도끼";
     public bool IsAcquirable { get; } = false;
-    public itemType ItemType { get; } = itemType.HAND_AXE;
-    public eventType EventType { get; } = eventType.NONE;
+    public ItemType ItemType { get; } = ItemType.HAND_AXE;
+    public EventType EventType { get; } = EventType.NONE;
 
     private int durability = 5;
     

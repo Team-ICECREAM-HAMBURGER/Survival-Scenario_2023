@@ -7,8 +7,8 @@ public class ItemMeatCooked : IItem {
 
     public string ItemName { get; } = "익힌 고기";
     public bool IsAcquirable { get; } = true;
-    public itemType ItemType { get; } = itemType.COOKED_MEAT;
-    public eventType EventType { get; } = eventType.HUNTING;
+    public ItemType ItemType { get; } = ItemType.COOKED_MEAT;
+    public EventType EventType { get; } = EventType.HUNTING;
 
     private readonly int maxValue = 3;
     
@@ -25,7 +25,7 @@ public class ItemMeatCooked : IItem {
     }
     
     public int ItemAcquire() {
-        int acquireValue = 1;
+        var acquireValue = 1;
         
         this.Count += acquireValue;
 

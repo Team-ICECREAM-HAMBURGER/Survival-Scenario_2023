@@ -4,20 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class newGame : MonoBehaviour {
-    private Button _button;
+public class NewGame : MonoBehaviour {
+    private Button button;
     
     
     private void Init() {
-        this._button = this.gameObject.GetComponent<Button>();
-        this._button.onClick.AddListener(() => {
+        this.button = this.gameObject.GetComponent<Button>();
+        this.button.onClick.AddListener(() => {
             // Has Save File?
-            if (gameManager.instance.GameFileCheck()) {
+            if (GameManager.Instance.GameFileCheck()) {
                 // Warn -> T or F -> Create or Return
             }
             else {
-                gameManager.instance.GameFileCreate();
-                gameManager.instance.GameFileLoad();
+                GameManager.Instance.GameFileCreate();
+                GameManager.Instance.GameFileLoad();
             }
         
             // Game Loading...

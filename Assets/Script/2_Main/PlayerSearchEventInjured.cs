@@ -21,7 +21,7 @@ public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
     }
 
     private string Injured() {
-        var effect = Player.Instance.StatusEffect[statusEffectType.INJURED];
+        var effect = Player.Instance.StatusEffect[StatusEffectType.INJURED];
 
         effect.Event();
         this.resultText.Clear();
@@ -37,10 +37,10 @@ public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
         
         // UI Text; Status
         this.resultText.Append("- 스테이터스 잔여량\n");
-        this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
-        this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
-        this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
-        this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+        this.resultText.Append($"체력: {Player.Instance.Status[StatusType.STAMINA]}%\n");
+        this.resultText.Append($"체온: {Player.Instance.Status[StatusType.BODY_HEAT]}%\n");
+        this.resultText.Append($"수분: {Player.Instance.Status[StatusType.HYDRATION]}%\n");
+        this.resultText.Append($"열량: {Player.Instance.Status[StatusType.CALORIES]}%\n");
             
         this.resultText.Append("\n");
             

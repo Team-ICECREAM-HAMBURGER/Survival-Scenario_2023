@@ -6,8 +6,8 @@ public class ItemBottleFilled : IItem {
 
     public string ItemName { get; } = "물통";
     public bool IsAcquirable { get; } = false;
-    public itemType ItemType { get; } = itemType.FILLED_BOTTLE;
-    public eventType EventType { get; } = eventType.NONE;
+    public ItemType ItemType { get; } = ItemType.FILLED_BOTTLE;
+    public EventType EventType { get; } = EventType.NONE;
 
     
     public ItemBottleFilled(int count = 0, float weight = 0f) {

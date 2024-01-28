@@ -4,7 +4,7 @@ public class PlayerStatusEffectInjured : IPlayerStatusEffect {
     public int DurationTerm { get; set; }
     
     public string StatusEffectName { get; } = "부상";
-    public statusEffectType StatusEffectType { get; } = statusEffectType.INJURED;
+    public StatusEffectType StatusEffectType { get; } = StatusEffectType.INJURED;
     
     
     public void Event() {

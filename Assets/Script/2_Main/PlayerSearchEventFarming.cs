@@ -32,21 +32,21 @@ public class PlayerSearchEventFarming : MonoBehaviour, IPlayerSearchEvent {
         
         // UI Text; Status
         this.resultText.Append("- 스테이터스 잔여량\n");
-        this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
-        this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
-        this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
-        this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+        this.resultText.Append($"체력: {Player.Instance.Status[StatusType.STAMINA]}%\n");
+        this.resultText.Append($"체온: {Player.Instance.Status[StatusType.BODY_HEAT]}%\n");
+        this.resultText.Append($"수분: {Player.Instance.Status[StatusType.HYDRATION]}%\n");
+        this.resultText.Append($"열량: {Player.Instance.Status[StatusType.CALORIES]}%\n");
         
         this.resultText.Append("\n");
         
         // UI Text; Items (1)
         this.resultText.Append("- 획득한 아이템\n");
         
-        for (int i = 0; i < Random.Range(2, 4); i++) {
+        for (var i = 0; i < Random.Range(2, 4); i++) {
             float randomPivot = Random.Range(0, 100);
             float weight = 0;
             
-            foreach (var variable in Player.Instance.Inventory.Where(variable => variable.Value.EventType == eventType.FARMING)) {
+            foreach (var variable in Player.Instance.Inventory.Where(variable => variable.Value.EventType == EventType.FARMING)) {
                 if (weight + variable.Value.Weight >= randomPivot) {
                     // Item Get
                     var acquiredItemCount = variable.Value.ItemAcquire();

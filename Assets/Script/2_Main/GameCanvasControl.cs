@@ -14,7 +14,7 @@ public class GameCanvasControl : MonoBehaviour {
     private void Init() {
         this.canvasList = new List<Canvas>();
         
-        foreach (GameObject variable in GameObject.FindGameObjectsWithTag("Canvas")) {
+        foreach (var variable in GameObject.FindGameObjectsWithTag("Canvas")) {
             this.canvasList.Add(variable.GetComponent<Canvas>());
         }
 
@@ -28,19 +28,19 @@ public class GameCanvasControl : MonoBehaviour {
     }
     
     private void CanvasChange(string canvasName) {
-        foreach (Canvas variable in this.canvasList) {
+        foreach (var variable in this.canvasList) {
             variable.enabled = false || variable.name == canvasName;
         }    
     }
 
     private void CanvasOn(string canvasName) {
-        foreach (Canvas variable in this.canvasList.Where(variable => variable.name == canvasName)) {
+        foreach (var variable in this.canvasList.Where(variable => variable.name == canvasName)) {
             variable.enabled = true;
         }
     }
 
     private void CanvasOff(string canvasName) {
-        foreach (Canvas variable in this.canvasList.Where(variable => variable.name == canvasName)) {
+        foreach (var variable in this.canvasList.Where(variable => variable.name == canvasName)) {
             variable.enabled = false;
         }
     }

@@ -22,12 +22,12 @@ public class PlayerOutside : MonoBehaviour {
         
         // TODO: Background Change -> DayNight Dictionary
         switch (GameInfo.Instance.CurrentDayNight) {
-            case dayNightType.DAY:
+            case DayNightType.DAY:
                 GamePanelControl.OnGamePanelOffEvent("Background Night");
                 GamePanelControl.OnGamePanelOnEvent("Background Day");
                 break;
             
-            case dayNightType.NIGHT:
+            case DayNightType.NIGHT:
                 GamePanelControl.OnGamePanelOffEvent("Background Day");
                 GamePanelControl.OnGamePanelOnEvent("Background Night");
                 break;
@@ -54,11 +54,11 @@ public class PlayerOutside : MonoBehaviour {
          * 부상을 입지 않음.
         */
         
-        float status = 50f;
+        var status = 50f;
 
         this.warningMessageContent.Clear();
         
-        if (Player.Instance.CurrentStatusEffect.ContainsKey(statusEffectType.INJURED)) {
+        if (Player.Instance.CurrentStatusEffect.ContainsKey(StatusEffectType.INJURED)) {
             this.warningMessageTitle = "부상을 입음";
             
             this.warningMessageContent.Append("부상을 입은 상태에서는 다른 지역으로 이동할 수 없다.\n");
@@ -104,14 +104,14 @@ public class PlayerOutside : MonoBehaviour {
          * 밤일 경우, '횃불' 아이템 1개 이상.
         */
 
-        float stamina = 20f;
-        float bodyHeat = 15f;
-        float hydration = 5f;
-        float calories = 10f;
+        var stamina = 20f;
+        var bodyHeat = 15f;
+        var hydration = 5f;
+        var calories = 10f;
 
         this.warningMessageContent.Clear();
         
-        if (GameInfo.Instance.CurrentDayNight == dayNightType.NIGHT && Player.Instance.Inventory[itemType.TORCH].Count < 1) {
+        if (GameInfo.Instance.CurrentDayNight == DayNightType.NIGHT && Player.Instance.Inventory[ItemType.TORCH].Count < 1) {
             this.warningMessageTitle = "횃불이 없음";
             
             this.warningMessageContent.Append("빛이 없는 야간에 탐색을 나서기 위해서는 횃불이 필요하다.\n");
@@ -158,14 +158,14 @@ public class PlayerOutside : MonoBehaviour {
          * 성공 여부와 상관 없이 재료 소비.
         */
 
-        int fireTool = 1;
-        int kindling = 2;
-        int wood = 3;
+        var fireTool = 1;
+        var kindling = 2;
+        var wood = 3;
 
-        float stamina = 15f;
-        float bodyHeat = 10f;
-        float hydration = 8f;
-        float calories = 9f;
+        var stamina = 15f;
+        var bodyHeat = 10f;
+        var hydration = 8f;
+        var calories = 9f;
         
         this.warningMessageContent.Clear();
         
@@ -173,7 +173,7 @@ public class PlayerOutside : MonoBehaviour {
             return true;
         }
         
-        if (!(Player.Instance.Inventory[itemType.FIRE_TOOL].Count >= fireTool) || !(Player.Instance.Inventory[itemType.KINDLING].Count >= kindling) || !(Player.Instance.Inventory[itemType.WOOD].Count >= wood)) {    // 불을 피울 재료가 부족함.
+        if (!(Player.Instance.Inventory[ItemType.FIRE_TOOL].Count >= fireTool) || !(Player.Instance.Inventory[ItemType.KINDLING].Count >= kindling) || !(Player.Instance.Inventory[ItemType.WOOD].Count >= wood)) {    // 불을 피울 재료가 부족함.
             this.warningMessageTitle = "재료가 부족함";
             
             this.warningMessageContent.Append("불을 피울 재료가 모두 준비되지 않았다.\n");

@@ -22,12 +22,12 @@ public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
     private string Hunting() {
         this.resultText.Clear();
         
-        if (Player.Instance.Inventory[itemType.HUNTING_TOOL].Count >= 1) {
-            var acquiredItem = Player.Instance.Inventory[itemType.RAW_MEAT];
-            var huntingTool = Player.Instance.Inventory[itemType.HUNTING_TOOL];
+        if (Player.Instance.Inventory[ItemType.HUNTING_TOOL].Count >= 1) {
+            var acquiredItem = Player.Instance.Inventory[ItemType.RAW_MEAT];
+            var huntingTool = Player.Instance.Inventory[ItemType.HUNTING_TOOL];
             
-            int usedValue = 1;
-            int acquiredValue = acquiredItem.ItemAcquire();
+            var usedValue = 1;
+            var acquiredValue = acquiredItem.ItemAcquire();
             
             huntingTool.ItemUse(usedValue);
             
@@ -39,10 +39,10 @@ public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
             
             // UI Text; Status
             this.resultText.Append("- 스테이터스 잔여량\n");
-            this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
-            this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
-            this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
-            this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+            this.resultText.Append($"체력: {Player.Instance.Status[StatusType.STAMINA]}%\n");
+            this.resultText.Append($"체온: {Player.Instance.Status[StatusType.BODY_HEAT]}%\n");
+            this.resultText.Append($"수분: {Player.Instance.Status[StatusType.HYDRATION]}%\n");
+            this.resultText.Append($"열량: {Player.Instance.Status[StatusType.CALORIES]}%\n");
             
             this.resultText.Append("\n");
             
@@ -67,10 +67,10 @@ public class PlayerSearchEventHunting : MonoBehaviour, IPlayerSearchEvent {
             
             // UI Text; Status
             this.resultText.Append("- 스테이터스 잔여량\n");
-            this.resultText.Append($"체력: {Player.Instance.Status[statusType.STAMINA]}%\n");
-            this.resultText.Append($"체온: {Player.Instance.Status[statusType.BODY_HEAT]}%\n");
-            this.resultText.Append($"수분: {Player.Instance.Status[statusType.HYDRATION]}%\n");
-            this.resultText.Append($"열량: {Player.Instance.Status[statusType.CALORIES]}%\n");
+            this.resultText.Append($"체력: {Player.Instance.Status[StatusType.STAMINA]}%\n");
+            this.resultText.Append($"체온: {Player.Instance.Status[StatusType.BODY_HEAT]}%\n");
+            this.resultText.Append($"수분: {Player.Instance.Status[StatusType.HYDRATION]}%\n");
+            this.resultText.Append($"열량: {Player.Instance.Status[StatusType.CALORIES]}%\n");
             
             this.resultText.Append("\n");
             

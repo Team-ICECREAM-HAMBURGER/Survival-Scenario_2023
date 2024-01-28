@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class gameQuitNo : gameQuit {
+public class GameQuitNo : GameQuit {
     private void Init() {
-        base.noButton = this.gameObject.GetComponent<Button>();
-        base.noButton.onClick.AddListener(base.QuitNo);
+        base.NoButton = this.gameObject.GetComponent<Button>();
+        base.NoButton.onClick.AddListener(base.QuitNo);
     }
 
     private void Awake() {

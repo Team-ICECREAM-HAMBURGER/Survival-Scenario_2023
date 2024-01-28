@@ -6,8 +6,8 @@ public class ItemStone : IItem {
 
     public string ItemName { get; } = "돌";
     public bool IsAcquirable { get; } = true;
-    public itemType ItemType { get; } = itemType.STONE;
-    public eventType EventType { get; } = eventType.FARMING;
+    public ItemType ItemType { get; } = ItemType.STONE;
+    public EventType EventType { get; } = EventType.FARMING;
     
     private readonly int maxValue = 5;
 
@@ -24,7 +24,7 @@ public class ItemStone : IItem {
     }
     
     public int ItemAcquire() {
-        int acquireValue = Random.Range(1, (this.maxValue + 1));
+        var acquireValue = Random.Range(1, (this.maxValue + 1));
 
         this.Count += acquireValue;
 

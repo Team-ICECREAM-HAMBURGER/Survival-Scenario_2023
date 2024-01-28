@@ -6,8 +6,8 @@ public class ItemPlasticBag : IItem {
 
     public string ItemName { get; } = "비닐";
     public bool IsAcquirable { get; } = true;
-    public itemType ItemType { get; } = itemType.PLASTIC_BAG;
-    public eventType EventType { get; } = eventType.FARMING;
+    public ItemType ItemType { get; } = ItemType.PLASTIC_BAG;
+    public EventType EventType { get; } = EventType.FARMING;
 
     private readonly int maxValue = 2;
 
@@ -24,7 +24,7 @@ public class ItemPlasticBag : IItem {
     }
     
     public int ItemAcquire() {
-        int acquireValue = Random.Range(1, (this.maxValue + 1));
+        var acquireValue = Random.Range(1, (this.maxValue + 1));
 
         this.Count += acquireValue;
 

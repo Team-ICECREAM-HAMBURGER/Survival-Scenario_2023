@@ -16,7 +16,7 @@ public class GamePanelControl : MonoBehaviour {
         OnGamePanelOnEvent += GamePanelOn;
         OnGamePanelOffEvent += GamePanelOff;
         
-        foreach (GameObject variable in GameObject.FindGameObjectsWithTag("Panel")) {
+        foreach (var variable in GameObject.FindGameObjectsWithTag("Panel")) {
             this.panelList.Add(variable);
         }
     }

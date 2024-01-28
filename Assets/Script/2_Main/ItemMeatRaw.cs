@@ -7,8 +7,8 @@ public class ItemMeatRaw : IItem {
     public float Weight { get; set; }
 
     public string ItemName { get; } = "생고기";
-    public itemType ItemType { get; } = itemType.RAW_MEAT;
-    public eventType EventType { get; } = eventType.HUNTING;
+    public ItemType ItemType { get; } = ItemType.RAW_MEAT;
+    public EventType EventType { get; } = EventType.HUNTING;
 
     private readonly int maxValue = 2;
     
@@ -25,7 +25,7 @@ public class ItemMeatRaw : IItem {
     }
     
     public int ItemAcquire() {
-        int value = Random.Range(1, (this.maxValue + 1));
+        var value = Random.Range(1, (this.maxValue + 1));
 
         this.Count += value;
 
