@@ -4,10 +4,9 @@ using UnityEngine.UI;
 
 public class PlayerFire : MonoBehaviour {
     [SerializeField] private GameObject fireLoadingScreen;
-    [SerializeField] private GameObject fireResultScreen;
-    [Space(10f)]
     [SerializeField] private GameObject cookLoadingScreen;
-    [SerializeField] private GameObject cookResultScreen;
+    [Space(10f)]
+    [SerializeField] private GameObject fireResultScreen;
     [Space(10f)]
     [SerializeField] private Button addWoodButton;
     [SerializeField] private Button cookingButton;
@@ -22,10 +21,9 @@ public class PlayerFire : MonoBehaviour {
     
     private void Init() {
         this.fireLoadingScreen.SetActive(false);
-        this.fireResultScreen.SetActive(true);
-        
         this.cookLoadingScreen.SetActive(false);
-        this.cookResultScreen.SetActive(false);
+
+        this.fireResultScreen.SetActive(true);
         
         this.resultStringBuilder = new StringBuilder();
         
@@ -145,7 +143,7 @@ public class PlayerFire : MonoBehaviour {
             wood.ItemUse(woodRequire);
 
             // Time Update
-            GameInfo.OnTimeUpdateEvent(10);
+            GameInfo.OnFireTimeUpdateEvent(+10);
         }
         else {
             this.resultStringBuilder.Append("뗄감으로 사용할 나무가 부족하다.\n");
@@ -167,6 +165,7 @@ public class PlayerFire : MonoBehaviour {
         // Cooking
         if (rawMeat.Count >= 0) {
             // Loading Ani.
+            GameCanvasControl.OnCanvasOffEvent("Canvas Information");
             this.cookLoadingScreen.SetActive(true);
             
             // Result

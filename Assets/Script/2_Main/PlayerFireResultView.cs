@@ -43,12 +43,15 @@ public class PlayerFireResultView : MonoBehaviour {
         this.titleText.text = "조리 완료";
         this.contentText.text = value;
         
+        GamePanelControl.OnGamePanelOnEvent("Fire Result");
+        
         this.okButton.onClick.RemoveAllListeners();
         this.okButton.onClick.AddListener(CookingResultListener);
     }
 
     private void CookingResultListener() {
-        GamePanelControl.OnGamePanelOffEvent("Cooking Result");
+        GameCanvasControl.OnCanvasOnEvent("Canvas Information");
+        GamePanelControl.OnGamePanelOffEvent("Fire Result");
     }
     
     private void FireResultSuccessListener() {
