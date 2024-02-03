@@ -1,61 +1,62 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerInfoView : MonoBehaviour {
-    [SerializeField] private RawImage playerProfile;
+    [SerializeField] private RawImage playerPicture;
     [SerializeField] private TMP_Text playerName;
     [Space(10f)]
-    [SerializeField] private TMP_Text dayCount;
+    [SerializeField] private TMP_Text dayCounter;
     [Space(10f)]
-    [SerializeField] private TMP_Text statusEffectName;
-    [SerializeField] private Slider statusEffectGauge;
+    [SerializeField] private GameObject statusEffectIndicator;
     [Space(10f)] 
     [SerializeField] private Slider[] statusGauges;
+    
+    public delegate void PlayerStatusInfoHandler(Dictionary<StatusType, float> values);
+    public static PlayerStatusInfoHandler OnPlayerStatusInfoUpdateEvent;
 
-    public delegate void PlayerInfoUpdateHandler(string value);
-    public static PlayerInfoUpdateHandler OnDayCountUpdateEvent;
-    public static PlayerInfoUpdateHandler OnStatusEffectTextUpdateEvent;
-    
-    public delegate void PlayerInfoGaugeUpdateHandler(float value);
-    public static PlayerInfoGaugeUpdateHandler OnStatusEffectGaugeUpdateEvent;
-    public static PlayerInfoGaugeUpdateHandler OnStatusEffectGaugeInitEvent;
-    
-    public delegate void PlayerInfoGaugesUpdateHandler(Dictionary<StatusType, float> values);
-    public static PlayerInfoGaugesUpdateHandler OnStatusGaugesUpdateEvent;
+    public delegate void PlayerStatusEffectIndicatorHandler();
+    public static PlayerStatusEffectIndicatorHandler OnPlayerStatusEffectIndicatorOnEvent;
+    public static PlayerStatusEffectIndicatorHandler OnPlayerStatusEffectIndicatorOffEvent;
+    public static PlayerStatusEffectIndicatorHandler OnPlayerStatusEffectIndicatorUpdateEvent;
     
     
     private void Init() {
         // TODO: Player Profile, Player Name Set; JSON
+        OnPlayerStatusInfoUpdateEvent += StatusGaugesUpdate;
+
+        OnPlayerStatusEffectIndicatorOnEvent += StatusEffectIndicatorOn;
+        OnPlayerStatusEffectIndicatorOffEvent += StatusEffectIndicatorOff;
+        OnPlayerStatusEffectIndicatorUpdateEvent += StatusEffectIndicatorUpdate;
+
+        if (Player.Instance.CurrentStatusEffects.Count > 0) {
+            StatusEffectIndicatorOn();
+            
+            return;
+        }
         
-        OnDayCountUpdateEvent += DayCountUpdate;
-        OnStatusEffectGaugeInitEvent += StatusEffectGaugeInit;
-        OnStatusGaugesUpdateEvent += StatusGaugesUpdate;
-        
-        
-        OnStatusEffectTextUpdateEvent += StatusEffectTextUpdate;
-        OnStatusEffectGaugeUpdateEvent += StatusEffectGaugeUpdate;
+        StatusEffectIndicatorOff();
     }
 
-    private void Awake() {
+    private void Start() {
         Init();
     }
 
-    private void DayCountUpdate(string value) {
-        this.dayCount.text = $"{value}일 째 생존 중";
-    }
-    
-    private void StatusEffectTextUpdate(string value) {
-        this.statusEffectName.text = value;
+    private void StatusEffectIndicatorOn() {
+        StatusEffectIndicatorUpdate();
+        GamePanelControl.OnGamePanelOnEvent("Status Effect");
     }
 
-    private void StatusEffectGaugeInit(float value) {
-        this.statusEffectGauge.maxValue = value;
+    private void StatusEffectIndicatorUpdate() {
+        var currentStatusEffects = Player.Instance.CurrentStatusEffects;
+        
+        // TODO: Tooltip 제작
     }
     
-    private void StatusEffectGaugeUpdate(float value) {
-        this.statusEffectGauge.value = value;   
+    private void StatusEffectIndicatorOff() {
+        GamePanelControl.OnGamePanelOffEvent("Status Effect");
     }
 
     private void StatusGaugesUpdate(Dictionary<StatusType, float> values) {

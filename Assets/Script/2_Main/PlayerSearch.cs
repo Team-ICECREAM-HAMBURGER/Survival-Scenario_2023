@@ -8,10 +8,10 @@ public class PlayerSearch : MonoBehaviour {
     [SerializeField] private GameObject searchLoadingScreen;
     
     private readonly Dictionary<EventType, IPlayerSearchEvent> eventActions = new Dictionary<EventType, IPlayerSearchEvent>() {
-            { EventType.INJURED, new PlayerSearchEventInjured(0.2f) },
+            { EventType.INJURED, new PlayerSearchEventInjured(98f) },
             { EventType.IN_DANGER, new PlayerSearchEventInDanger(0.2f) },
             { EventType.HUNTING, new PlayerSearchEventHunting(1f) },
-            { EventType.FARMING, new PlayerSearchEventFarming(98f) }
+            { EventType.FARMING, new PlayerSearchEventFarming(0.2f) }
         };
 
     public delegate void SearchEventHandler();
@@ -29,7 +29,7 @@ public class PlayerSearch : MonoBehaviour {
     private void Searching() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Search");
         
-        GameInfo.OnTimeUpdateEvent(1);
+        GameInfoControl.OnTimeUpdateEvent(1);
         this.searchLoadingScreen.SetActive(true);
         
         // Player Status Update
