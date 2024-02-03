@@ -190,6 +190,7 @@ public class PlayerFire : MonoBehaviour {
         else {
             this.resultStringBuilder.Append("조리할 재료가 없다.\n");
             this.resultStringBuilder.Append("사냥 도구가 있다면 사냥을 통해 생고기를 얻을 수 있다.\n");
+            this.resultStringBuilder.Append("사냥 도구를 만들고 주변을 탐색해보자.\n");
             
             GameWarningView.OnWarningMessageEvent(warningTitle, this.resultStringBuilder.ToString());
         }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerStatusEffectInjured : IPlayerStatusEffect {
     public int DurationTerm { get; set; }
-    
     public string StatusEffectName { get; } = "부상";
     public StatusEffectType StatusEffectType { get; } = StatusEffectType.INJURED;
     
@@ -10,25 +9,24 @@ public class PlayerStatusEffectInjured : IPlayerStatusEffect {
     public void Event() {
         this.DurationTerm = Random.Range(3, 8) * 500;
         Player.Instance.StatusReduceMultiplier = 2f;
+        PlayerInfoView.OnPlayerStatusEffectInfoInitEvent(this);
         
-        PlayerInfoView.OnStatusEffectGaugeInitEvent(this.DurationTerm);
-        
-        if (Player.Instance.StatusEffectAdd(this.StatusEffectType, this.DurationTerm)) {
+        if (Player.Instance.StatusEffectAdd(this.StatusEffectType, this)) {
             GameInfo.OnTimeUpdateEvent += DurationTermUpdate;
         }
-        
-        PlayerInfoView.OnStatusEffectTextUpdateEvent(this.StatusEffectName);
-        PlayerInfoView.OnStatusEffectGaugeUpdateEvent(this.DurationTerm);
+
+        PlayerInfoView.OnPlayerStatusEffectInfoUpdateEvent(this);
     }
     
     private void DurationTermUpdate(int value) {
         if (this.DurationTerm > 0) {
             this.DurationTerm -= value;
-            PlayerInfoView.OnStatusEffectGaugeUpdateEvent(this.DurationTerm);
+            PlayerInfoView.OnPlayerStatusEffectInfoUpdateEvent(this);
             
             return;
         }
         
         Player.Instance.StatusEffectRemove(this.StatusEffectType);
+        PlayerInfoView.OnPlayerStatusEffectInfoOffEvent(this);
     }
 }
