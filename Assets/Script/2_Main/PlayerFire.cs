@@ -47,13 +47,13 @@ public class PlayerFire : MonoBehaviour {
     private void MakingFire() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
 
-        if (GameInfo.Instance.IsFireInstalled) {    // 이미 불이 피워져 있음.
+        if (GameInfoControl.Instance.IsFireInstalled) {    // 이미 불이 피워져 있음.
             GameCanvasControl.OnCanvasOnEvent("Canvas Information");
 
             return;
         }
 
-        GameInfo.OnTimeUpdateEvent(1);
+        GameInfoControl.OnTimeUpdateEvent(1);
         this.resultStringBuilder.Clear();
         
         // 불 피우는 중 애니메이션
@@ -84,7 +84,7 @@ public class PlayerFire : MonoBehaviour {
                            $"열량 {caloriesValue:+#; -#; 0}\n";
         
         // 날씨에 따른 확률 결정
-        if (GameInfo.Instance.CurrentWeather.WillCatchFire()) { // SUNNY = 40%; RAIN = 20%; SNOW = 20%;
+        if (GameInfoControl.Instance.CurrentWeather.WillCatchFire()) { // SUNNY = 40%; RAIN = 20%; SNOW = 20%;
             /*
              * 성공; 몇 텀?
              * 불 1회 300텀 ~ 400텀
@@ -103,13 +103,13 @@ public class PlayerFire : MonoBehaviour {
             this.resultStringBuilder.Append("\n");
             this.resultStringBuilder.Append(statusResult);  // - 스테이터스 소모량
 
-            GameInfo.Instance.IsFireInstalled = true;
+            GameInfoControl.Instance.IsFireInstalled = true;
             
             // 결과 보고; 성공 시 OK 버튼 -> Fire 캔버스
             PlayerFireResultView.OnFireResultSuccess(this.resultStringBuilder.ToString());
             
             // 모닥불 텀 업데이트
-            GameInfo.OnFireTimeUpdateEvent(value);
+            GameInfoControl.OnFireTimeUpdateEvent(value);
         }
         else {
             var fireResult = "- 결과\n" +
@@ -122,7 +122,7 @@ public class PlayerFire : MonoBehaviour {
             this.resultStringBuilder.Append("\n");
             this.resultStringBuilder.Append(statusResult);
             
-            GameInfo.Instance.IsFireInstalled = false;
+            GameInfoControl.Instance.IsFireInstalled = false;
             
             // 결과 보고; 실패 시 OK 버튼 -> Outside 캔버스
             PlayerFireResultView.OnFireResultFail(this.resultStringBuilder.ToString());
@@ -143,7 +143,7 @@ public class PlayerFire : MonoBehaviour {
             wood.ItemUse(woodRequire);
 
             // Time Update
-            GameInfo.OnFireTimeUpdateEvent(+10);
+            GameInfoControl.OnFireTimeUpdateEvent(+10);
         }
         else {
             this.resultStringBuilder.Append("뗄감으로 사용할 나무가 부족하다.\n");
@@ -185,7 +185,7 @@ public class PlayerFire : MonoBehaviour {
             PlayerFireResultView.OnCookingResult(this.resultStringBuilder.ToString());
             
             // Time Update
-            GameInfo.OnTimeUpdateEvent(5);
+            GameInfoControl.OnTimeUpdateEvent(5);
         }
         else {
             this.resultStringBuilder.Append("조리할 재료가 없다.\n");

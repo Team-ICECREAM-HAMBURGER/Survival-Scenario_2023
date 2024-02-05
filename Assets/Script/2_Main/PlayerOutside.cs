@@ -21,7 +21,7 @@ public class PlayerOutside : MonoBehaviour {
         this.warningMessageContent = new StringBuilder();
         
         // TODO: Background Change -> DayNight Dictionary
-        switch (GameInfo.Instance.CurrentDayNight) {
+        switch (GameInfoControl.Instance.CurrentDayNight) {
             case DayNightType.DAY:
                 GamePanelControl.OnGamePanelOffEvent("Background Night");
                 GamePanelControl.OnGamePanelOnEvent("Background Day");
@@ -58,7 +58,7 @@ public class PlayerOutside : MonoBehaviour {
 
         this.warningMessageContent.Clear();
         
-        if (Player.Instance.CurrentStatusEffect.ContainsKey(StatusEffectType.INJURED)) {
+        if (Player.Instance.StatusCheck(StatusEffectType.INJURED)) {
             this.warningMessageTitle = "부상을 입음";
             
             this.warningMessageContent.Append("부상을 입은 상태에서는 다른 지역으로 이동할 수 없다.\n");
@@ -111,7 +111,7 @@ public class PlayerOutside : MonoBehaviour {
 
         this.warningMessageContent.Clear();
         
-        if (GameInfo.Instance.CurrentDayNight == DayNightType.NIGHT && Player.Instance.Inventory[ItemType.TORCH].Count < 1) {
+        if (GameInfoControl.Instance.CurrentDayNight == DayNightType.NIGHT && Player.Instance.Inventory[ItemType.TORCH].Count < 1) {
             this.warningMessageTitle = "횃불이 없음";
             
             this.warningMessageContent.Append("빛이 없는 야간에 탐색을 나서기 위해서는 횃불이 필요하다.\n");
@@ -169,7 +169,7 @@ public class PlayerOutside : MonoBehaviour {
         
         this.warningMessageContent.Clear();
         
-        if (GameInfo.Instance.IsFireInstalled) {
+        if (GameInfoControl.Instance.IsFireInstalled) {
             return true;
         }
         

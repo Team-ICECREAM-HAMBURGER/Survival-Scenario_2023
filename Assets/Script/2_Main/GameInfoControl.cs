@@ -13,8 +13,8 @@ public enum WeatherType {
 }
 
 
-public class GameInfo : MonoBehaviour {
-    public static GameInfo Instance;
+public class GameInfoControl : MonoBehaviour {
+    public static GameInfoControl Instance;
     
     public bool IsFireInstalled { get; set; }
     public bool IsShelterInstalled { get; set; }

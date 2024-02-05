@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public enum StatusType {
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour {
     public static Player Instance;
     
     public float StatusReduceMultiplier { get; set; }
-    public Dictionary<StatusEffectType, IPlayerStatusEffect> CurrentStatusEffect { get; private set; }
+    public List<IPlayerStatusEffect> CurrentStatusEffects { get; private set; }
 
     public readonly Dictionary<StatusEffectType, IPlayerStatusEffect> StatusEffect = new Dictionary<StatusEffectType, IPlayerStatusEffect>() {
             { StatusEffectType.HEALING, new PlayerStatusEffectHealing() },
@@ -91,8 +92,7 @@ public class Player : MonoBehaviour {
         
         // TODO: Json Save File Load
         this.StatusReduceMultiplier = 1f;
-        this.CurrentStatusEffect = new Dictionary<StatusEffectType, IPlayerStatusEffect>();
-        GamePanelControl.OnGamePanelOffEvent("Status Effect Gauge");
+        this.CurrentStatusEffects = new List<IPlayerStatusEffect>();
     }
 
     private void Awake() {
@@ -133,17 +133,16 @@ public class Player : MonoBehaviour {
             (statusEntry.Key == StatusType.CALORIES && statusEntry.Value > calories));
     }
 
-    public bool StatusEffectAdd(StatusEffectType statusEffectType, IPlayerStatusEffect statusEffect) {
-        if (this.CurrentStatusEffect.TryAdd(statusEffectType, statusEffect)) {
-            return true;
-        }
-        
-        this.CurrentStatusEffect[statusEffectType] = statusEffect;
-        
-        return false;
+    public bool StatusCheck(StatusEffectType type) {
+        return this.CurrentStatusEffects.Any(statusEffect => 
+            statusEffect.StatusEffectType == type);
+    }
+
+    public void StatusEffectAdd(IPlayerStatusEffect statusEffect) {
+        this.CurrentStatusEffects.Add(statusEffect);
     }
     
-    public void StatusEffectRemove(StatusEffectType statusEffectType) {
-        this.CurrentStatusEffect.Remove(statusEffectType);
+    public void StatusEffectRemove(IPlayerStatusEffect statusEffect) {
+        this.CurrentStatusEffects.Remove(statusEffect);
     }
 }
