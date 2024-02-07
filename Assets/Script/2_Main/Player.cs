@@ -133,11 +133,15 @@ public class Player : MonoBehaviour {
             (statusEntry.Key == StatusType.CALORIES && statusEntry.Value > calories));
     }
 
-    public bool StatusCheck(StatusEffectType type) {
+    public bool StatusCheck(StatusType type, float value) {
+        return this.Status[type] > value;
+    }
+    
+    public bool StatusEffectCheck(StatusEffectType type) {
         return this.CurrentStatusEffects.Any(statusEffect => 
             statusEffect.StatusEffectType == type);
     }
-
+    
     public void StatusEffectAdd(IPlayerStatusEffect statusEffect) {
         this.CurrentStatusEffects.Add(statusEffect);
     }

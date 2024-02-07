@@ -22,15 +22,18 @@ public class PlayerSearchEventInjured : MonoBehaviour, IPlayerSearchEvent {
 
     private string Injured() {
         var effect = Player.Instance.StatusEffect[StatusEffectType.INJURED];
-
-        effect.Event();
+        var day = ((PlayerStatusEffectInjured)effect).DurationTerm / 500;
+        var term = 500 * day;
+        
         this.resultText.Clear();
+        
+        effect.Event();
         
         // UI Text; Result
         this.resultText.Append("- 결과\n");
         this.resultText.Append("탐색 도중 위험에 빠졌다.\n");
         this.resultText.Append("가까스로 돌아오기는 했지만 부상을 입고 말았다.\n");
-        this.resultText.Append($"부상 회복까지 {effect.DurationTerm / 500}일({effect.DurationTerm}텀)이 걸린다.\n");
+        this.resultText.Append($"부상 회복까지 {day}일({term}텀)이 걸린다.\n");
         this.resultText.Append("부상 회복이 먼저다. 의약품을 만들고 휴식을 취하자.\n");
         
         this.resultText.Append("\n");

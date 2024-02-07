@@ -58,7 +58,7 @@ public class PlayerOutside : MonoBehaviour {
 
         this.warningMessageContent.Clear();
         
-        if (Player.Instance.StatusCheck(StatusEffectType.INJURED)) {
+        if (Player.Instance.StatusEffectCheck(StatusEffectType.INJURED)) {
             this.warningMessageTitle = "부상을 입음";
             
             this.warningMessageContent.Append("부상을 입은 상태에서는 다른 지역으로 이동할 수 없다.\n");

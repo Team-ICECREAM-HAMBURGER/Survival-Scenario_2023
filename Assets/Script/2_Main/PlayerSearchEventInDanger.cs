@@ -21,14 +21,16 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
     }
 
     private string InDanger() {
-        var effect = Player.Instance.StatusEffect[StatusEffectType.EXHAUSTION];
         var huntingTool = Player.Instance.Inventory[ItemType.HUNTING_TOOL];
-        var value = 1;
-        
-        effect.Event();
+
         this.resultText.Clear();
         
         if (huntingTool.Count > 0) {
+            var effect = Player.Instance.StatusEffect[StatusEffectType.EXHAUSTION];
+            var value = 1;
+        
+            effect.Event();
+            
             huntingTool.ItemUse(value);
 
             // UI Text; Result
@@ -58,14 +60,17 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
             this.resultText.Append($"{huntingTool.ItemName}: {value}개\n");
         }
         else {
-            effect = Player.Instance.StatusEffect[StatusEffectType.INJURED];
+            var effect = Player.Instance.StatusEffect[StatusEffectType.INJURED];
+            var day = ((PlayerStatusEffectInjured)effect).DurationTerm / 500;
+            var term = 500 * day;
+            
             effect.Event();
 
             // UI Text; Result
             this.resultText.Append("- 결과\n");
             this.resultText.Append("탐색 도중 맹수를 만나 가까스로 탈출했다.\n");
             this.resultText.Append("마땅한 도구가 없어 큰 부상을 입고 말았다.\n");
-            this.resultText.Append($"부상 회복까지 {effect.DurationTerm / 500}일({effect.DurationTerm}텀)이 걸린다.\n");
+            this.resultText.Append($"부상 회복까지 {day}일({term}텀)이 걸린다.\n");
             this.resultText.Append("부상 회복이 먼저다. 의약품을 만들고 휴식을 취하자.\n");
             
             this.resultText.Append("\n");
