@@ -1,27 +1,17 @@
-using UnityEngine;
-
 public class PlayerStatusCalories : IPlayerStatus {
     public float MaxValue { get; } = 100f;
     public float LimitValue { get; } = 15f;
+    public float CurrentValue { get; private set; }
     
-    public string StatusName { get; } = "체력";
-    public StatusType StatusType { get; } = StatusType.STAMINA;
-    
-    private float statusCurrentValue;
+    public string StatusName { get; } = "칼로리";
+    public StatusType StatusType { get; } = StatusType.CALORIES;
     
     
     public void StatusUpdate(float value) {
-        this.statusCurrentValue += Mathf.Clamp(value * Player.Instance.StatusReduceMultiplier, 0, 100);
-        PlayerInfoView.OnPlayerStatusInfoUpdateEvent(this.StatusType, this.statusCurrentValue);
-        
-        StatusCheck();
+        this.CurrentValue += value;
     }
 
-    public void StatusCheck() {
-        if (this.statusCurrentValue > this.LimitValue) {
-            return;
-        }
-
-        Player.Instance.StatusEffectAdd(StatusEffectType.EXHAUSTION);
+    public bool StatusLimitCheck(float value) {
+        return this.CurrentValue >= this.LimitValue;
     }
 }
