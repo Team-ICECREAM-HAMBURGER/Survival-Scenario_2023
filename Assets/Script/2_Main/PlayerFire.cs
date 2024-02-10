@@ -3,16 +3,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerFire : MonoBehaviour {
+    [Header("Loading Screen")]
     [SerializeField] private GameObject fireLoadingScreen;
     [SerializeField] private GameObject cookLoadingScreen;
+    
     [Space(10f)]
+    
+    [Header("Behaviour Result")]
     [SerializeField] private GameObject fireResultScreen;
+    private StringBuilder resultStringBuilder;
+
     [Space(10f)]
+    
+    [Header("UI Buttons")]
     [SerializeField] private Button addWoodButton;
     [SerializeField] private Button cookingButton;
     [SerializeField] private Button returnToMenuButton;
-    
-    private StringBuilder resultStringBuilder;
     
     public delegate void MakingFireEventHandler();
     public static MakingFireEventHandler OnMakingFireEvent;
@@ -22,7 +28,6 @@ public class PlayerFire : MonoBehaviour {
     private void Init() {
         this.fireLoadingScreen.SetActive(false);
         this.cookLoadingScreen.SetActive(false);
-
         this.fireResultScreen.SetActive(true);
         
         this.resultStringBuilder = new StringBuilder();
@@ -60,8 +65,8 @@ public class PlayerFire : MonoBehaviour {
         this.fireLoadingScreen.SetActive(true);
         
         // 아이템 소모; 성공 여부와 상관없이 무조건 아이템은 소모함; 점화 도구 1개, 불쏘시개 2개, 나무 3개 이상.
-        var fireTool = Player.Instance.Inventory[ItemType.FIRE_TOOL]; 
-        var kindling = Player.Instance.Inventory[ItemType.KINDLING]; 
+        var fireTool = Player.Instance.Inventory[ItemType.FIRE_TOOL];
+        var kindling = Player.Instance.Inventory[ItemType.KINDLING];
         var wood = Player.Instance.Inventory[ItemType.WOOD];
         
         var itemResult = "- 소모된 아이템\n" +
@@ -70,18 +75,21 @@ public class PlayerFire : MonoBehaviour {
                          $"{wood.ItemName} {wood.ItemUse(3):-#; 0}\n";
         
         // 스테이터스 소모; 성공 여부와 상관없이 무조건 스테이터스를 소모함; 체력 -20, 체온 -5, 수분 -10, 열량 -15
-        float staminaValue = -20;
-        float bodyHeatValue = -5;
-        float hydrationValue = -10;
-        float caloriesValue = -15;
-        
-        Player.Instance.StatusUpdate(staminaValue, bodyHeatValue, hydrationValue, caloriesValue);
+        var staminaValue = -20;
+        var bodyHeatValue = -5;
+        var hydrationValue = -10;
+        var caloriesValue = -15;
         
         var statusResult = "- 스테이터스 소모량\n" +
                            $"체력 {staminaValue:+#; -#; 0}\n" +
                            $"체온 {bodyHeatValue:+#; -#; 0}\n" +
                            $"수분 {hydrationValue:+#; -#; 0}\n" +
                            $"열량 {caloriesValue:+#; -#; 0}\n";
+        
+        Player.Instance.StatusDictionary[StatusType.STAMINA].StatusUpdate(staminaValue);
+        Player.Instance.StatusDictionary[StatusType.BODY_HEAT].StatusUpdate(bodyHeatValue);
+        Player.Instance.StatusDictionary[StatusType.HYDRATION].StatusUpdate(hydrationValue);
+        Player.Instance.StatusDictionary[StatusType.CALORIES].StatusUpdate(caloriesValue);
         
         // 날씨에 따른 확률 결정
         if (GameInfoControl.Instance.CurrentWeather.WillCatchFire()) { // SUNNY = 40%; RAIN = 20%; SNOW = 20%;

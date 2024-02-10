@@ -28,9 +28,9 @@ public class PlayerInfoView : MonoBehaviour {
     
     [Space(10f)]
     
-    [SerializeField] private Slider[] statusGauges;
+    [SerializeField] private List<Slider> statusGauges;
     
-    public delegate void PlayerStatusInfoHandler(Dictionary<StatusType, float> values);
+    public delegate void PlayerStatusInfoHandler(StatusType statusType, float value);
     public static PlayerStatusInfoHandler OnPlayerStatusInfoUpdateEvent;
 
     public delegate void PlayerStatusEffectIndicatorHandler();
@@ -88,7 +88,7 @@ public class PlayerInfoView : MonoBehaviour {
                     this.resultText.Append($"- {effect.StatusEffectName} ({day}일 {term}텀 남음)\n");
                 }
                 else {
-                    this.resultText.Append($"- {effect.StatusEffectName} ({}이 {}% 이하)");
+                    //this.resultText.Append($"- {effect.StatusEffectName} ({}이 {}% 이하)");
                 }
             }
         }
@@ -109,12 +109,7 @@ public class PlayerInfoView : MonoBehaviour {
         GamePanelControl.OnGamePanelOffEvent("Status Effect");
     }
 
-    private void StatusGaugesUpdate(Dictionary<StatusType, float> values) {
-        var i = 0;
-        
-        foreach (var variable in values.Values) {
-            this.statusGauges[i].value = variable;
-            i += 1;
-        }
+    private void StatusGaugesUpdate(StatusType statusType, float value) {
+        this.statusGauges[statusType].value = value;
     }
 }

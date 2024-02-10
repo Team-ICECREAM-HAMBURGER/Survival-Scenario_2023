@@ -26,7 +26,7 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
         this.resultText.Clear();
         
         if (huntingTool.Count > 0) {
-            var effect = Player.Instance.StatusEffect[StatusEffectType.EXHAUSTION];
+            var effect = Player.Instance.StatusEffectDictionary[StatusEffectType.EXHAUSTION];
             var value = 1;
         
             effect.Event();
@@ -43,10 +43,10 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
             
             // UI Text; Status
             this.resultText.Append("- 스테이터스 잔여량\n");
-            this.resultText.Append($"체력: {Player.Instance.Status[StatusType.STAMINA]}%\n");
-            this.resultText.Append($"체온: {Player.Instance.Status[StatusType.BODY_HEAT]}%\n");
-            this.resultText.Append($"수분: {Player.Instance.Status[StatusType.HYDRATION]}%\n");
-            this.resultText.Append($"열량: {Player.Instance.Status[StatusType.CALORIES]}%\n");
+            this.resultText.Append($"체력: {Player.Instance.StatusDictionary[StatusType.STAMINA]}%\n");
+            this.resultText.Append($"체온: {Player.Instance.StatusDictionary[StatusType.BODY_HEAT]}%\n");
+            this.resultText.Append($"수분: {Player.Instance.StatusDictionary[StatusType.HYDRATION]}%\n");
+            this.resultText.Append($"열량: {Player.Instance.StatusDictionary[StatusType.CALORIES]}%\n");
 
             this.resultText.Append("\n");
             
@@ -60,7 +60,7 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
             this.resultText.Append($"{huntingTool.ItemName}: {value}개\n");
         }
         else {
-            var effect = Player.Instance.StatusEffect[StatusEffectType.INJURED];
+            var effect = Player.Instance.StatusEffectDictionary[StatusEffectType.INJURED];
             var day = ((PlayerStatusEffectInjured)effect).DurationTerm / 500;
             var term = 500 * day;
             
@@ -77,10 +77,10 @@ public class PlayerSearchEventInDanger : MonoBehaviour, IPlayerSearchEvent {
             
             // UI Text; Status
             this.resultText.Append("- 스테이터스 잔여량\n");
-            this.resultText.Append($"체력: {Player.Instance.Status[StatusType.STAMINA]}%\n");
-            this.resultText.Append($"체온: {Player.Instance.Status[StatusType.BODY_HEAT]}%\n");
-            this.resultText.Append($"수분: {Player.Instance.Status[StatusType.HYDRATION]}%\n");
-            this.resultText.Append($"열량: {Player.Instance.Status[StatusType.CALORIES]}%\n");
+            this.resultText.Append($"체력: {Player.Instance.StatusDictionary[StatusType.STAMINA]}%\n");
+            this.resultText.Append($"체온: {Player.Instance.StatusDictionary[StatusType.BODY_HEAT]}%\n");
+            this.resultText.Append($"수분: {Player.Instance.StatusDictionary[StatusType.HYDRATION]}%\n");
+            this.resultText.Append($"열량: {Player.Instance.StatusDictionary[StatusType.CALORIES]}%\n");
 
             this.resultText.Append("\n");
 

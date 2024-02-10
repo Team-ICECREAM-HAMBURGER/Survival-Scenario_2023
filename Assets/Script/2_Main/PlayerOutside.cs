@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerOutside : MonoBehaviour {
+    [Header("UI Buttons")]
     [SerializeField] private Button moveButton;
     [SerializeField] private Button searchButton;
     [SerializeField] private Button fireButton;
     [SerializeField] private Button rainGutterButton;
-
     private string warningMessageTitle;
     private StringBuilder warningMessageContent;
 

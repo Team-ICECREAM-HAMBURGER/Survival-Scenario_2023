@@ -5,8 +5,8 @@ public class PlayerStatusEffectExhaustion : IPlayerStatusEffect {
     
 
     public void Event() {
-        var stamina = Player.Instance.Status[StatusType.STAMINA];
+        var stamina = Player.Instance.StatusDictionary[StatusType.STAMINA];
         
-        Player.Instance.StatusUpdate(-stamina);
+        Player.OnPlayerStatusUpdateEvent(-stamina);
     }
 }

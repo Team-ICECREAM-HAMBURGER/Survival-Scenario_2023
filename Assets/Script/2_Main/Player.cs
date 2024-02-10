@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public enum StatusType {
@@ -45,23 +44,24 @@ public class Player : MonoBehaviour {
     public static Player Instance;
     
     public float StatusReduceMultiplier { get; set; }
-    public List<IPlayerStatusEffect> CurrentStatusEffects { get; private set; }
-
-    public readonly Dictionary<StatusEffectType, IPlayerStatusEffect> StatusEffect = new Dictionary<StatusEffectType, IPlayerStatusEffect>() {
-            { StatusEffectType.HEALING, new PlayerStatusEffectHealing() },
+    
+    public List<IPlayerStatusEffect> StatusEffect { get; private set; }
+    public List<IPlayerStatus> Status { get; private set; }
+    public List<IItem> Inventory { get; private set; }
+    
+    private readonly Dictionary<StatusEffectType, IPlayerStatusEffect> statusEffectDictionary = new Dictionary<StatusEffectType, IPlayerStatusEffect>() {
             { StatusEffectType.INJURED, new PlayerStatusEffectInjured() },
-            { StatusEffectType.ADRENALINE, new PlayerStatusEffectAdrenaline() },
             { StatusEffectType.EXHAUSTION, new PlayerStatusEffectExhaustion() },
             { StatusEffectType.DEHYDRATION, new PlayerStatusEffectExhaustion() },
             { StatusEffectType.HYPOTHERMIA, new PlayerStatusEffectHypothermia() }
         };
-    public readonly Dictionary<StatusType, float> Status = new Dictionary<StatusType, float>() {
-        { StatusType.STAMINA, 100f },
-        { StatusType.BODY_HEAT, 100f },
-        { StatusType.HYDRATION, 100f },
-        { StatusType.CALORIES, 100f }
+    private readonly Dictionary<StatusType, IPlayerStatus> statusDictionary = new Dictionary<StatusType, IPlayerStatus>() {
+        { StatusType.STAMINA, new PlayerStatusStamina() },
+        { StatusType.BODY_HEAT, new PlayerStatusBodyHeat() },
+        { StatusType.HYDRATION, new PlayerStatusHydration() },
+        { StatusType.CALORIES, new PlayerStatusCalories() }
     };
-    public readonly Dictionary<ItemType, IItem> Inventory = new Dictionary<ItemType, IItem>() {
+    private readonly Dictionary<ItemType, IItem> inventoryDictionary = new Dictionary<ItemType, IItem>() {
             { ItemType.HERBS, new ItemHerbs() },
             { ItemType.ROPE, new ItemRope() },
             { ItemType.CAN, new ItemCan() },
@@ -90,63 +90,45 @@ public class Player : MonoBehaviour {
         
         Instance = this;
         
-        // TODO: Json Save File Load
+        // TODO: Save & Load
         this.StatusReduceMultiplier = 1f;
-        this.CurrentStatusEffects = new List<IPlayerStatusEffect>();
+        this.StatusEffect = new List<IPlayerStatusEffect>();
+        this.Status = new List<IPlayerStatus>();
+        this.Inventory = new List<IItem>();
     }
 
     private void Awake() {
         Init();
     }
     
-    public void StatusUpdate(float value) {
-        for (var i = 0; i < this.Status.Count; i++) {
-            this.Status[(StatusType)i] = Mathf.Clamp(this.Status[(StatusType)i] + value * this.StatusReduceMultiplier, 0, 100);
-        }
-        
-        PlayerInfoView.OnPlayerStatusInfoUpdateEvent(this.Status);
-    }
-
-    public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
-        float[] values = { stamina, bodyHeat, hydration, calories };
-        
-        for (var i = 0; i < this.Status.Count; i++) {
-            this.Status[(StatusType)i] = Mathf.Clamp(this.Status[(StatusType)i] + values[i] * this.StatusReduceMultiplier, 0, 100);
-        }
-        
-        PlayerInfoView.OnPlayerStatusInfoUpdateEvent(this.Status);
-    }
-
-    public bool StatusCheck(float value) {
-        return this.Status.All(statusEntry =>
-            (statusEntry.Key == StatusType.STAMINA && statusEntry.Value >= value) ||
-            (statusEntry.Key == StatusType.BODY_HEAT && statusEntry.Value > value) ||
-            (statusEntry.Key == StatusType.HYDRATION && statusEntry.Value > value) ||
-            (statusEntry.Key == StatusType.CALORIES && statusEntry.Value > value));
+    public bool StatusEffectCheck(StatusEffectType type) {  // type 상태 이상 효과가 적용되어 있는가?
+        return this.StatusEffect.Any(statusEffect => statusEffect.StatusEffectType == type);
     }
     
+    public void StatusEffectAdd(StatusEffectType type) {    // type 상태 이상 효과를 추가
+        this.StatusEffect.Add(this.statusEffectDictionary[type]);
+    }
+    
+    public void StatusEffectRemove(StatusEffectType type) { // type 상태 이상 효과를 제거
+        this.StatusEffect.Remove(this.statusEffectDictionary[type]);
+    }
+
+    public bool StatusCheck(StatusType type, float value) { // type 상태의 수치가 value 이상인가?
+        return this.Status.Any(status => status.StatusType == type && status.CurrentValue >= value);
+    }
+
+    public bool StatusCheck(float value) {   // 모든 상태의 수치가 value 이상인가?
+        return this.Status.All(status => status.CurrentValue >= value);
+    }
+
     public bool StatusCheck(float stamina, float bodyHeat, float hydration, float calories) {
-        return this.Status.All(statusEntry =>
-            (statusEntry.Key == StatusType.STAMINA && statusEntry.Value >= stamina) ||
-            (statusEntry.Key == StatusType.BODY_HEAT && statusEntry.Value > bodyHeat) ||
-            (statusEntry.Key == StatusType.HYDRATION && statusEntry.Value > hydration) ||
-            (statusEntry.Key == StatusType.CALORIES && statusEntry.Value > calories));
+        return this.Status.All(status => (status.StatusType == StatusType.STAMINA && status.CurrentValue >= stamina) ||
+                                         (status.StatusType == StatusType.BODY_HEAT && status.CurrentValue > bodyHeat) ||
+                                         (status.StatusType == StatusType.HYDRATION && status.CurrentValue > hydration) ||
+                                         (status.StatusType == StatusType.CALORIES && status.CurrentValue > calories));
     }
 
-    public bool StatusCheck(StatusType type, float value) {
-        return this.Status[type] > value;
-    }
-    
-    public bool StatusEffectCheck(StatusEffectType type) {
-        return this.CurrentStatusEffects.Any(statusEffect => 
-            statusEffect.StatusEffectType == type);
-    }
-    
-    public void StatusEffectAdd(IPlayerStatusEffect statusEffect) {
-        this.CurrentStatusEffects.Add(statusEffect);
-    }
-    
-    public void StatusEffectRemove(IPlayerStatusEffect statusEffect) {
-        this.CurrentStatusEffects.Remove(statusEffect);
+    public void StatusUpdate(StatusType type, float value) {    // type 상태의 수치를 value만큼 변경
+        
     }
 }
