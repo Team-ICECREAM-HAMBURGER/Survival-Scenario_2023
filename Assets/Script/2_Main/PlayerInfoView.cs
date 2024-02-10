@@ -34,8 +34,8 @@ public class PlayerInfoView : MonoBehaviour {
     public static PlayerStatusInfoHandler OnPlayerStatusInfoUpdateEvent;
 
     public delegate void PlayerStatusEffectIndicatorHandler();
-    public static PlayerStatusEffectIndicatorHandler OnPlayerStatusEffectIndicatorOnEvent;
-    public static PlayerStatusEffectIndicatorHandler OnPlayerStatusEffectIndicatorOffEvent;
+    public static PlayerStatusEffectIndicatorHandler OnPlayerStatusEffectIndicatorActiveEvent;
+    public static PlayerStatusEffectIndicatorHandler OnPlayerStatusEffectIndicatorDeActiveEvent;
     public static PlayerStatusEffectIndicatorHandler OnPlayerStatusEffectIndicatorUpdateEvent;
     
     
@@ -43,8 +43,8 @@ public class PlayerInfoView : MonoBehaviour {
         // TODO: Player Profile, Player Name Set/Load; JSON
         OnPlayerStatusInfoUpdateEvent += StatusGaugesUpdate;
 
-        OnPlayerStatusEffectIndicatorOnEvent += StatusEffectIndicatorOn;
-        OnPlayerStatusEffectIndicatorOffEvent += StatusEffectIndicatorOff;
+        OnPlayerStatusEffectIndicatorActiveEvent += StatusEffectIndicatorActive;
+        OnPlayerStatusEffectIndicatorDeActiveEvent += StatusEffectIndicatorDeActive;
         OnPlayerStatusEffectIndicatorUpdateEvent += StatusEffectIndicatorUpdate;
         
         this.statusEffectButton.onClick.AddListener(TooltipControl);
@@ -57,12 +57,12 @@ public class PlayerInfoView : MonoBehaviour {
         
         // TODO: Player.Init() -> PlayerInfoView.Init() ; delegate Event Call
         if (Player.Instance.CurrentStatusEffects.Count > 0) {
-            StatusEffectIndicatorOn();
+            StatusEffectIndicatorActive();
             
             return;
         }
         
-        StatusEffectIndicatorOff();
+        StatusEffectIndicatorDeActive();
     }
 
     private void Start() {
@@ -94,7 +94,7 @@ public class PlayerInfoView : MonoBehaviour {
         }
     }
     
-    private void StatusEffectIndicatorOn() {
+    private void StatusEffectIndicatorActive() {
         StatusEffectIndicatorUpdate();
         GamePanelControl.OnGamePanelOnEvent("Status Effect");
     }
@@ -105,7 +105,7 @@ public class PlayerInfoView : MonoBehaviour {
         // TODO: Tooltip 제작
     }
     
-    private void StatusEffectIndicatorOff() {
+    private void StatusEffectIndicatorDeActive() {
         GamePanelControl.OnGamePanelOffEvent("Status Effect");
     }
 

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public enum StatusType {
     STAMINA,
@@ -10,10 +9,12 @@ public enum StatusType {
 }
 
 public enum StatusEffectType {
-    INJURED,
-    HYPOTHERMIA,
-    DEHYDRATION,
-    EXHAUSTION
+    NO_SHELTER,     // 휴식처가 없음
+    NO_FIRE,        // 불이 없음
+    INJURED,        // 부상을 입음
+    DEHYDRATION,    // 탈수
+    EXHAUSTION,     // 탈진
+    HYPOTHERMIA     // 저체온증
 }
 
 public enum ItemType {
@@ -39,7 +40,7 @@ public enum ItemType {
 }
 
 [Serializable]
-public class PlayerInfo {
+public class InfoData {
     public string name;
 
     public Dictionary<ItemType, IItem> inventory;
@@ -48,9 +49,8 @@ public class PlayerInfo {
 }
 
 
-public class Player : MonoBehaviour {
-    public static Player Instance;
-    public PlayerInfo playerInfo;
+public class Player : Singleton<Player> {
+    public InfoData infoData;
 
     private readonly Dictionary<ItemType, IItem> itemDictionary = new Dictionary<ItemType, IItem> {
         { ItemType.EMPTY_BOTTLE, new ItemBottleEmpty() },
@@ -88,15 +88,9 @@ public class Player : MonoBehaviour {
     
     
     private void Init() {
-        if (Instance != null) {
-            return;
-        }
-        
-        Instance = this;
-
         // TODO: Json Load/Save
         if (!GameSaveLoadControl.Instance.SaveFileCheck()) {    // 새로 시작
-            this.playerInfo = new PlayerInfo {
+            this.infoData = new InfoData {
                 name = String.Empty,
                 inventory = new Dictionary<ItemType, IItem>(),
                 status = new Dictionary<StatusType, IPlayerStatus> {
@@ -109,7 +103,7 @@ public class Player : MonoBehaviour {
             };
         }
         else {  // 파일 로드
-            this.playerInfo = GameSaveLoadControl.Instance.LoadSaveFile<PlayerInfo>();
+            this.infoData = GameSaveLoadControl.Instance.LoadSaveFile<InfoData>();
         }
     }
 
@@ -118,7 +112,7 @@ public class Player : MonoBehaviour {
     }
 
     public bool InventoryCheck(ItemType type) {
-        return this.playerInfo.inventory.ContainsKey(type);
+        return this.infoData.inventory.ContainsKey(type);
     }
 
     public void InventoryAdd(ItemType type) {
@@ -126,7 +120,7 @@ public class Player : MonoBehaviour {
             return;
         }
         
-        this.playerInfo.inventory.Add(type, this.itemDictionary[type]);
+        this.infoData.inventory.Add(type, this.itemDictionary[type]);
     }
 
     public void InventoryRemove(ItemType type) {
@@ -134,11 +128,11 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        this.playerInfo.inventory.Remove(type);
+        this.infoData.inventory.Remove(type);
     }
     
     public bool StatusEffectCheck(StatusEffectType type) {  // type 상태 이상 효과가 적용되어 있는가?
-        return this.playerInfo.statusEffect.ContainsKey(type);
+        return this.infoData.statusEffect.ContainsKey(type);
     }
     
     public void StatusEffectAdd(StatusEffectType type) {    // type 상태 이상 효과를 추가
@@ -146,34 +140,34 @@ public class Player : MonoBehaviour {
             return;
         }
         
-        this.playerInfo.statusEffect.Add(type, this.statusEffectDictionary[type]);
+        this.infoData.statusEffect.Add(type, this.statusEffectDictionary[type]);
     }
     
     public void StatusEffectRemove(StatusEffectType type) { // type 상태 이상 효과를 제거
         if (StatusEffectCheck(type)) {
-            this.playerInfo.statusEffect.Remove(type);
+            this.infoData.statusEffect.Remove(type);
         }
     }
 
     public bool StatusCheck(StatusType type, float value) { // type 상태의 수치가 value 이상인가?
-        return this.playerInfo.status[type].CurrentValue >= value;
+        return this.infoData.status[type].CurrentValue >= value;
     }
 
     public bool StatusCheck(float value) {  // 모든 상태의 수치가 value 이상인가?
-        return this.playerInfo.status[StatusType.STAMINA].CurrentValue >= value &&
-               this.playerInfo.status[StatusType.BODY_HEAT].CurrentValue >= value &&
-               this.playerInfo.status[StatusType.HYDRATION].CurrentValue >= value &&
-               this.playerInfo.status[StatusType.CALORIES].CurrentValue >= value;
+        return this.infoData.status[StatusType.STAMINA].CurrentValue >= value &&
+               this.infoData.status[StatusType.BODY_HEAT].CurrentValue >= value &&
+               this.infoData.status[StatusType.HYDRATION].CurrentValue >= value &&
+               this.infoData.status[StatusType.CALORIES].CurrentValue >= value;
     }
 
     public bool StatusCheck(float stamina, float bodyHeat, float hydration, float calories) {   // 각 상태의 수치가 기준치를 넘는가?
-        return this.playerInfo.status[StatusType.STAMINA].CurrentValue >= stamina &&
-               this.playerInfo.status[StatusType.BODY_HEAT].CurrentValue >= bodyHeat &&
-               this.playerInfo.status[StatusType.HYDRATION].CurrentValue >= hydration &&
-               this.playerInfo.status[StatusType.CALORIES].CurrentValue >= calories;
+        return this.infoData.status[StatusType.STAMINA].CurrentValue >= stamina &&
+               this.infoData.status[StatusType.BODY_HEAT].CurrentValue >= bodyHeat &&
+               this.infoData.status[StatusType.HYDRATION].CurrentValue >= hydration &&
+               this.infoData.status[StatusType.CALORIES].CurrentValue >= calories;
     }
 
     public void StatusUpdate(StatusType type, float value) {    // type 상태의 수치를 value만큼 변경
-        this.playerInfo.status[type].StatusUpdate(value);
+        this.infoData.status[type].StatusIncrease(value);
     }
 }
