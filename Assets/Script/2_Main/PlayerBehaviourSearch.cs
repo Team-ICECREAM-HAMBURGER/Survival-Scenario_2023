@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PlayerSearch : MonoBehaviour {
+public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private GameObject searchLoadingScreen;
     
     private readonly Dictionary<EventType, IPlayerSearchEvent> eventActions = new Dictionary<EventType, IPlayerSearchEvent>() {
@@ -33,7 +31,7 @@ public class PlayerSearch : MonoBehaviour {
         this.searchLoadingScreen.SetActive(true);
         
         // Player Status Update
-        Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
+        //Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
         
         // Weight random select
         float randomPivot = Random.Range(0, 100);
@@ -49,5 +47,13 @@ public class PlayerSearch : MonoBehaviour {
             
             weight += variable.Weight;
         }
+    }
+
+    public void Behaviour() {
+        throw new System.NotImplementedException();
+    }
+
+    public bool CanBehaviour() {
+        throw new System.NotImplementedException();
     }
 }

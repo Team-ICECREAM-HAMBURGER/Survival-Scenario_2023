@@ -2,7 +2,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerFire : MonoBehaviour {
+public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [Header("Loading Screen")]
     [SerializeField] private GameObject fireLoadingScreen;
     [SerializeField] private GameObject cookLoadingScreen;
@@ -32,11 +32,11 @@ public class PlayerFire : MonoBehaviour {
         
         this.resultStringBuilder = new StringBuilder();
         
-        this.addWoodButton.onClick.AddListener(AddWood);
-        this.cookingButton.onClick.AddListener(Cooking);
+        //this.addWoodButton.onClick.AddListener(AddWood);
+        //this.cookingButton.onClick.AddListener(Cooking);
         this.returnToMenuButton.onClick.AddListener(ReturnToMenu);
         
-        OnMakingFireEvent += MakingFire;
+        //OnMakingFireEvent += MakingFire;
         OnResetFireEvent += ResetFire;
     }
     
@@ -49,6 +49,7 @@ public class PlayerFire : MonoBehaviour {
         this.fireResultScreen.SetActive(true);
     }
     
+    /*
     private void MakingFire() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Fire");
 
@@ -93,13 +94,6 @@ public class PlayerFire : MonoBehaviour {
         
         // 날씨에 따른 확률 결정
         if (GameInfoControl.Instance.CurrentWeather.WillCatchFire()) { // SUNNY = 40%; RAIN = 20%; SNOW = 20%;
-            /*
-             * 성공; 몇 텀?
-             * 불 1회 300텀 ~ 400텀
-             * 1일 500텀, 0.5일 250텀
-             * 뗄감 1회 추가 -> 나무 5개 소모 -> 불 10텀 추가
-            */
-
             var value = Random.Range(300, 401);
             var fireResult = "- 결과\n" +
                              $"모닥불은 최대 {value}텀까지 유지된다.\n" +
@@ -136,7 +130,9 @@ public class PlayerFire : MonoBehaviour {
             PlayerFireResultView.OnFireResultFail(this.resultStringBuilder.ToString());
         }
     }
+    */
     
+    /*
     private void AddWood() {
         var wood = Player.Instance.Inventory[ItemType.WOOD];
         var woodRequire = 5;
@@ -157,10 +153,12 @@ public class PlayerFire : MonoBehaviour {
             this.resultStringBuilder.Append("뗄감으로 사용할 나무가 부족하다.\n");
             this.resultStringBuilder.Append("주변을 탐색하여 쓸만한 나무를 모아보자.\n");
             
-            GameWarningView.OnWarningMessageEvent(warningTitle, this.resultStringBuilder.ToString());
+            GameMessageView.OnGameWarningMessageViewEvent(warningTitle, this.resultStringBuilder.ToString());
         }
     }
+    */
 
+    /*
     private void Cooking() {
         var rawMeat = Player.Instance.Inventory[ItemType.RAW_MEAT];
         var cookedMeat = Player.Instance.Inventory[ItemType.COOKED_MEAT];
@@ -200,12 +198,21 @@ public class PlayerFire : MonoBehaviour {
             this.resultStringBuilder.Append("사냥 도구가 있다면 사냥을 통해 생고기를 얻을 수 있다.\n");
             this.resultStringBuilder.Append("사냥 도구를 만들고 주변을 탐색해보자.\n");
             
-            GameWarningView.OnWarningMessageEvent(warningTitle, this.resultStringBuilder.ToString());
+            GameMessageView.OnGameWarningMessageViewEvent(warningTitle, this.resultStringBuilder.ToString());
         }
     }
+    */
 
     private void ReturnToMenu() {
         GameCanvasControl.OnCanvasChangeEvent("Canvas Outside");
         GameCanvasControl.OnCanvasOnEvent("Canvas Information");
+    }
+
+    public void Behaviour() {
+        throw new System.NotImplementedException();
+    }
+
+    public bool CanBehaviour() {
+        throw new System.NotImplementedException();
     }
 }

@@ -12,6 +12,10 @@ public class PlayerStatusBodyHeat : IPlayerStatus {
         this.CurrentValue += value;
     }
 
+    public void StatusDecrease(float value) {
+        this.CurrentValue -= value * this.StatusDecreaseMultiplier;
+    }
+    
     public bool StatusLimitCheck(float value) {
         return this.CurrentValue >= this.LimitValue;
     }

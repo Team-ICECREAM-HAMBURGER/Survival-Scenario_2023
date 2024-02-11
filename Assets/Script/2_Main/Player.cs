@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic;using UnityEngine;
 
 public enum StatusType {
     STAMINA,
@@ -38,6 +38,7 @@ public enum ItemType {
     CLOTH,
     STONE,
 }
+
 
 [Serializable]
 public class InfoData {
@@ -89,20 +90,20 @@ public class Player : Singleton<Player> {
     
     private void Init() {
         // TODO: Json Load/Save
-        if (!GameSaveLoadControl.Instance.SaveFileCheck()) {    // 새로 시작
+        if (!GameSaveLoadControl.Instance.SaveFileCheck()) {    // 새로운 시작
             this.infoData = new InfoData {
                 name = String.Empty,
                 inventory = new Dictionary<ItemType, IItem>(),
                 status = new Dictionary<StatusType, IPlayerStatus> {
-                    { StatusType.STAMINA, new PlayerStatusStamina() },
-                    { StatusType.CALORIES, new PlayerStatusCalories() },
-                    { StatusType.BODY_HEAT, new PlayerStatusBodyHeat() },
-                    { StatusType.HYDRATION, new PlayerStatusHydration() }
+                    { StatusType.STAMINA, this.statusDictionary[StatusType.STAMINA] },
+                    { StatusType.BODY_HEAT, this.statusDictionary[StatusType.BODY_HEAT] },
+                    { StatusType.CALORIES, this.statusDictionary[StatusType.CALORIES] },
+                    { StatusType.HYDRATION, this.statusDictionary[StatusType.HYDRATION] }
                 },
                 statusEffect = new Dictionary<StatusEffectType, IPlayerStatusEffect>()
             };
         }
-        else {  // 파일 로드
+        else {  // 저장 데이터 불러오기
             this.infoData = GameSaveLoadControl.Instance.LoadSaveFile<InfoData>();
         }
     }
@@ -111,11 +112,11 @@ public class Player : Singleton<Player> {
         Init();
     }
 
-    public bool InventoryCheck(ItemType type) {
+    public bool InventoryCheck(ItemType type) { // 인벤토리에 type 아이템이 존재하는가?
         return this.infoData.inventory.ContainsKey(type);
     }
 
-    public void InventoryAdd(ItemType type) {
+    public void InventoryAdd(ItemType type) {   // 인벤토리에 type 아이템을 추가
         if (InventoryCheck(type)) {
             return;
         }
@@ -123,7 +124,7 @@ public class Player : Singleton<Player> {
         this.infoData.inventory.Add(type, this.itemDictionary[type]);
     }
 
-    public void InventoryRemove(ItemType type) {
+    public void InventoryRemove(ItemType type) {    // 인벤토리에서 type 아이템 제거
         if (!InventoryCheck(type)) {
             return;
         }
@@ -167,7 +168,23 @@ public class Player : Singleton<Player> {
                this.infoData.status[StatusType.CALORIES].CurrentValue >= calories;
     }
 
-    public void StatusUpdate(StatusType type, float value) {    // type 상태의 수치를 value만큼 변경
+    public void StatusIncrease(StatusType type, float value) {    // type 상태의 수치를 value만큼 증가
         this.infoData.status[type].StatusIncrease(value);
+    }
+
+    public void StatusDecrease(StatusType type, float value) {  // type 상태의 수치를 value만큼 감소
+        this.infoData.status[type].StatusDecrease(value);
+    }
+
+    public void StatusIncrease(float value) {   // 모든 상태의 수치를 value만큼 증가
+        foreach (var VARIABLE in this.infoData.status.Values) {
+            VARIABLE.StatusIncrease(value);
+        }
+    }
+
+    public void StatusDecrease(float value) {   // 모든 상태의 수치를 value만큼 감소
+        foreach (var VARIABLE in this.infoData.status.Values) {
+            VARIABLE.StatusDecrease(value);
+        }
     }
 }

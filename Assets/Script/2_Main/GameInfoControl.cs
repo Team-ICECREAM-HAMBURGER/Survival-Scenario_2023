@@ -93,6 +93,6 @@ public class GameInfoControl : MonoBehaviour {
         }
 
         this.IsFireInstalled = false;
-        PlayerFire.OnResetFireEvent();
+        PlayerBehaviourFire.OnResetFireEvent();
     }
 }
