@@ -7,7 +7,6 @@ public class PlayerStatusEffectDehydration : IPlayerStatusEffect {
     
     public void Event() {
         Player.Instance.infoData.status[StatusType.HYDRATION].StatusDecreaseMultiplier = 2f;
-        
         Player.Instance.StatusEffectAdd(this.StatusEffectType);
         PlayerInfoView.OnPlayerStatusEffectIndicatorActiveEvent();
     }

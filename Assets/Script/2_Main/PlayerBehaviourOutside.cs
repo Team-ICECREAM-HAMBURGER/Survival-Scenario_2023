@@ -11,7 +11,7 @@ public class PlayerBehaviourOutside : MonoBehaviour, IPlayerBehaviour {
     
     private string warningMessageTitle;
     private StringBuilder warningMessageContent;
-
+    
     
     private void Init() {
         //this.moveButton.onClick.AddListener(Move);

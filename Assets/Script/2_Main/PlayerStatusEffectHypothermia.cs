@@ -7,7 +7,6 @@ public class PlayerStatusEffectHypothermia : IPlayerStatusEffect {
     
     public void Event() {
         Player.Instance.infoData.status[StatusType.BODY_HEAT].StatusDecreaseMultiplier = 2f;
-        
         Player.Instance.StatusEffectAdd(this.StatusEffectType);
         PlayerInfoView.OnPlayerStatusEffectIndicatorActiveEvent();
     }

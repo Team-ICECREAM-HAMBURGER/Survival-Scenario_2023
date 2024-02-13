@@ -7,7 +7,6 @@ public class PlayerStatusEffectExhaustion : IPlayerStatusEffect {
     
     public void Event() {
         Player.Instance.infoData.status[StatusType.STAMINA].StatusDecreaseMultiplier = 2f;
-        
         Player.Instance.StatusEffectAdd(this.StatusEffectType);
         PlayerInfoView.OnPlayerStatusEffectIndicatorActiveEvent();
     }
