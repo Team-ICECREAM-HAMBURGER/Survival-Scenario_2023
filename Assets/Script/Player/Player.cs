@@ -2,23 +2,42 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : GameContolSingleton<Player> {
-    [Header("Game Dictionary Struct")]
-    public GameDictionaryItem itemDictionary;
-    public GameDictionaryStatus statusDictionary;
-    public GameDictionaryStatusEffect statusEffectDictionary;
-
+public class Player : GameContolSingleton<Player> { // Model
     private GameInformation.PlayerInformation information;
-    private Dictionary<GameTypeItem, IItem> inventory;
+
+    [Header("Status")]
+    public GameDictionaryStatus statusDictionary;
     private Dictionary<GameTypeStatus, IPlayerStatus> status;
+    
+    [Space(10f)]
+    
+    [Header("Status Effect")]
+    public GameDictionaryStatusEffect statusEffectDictionary;
     private Dictionary<GameTypeStatusEffect, IPlayerStatusEffect> statusEffect;
 
+    [Space(10f)]
+    
+    [Header("Inventory")]
+    public GameDictionaryItem itemDictionary;
+    private Dictionary<GameTypeItem, IItem> inventory;
+
+    [Space(10f)]
+    
+    [Header("Behaviour")] 
+    public GameDictionaryBehaviour behaviourDictionary;
+    
+    [Space(10f)]
+    
+    [Header("Behaviour Event")] 
+    public GameDictionaryBehaviourEvent behaviourEventDictionary;
+    
     
     private void Init() {
         this.information = GameInformation.Instance.playerInformation;
-        this.inventory = this.information.inventory;
+        
         this.status = this.information.status;
         this.statusEffect = this.information.statusEffect;
+        this.inventory = this.information.inventory;
     }
 
     private void Awake() {
@@ -44,6 +63,19 @@ public class Player : GameContolSingleton<Player> {
                 this.status[GameTypeStatus.BODY_HEAT].CurrentValue >= bodyHeat &&
                 this.status[GameTypeStatus.CALORIES].CurrentValue >= hydration &&
                 this.status[GameTypeStatus.HYDRATION].CurrentValue >= calories);
+    }
+
+    // 각 상태의 수치를 value만큼 업데이트
+    public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
+        this.status[GameTypeStatus.STAMINA].CurrentValue += stamina;
+        this.status[GameTypeStatus.BODY_HEAT].CurrentValue += bodyHeat;
+        this.status[GameTypeStatus.HYDRATION].CurrentValue += hydration;
+        this.status[GameTypeStatus.CALORIES].CurrentValue += calories;
+    }
+
+    // type 상태의 수치를 value만큼 업데이트
+    public void StatusUpdate(GameTypeStatus type, float value) {
+        this.status[type].CurrentValue += value;
     }
     
     // type 상태 이상 효과가 적용되어 있는가?

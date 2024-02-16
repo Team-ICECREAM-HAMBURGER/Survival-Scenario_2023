@@ -1,7 +1,7 @@
 public interface IPlayerStatus {
     public float MaxValue { get; }
     public float LimitValue { get; }
-    public float CurrentValue { get; }
+    public float CurrentValue { get; set; }
     
     public string StatusName { get; }
     public GameTypeStatus GameTypeStatus { get; }
