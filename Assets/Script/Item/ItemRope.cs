@@ -7,8 +7,8 @@ public class ItemRope : IItem {
     public string ItemName { get; } = "노끈";
     public bool IsAcquirable { get; } = true;
     public GameTypeItem GameTypeItem { get; } = GameTypeItem.ROPE;
-    public EventType EventType { get; } = EventType.FARMING;
-    
+    public GameTypeBehaviourEvent EventType { get; }
+
     private readonly int maxValue = 3;
     
 

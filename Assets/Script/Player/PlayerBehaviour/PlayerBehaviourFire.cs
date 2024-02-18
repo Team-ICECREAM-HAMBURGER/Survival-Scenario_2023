@@ -204,12 +204,18 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     */
 
     private void ReturnToMenu() {
-        GameControlCanvas.OnCanvasChangeEvent("Canvas Outside");
-        GameControlCanvas.OnCanvasOnEvent("Canvas Information");
     }
 
     public void Behaviour() {
         throw new System.NotImplementedException();
+    }
+
+    public bool BehaviourCheck() {
+        throw new System.NotImplementedException();
+    }
+
+    public void UpdateView() {
+        // Canvas Change
     }
 
     public bool CanBehaviour() {

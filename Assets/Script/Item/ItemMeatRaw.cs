@@ -7,8 +7,9 @@ public class ItemMeatRaw : IItem {
     public float Weight { get; set; }
 
     public string ItemName { get; } = "생고기";
-    public GameTypeItem GameTypeItem { get; } = GameTypeItem.RAW_MEAT;
-    public EventType EventType { get; } = EventType.HUNTING;
+    public GameTypeItem GameTypeItem { get; }
+    public GameTypeBehaviourEvent EventType { get; }
+
 
     private readonly int maxValue = 2;
     

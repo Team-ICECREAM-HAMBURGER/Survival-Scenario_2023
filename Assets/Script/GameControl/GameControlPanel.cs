@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameControlPanel : MonoBehaviour {
     [SerializeField] private List<GameObject> panelList;
 
-    public delegate void GamePanelUpdateHandler(string value);
+    public delegate void GamePanelUpdateHandler(GameObject obj);
     public static GamePanelUpdateHandler OnGamePanelChangeEvent;
     public static GamePanelUpdateHandler OnGamePanelOnEvent;
     public static GamePanelUpdateHandler OnGamePanelOffEvent;
@@ -25,26 +25,26 @@ public class GameControlPanel : MonoBehaviour {
         Init();
     }
 
-    private void GamePanelChange(string objectName) {
-        foreach (var variable in this.panelList) {
-            if (variable.name == objectName) {
-                variable.SetActive(true);
-                continue;
-            }
-            
-            variable.SetActive(false);
-        }
+    private void GamePanelChange(GameObject obj) {
+        // foreach (var variable in this.panelList) {
+        //     if (variable.name == objectName) {
+        //         variable.SetActive(true);
+        //         continue;
+        //     }
+        //     
+        //     variable.SetActive(false);
+        // }
     }
 
-    private void GamePanelOn(string objectName) {
-        foreach (var variable in this.panelList.Where(variable => variable.name == objectName)) {
-            variable.SetActive(true);
-        }
+    private void GamePanelOn(GameObject obj) {
+        // foreach (var variable in this.panelList.Where(variable => variable.name == objectName)) {
+        //     variable.SetActive(true);
+        // }
     }
     
-    private void GamePanelOff(string objectName) {
-        foreach (var variable in this.panelList.Where(variable => variable.name == objectName)) {
-            variable.SetActive(false);
-        }
+    private void GamePanelOff(GameObject obj) {
+        // foreach (var variable in this.panelList.Where(variable => variable.name == objectName)) {
+        //     variable.SetActive(false);
+        // }
     }
 }

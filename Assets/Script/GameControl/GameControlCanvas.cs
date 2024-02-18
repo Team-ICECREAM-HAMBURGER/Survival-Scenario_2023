@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameControlCanvas : MonoBehaviour {
     [SerializeField] private List<Canvas> canvasList;
     
-    public delegate void CanvasUpdateHandler(string value);
+    public delegate void CanvasUpdateHandler(Canvas obj);
     public static CanvasUpdateHandler OnCanvasChangeEvent;
     public static CanvasUpdateHandler OnCanvasOnEvent;
     public static CanvasUpdateHandler OnCanvasOffEvent;
@@ -27,21 +27,21 @@ public class GameControlCanvas : MonoBehaviour {
         Init();
     }
     
-    private void CanvasChange(string canvasName) {
-        foreach (var variable in this.canvasList) {
-            variable.enabled = false || variable.name == canvasName;
-        }    
+    private void CanvasChange(Canvas obj) {
+        // foreach (var variable in this.canvasList) {
+        //     variable.enabled = false || variable.name == canvasName;
+        // }    
     }
 
-    private void CanvasOn(string canvasName) {
-        foreach (var variable in this.canvasList.Where(variable => variable.name == canvasName)) {
-            variable.enabled = true;
-        }
+    private void CanvasOn(Canvas obj) {
+        // foreach (var variable in this.canvasList.Where(variable => variable.name == canvasName)) {
+        //     variable.enabled = true;
+        // }
     }
 
-    private void CanvasOff(string canvasName) {
-        foreach (var variable in this.canvasList.Where(variable => variable.name == canvasName)) {
-            variable.enabled = false;
-        }
+    private void CanvasOff(Canvas obj) {
+        // foreach (var variable in this.canvasList.Where(variable => variable.name == canvasName)) {
+        //     variable.enabled = false;
+        // }
     }
 }

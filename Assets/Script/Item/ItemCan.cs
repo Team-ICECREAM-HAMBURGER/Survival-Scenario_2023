@@ -8,8 +8,9 @@ public class ItemCan : IItem {
     public string ItemName { get; } = "깡통";
     public bool IsAcquirable { get; } = true;
     public GameTypeItem GameTypeItem { get; } = GameTypeItem.CAN;
-    public EventType EventType { get; } = EventType.FARMING;
-    
+    public GameTypeBehaviourEvent EventType { get; }
+
+
     private readonly int maxValue = 2;
     
     

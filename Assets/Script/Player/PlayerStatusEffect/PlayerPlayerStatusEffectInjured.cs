@@ -7,13 +7,13 @@ public class PlayerPlayerStatusEffectInjured : IPlayerStatusEffect {
     
     
     public void Event() {
-        GameInfoControl.OnTimeUpdateEvent += DurationTermUpdate;
-
-        this.DurationTerm = Random.Range(3, 8) * 500;
-        Player.Instance.information.status[GameTypeStatus.STAMINA].StatusDecreaseMultiplier = 2f;
-        
-        Player.Instance.StatusEffectAdd(this.GameTypeStatusEffect);
-        GameInformation.OnPlayerStatusEffectIndicatorActiveEvent();
+        // GameInfoControl.OnTimeUpdateEvent += DurationTermUpdate;
+        //
+        // this.DurationTerm = Random.Range(3, 8) * 500;
+        // Player.Instance.information.status[GameTypeStatus.STAMINA].StatusDecreaseMultiplier = 2f;
+        //
+        // Player.Instance.StatusEffectAdd(this.GameTypeStatusEffect);
+        // GameInformation.OnPlayerStatusEffectIndicatorActiveEvent();
     }
     
     private void DurationTermUpdate(int value) {
@@ -23,7 +23,7 @@ public class PlayerPlayerStatusEffectInjured : IPlayerStatusEffect {
             return;
         }
         
-        Player.Instance.StatusEffectRemove(this.GameTypeStatusEffect);
-        GameInformation.OnPlayerStatusEffectIndicatorUpdateEvent();
+        // Player.Instance.StatusEffectRemove(this.GameTypeStatusEffect);
+        // GameInformation.OnPlayerStatusEffectIndicatorUpdateEvent();
     }
 }

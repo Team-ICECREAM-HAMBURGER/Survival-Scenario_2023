@@ -154,12 +154,18 @@ public class PlayerBehaviourOutside : MonoBehaviour, IPlayerBehaviour {
     */
     
     private void RainGutter() {
-        GameControlCanvas.OnCanvasChangeEvent("Canvas Rain Gutter");
-        GameControlCanvas.OnCanvasOnEvent("Canvas Information");
     }
 
     public void Behaviour() {
         throw new System.NotImplementedException();
+    }
+
+    public bool BehaviourCheck() {
+        throw new System.NotImplementedException();
+    }
+
+    public void UpdateView() {
+        // Canvas Change
     }
 
     public bool CanBehaviour() {

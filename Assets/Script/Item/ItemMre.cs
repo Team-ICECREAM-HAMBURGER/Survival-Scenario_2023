@@ -7,8 +7,8 @@ public class ItemMre : IItem {
     public string ItemName { get; } = "비상식량";
     public bool IsAcquirable { get; } = false;
     public GameTypeItem GameTypeItem { get; } = GameTypeItem.MRE;
-    public EventType EventType { get; } = EventType.NONE;
-    
+    public GameTypeBehaviourEvent EventType { get; }
+
 
     public ItemMre(int count = 0, float weight = 0f) {
         this.Count = count;

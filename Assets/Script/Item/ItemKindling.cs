@@ -7,7 +7,8 @@ public class ItemKindling : IItem {
     public string ItemName { get; } = "불쏘시개";
     public bool IsAcquirable { get; } = false;
     public GameTypeItem GameTypeItem { get; } = GameTypeItem.KINDLING;
-    public EventType EventType { get; } = EventType.NONE;
+    public GameTypeBehaviourEvent EventType { get; }
+
 
     private int durability = 1;
     

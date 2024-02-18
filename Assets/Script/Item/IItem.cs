@@ -4,7 +4,7 @@ public interface IItem {
     
     public string ItemName { get; }
     public GameTypeItem GameTypeItem { get; }
-    public EventType EventType { get; }
+    public GameTypeBehaviourEvent EventType { get; }
     
     
     public int ItemUse(int value);

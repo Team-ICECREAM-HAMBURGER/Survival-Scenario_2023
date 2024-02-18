@@ -5,9 +5,10 @@ public class ItemHandAxe : IItem {
     public float Weight { get; set; }
 
     public string ItemName { get; } = "손도끼";
+    public GameTypeItem GameTypeItem { get; }
+    public GameTypeBehaviourEvent EventType { get; }
     public bool IsAcquirable { get; } = false;
-    public GameTypeItem GameTypeItem { get; } = GameTypeItem.HAND_AXE;
-    public EventType EventType { get; } = EventType.NONE;
+
 
     private int durability = 5;
     

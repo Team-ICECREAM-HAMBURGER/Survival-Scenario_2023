@@ -7,8 +7,8 @@ public class ItemMedicine : IItem {
     public string ItemName { get; } = "약품";
     public bool IsAcquirable { get; } = false;
     public GameTypeItem GameTypeItem { get; } = GameTypeItem.MEDICINE;
-    public EventType EventType { get; } = EventType.NONE;
-    
+    public GameTypeBehaviourEvent EventType { get; }
+
     public ItemMedicine(int count = 0, float weight = 0f) {
         this.Count = count;
         this.Weight = weight;

@@ -1,7 +1,9 @@
 public class PlayerStatusCalories : IPlayerStatus {
     public float MaxValue { get; } = 100f;
     public float LimitValue { get; } = 15f;
-    public float CurrentValue { get; private set; }
+
+    public float CurrentValue { get; set; }
+    // public float CurrentValue { get; private set; }
     
     public string StatusName { get; } = "칼로리";
     public GameTypeStatus GameTypeStatus { get; } = GameTypeStatus.CALORIES;

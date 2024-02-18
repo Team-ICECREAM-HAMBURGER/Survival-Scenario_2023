@@ -1,5 +1,5 @@
-namespace Script.Player {
-    public class PlayerBehaviourWater {
+using UnityEngine;
+
+public class PlayerBehaviourWater : MonoBehaviour {
         
-    }
 }

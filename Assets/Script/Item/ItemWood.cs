@@ -7,7 +7,7 @@ public class ItemWood : IItem {
     public string ItemName { get; } = "나무";
     public bool IsAcquirable { get; } = true;
     public GameTypeItem GameTypeItem { get; } = GameTypeItem.WOOD;
-    public EventType EventType { get; } = EventType.FARMING;
+    public GameTypeBehaviourEvent EventType { get; }
 
     private readonly int maxValue = 3;
     

@@ -6,9 +6,10 @@ public class ItemMeatCooked : IItem {
     public float Weight { get; set; }
 
     public string ItemName { get; } = "익힌 고기";
+    public GameTypeItem GameTypeItem { get; }
+    public GameTypeBehaviourEvent EventType { get; }
     public bool IsAcquirable { get; } = true;
-    public GameTypeItem GameTypeItem { get; } = GameTypeItem.COOKED_MEAT;
-    public EventType EventType { get; } = EventType.HUNTING;
+
 
     private readonly int maxValue = 3;
     

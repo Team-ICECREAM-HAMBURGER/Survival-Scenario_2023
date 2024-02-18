@@ -6,7 +6,7 @@ public class PlayerInventory : Player {
             return;
         }
         
-        base.information.inventory.Add(gameType, base.itemDictionary[gameType]);
+        // base.information.inventory.Add(gameType, base.itemDictionary[gameType]);
     }
 
     public void InventoryRemove(GameTypeItem gameType) {    // 인벤토리에서 type 아이템 제거
@@ -14,6 +14,6 @@ public class PlayerInventory : Player {
             return;
         }
 
-        this.information.inventory.Remove(gameType);
+        // this.information.inventory.Remove(gameType);
     }
 }

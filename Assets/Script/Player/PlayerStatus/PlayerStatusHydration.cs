@@ -1,7 +1,9 @@
 public class PlayerStatusHydration : IPlayerStatus {
     public float MaxValue { get; } = 100f;
     public float LimitValue { get; } = 20f;
-    public float CurrentValue { get; private set; }
+
+    public float CurrentValue { get; set; }
+    // public float CurrentValue { get; private set; }
     
     public string StatusName { get; } = "수분";
     public GameTypeStatus GameTypeStatus { get; } = GameTypeStatus.HYDRATION;

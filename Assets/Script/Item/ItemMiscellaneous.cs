@@ -7,7 +7,7 @@ public class ItemMiscellaneous : IItem {
     public string ItemName { get; } = "잡동사니";
     public bool IsAcquirable { get; } = true;
     public GameTypeItem GameTypeItem { get; } = GameTypeItem.MISCELLANEOUS;
-    public EventType EventType { get; } = EventType.FARMING;
+    public GameTypeBehaviourEvent EventType { get; }
 
     private readonly int maxValue = 5;
     

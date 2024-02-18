@@ -14,13 +14,13 @@ public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
 
     public bool CanBehaviour() {
         if (Player.Instance.StatusEffectCheck(GameTypeStatusEffect.INJURED)) {
-            PlayerBehaviourMovePresenter.OnMessageInjuredEvent();
+            // PlayerBehaviourMovePresenter.OnMessageInjuredEvent();
             
             return false;
         }
         
         if (!Player.Instance.StatusCheck(this.requireStatusValue)) {
-            PlayerBehaviourMovePresenter.OnMessageLowStatusEvent();
+            // PlayerBehaviourMovePresenter.OnMessageLowStatusEvent();
             
             return false;
         }
@@ -29,6 +29,14 @@ public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
     }
     
     public void Behaviour() {
-        Player.Instance.StatusDecrease(25f);
+        // Player.Instance.StatusDecrease(25f);
+    }
+
+    public bool BehaviourCheck() {
+        throw new System.NotImplementedException();
+    }
+
+    public void UpdateView() {
+        // Canvas Change
     }
 }

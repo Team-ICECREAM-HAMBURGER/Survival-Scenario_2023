@@ -5,9 +5,10 @@ public class ItemFireTool : IItem {
     public float Weight { get; set; }
 
     public string ItemName { get; } = "점화 도구";
+    public GameTypeItem GameTypeItem { get; }
+    public GameTypeBehaviourEvent EventType { get; }
     public bool IsAcquirable { get; } = false;
-    public GameTypeItem GameTypeItem { get; } = GameTypeItem.FIRE_TOOL;
-    public EventType EventType { get; } = EventType.NONE;
+
 
     private int durability = 1;
     

@@ -5,8 +5,9 @@ public class ItemHuntingTool : IItem {
     public float Weight { get; set; }
 
     public string ItemName { get; } = "사냥 도구";
-    public GameTypeItem GameTypeItem { get; } = GameTypeItem.HUNTING_TOOL;
-    public EventType EventType { get; } = EventType.NONE;
+    public GameTypeItem GameTypeItem { get; }
+    public GameTypeBehaviourEvent EventType { get; }
+
 
     private int durability = 0;
     

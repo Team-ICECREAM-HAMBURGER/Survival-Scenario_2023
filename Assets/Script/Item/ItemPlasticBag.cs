@@ -5,9 +5,9 @@ public class ItemPlasticBag : IItem {
     public float Weight { get; set; }
 
     public string ItemName { get; } = "비닐";
+    public GameTypeItem GameTypeItem { get; }
+    public GameTypeBehaviourEvent EventType { get; }
     public bool IsAcquirable { get; } = true;
-    public GameTypeItem GameTypeItem { get; } = GameTypeItem.PLASTIC_BAG;
-    public EventType EventType { get; } = EventType.FARMING;
 
     private readonly int maxValue = 2;
 

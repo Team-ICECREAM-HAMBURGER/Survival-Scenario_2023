@@ -7,7 +7,7 @@ public class ItemTorch : IItem {
     public string ItemName { get; } = "횃불";
     public bool IsAcquirable { get; } = false;
     public GameTypeItem GameTypeItem { get; } = GameTypeItem.TORCH;
-    public EventType EventType { get; } = EventType.NONE;   // TODO: eventType.CRAFT
+    public GameTypeBehaviourEvent EventType { get; }
 
     private int durability = 1;
     

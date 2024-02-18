@@ -1,7 +1,9 @@
 public class PlayerStatusStamina : IPlayerStatus {
     public float MaxValue { get; } = 100f;
     public float LimitValue { get; } = 0f;
-    public float CurrentValue { get; private set; }
+
+    public float CurrentValue { get; set; }
+    // public float CurrentValue { get; private set; }
     
     public string StatusName { get; } = "체력";
     public GameTypeStatus GameTypeStatus { get; } = GameTypeStatus.STAMINA;
