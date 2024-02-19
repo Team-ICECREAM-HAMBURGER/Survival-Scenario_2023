@@ -3,12 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerBehaviourOutside : MonoBehaviour, IPlayerBehaviour {
-    [Header("UI Buttons")]
-    [SerializeField] private Button moveButton;
-    [SerializeField] private Button searchButton;
-    [SerializeField] private Button fireButton;
-    [SerializeField] private Button rainGutterButton;
-    
     private string warningMessageTitle;
     private StringBuilder warningMessageContent;
     
@@ -17,7 +11,7 @@ public class PlayerBehaviourOutside : MonoBehaviour, IPlayerBehaviour {
         //this.moveButton.onClick.AddListener(Move);
         //this.searchButton.onClick.AddListener(Search);
         //this.fireButton.onClick.AddListener(Fire);
-        this.rainGutterButton.onClick.AddListener(RainGutter);
+        //this.rainGutterButton.onClick.AddListener(RainGutter);
         
         this.warningMessageContent = new StringBuilder();
         

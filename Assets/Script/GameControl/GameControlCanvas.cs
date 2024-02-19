@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GameControlCanvas : MonoBehaviour {
-    [SerializeField] private List<Canvas> canvasList;
-    
     public delegate void CanvasUpdateHandler(Canvas obj);
     public static CanvasUpdateHandler OnCanvasChangeEvent;
     public static CanvasUpdateHandler OnCanvasOnEvent;
@@ -12,12 +9,6 @@ public class GameControlCanvas : MonoBehaviour {
     
 
     private void Init() {
-        this.canvasList = new List<Canvas>();
-        
-        foreach (var variable in GameObject.FindGameObjectsWithTag("Canvas")) {
-            this.canvasList.Add(variable.GetComponent<Canvas>());
-        }
-
         OnCanvasChangeEvent += CanvasChange;
         OnCanvasOnEvent += CanvasOn;
         OnCanvasOffEvent += CanvasOff;

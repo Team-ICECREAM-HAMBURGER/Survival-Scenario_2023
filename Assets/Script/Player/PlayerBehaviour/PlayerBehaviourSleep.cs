@@ -1,5 +1,5 @@
-namespace Script.Player {
-    public class PlayerBehaviourSleep {
+using UnityEngine;
+
+public class PlayerBehaviourSleep : MonoBehaviour {
         
-    }
 }

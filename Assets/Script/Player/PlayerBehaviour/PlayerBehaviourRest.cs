@@ -1,5 +1,5 @@
-namespace Script.Player {
-    public class PlayerBehaviourRest {
+using UnityEngine;
+
+public class PlayerBehaviourRest : MonoBehaviour {
         
-    }
 }

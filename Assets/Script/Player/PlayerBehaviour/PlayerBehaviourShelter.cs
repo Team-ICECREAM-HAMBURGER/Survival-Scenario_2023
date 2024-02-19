@@ -1,5 +1,5 @@
-namespace Script.Player {
-    public class PlayerBehaviourShelter {
+using UnityEngine;
+
+public class PlayerBehaviourShelter : MonoBehaviour {
         
-    }
 }

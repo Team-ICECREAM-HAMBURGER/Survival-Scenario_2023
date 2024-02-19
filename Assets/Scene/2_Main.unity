@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311924, g: 0.38073963, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2326,7 +2326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 265843800}
+  m_AnchoredPosition: {x: -399.9992, y: 273208400}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -17144,7 +17144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 265843800}
+  m_AnchoredPosition: {x: -399.9992, y: 273208400}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -21533,10 +21533,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1234693839}
   - component: {fileID: 1234693841}
+  - component: {fileID: 1234693846}
   - component: {fileID: 1234693845}
   - component: {fileID: 1234693844}
   - component: {fileID: 1234693843}
   - component: {fileID: 1234693842}
+  - component: {fileID: 1234693848}
+  - component: {fileID: 1234693847}
+  - component: {fileID: 1234693849}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -21613,9 +21617,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebce65318014469e83f28ab08240a508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasSearch: {fileID: 0}
-  panelSearchResult: {fileID: 0}
-  panelSearchLoading: {fileID: 0}
+  canvasSearch: {fileID: 1152889176}
+  canvasOutside: {fileID: 1589722235}
+  canvasInformation: {fileID: 2025123718}
+  searchResult: {fileID: 455032948}
+  searchResultTitle: {fileID: 1850115037}
+  searchResultContent: {fileID: 1301594471}
+  searchLoading: {fileID: 59030600}
 --- !u!114 &1234693845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21626,6 +21634,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93cfa354a749e7843bd43668338b5576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1234693846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234693838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76aab4745bbc4854e81616f9f81bc453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1234693847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234693838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2819c7c411d4336ba0ae39e6c1bd2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1234693848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234693838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ded2558204f4a0898acb64f92d48171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1234693849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234693838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d21e7498ca4c5a9bad7848645e8341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1243670412
@@ -27054,7 +27110,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589722232}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 963194227}
@@ -33355,8 +33411,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1970817190}
-  - component: {fileID: 1970817191}
   - component: {fileID: 1970817192}
+  - component: {fileID: 1970817191}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -33388,10 +33444,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1970817189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4df64347269f4546b1b6b9f8df3b85f3, type: 3}
+  m_Script: {fileID: 11500000, guid: bc3f801809604cbda87c8a29e7285dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasList: []
 --- !u!114 &1970817192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33401,10 +33456,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1970817189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 532e896758debba42bd2b76b4d82d075, type: 3}
+  m_Script: {fileID: 11500000, guid: b06c05c03c097495a980c510870c2305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelList: []
 --- !u!1 &1978863694
 GameObject:
   m_ObjectHideFlags: 0
@@ -33598,6 +33652,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1234693844}
         m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
         m_MethodName: UpdateView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1970817192}
+        m_TargetAssemblyTypeName: GameRandomEventSearch, Assembly-CSharp
+        m_MethodName: RandomEventSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
