@@ -1,4 +1,5 @@
 public interface IGameRandomEvent {
-    float Weight { get; set; }
-    void Event();
+    float Weight { get; }
+    (string title, string content) Event();
+    (string title, string content) Result();
 }

@@ -41,17 +41,16 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         
         // Player Status Update
         Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
-        
-        BehaviourResult();
-    }
 
-    public void BehaviourResult() {
-        var result = GameRandomEventSearch.On
-        this.searchResultTitle.text = result.Item1;
-        this.searchResultContent.text = result.Item2;
+        GameRandomEventSearch.OnSearchRandomEvent();
     }
     
     public void UpdateView() {
+        
+        // TODO: GameRandomEventSearch.OnSearchRandomEvent 반환 결과
+        this.searchResultTitle.text = String.Empty;
+        this.searchResultContent.text = String.Empty;
+        
         GameControlCanvas.OnCanvasOnEvent(this.canvasSearch);
         
         GameControlCanvas.OnCanvasOffEvent(this.canvasOutside);
