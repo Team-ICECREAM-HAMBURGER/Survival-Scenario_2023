@@ -3,33 +3,11 @@ using UnityEngine;
 
 public class Player : GameContolSingleton<Player> { // Model
     private GameInformation.PlayerInformation information;
-
-    [Header("Status")]
-    public GameDictionaryStatus statusDictionary;
+    
     private Dictionary<GameTypeStatus, IPlayerStatus> status;
-    
-    [Space(10f)]
-    
-    [Header("Status Effect")]
-    public GameDictionaryStatusEffect statusEffectDictionary;
     private Dictionary<GameTypeStatusEffect, IPlayerStatusEffect> statusEffect;
-
-    [Space(10f)]
-    
-    [Header("Inventory")]
-    public GameDictionaryItem itemDictionary;
     private Dictionary<GameTypeItem, IItem> inventory;
 
-    [Space(10f)]
-    
-    [Header("Behaviour")] 
-    public GameDictionaryBehaviour behaviourDictionary;
-    
-    [Space(10f)]
-    
-    [Header("Behaviour Event")] 
-    public GameDictionaryBehaviourEvent behaviourEventDictionary;
-    
     
     private void Init() {
         this.information = GameInformation.Instance.playerInformation;

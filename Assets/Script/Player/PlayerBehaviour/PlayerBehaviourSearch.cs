@@ -18,7 +18,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     
     [SerializeField] private GameObject searchLoading;
     
-    public delegate void SearchEventUpdateViewHandler();
+    public delegate void SearchEventUpdateViewHandler(string value1, string value2);
     public static SearchEventUpdateViewHandler OnSearchEventUpdateView;
 
 
@@ -35,38 +35,40 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     }
     
     public void Behaviour() {
-        if (BehaviourCheck()) {
+        if (!BehaviourCheck()) {
             return;
         }
         
         // Player Status Update
-        Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f);
-
+        Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f); 
+        
+        // Random Event; Search
         GameRandomEventSearch.OnSearchRandomEvent();
     }
     
-    public void UpdateView() {
+    private void UpdateView(string title, string content) {
+        this.searchResultTitle.text = title;
+        this.searchResultContent.text = content;
         
-        // TODO: GameRandomEventSearch.OnSearchRandomEvent 반환 결과
-        this.searchResultTitle.text = String.Empty;
-        this.searchResultContent.text = String.Empty;
+        this.canvasSearch.enabled = true;
         
-        GameControlCanvas.OnCanvasOnEvent(this.canvasSearch);
+        this.canvasOutside.enabled = false;
+        this.canvasInformation.enabled = false;
         
-        GameControlCanvas.OnCanvasOffEvent(this.canvasOutside);
-        GameControlCanvas.OnCanvasOffEvent(this.canvasInformation);
-        
-        GameControlPanel.OnGamePanelOnEvent(this.searchLoading);
-        GameControlPanel.OnGamePanelOnEvent(this.searchResult);
+        this.searchLoading.SetActive(true);
+        this.searchResult.SetActive(true);
     }
 
     public void ResetView() {
-        GameControlCanvas.OnCanvasOffEvent(this.canvasSearch);
+        this.searchResultTitle.text = String.Empty;
+        this.searchResultContent.text = String.Empty;
         
-        GameControlCanvas.OnCanvasOnEvent(this.canvasOutside);
-        GameControlCanvas.OnCanvasOnEvent(this.canvasInformation);
-
-        GameControlPanel.OnGamePanelOffEvent(this.searchLoading);
-        GameControlPanel.OnGamePanelOffEvent(this.searchResult);
+        this.canvasSearch.enabled = false;
+        
+        this.canvasOutside.enabled = true;
+        this.canvasInformation.enabled = true;
+        
+        this.searchLoading.SetActive(false);
+        this.searchResult.SetActive(false);
     }
 }

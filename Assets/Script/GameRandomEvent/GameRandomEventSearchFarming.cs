@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using UnityEngine;
 
-public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent {
+public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { // Presenter
     public float Weight { get; private set; }
     
     private string title;
@@ -10,7 +10,7 @@ public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent {
 
     
     private void Init() {
-        this.title = "탐색 결과";
+        this.Weight = 90f;
         this.content = new StringBuilder();
     }
 
@@ -18,17 +18,19 @@ public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent {
         Init();
     }
     
-    public (string title, string content) Event() {
+    public void Event() {
         // Debug
         Debug.Log("FarmingEvent");
         
-        // TODO: Item Get
+        // TODO: Item Random Get
         
         // Result Text
-        return Result();
+        EventResult();
     }
 
-    public (string title, string content) Result() {
+    public void EventResult() {
+        this.title = "탐색 결과";
+
         this.content.Clear();
         
         this.content.Append("- 결과\n");
@@ -45,7 +47,7 @@ public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent {
         this.content.Append("\n");
         
         this.content.Append("- 획득한 아이템\n");
-        
-        return (this.title, this.content.ToString());
+
+        PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
 }
