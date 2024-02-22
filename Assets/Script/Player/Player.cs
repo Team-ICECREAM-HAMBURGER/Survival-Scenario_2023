@@ -6,7 +6,7 @@ public class Player : GameContolSingleton<Player> { // Model
     
     private Dictionary<GameTypeStatus, IPlayerStatus> status;
     private Dictionary<GameTypeStatusEffect, IPlayerStatusEffect> statusEffect;
-    private Dictionary<GameTypeItem, IItem> inventory;
+    private Dictionary<GameTypeItem, Item> inventory;
 
     
     private void Init() {

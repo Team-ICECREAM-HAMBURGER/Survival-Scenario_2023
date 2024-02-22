@@ -8,7 +8,7 @@ public class GameInformation : GameContolSingleton<GameInformation> {
     // Player Information
     public class PlayerInformation {
         public string name;
-        public Dictionary<GameTypeItem, IItem> inventory = new();
+        public Dictionary<GameTypeItem, Item> inventory = new();
         public Dictionary<GameTypeStatus, IPlayerStatus> status = new();
         public Dictionary<GameTypeStatusEffect, IPlayerStatusEffect> statusEffect = new();
     }
