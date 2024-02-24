@@ -28,6 +28,7 @@ public class GameRandomEventSearch : MonoBehaviour {
         foreach (var VARIABLE in this.randomEvents) {
             if (this.weightLimit > this.weightSum) {
                 VARIABLE.Event();
+                break;
             }
 
             this.weightSum += VARIABLE.Weight;

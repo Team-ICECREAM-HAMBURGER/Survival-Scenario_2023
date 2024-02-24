@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -40,7 +39,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         }
         
         // Player Status Update
-        Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f); 
+        //Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f); 
         
         // Random Event; Search
         GameRandomEventSearch.OnSearchRandomEvent();

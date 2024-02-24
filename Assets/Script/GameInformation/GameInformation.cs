@@ -8,7 +8,7 @@ public class GameInformation : GameContolSingleton<GameInformation> {
     // Player Information
     public class PlayerInformation {
         public string name;
-        public Dictionary<GameTypeItem, Item> inventory = new();
+        public Dictionary<GameTypeItem, IItem> inventory = new();
         public Dictionary<GameTypeStatus, IPlayerStatus> status = new();
         public Dictionary<GameTypeStatusEffect, IPlayerStatusEffect> statusEffect = new();
     }
@@ -26,8 +26,8 @@ public class GameInformation : GameContolSingleton<GameInformation> {
         this.playerInformation = new();
         this.worldInformation = new();
         
-        this.playerInformation = GameControlSaveLoad.Instance.LoadSaveFile<PlayerInformation>();
-        this.worldInformation = GameControlSaveLoad.Instance.LoadSaveFile<WorldInformation>();
+        //this.playerInformation = GameControlSaveLoad.Instance.LoadSaveFile<PlayerInformation>();
+        //this.worldInformation = GameControlSaveLoad.Instance.LoadSaveFile<WorldInformation>();
     }
 
     private void Awake() {

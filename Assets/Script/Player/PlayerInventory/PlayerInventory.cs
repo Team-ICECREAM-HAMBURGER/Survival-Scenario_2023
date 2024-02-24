@@ -1,19 +1,40 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-public class PlayerInventory : Player {
-    public void InventoryAdd(GameTypeItem gameType) {   // 인벤토리에 type 아이템을 추가
-        if (InventoryCheck(gameType)) {
-            return;
-        }
-        
-        // base.information.inventory.Add(gameType, base.itemDictionary[gameType]);
+public class PlayerInventory : MonoBehaviour {  // Presenter
+    public delegate void ItemEventHandler(HashSet<IItem> item);
+    public static ItemEventHandler OnItemGet;
+    public static ItemEventHandler OnItemUse;
+    public static ItemEventHandler OnItemCraft;
+
+
+    private void Init() {
+        OnItemGet += ItemGet;
+        OnItemUse += ItemUse;
+        OnItemCraft += ItemCraft;
     }
 
-    public void InventoryRemove(GameTypeItem gameType) {    // 인벤토리에서 type 아이템 제거
-        if (!InventoryCheck(gameType)) {
-            return;
-        }
+    private void Awake() {
+        Init();
+    }
 
-        // this.information.inventory.Remove(gameType);
+    private void ItemGet(HashSet<IItem> items) {
+        var acquiredItems = new List<IItem>();
+
+        foreach (var VARIABLE in items) {
+            acquiredItems.Add(VARIABLE);
+        }
+        
+        Player.Instance.InventoryUpdate(acquiredItems);
+    }
+
+    private void ItemUse(HashSet<IItem> items) {
+        var usedItems = new List<IItem>();
+        
+        Player.Instance.InventoryUpdate(usedItems); 
+    }
+
+    private void ItemCraft(HashSet<IItem> items) {
     }
 }
