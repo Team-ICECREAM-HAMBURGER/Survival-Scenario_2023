@@ -23,7 +23,11 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         Debug.Log("FarmingEvent");
         
         // Item Random Get Event
-        ItemSpawnManager.OnMaterialItemRandomGet();
+        var items = ItemSpawnManager.OnMaterialItemGet();
+
+        foreach (var VARIABLE in items) {
+            Debug.Log(VARIABLE.ItemName);
+        }
         
         // TODO: Result Text
         EventResult();

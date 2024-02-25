@@ -1,7 +1,12 @@
 public enum GameTypeItem {
-    MATERIAL,       // 재료
-    TOOL,           // 도구
-    WEAPON,         // 무기   
-    GEAR,           // 장비
-    CONSUMABLE      // 소모품 (음식)
+    MATERIAL_WOOD,      // 재료 나무
+    MATERIAL_STONE,     // 재료 돌
+    MATERIAL_ROPE,      // 재료 노끈
+    
+    
+    
+    TOOL,
+    WEAPON,
+    GEAR,
+    CONSUMABLE
 }
