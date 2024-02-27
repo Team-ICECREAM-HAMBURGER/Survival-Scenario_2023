@@ -46,6 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemType>k__BackingField: 0
   <ItemName>k__BackingField: "\uB098\uBB34"
-  <RandomWeight>k__BackingField: 95
-  <AcquireLimit>k__BackingField: 2
-  <ItemQuantity>k__BackingField: 0
+  <RandomPercent>k__BackingField: 95

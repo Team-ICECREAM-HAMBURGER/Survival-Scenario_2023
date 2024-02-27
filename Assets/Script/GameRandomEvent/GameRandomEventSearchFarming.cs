@@ -10,7 +10,7 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
     private string title;
     private StringBuilder content;
     private List<IItem> itemList;
-    private Dictionary<GameTypeItem, int> itemDic;
+    private Dictionary<string, int> itemDic;
     
     
     private void Init() {
@@ -29,11 +29,15 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         Debug.Log("FarmingEvent");
         
         // Item Random Get Event
-        this.itemList = ItemSpawnManager.OnMaterialItemGet();
+        this.itemList = ItemManager.OnMaterialItemGet();
         this.itemDic.Clear();
 
-        foreach (var type in this.itemList.Select(VARIABLE => VARIABLE.ItemType).Where(type => !itemDic.TryAdd(type, 1))) {
-            itemDic[type] += 1;
+        foreach (var VARIABLE in this.itemList) {
+            var key = VARIABLE.ItemName;
+            
+            if (!this.itemDic.TryAdd(key, 1)) {
+                this.itemDic[key] += 1;
+            }
         }
         
         Player.Instance.InventoryUpdate(this.itemDic);
@@ -62,6 +66,10 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         
         this.content.Append("- 획득한 아이템\n");
 
+        foreach (var VARIABLE in this.itemDic) {
+            this.content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
+        }
+        
         PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
 }

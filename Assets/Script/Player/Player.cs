@@ -6,7 +6,7 @@ public class Player : GameContolSingleton<Player> { // Model
     
     private Dictionary<GameTypeStatus, IPlayerStatus> status;
     private Dictionary<GameTypeStatusEffect, IPlayerStatusEffect> statusEffect;
-    private Dictionary<GameTypeItem, int> inventory;
+    private Dictionary<string, int> inventory;
 
     
     private void Init() {
@@ -64,16 +64,12 @@ public class Player : GameContolSingleton<Player> { // Model
     }
     
     // 인벤토리에 type 아이템이 존재하는가?
-    public bool InventoryCheck(GameTypeItem type) {
+    public bool InventoryCheck(string type) {
         return this.inventory.ContainsKey(type);
     }
     
-    // 인벤토리에 type 아이템들을 value만큼 업데이트
-    public void InventoryUpdate(GameTypeItem type, int value) {
-        
-    }
-
-    public void InventoryUpdate(Dictionary<GameTypeItem, int> items) {
+    // 인벤토리에 type 아이템들을 업데이트
+    public void InventoryUpdate(Dictionary<string, int> items) {
         foreach (var VARIABLE in items) {
             if (this.inventory.ContainsKey(VARIABLE.Key)) {
                 this.inventory[VARIABLE.Key] += VARIABLE.Value;

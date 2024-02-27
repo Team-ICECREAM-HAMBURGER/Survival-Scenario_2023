@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ItemSpawnManager : MonoBehaviour {
+public class ItemManager : MonoBehaviour {
     [SerializeField] private List<GameObject> consumableItemPrefabs;
     [SerializeField] private List<GameObject> gearItemPrefabs;
     [SerializeField] private List<GameObject> materialItemPrefabs;
@@ -21,8 +21,8 @@ public class ItemSpawnManager : MonoBehaviour {
     public static ItemGetEventHandler OnMaterialItemGet;
     public static ItemGetEventHandler OnToolItemGet;
     public static ItemGetEventHandler OnWeaponItemGet;
-    
 
+    
     private void Init() {
         var sum = 0f;
         
@@ -45,7 +45,6 @@ public class ItemSpawnManager : MonoBehaviour {
         }
 
         this.materialItems = this.materialItems.OrderBy(i => i.RandomWeight).ToList();
-        
         OnMaterialItemGet += MaterialItemGet;
     }
 
