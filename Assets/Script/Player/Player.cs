@@ -70,11 +70,21 @@ public class Player : GameContolSingleton<Player> { // Model
     
     // 인벤토리에 type 아이템들을 value만큼 업데이트
     public void InventoryUpdate(GameTypeItem type, int value) {
-
+        
     }
 
-    // 인벤토리에 type 아이템을 value만큼 업데이트
-    public void InventoryUpdate(IItem item) {
-        
+    public void InventoryUpdate(Dictionary<GameTypeItem, int> items) {
+        foreach (var VARIABLE in items) {
+            if (this.inventory.ContainsKey(VARIABLE.Key)) {
+                this.inventory[VARIABLE.Key] += VARIABLE.Value;
+            }
+            else {
+                this.inventory[VARIABLE.Key] = VARIABLE.Value;
+            }
+        }
+
+        foreach (var VARIABLE in this.inventory) {
+            Debug.Log(VARIABLE.Key + " " + VARIABLE.Value);
+        }
     }
 }

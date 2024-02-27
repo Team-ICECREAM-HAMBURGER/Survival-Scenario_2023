@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -7,11 +9,15 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
     
     private string title;
     private StringBuilder content;
-
+    private List<IItem> itemList;
+    private Dictionary<GameTypeItem, int> itemDic;
+    
     
     private void Init() {
         this.Weight = 90f;
-        this.content = new StringBuilder();
+        this.itemList = new();
+        this.itemDic = new();
+        this.content = new();
     }
 
     private void Awake() {
@@ -23,11 +29,14 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         Debug.Log("FarmingEvent");
         
         // Item Random Get Event
-        var items = ItemSpawnManager.OnMaterialItemGet();
+        this.itemList = ItemSpawnManager.OnMaterialItemGet();
+        this.itemDic.Clear();
 
-        foreach (var VARIABLE in items) {
-            Debug.Log(VARIABLE.ItemName);
+        foreach (var type in this.itemList.Select(VARIABLE => VARIABLE.ItemType).Where(type => !itemDic.TryAdd(type, 1))) {
+            itemDic[type] += 1;
         }
+        
+        Player.Instance.InventoryUpdate(this.itemDic);
         
         // TODO: Result Text
         EventResult();

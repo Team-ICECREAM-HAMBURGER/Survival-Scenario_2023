@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ItemMaterialWood : MonoBehaviour, IItemMaterial {
+public class ItemMaterial : MonoBehaviour, IItemMaterial {
     [field: SerializeField] public GameTypeItem ItemType { get; private set; }
     [field: SerializeField] public string ItemName { get; private set; }
     [field: SerializeField] public float RandomPercent { get; private set; }
@@ -9,9 +9,6 @@ public class ItemMaterialWood : MonoBehaviour, IItemMaterial {
     
     
     public void Init(float randomWeight) {
-        this.ItemType = GameTypeItem.MATERIAL_WOOD;
-        this.ItemName = "나무";
-        this.RandomPercent = 95f;
         this.RandomWeight = randomWeight;
     }
 }

@@ -66,7 +66,7 @@ public class ItemSpawnManager : MonoBehaviour {
                 
                 if (sum >= pivot) {
                     acquiredItems.Add(VARIABLE);
-                    Debug.Log("Add!");
+                    Debug.Log("Add! " + VARIABLE.ItemName);
                     
                     break;
                 }
