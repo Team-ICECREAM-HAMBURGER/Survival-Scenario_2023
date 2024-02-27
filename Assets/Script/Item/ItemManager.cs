@@ -65,7 +65,6 @@ public class ItemManager : MonoBehaviour {
                 
                 if (sum >= pivot) {
                     acquiredItems.Add(VARIABLE);
-                    Debug.Log("Add! " + VARIABLE.ItemName);
                     
                     break;
                 }

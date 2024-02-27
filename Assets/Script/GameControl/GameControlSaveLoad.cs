@@ -4,56 +4,49 @@ using System.Text;
 using UnityEngine;
 using Newtonsoft.Json;
 
-public class GameControlSaveLoad : MonoBehaviour {
-    public static GameControlSaveLoad Instance;
+public class GameControlSaveLoad : GameContolSingleton<GameControlSaveLoad> {
+    private string fileName;
+    private string filePath;
 
-    public string fileName = DateTime.Now.ToString("yyyy-MM-dd");
-    public string filePath = Application.persistentDataPath;
 
-    
     private void Init() {
-        if (Instance != null) {
-            return;
-        }
-        
-        Instance = this;
+        this.fileName = DateTime.Now.ToString("yyyy-MM-dd");
+        this.filePath = Application.persistentDataPath;
     }
 
     private void Awake() {
         Init();
     }
-    
-    public string DataSave(object obj) {
+
+    // Obj -> Json
+    public string ObjectToJson(object obj) {
         return JsonConvert.SerializeObject(obj);
     }
 
-    public T DataLoad<T>(string data) {
-        return JsonConvert.DeserializeObject<T>(data);
+    // Json -> Obj
+    public T JsonToObject<T>(string jsonData) {
+        return JsonConvert.DeserializeObject<T>(jsonData);
     }
 
-    public void CreateSaveFile(string saveData) {
+    // Json -> File
+    public void CreateJsonFile(string jsonData) {
         FileStream fileStream = new FileStream($"{this.filePath}/{this.fileName}.json", FileMode.Create);
-        byte[] data = Encoding.UTF8.GetBytes(saveData);
+        byte[] data = Encoding.UTF8.GetBytes(jsonData);
         
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
     }
-
-    public T LoadSaveFile<T>() {
+    
+    // Json -> Obj
+    public T LoadJsonFile<T>() {
         FileStream fileStream = new FileStream($"{this.filePath}/{this.fileName}.json", FileMode.Open);
         byte[] data = new byte[fileStream.Length];
 
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();
-        
-        string loadData = Encoding.UTF8.GetString(data);
 
-        return JsonConvert.DeserializeObject<T>(loadData);
-    }
+        var jsonData = Encoding.UTF8.GetString(data);
 
-    public bool SaveFileCheck() {
-        FileInfo fileInfo = new FileInfo($"{this.filePath}/{this.fileName}.json");
-        
-        return fileInfo.Exists;
+        return JsonConvert.DeserializeObject<T>(jsonData);
     }
 }

@@ -42,7 +42,7 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         
         Player.Instance.InventoryUpdate(this.itemDic);
         
-        // TODO: Result Text
+        // UI Update
         EventResult();
     }
 

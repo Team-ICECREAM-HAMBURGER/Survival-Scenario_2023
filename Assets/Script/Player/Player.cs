@@ -2,25 +2,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : GameContolSingleton<Player> { // Model
-    private GameInformation.PlayerInformation information;
-    
+    private PlayerInformation information;
     private Dictionary<GameTypeStatus, IPlayerStatus> status;
     private Dictionary<GameTypeStatusEffect, IPlayerStatusEffect> statusEffect;
     private Dictionary<string, int> inventory;
 
     
     private void Init() {
-        // this.information = GameInformation.Instance.playerInformation;
-        // this.status = this.information.status;
-        // this.statusEffect = this.information.statusEffect;
-        // this.inventory = this.information.inventory;
+        this.information = GameInformation.Instance.playerInformation;
+        this.status = this.information.status;
+        this.statusEffect = this.information.statusEffect;
+        this.inventory = this.information.inventory;
 
-        this.status = new();
-        this.statusEffect = new();
-        this.inventory = new();
+        // Debug
+        foreach (var VARIABLE in this.inventory) {
+            Debug.Log(VARIABLE.Key + " : " + VARIABLE.Value);
+        }
     }
 
-    private void Awake() {
+    private void Start() {
         Init();
     }
     
@@ -78,9 +78,7 @@ public class Player : GameContolSingleton<Player> { // Model
                 this.inventory[VARIABLE.Key] = VARIABLE.Value;
             }
         }
-
-        foreach (var VARIABLE in this.inventory) {
-            Debug.Log(VARIABLE.Key + " " + VARIABLE.Value);
-        }
+        
+        GameInformation.Instance.PlayerDataSave();
     }
 }
