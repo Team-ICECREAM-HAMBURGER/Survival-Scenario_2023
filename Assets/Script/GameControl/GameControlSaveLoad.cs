@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEditor;
 
 public class GameControlSaveLoad : GameContolSingleton<GameControlSaveLoad> {
     private string fileName;
@@ -39,6 +40,10 @@ public class GameControlSaveLoad : GameContolSingleton<GameControlSaveLoad> {
     
     // Json -> Obj
     public T LoadJsonFile<T>() {
+        if (!File.Exists($"{this.filePath}/{this.fileName}.json")) {
+            throw new FileNotFoundException();
+        }
+        
         FileStream fileStream = new FileStream($"{this.filePath}/{this.fileName}.json", FileMode.Open);
         byte[] data = new byte[fileStream.Length];
 
