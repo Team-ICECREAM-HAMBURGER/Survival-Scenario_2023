@@ -1,12 +1,39 @@
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-public class GameRandomEventSearchHunting : MonoBehaviour {
-        
-// private void HuntingEvent() {
-//     // Debug
-//     Debug.Log("HuntingEvent");
-// }
-//
+public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {
+    public float Weight { get; private set; }
+
+    private string title;
+    private StringBuilder content;
+    private List<IItem> itemList;
+    private Dictionary<string, int> itemDic;
+    
+    
+    private void Init() {
+        this.Weight = 95f;
+        this.itemList = new();
+        this.itemDic = new();
+        this.content = new();
+    }
+
+    private void Awake() {
+        Init();
+    }
+    
+    public void Event() {
+        // TODO: 사냥 이벤트 제작 -> 사냥 아이템 소지 여부에 따라 성공 여부가 달라짐 -> 고기 아이템 획득
+        Debug.Log("HuntingEvent");
+    }
+
+    public void EventResult() {
+        // TODO: 사냥 성공 여부에 따라 결과 텍스트가 달라짐
+        this.title = "탐색 결과";
+
+        this.content.Clear();
+    }
+    
 // private (string title, StringBuilder content) HuntingResult() {
 //     this.content.Clear();
 //     

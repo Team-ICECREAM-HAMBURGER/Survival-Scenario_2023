@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +14,8 @@ public class GameRandomEventSearch : MonoBehaviour {
 
 
     private void Init() {
-        this.randomEvents = gameObject.GetComponents<IGameRandomEvent>().OrderBy(e => e.Weight).ToList();
+        this.randomEvents = gameObject.GetComponents<IGameRandomEvent>().ToList();
+        
         OnSearchRandomEvent += RandomEventSelect;
     }
 
@@ -26,12 +28,13 @@ public class GameRandomEventSearch : MonoBehaviour {
         this.weightLimit = Random.Range(0, 100);
 
         foreach (var VARIABLE in this.randomEvents) {
-            if (this.weightLimit > this.weightSum) {
+            this.weightSum += VARIABLE.Weight;
+            
+            if (this.weightSum > this.weightLimit) {
                 VARIABLE.Event();
+                
                 break;
             }
-
-            this.weightSum += VARIABLE.Weight;
         }
     }
 }

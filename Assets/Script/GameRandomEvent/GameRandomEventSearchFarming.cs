@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -14,7 +12,7 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
     
     
     private void Init() {
-        this.Weight = 90f;
+        this.Weight = 5f;
         this.itemList = new();
         this.itemDic = new();
         this.content = new();
