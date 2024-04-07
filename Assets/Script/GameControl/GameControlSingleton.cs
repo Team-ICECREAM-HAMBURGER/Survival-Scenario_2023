@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameContolSingleton<T> : MonoBehaviour where T : Component {
+public class GameControlSingleton<T> : MonoBehaviour where T : Component {
     private static T instance;
     public static T Instance {
         get {

@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : GameContolSingleton<Player> { // Model
-    private PlayerInformation information;
-    private Dictionary<GameTypeStatus, IPlayerStatus> status;
-    private Dictionary<GameTypeStatusEffect, IPlayerStatusEffect> statusEffect;
-    private Dictionary<string, int> inventory;
+public class Player : GameControlSingleton<Player> { // Model
+    [SerializeField] private PlayerInformation information;
 
+    private PlayerInventoryDictionary inventory;
+    private PlayerStatusDictionary status;
+    private PlayerStatusEffectDictionary statusEffect;
+    
     
     private void Init() {
         this.information = GameInformation.Instance.playerInformation;

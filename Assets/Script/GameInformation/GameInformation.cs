@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-public class GameInformation : GameContolSingleton<GameInformation> {
+public class GameInformation : GameControlSingleton<GameInformation> {
     public PlayerInformation playerInformation;
     public WorldInformation worldInformation;
 
@@ -11,10 +11,11 @@ public class GameInformation : GameContolSingleton<GameInformation> {
             this.playerInformation = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformation>();
         }
         catch (FileNotFoundException e) {
-            // TODO: Save File Not Found.
-            // PlayerInformation 객체 생성.
-            // PlayerInformation Obj to Json
-            // CreateJsonFile(PlayerInformation Json)
+            Debug.Log("Player Information Save File Created.");
+            
+            GameControlSaveLoad.Instance.CreateJsonFile(
+                GameControlSaveLoad.Instance.ObjectToJson(new PlayerInformation()));
+            this.playerInformation = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformation>();
         }
     }
 

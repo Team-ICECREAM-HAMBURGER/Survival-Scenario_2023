@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using UnityEditor;
 
-public class GameControlSaveLoad : GameContolSingleton<GameControlSaveLoad> {
+public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
     private string fileName;
     private string filePath;
 
