@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -7,14 +8,15 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
     
     private string title;
     private StringBuilder content;
-    private List<IItem> itemList;
-    private Dictionary<string, int> itemDic;
+    private List<ItemSpawnFarming> acquiredItemsList;
+    private Dictionary<string, int> acquiredItems;
     
     
     private void Init() {
-        this.Weight = 5f;
-        this.itemList = new();
-        this.itemDic = new();
+        this.Weight = 95f;
+        this.acquiredItemsList = ItemManager.Instance.FarmingSpawnItemsGet();
+        this.acquiredItems = new();
+        this.title = String.Empty;
         this.content = new();
     }
 
@@ -27,18 +29,15 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         Debug.Log("FarmingEvent");
         
         // Item Random Get Event
-        this.itemList = ItemManager.OnMaterialItemGet();
-        this.itemDic.Clear();
-
-        foreach (var VARIABLE in this.itemList) {
+        foreach (var VARIABLE in this.acquiredItemsList) {
             var key = VARIABLE.ItemName;
-            
-            if (!this.itemDic.TryAdd(key, 1)) {
-                this.itemDic[key] += 1;
+
+            if (!this.acquiredItems.TryAdd(key, 1)) {
+                this.acquiredItems[key] += 1;
             }
         }
         
-        Player.Instance.InventoryUpdate(this.itemDic);
+        Player.Instance.InventoryUpdate(this.acquiredItems);
         
         // UI Update
         EventResult();
@@ -64,7 +63,7 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         
         this.content.Append("- 획득한 아이템\n");
 
-        foreach (var VARIABLE in this.itemDic) {
+        foreach (var VARIABLE in this.acquiredItems) {
             this.content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
         }
         

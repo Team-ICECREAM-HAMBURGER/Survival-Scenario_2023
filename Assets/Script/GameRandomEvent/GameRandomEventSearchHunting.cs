@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {
+public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   // Presenter
     public float Weight { get; private set; }
 
     private string title;
@@ -12,7 +12,7 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {
     
     
     private void Init() {
-        this.Weight = 95f;
+        this.Weight = 5f;
         this.itemList = new();
         this.itemDic = new();
         this.content = new();
@@ -23,8 +23,14 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {
     }
     
     public void Event() {
-        // TODO: 사냥 이벤트 제작 -> 사냥 아이템 소지 여부에 따라 성공 여부가 달라짐 -> 고기 아이템 획득
+        // TODO: 사냥 이벤트 제작 -> 사냥 아이템 소지 여부에 따라 성공 여부가 달라짐 -> 고기, 가죽 아이템 획득
         Debug.Log("HuntingEvent");
+
+        if (Player.Instance.InventoryCheck("사냥 도구")) {
+            Player.Instance.InventoryUpdate("사냥 도구", -1);
+
+            
+        }
     }
 
     public void EventResult() {

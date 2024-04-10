@@ -2,67 +2,57 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour {
-    [SerializeField] private List<GameObject> consumableItemPrefabs;
-    [SerializeField] private List<GameObject> gearItemPrefabs;
-    [SerializeField] private List<GameObject> materialItemPrefabs;
-    [SerializeField] private List<GameObject> toolItemPrefabs;
-    [SerializeField] private List<GameObject> weaponItemPrefabs;
+public class ItemManager : GameControlSingleton<ItemManager> {  // Model
+    [SerializeField] private List<GameObject> farmingSpawnItemPrefabs;
+    [SerializeField] private List<GameObject> huntingSpawnItemPrefabs;
+    [SerializeField] private List<GameObject> craftingSpawnItemPrefabs;
+
+    private List<ItemSpawnFarming> farmingSpawnItems;
+    private List<ItemSpawnCrafting> craftingSpawnItems;
+    private List<ItemSpawnHunting> huntingSpawnItems;
     
-    private List<IItemConsumable> consumableItems;
-    private List<IItemGear> gearItems;
-    private List<IItemMaterial> materialItems;
-    private List<IItemTool> toolItems;
-    private List<IItemWeapon> weaponItems;
-
-    public delegate List<IItem> ItemGetEventHandler();
-    public static ItemGetEventHandler OnConsumableItemGet;
-    public static ItemGetEventHandler OnGearItemGet;
-    public static ItemGetEventHandler OnMaterialItemGet;
-    public static ItemGetEventHandler OnToolItemGet;
-    public static ItemGetEventHandler OnWeaponItemGet;
-
     
     private void Init() {
-        var sum = 0f;
+        this.farmingSpawnItems = new();
+        this.craftingSpawnItems = new();
+        this.huntingSpawnItems = new();
         
-        this.consumableItems = new();
-        this.gearItems = new();
-        this.materialItems = new();
-        this.toolItems = new();
-        this.weaponItems = new();
+        // Farming Spawn Items Init();
+        var totalPercent = 0f;
         
-        // Material List Init();
-        foreach (var VARIABLE in this.materialItemPrefabs) {
-            var i = VARIABLE.GetComponent<IItemMaterial>();
+        foreach (var VARIABLE in this.farmingSpawnItemPrefabs) {    // 클래스 리스트 생성 + % 총합
+            var item = VARIABLE.GetComponent<ItemSpawnFarming>();
             
-            sum += i.RandomPercent;
-            this.materialItems.Add(i);
+            this.farmingSpawnItems.Add(item);
+            totalPercent += item.randomPercent;
         }
 
-        foreach (var VARIABLE in this.materialItems) {
-            VARIABLE.Init(VARIABLE.RandomPercent / sum);
+        foreach (var VARIABLE in this.farmingSpawnItems) {  // 가중치 계산
+            VARIABLE.randomWeight = (VARIABLE.randomPercent / totalPercent);
         }
 
-        this.materialItems = this.materialItems.OrderBy(i => i.RandomWeight).ToList();
-        OnMaterialItemGet += MaterialItemGet;
+        this.farmingSpawnItems = this.farmingSpawnItems.OrderBy(i => i.randomWeight).ToList(); // 정렬
+
+        // Crafting Spawn Items Init();
+        
+        // Hunting Spawn Items Init();
     }
 
     private void Awake() {
         Init();
     }
-    
-    private List<IItem> MaterialItemGet() {
+
+    public List<ItemSpawnFarming> FarmingSpawnItemsGet() {
+        var acquiredItems = new List<ItemSpawnFarming>();
         var repeat = Random.Range(1, 5);
-        var acquiredItems = new List<IItem>();
-        
+
         for (var i = 0; i < repeat; i++) {
             var pivot = Random.Range(0, 1f);
             var sum = 0f;
-            
-            foreach (var VARIABLE in this.materialItems) {
-                sum += VARIABLE.RandomWeight;
-                
+
+            foreach (var VARIABLE in this.farmingSpawnItems) {
+                sum += VARIABLE.randomWeight;
+
                 if (sum >= pivot) {
                     acquiredItems.Add(VARIABLE);
                     
@@ -70,7 +60,7 @@ public class ItemManager : MonoBehaviour {
                 }
             }
         }
-
+        
         return acquiredItems;
     }
 }

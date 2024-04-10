@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6353538060457195991}
-  - component: {fileID: 1399260811983567760}
+  - component: {fileID: 9013370886931718204}
   m_Layer: 0
   m_Name: Wood
-  m_TagString: Item
+  m_TagString: Item_Material
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1399260811983567760
+--- !u!114 &9013370886931718204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8883567769157894711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5579c95361514ce5926137e7eb648a57, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a79cc10e40341e2aaf87081bda2e044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemType>k__BackingField: 0
-  <ItemName>k__BackingField: "\uB098\uBB34"
-  <RandomPercent>k__BackingField: 95
+  <ItemName>k__BackingField: 
+  randomPercent: 95
+  randomWeight: 0.36821705

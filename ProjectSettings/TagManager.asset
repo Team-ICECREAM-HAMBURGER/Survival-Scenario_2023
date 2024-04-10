@@ -7,7 +7,9 @@ TagManager:
   - Button
   - Canvas
   - Panel
-  - Item
+  - Item_Material
+  - Item_Tool
+  - Item_Food
   layers:
   - Default
   - TransparentFX
