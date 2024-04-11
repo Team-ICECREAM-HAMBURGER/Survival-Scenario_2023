@@ -18,6 +18,15 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         this.huntingSpawnItems = new();
         
         // Farming Spawn Items Init();
+        FarmingSpawnItemsInit();
+
+        // Crafting Spawn Items Init();
+
+        // Hunting Spawn Items Init();
+        HuntingSpawnItemsInit();
+    }
+
+    private void FarmingSpawnItemsInit() {
         var totalPercent = 0f;
         
         foreach (var VARIABLE in this.farmingSpawnItemPrefabs) {    // 클래스 리스트 생성 + % 총합
@@ -32,10 +41,26 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         }
 
         this.farmingSpawnItems = this.farmingSpawnItems.OrderBy(i => i.randomWeight).ToList(); // 정렬
+    }
 
-        // Crafting Spawn Items Init();
-        
-        // Hunting Spawn Items Init();
+    private void CraftingSpawnItemsInit() {
+    }
+
+    private void HuntingSpawnItemsInit() {
+        var totalPercent = 0f;
+
+        foreach (var VARIABLE in this.huntingSpawnItemPrefabs) {
+            var item = VARIABLE.GetComponent<ItemSpawnHunting>();
+            
+            this.huntingSpawnItems.Add(item);
+            totalPercent += item.randomPercent;
+        }
+
+        foreach (var VARIABLE in this.huntingSpawnItems) {  // 가중치 계산
+            VARIABLE.randomWeight = (VARIABLE.randomPercent / totalPercent);
+        }
+
+        this.huntingSpawnItems = this.huntingSpawnItems.OrderBy(i => i.randomPercent).ToList();
     }
 
     private void Awake() {
@@ -59,6 +84,32 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
                     break;
                 }
             }
+        }
+        
+        return acquiredItems;
+    }
+
+    public List<ItemSpawnHunting> HuntingSpawnItemsGet() {
+        var acquiredItems = new List<ItemSpawnHunting>();
+        var repeat = Random.Range(1, 3);
+        
+        for (var i = 0; i < repeat; i++) {
+            var pivot = Random.Range(0, 1f);
+            var sum = 0f;
+
+            foreach (var VARIABLE in this.huntingSpawnItems) {
+                sum += VARIABLE.randomWeight;
+
+                if (sum >= pivot) {
+                    acquiredItems.Add(VARIABLE);
+
+                    break;
+                }
+            }
+        }
+
+        foreach (var VARIABLE in acquiredItems) {
+            Debug.Log("ItemManager: " + VARIABLE.ItemName);
         }
         
         return acquiredItems;

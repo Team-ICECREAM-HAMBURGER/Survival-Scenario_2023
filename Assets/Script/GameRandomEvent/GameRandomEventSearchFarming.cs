@@ -13,7 +13,7 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
     
     
     private void Init() {
-        this.Weight = 95f;
+        this.Weight = 5f;
         this.acquiredItemsList = ItemManager.Instance.FarmingSpawnItemsGet();
         this.acquiredItems = new();
         this.title = String.Empty;
@@ -29,6 +29,8 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         Debug.Log("FarmingEvent");
         
         // Item Random Get Event
+        this.acquiredItems.Clear();
+
         foreach (var VARIABLE in this.acquiredItemsList) {
             var key = VARIABLE.ItemName;
 

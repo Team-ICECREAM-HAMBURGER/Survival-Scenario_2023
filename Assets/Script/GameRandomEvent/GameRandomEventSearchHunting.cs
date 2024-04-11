@@ -7,14 +7,12 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
 
     private string title;
     private StringBuilder content;
-    private List<IItem> itemList;
-    private Dictionary<string, int> itemDic;
+    private Dictionary<string, int> acquiredItems;
     
     
     private void Init() {
-        this.Weight = 5f;
-        this.itemList = new();
-        this.itemDic = new();
+        this.Weight = 95f;
+        this.acquiredItems = new();
         this.content = new();
     }
 
@@ -25,11 +23,28 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
     public void Event() {
         // TODO: 사냥 이벤트 제작 -> 사냥 아이템 소지 여부에 따라 성공 여부가 달라짐 -> 고기, 가죽 아이템 획득
         Debug.Log("HuntingEvent");
-
+        
+        Player.Instance.InventoryUpdate("사냥 도구", 1);
+        
         if (Player.Instance.InventoryCheck("사냥 도구")) {
+            var items = ItemManager.Instance.HuntingSpawnItemsGet();
+            
+            this.acquiredItems.Clear();
             Player.Instance.InventoryUpdate("사냥 도구", -1);
 
+            foreach (var VARIABLE in items) {
+                Debug.Log("Hunting: " + VARIABLE.ItemName);
+                
+                if (!this.acquiredItems.TryAdd(VARIABLE.ItemName, 1)) {
+                    this.acquiredItems[VARIABLE.ItemName] += 1;
+                }
+            }
             
+            Player.Instance.InventoryUpdate(this.acquiredItems);
+            EventResult();  // True
+        }
+        else {
+            EventResult(); // Fail
         }
     }
 

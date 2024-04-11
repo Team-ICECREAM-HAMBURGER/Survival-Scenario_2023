@@ -72,6 +72,8 @@ public class Player : GameControlSingleton<Player> { // Model
     // 인벤토리에 type 아이템들을 업데이트; ItemGet
     public void InventoryUpdate(Dictionary<string, int> items) {
         foreach (var VARIABLE in items) {
+            Debug.Log("Player: " + VARIABLE.Key + " " + VARIABLE.Value);
+            
             if (this.inventory.ContainsKey(VARIABLE.Key)) {
                 this.inventory[VARIABLE.Key] += VARIABLE.Value;
             }
@@ -84,7 +86,7 @@ public class Player : GameControlSingleton<Player> { // Model
     }
 
     public void InventoryUpdate(string item, int value) {
-        if (this.inventory.ContainsKey(item)) {
+        if (!this.inventory.TryAdd(item, value)) {
             this.inventory[item] += value;
         }
     }

@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemType>k__BackingField: 0
-  <ItemName>k__BackingField: 
-  randomPercent: 0
+  <ItemName>k__BackingField: "\uAC00\uC8FD"
+  randomPercent: 30
   randomWeight: 0
