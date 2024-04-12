@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -8,11 +9,14 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
     private string title;
     private StringBuilder content;
     private Dictionary<string, int> acquiredItems;
+    private Dictionary<string, int> usedItems;
+    private bool isHuntingSuccess;
     
     
     private void Init() {
         this.Weight = 95f;
         this.acquiredItems = new();
+        this.usedItems = new();
         this.content = new();
     }
 
@@ -21,70 +25,76 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
     }
     
     public void Event() {
-        // TODO: 사냥 이벤트 제작 -> 사냥 아이템 소지 여부에 따라 성공 여부가 달라짐 -> 고기, 가죽 아이템 획득
         Debug.Log("HuntingEvent");
         
+        this.isHuntingSuccess = false;
         Player.Instance.InventoryUpdate("사냥 도구", 1);
         
         if (Player.Instance.InventoryCheck("사냥 도구")) {
             var items = ItemManager.Instance.HuntingSpawnItemsGet();
             
             this.acquiredItems.Clear();
+            this.usedItems.Clear();
+            this.isHuntingSuccess = true;
+            
+            // TODO: 아이템 종류, 아이템 개수 -> 변수
+            // 딕셔너리 추가/수정 시 Key, Value -> 변수로
             Player.Instance.InventoryUpdate("사냥 도구", -1);
 
-            foreach (var VARIABLE in items) {
-                Debug.Log("Hunting: " + VARIABLE.ItemName);
-                
-                if (!this.acquiredItems.TryAdd(VARIABLE.ItemName, 1)) {
-                    this.acquiredItems[VARIABLE.ItemName] += 1;
-                }
+            if (!this.usedItems.TryAdd("사냥 도구", 1)) {
+                this.usedItems["사냥 도구"] += 1;
+            }
+            // 
+            
+            foreach (var VARIABLE in items.Where(VARIABLE => !this.acquiredItems.TryAdd(VARIABLE.ItemName, 1))) {
+                this.acquiredItems[VARIABLE.ItemName] += 1;
             }
             
             Player.Instance.InventoryUpdate(this.acquiredItems);
-            EventResult();  // True
         }
-        else {
-            EventResult(); // Fail
-        }
+        
+        EventResult();
     }
 
     public void EventResult() {
-        // TODO: 사냥 성공 여부에 따라 결과 텍스트가 달라짐
         this.title = "탐색 결과";
-
         this.content.Clear();
+
+        if (this.isHuntingSuccess) {
+            this.content.Append("- 결과\n");
+            this.content.Append("끈질긴 추격전 끝에 사냥에 성공했다.\n");
+            
+            this.content.Append("\n");
+            
+            this.content.Append("- 스테이터스 잔여량\n");
+            this.content.Append($"체력: %\n");
+            this.content.Append($"체온: %\n");
+            this.content.Append($"수분: %\n");
+            this.content.Append($"열량: %\n");
+            
+            this.content.Append("\n");
+
+            this.content.Append("- 획득한 아이템\n");
+            
+            foreach (var VARIABLE in this.acquiredItems) {
+                this.content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
+            }
+            
+            this.content.Append("\n");
+            
+            this.content.Append("- 소모된 아이템\n");
+            
+            foreach (var VARIABLE in this.usedItems) {
+                this.content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
+            }
+        }
+        else {
+           this.content.Append("- 결과\n");
+           this.content.Append("사냥감을 잡을 마땅한 도구가 없어 놓치고 말았다.\n");
+           this.content.Append("도구 제작은 '인벤토리' 메뉴에서 할 수 있다.\n");
+           this.content.Append("우선 제작에 필요한 재료를 모아보자.\n");
+        }
+        
+        PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
-    
-// private (string title, StringBuilder content) HuntingResult() {
-//     this.content.Clear();
-//     
-//     this.content.Append("- 결과\n");
-//     this.content.Append("끈질긴 추격전 끝에 사냥에 성공했다.\n");
-//
-//     /*
-//         this.resultText.Append("- 결과\n");
-//         this.resultText.Append("사냥감을 잡을 마땅한 도구가 없어 놓치고 말았다.\n");
-//         this.resultText.Append("도구 제작은 '인벤토리' 메뉴에서 할 수 있다.\n");
-//         this.resultText.Append("우선 제작에 필요한 재료를 모아보자.\n");
-//     */
-//     
-//     this.content.Append("\n");
-//     
-//     this.content.Append("- 스테이터스 잔여량\n");
-//     this.content.Append($"체력: %\n");
-//     this.content.Append($"체온: %\n");
-//     this.content.Append($"수분: %\n");
-//     this.content.Append($"열량: %\n");
-//     
-//     this.content.Append("\n");
-//     
-//     this.content.Append("- 획득한 아이템\n");
-//     
-//     this.content.Append("\n");
-//
-//     this.content.Append("- 소모된 아이템\n");
-//     
-//     
-//     return (this.title, this.content);
-// }
 }

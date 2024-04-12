@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : GameControlSingleton<Player> { // Model
-    [SerializeField] private PlayerInformation information;
+    private PlayerInformation information;
 
     private PlayerInventoryDictionary inventory;
     private PlayerStatusDictionary status;
