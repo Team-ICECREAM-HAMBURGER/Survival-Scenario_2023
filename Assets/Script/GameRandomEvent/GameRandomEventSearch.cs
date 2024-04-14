@@ -15,7 +15,6 @@ public class GameRandomEventSearch : MonoBehaviour {
 
     private void Init() {
         this.randomEvents = gameObject.GetComponents<IGameRandomEvent>().ToList();
-        
         OnSearchRandomEvent += RandomEventSelect;
     }
 

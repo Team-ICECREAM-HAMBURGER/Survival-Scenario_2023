@@ -14,11 +14,6 @@ public class Player : GameControlSingleton<Player> { // Model
         this.status = this.information.status;
         this.statusEffect = this.information.statusEffect;
         this.inventory = this.information.inventory;
-
-        // Debug
-        foreach (var VARIABLE in this.inventory) {
-            Debug.Log(VARIABLE.Key + " : " + VARIABLE.Value);
-        }
     }
 
     private void Start() {
@@ -72,8 +67,6 @@ public class Player : GameControlSingleton<Player> { // Model
     // 인벤토리에 type 아이템들을 업데이트; ItemGet
     public void InventoryUpdate(Dictionary<string, int> items) {
         foreach (var VARIABLE in items) {
-            Debug.Log("Player: " + VARIABLE.Key + " " + VARIABLE.Value);
-            
             if (this.inventory.ContainsKey(VARIABLE.Key)) {
                 this.inventory[VARIABLE.Key] += VARIABLE.Value;
             }

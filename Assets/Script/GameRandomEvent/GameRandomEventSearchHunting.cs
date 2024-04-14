@@ -6,6 +6,9 @@ using UnityEngine;
 public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   // Presenter
     public float Weight { get; private set; }
 
+    [SerializeField] private string RequireItem;
+    [SerializeField] private int RequireItemAmount;
+    
     private string title;
     private StringBuilder content;
     private Dictionary<string, int> acquiredItems;
@@ -30,23 +33,21 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
         this.isHuntingSuccess = false;
         Player.Instance.InventoryUpdate("사냥 도구", 1);
         
-        if (Player.Instance.InventoryCheck("사냥 도구")) {
+        if (Player.Instance.InventoryCheck(this.RequireItem)) {
             var items = ItemManager.Instance.HuntingSpawnItemsGet();
             
             this.acquiredItems.Clear();
             this.usedItems.Clear();
             this.isHuntingSuccess = true;
             
-            // TODO: 아이템 종류, 아이템 개수 -> 변수
-            // 딕셔너리 추가/수정 시 Key, Value -> 변수로
-            Player.Instance.InventoryUpdate("사냥 도구", -1);
+            Player.Instance.InventoryUpdate(this.RequireItem, -this.RequireItemAmount);
 
-            if (!this.usedItems.TryAdd("사냥 도구", 1)) {
-                this.usedItems["사냥 도구"] += 1;
+            if (!this.usedItems.TryAdd(this.RequireItem, this.RequireItemAmount)) {
+                this.usedItems[this.RequireItem] += this.RequireItemAmount;
             }
-            // 
             
-            foreach (var VARIABLE in items.Where(VARIABLE => !this.acquiredItems.TryAdd(VARIABLE.ItemName, 1))) {
+            foreach (var VARIABLE in items.Where(
+                         VARIABLE => !this.acquiredItems.TryAdd(VARIABLE.ItemName, 1))) {
                 this.acquiredItems[VARIABLE.ItemName] += 1;
             }
             
