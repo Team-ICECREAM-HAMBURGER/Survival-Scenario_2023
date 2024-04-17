@@ -6,7 +6,7 @@ public class PlayerStatusCalories : IPlayerStatus {
     // public float CurrentValue { get; private set; }
     
     public string StatusName { get; } = "칼로리";
-    public GameTypeStatus GameTypeStatus { get; } = GameTypeStatus.CALORIES;
+    public GameControlType.Status Status { get; } = GameControlType.Status.CALORIES;
     public float StatusDecreaseMultiplier { get; set; }
 
 

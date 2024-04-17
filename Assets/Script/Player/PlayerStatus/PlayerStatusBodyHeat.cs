@@ -6,7 +6,7 @@ public class PlayerStatusBodyHeat : IPlayerStatus {
     // public float CurrentValue { get; private set; }
     
     public string StatusName { get; } = "체온";
-    public GameTypeStatus GameTypeStatus { get; } = GameTypeStatus.BODY_HEAT;
+    public GameControlType.Status Status { get; } = GameControlType.Status.BODY_HEAT;
     public float StatusDecreaseMultiplier { get; set; }
 
 

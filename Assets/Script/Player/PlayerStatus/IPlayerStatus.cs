@@ -4,7 +4,7 @@ public interface IPlayerStatus {
     public float CurrentValue { get; set; }
     
     public string StatusName { get; }
-    public GameTypeStatus GameTypeStatus { get; }
+    public GameControlType.Status Status { get; }
     public float StatusDecreaseMultiplier { get; set; }
     
     

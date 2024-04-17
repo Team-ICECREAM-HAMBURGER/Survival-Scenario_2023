@@ -2,24 +2,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   // Presenter
     public float Weight { get; private set; }
 
-    [SerializeField] private string RequireItem;
-    [SerializeField] private int RequireItemAmount;
+    [SerializeField] private string spendItem;
+    [SerializeField] private int spendItemAmount;
     
     private string title;
     private StringBuilder content;
     private Dictionary<string, int> acquiredItems;
-    private Dictionary<string, int> usedItems;
+    private Dictionary<string, int> spentItems;
     private bool isHuntingSuccess;
     
     
     private void Init() {
         this.Weight = 95f;
         this.acquiredItems = new();
-        this.usedItems = new();
+        this.spentItems = new();
         this.content = new();
     }
 
@@ -31,27 +32,42 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
         Debug.Log("HuntingEvent");
         
         this.isHuntingSuccess = false;
-        Player.Instance.InventoryUpdate("사냥 도구", 1);
+        Player.Instance.InventoryUpdate("사냥 도구", 1);    // DEBUG
         
-        if (Player.Instance.InventoryCheck(this.RequireItem)) {
-            var items = ItemManager.Instance.HuntingSpawnItemsGet();
-            
-            this.acquiredItems.Clear();
-            this.usedItems.Clear();
+        if (Player.Instance.InventoryCheck(this.spendItem)) {
             this.isHuntingSuccess = true;
             
-            Player.Instance.InventoryUpdate(this.RequireItem, -this.RequireItemAmount);
+            // Item Random Get Event
+            this.acquiredItems.Clear();
 
-            if (!this.usedItems.TryAdd(this.RequireItem, this.RequireItemAmount)) {
-                this.usedItems[this.RequireItem] += this.RequireItemAmount;
-            }
-            
-            foreach (var VARIABLE in items.Where(
-                         VARIABLE => !this.acquiredItems.TryAdd(VARIABLE.ItemName, 1))) {
-                this.acquiredItems[VARIABLE.ItemName] += 1;
+            for (var i = 0; i < Random.Range(1, 5); i++) {
+                var pivot = Random.Range(0, 1f);
+                var randomWeightSum = 0f;
+
+                foreach (var VARIABLE in ItemManager.Instance.HuntingItems) {
+                    randomWeightSum += VARIABLE.randomWeight;
+
+                    if (randomWeightSum >= pivot) {
+                        // TODO: 획득 개수 무작위 함수 적용
+                        if (!this.acquiredItems.TryAdd(VARIABLE.ItemName, 1)) {
+                            this.acquiredItems[VARIABLE.ItemName] += 1;
+                        }
+                    
+                        break;
+                    }
+                }
             }
             
             Player.Instance.InventoryUpdate(this.acquiredItems);
+            
+            // Item Spend
+            this.spentItems.Clear();
+            
+            if (!this.spentItems.TryAdd(this.spendItem, this.spendItemAmount)) {
+                this.spentItems[this.spendItem] += this.spendItemAmount;
+            }
+            
+            Player.Instance.InventoryUpdate(this.spendItem, -this.spendItemAmount);
         }
         
         EventResult();
@@ -85,7 +101,7 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
             
             this.content.Append("- 소모된 아이템\n");
             
-            foreach (var VARIABLE in this.usedItems) {
+            foreach (var VARIABLE in this.spentItems) {
                 this.content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
             }
         }

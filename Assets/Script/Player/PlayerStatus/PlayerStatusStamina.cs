@@ -6,7 +6,7 @@ public class PlayerStatusStamina : IPlayerStatus {
     // public float CurrentValue { get; private set; }
     
     public string StatusName { get; } = "체력";
-    public GameTypeStatus GameTypeStatus { get; } = GameTypeStatus.STAMINA;
+    public GameControlType.Status Status { get; } = GameControlType.Status.STAMINA;
     public float StatusDecreaseMultiplier { get; set; }
     
     

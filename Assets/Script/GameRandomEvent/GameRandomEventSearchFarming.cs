@@ -1,20 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { // Presenter
     public float Weight { get; private set; }
     
     private string title;
     private StringBuilder content;
-    private List<ItemSpawnFarming> acquiredItemsList;
     private Dictionary<string, int> acquiredItems;
     
     
     private void Init() {
         this.Weight = 5f;
-        this.acquiredItemsList = ItemManager.Instance.FarmingSpawnItemsGet();
         this.acquiredItems = new();
         this.title = String.Empty;
         this.content = new();
@@ -31,11 +31,21 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         // Item Random Get Event
         this.acquiredItems.Clear();
 
-        foreach (var VARIABLE in this.acquiredItemsList) {
-            var key = VARIABLE.ItemName;
+        for (var i = 0; i < Random.Range(1, 5); i++) {
+            var pivot = Random.Range(0, 1f);
+            var randomWeightSum = 0f;
 
-            if (!this.acquiredItems.TryAdd(key, 1)) {
-                this.acquiredItems[key] += 1;
+            foreach (var VARIABLE in ItemManager.Instance.FarmingItems) {
+                randomWeightSum += VARIABLE.randomWeight;
+
+                if (randomWeightSum >= pivot) {
+                    // TODO: 획득 개수 무작위 함수 적용
+                    if (!this.acquiredItems.TryAdd(VARIABLE.ItemName, 1)) {
+                        this.acquiredItems[VARIABLE.ItemName] += 1;
+                    }
+                    
+                    break;
+                }
             }
         }
         

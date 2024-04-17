@@ -6,7 +6,7 @@ public class PlayerStatusHydration : IPlayerStatus {
     // public float CurrentValue { get; private set; }
     
     public string StatusName { get; } = "수분";
-    public GameTypeStatus GameTypeStatus { get; } = GameTypeStatus.HYDRATION;
+    public GameControlType.Status Status { get; } = GameControlType.Status.HYDRATION;
     public float StatusDecreaseMultiplier { get; set; }
 
 

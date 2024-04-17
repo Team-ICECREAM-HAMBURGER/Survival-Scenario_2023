@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8883567769157894711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a79cc10e40341e2aaf87081bda2e044, type: 3}
+  m_Script: {fileID: 11500000, guid: 107929d56a5f4614980f648238957b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemType>k__BackingField: 0
-  <ItemName>k__BackingField: 
+  <ItemName>k__BackingField: "\uB098\uBB34"
   randomPercent: 95
-  randomWeight: 0.36821705
+  randomWeight: 0

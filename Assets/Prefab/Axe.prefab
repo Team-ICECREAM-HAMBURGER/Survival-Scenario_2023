@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6353538060457195991}
-  - component: {fileID: 8615892267694944260}
+  - component: {fileID: -6074543203780883022}
   m_Layer: 0
-  m_Name: Cloth
-  m_TagString: Item_Material
+  m_Name: Axe
+  m_TagString: Item_Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8615892267694944260
+--- !u!114 &-6074543203780883022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8883567769157894711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107929d56a5f4614980f648238957b37, type: 3}
+  m_Script: {fileID: 11500000, guid: a0bc4dcc495d4103b20f1b73fefd3e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemType>k__BackingField: 0
-  <ItemName>k__BackingField: 
-  randomPercent: 0
-  randomWeight: 0
+  <ItemType>k__BackingField: 4
+  <ItemName>k__BackingField: "\uB3C4\uB07C"

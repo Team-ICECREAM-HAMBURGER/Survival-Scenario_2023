@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {
     public string StatusEffectName { get; } = "부상";
-    public GameTypeStatusEffect GameTypeStatusEffect { get; } = GameTypeStatusEffect.INJURED;
+    public GameControlType.StatusEffect StatusEffectType { get; } = GameControlType.StatusEffect.INJURED;
     public int DurationTerm { get; private set; }
 
     public delegate void InjuredEffectEventHandler();

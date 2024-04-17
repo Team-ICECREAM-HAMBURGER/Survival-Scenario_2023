@@ -13,7 +13,7 @@ public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
     }
 
     public bool CanBehaviour() {
-        if (Player.Instance.StatusEffectCheck(GameTypeStatusEffect.INJURED)) {
+        if (Player.Instance.StatusEffectCheck(GameControlType.StatusEffect.INJURED)) {
             // PlayerBehaviourMovePresenter.OnMessageInjuredEvent();
             
             return false;

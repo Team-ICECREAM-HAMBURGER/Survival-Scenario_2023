@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerStatusEffectDehydration : IPlayerStatusEffect {
     public string StatusEffectName { get; } = "탈수";
-    public GameTypeStatusEffect GameTypeStatusEffect { get; } = GameTypeStatusEffect.DEHYDRATION;
+    public GameControlType.StatusEffect StatusEffectType { get; } = GameControlType.StatusEffect.DEHYDRATION;
     
     
     public void Event() {

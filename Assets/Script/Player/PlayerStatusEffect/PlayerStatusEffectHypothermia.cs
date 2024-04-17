@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerStatusEffectHypothermia : IPlayerStatusEffect {
     public string StatusEffectName { get; } = "저체온증";
-    public GameTypeStatusEffect GameTypeStatusEffect { get; } = GameTypeStatusEffect.HYPOTHERMIA;
+    public GameControlType.StatusEffect StatusEffectType { get; } = GameControlType.StatusEffect.HYPOTHERMIA;
     
     
     public void Event() {

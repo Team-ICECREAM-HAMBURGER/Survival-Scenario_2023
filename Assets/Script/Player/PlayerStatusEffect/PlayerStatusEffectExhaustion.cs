@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerStatusEffectExhaustion : IPlayerStatusEffect {
     public string StatusEffectName { get; } = "탈진";
-    public GameTypeStatusEffect GameTypeStatusEffect { get; } = GameTypeStatusEffect.EXHAUSTION;
+    public GameControlType.StatusEffect StatusEffectType { get; } = GameControlType.StatusEffect.EXHAUSTION;
     
     
     public void Event() {
