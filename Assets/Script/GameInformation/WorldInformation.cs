@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class WorldInformation {
@@ -6,4 +7,5 @@ public class WorldInformation {
     public int timeDay;
     public IWeather weather;
     public ILocation location;
+    
 }

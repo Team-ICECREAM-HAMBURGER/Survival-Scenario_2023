@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     public float Weight { get; private set; }
@@ -10,7 +10,7 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
 
 
     private void Init() {
-        this.Weight = 0f;
+        this.Weight = 95f;
         this.content = new();
     }
 
@@ -20,9 +20,8 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     
     public void Event() {
         Debug.Log("InjuredEvent");
-        
-        PlayerStatusEffectInjured.OnInjuredEffectEvent();   // 스테이터스 상태 업데이트; 상태 이상 적용
-        
+
+        StatusEffectInjured.OnInjuredEffectEvent();
         EventResult();
     }
 

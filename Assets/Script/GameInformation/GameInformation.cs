@@ -1,12 +1,14 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class GameInformation : GameControlSingleton<GameInformation> {
     public PlayerInformation playerInformation;
     public WorldInformation worldInformation;
-
-
+    
+    
     private void Init() {
+        // Save File Load/New
         try {
             this.playerInformation = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformation>();
         }
@@ -28,5 +30,13 @@ public class GameInformation : GameControlSingleton<GameInformation> {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformation);
         
         GameControlSaveLoad.Instance.CreateJsonFile(saveData);
+    }
+
+    public void WorldTimeTermUpdate(int term) {
+        this.worldInformation.timeTerm += term;
+    }
+
+    public void WorldTimeDayUpdate(int value) {
+        this.worldInformation.timeDay += value;
     }
 }

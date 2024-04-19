@@ -11,9 +11,10 @@ public class Player : GameControlSingleton<Player> { // Model
     
     private void Init() {
         this.information = GameInformation.Instance.playerInformation;
+        
+        this.inventory = this.information.inventory;
         this.status = this.information.status;
         this.statusEffect = this.information.statusEffect;
-        this.inventory = this.information.inventory;
     }
 
     private void Start() {
@@ -57,6 +58,17 @@ public class Player : GameControlSingleton<Player> { // Model
     // type 상태 이상 효과가 적용되어 있는가?
     public bool StatusEffectCheck(GameControlType.StatusEffect type) {
         return this.statusEffect.ContainsKey(type);
+    }
+    
+    // type 상태 이상 효과 업데이트
+    public void StatusEffectUpdate(IStatusEffect value) {
+        Debug.Log(value.StatusEffectName);
+        
+        if (!this.statusEffect.TryAdd(value.StatusEffectType, value)) {
+            this.statusEffect[value.StatusEffectType].DurationTermUpdate();
+        }
+        
+        GameInformation.Instance.PlayerDataSave();
     }
     
     // 인벤토리에 type 아이템이 존재하는가?

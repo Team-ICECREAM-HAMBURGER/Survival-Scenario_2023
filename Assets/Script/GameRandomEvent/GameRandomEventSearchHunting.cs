@@ -18,7 +18,7 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
     
     
     private void Init() {
-        this.Weight = 95f;
+        this.Weight = 0f;
         this.acquiredItems = new();
         this.spentItems = new();
         this.content = new();
@@ -32,7 +32,6 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
         Debug.Log("HuntingEvent");
         
         this.isHuntingSuccess = false;
-        Player.Instance.InventoryUpdate("사냥 도구", 1);    // DEBUG
         
         if (Player.Instance.InventoryCheck(this.spendItem)) {
             this.isHuntingSuccess = true;

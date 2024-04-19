@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStatusEffectExhaustion : IPlayerStatusEffect {
+public class StatusEffectExhaustion : MonoBehaviour, IStatusEffect {
     public string StatusEffectName { get; } = "탈진";
     public GameControlType.StatusEffect StatusEffectType { get; } = GameControlType.StatusEffect.EXHAUSTION;
     
@@ -9,5 +9,9 @@ public class PlayerStatusEffectExhaustion : IPlayerStatusEffect {
         // Player.Instance.information.status[GameTypeStatus.STAMINA].StatusDecreaseMultiplier = 2f;
         // Player.Instance.StatusEffectAdd(this.GameTypeStatusEffect);
         // GameInformation.OnPlayerStatusEffectIndicatorActiveEvent();
+    }
+
+    public void DurationTermUpdate() {
+        throw new System.NotImplementedException();
     }
 }
