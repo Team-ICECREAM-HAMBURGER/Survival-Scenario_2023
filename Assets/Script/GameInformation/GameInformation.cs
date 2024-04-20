@@ -28,7 +28,7 @@ public class GameInformation : GameControlSingleton<GameInformation> {
     // TODO: Generic
     public void PlayerDataSave() {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformation);
-        
+        Debug.Log(saveData);
         GameControlSaveLoad.Instance.CreateJsonFile(saveData);
     }
 

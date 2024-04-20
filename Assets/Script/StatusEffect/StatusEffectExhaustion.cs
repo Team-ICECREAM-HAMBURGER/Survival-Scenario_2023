@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class StatusEffectExhaustion : MonoBehaviour, IStatusEffect {
-    public string StatusEffectName { get; } = "탈진";
-    public GameControlType.StatusEffect StatusEffectType { get; } = GameControlType.StatusEffect.EXHAUSTION;
+    public string StatusEffectName { get; set; } = "탈진";
+    public GameControlType.StatusEffect StatusEffectType { get; set; } = GameControlType.StatusEffect.EXHAUSTION;
     
     
     public void Event() {

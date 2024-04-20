@@ -61,12 +61,8 @@ public class Player : GameControlSingleton<Player> { // Model
     }
     
     // type 상태 이상 효과 업데이트
-    public void StatusEffectUpdate(IStatusEffect value) {
-        Debug.Log(value.StatusEffectName);
-        
-        if (!this.statusEffect.TryAdd(value.StatusEffectType, value)) {
-            this.statusEffect[value.StatusEffectType].DurationTermUpdate();
-        }
+    public void StatusEffectUpdate( value) {
+        this.statusEffect.TryAdd(value.StatusEffectType, value);
         
         GameInformation.Instance.PlayerDataSave();
     }

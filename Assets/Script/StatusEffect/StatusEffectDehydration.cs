@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class StatusEffectDehydration : MonoBehaviour, IStatusEffect {
-    public string StatusEffectName { get; } = "탈수";
-    public GameControlType.StatusEffect StatusEffectType { get; } = GameControlType.StatusEffect.DEHYDRATION;
+    public string StatusEffectName { get; set; } = "탈수";
+    public GameControlType.StatusEffect StatusEffectType { get; set; } = GameControlType.StatusEffect.DEHYDRATION;
     
     
     public void Event() {

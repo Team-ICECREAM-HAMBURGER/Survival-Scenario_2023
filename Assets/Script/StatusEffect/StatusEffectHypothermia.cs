@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class StatusEffectHypothermia : MonoBehaviour, IStatusEffect {
-    public string StatusEffectName { get; } = "저체온증";
-    public GameControlType.StatusEffect StatusEffectType { get; } = GameControlType.StatusEffect.HYPOTHERMIA;
+    public string StatusEffectName { get; set; } = "저체온증";
+    public GameControlType.StatusEffect StatusEffectType { get; set; } = GameControlType.StatusEffect.HYPOTHERMIA;
     
     
     public void Event() {

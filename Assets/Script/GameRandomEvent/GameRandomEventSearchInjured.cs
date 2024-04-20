@@ -21,7 +21,7 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     public void Event() {
         Debug.Log("InjuredEvent");
 
-        StatusEffectInjured.OnInjuredEffectEvent();
+        StatusEffectManager.OnInjuredEffectEvent();
         EventResult();
     }
 
