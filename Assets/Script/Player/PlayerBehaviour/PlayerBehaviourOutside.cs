@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
@@ -149,6 +150,7 @@ public class PlayerBehaviourOutside : MonoBehaviour, IPlayerBehaviour {
     
     private void RainGutter() {
     }
+
 
     public void Behaviour() {
         throw new System.NotImplementedException();

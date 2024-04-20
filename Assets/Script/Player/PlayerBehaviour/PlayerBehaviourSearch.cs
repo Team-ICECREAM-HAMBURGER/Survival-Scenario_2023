@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
+    [SerializeField] private float[] requireStatusValues = new float[4];
+    
     [SerializeField] private Canvas canvasSearch;
     [SerializeField] private Canvas canvasOutside;
     [SerializeField] private Canvas canvasInformation;
@@ -37,9 +39,9 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         if (!BehaviourCheck()) {
             return;
         }
-        
+
         // Player Status Update
-        //Player.Instance.StatusUpdate(-20f, -10f, -10f, -10f); 
+        //Player.Instance.StatusUpdate(this.requireStatusValues);
         
         // Random Event; Search
         GameRandomEventSearch.OnSearchRandomEvent();

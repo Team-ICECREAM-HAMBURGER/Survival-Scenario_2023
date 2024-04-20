@@ -19,7 +19,7 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         // this.craftingSpawnItems = CraftItemsInit(this.craftingSpawnItems);
     }
     
-    private void Awake() {
+    private void Start() {
         Init();
     }
 

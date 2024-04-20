@@ -21,7 +21,7 @@ public class GameControlSingleton<T> : MonoBehaviour where T : Component {
 
     private static void SetupInstance() {
         instance = (T)FindObjectOfType(typeof(T));
-            
+        
         if (instance == null) {
             GameObject gameObj = new GameObject();
             gameObj.name = typeof(T).Name;

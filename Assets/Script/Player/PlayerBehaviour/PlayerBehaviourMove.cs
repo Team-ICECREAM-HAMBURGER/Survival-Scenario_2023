@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
@@ -13,21 +14,10 @@ public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
     }
 
     public bool CanBehaviour() {
-        if (Player.Instance.StatusEffectCheck(GameControlType.StatusEffect.INJURED)) {
-            // PlayerBehaviourMovePresenter.OnMessageInjuredEvent();
-            
-            return false;
-        }
-        
-        if (!Player.Instance.StatusCheck(this.requireStatusValue)) {
-            // PlayerBehaviourMovePresenter.OnMessageLowStatusEvent();
-            
-            return false;
-        }
-
         return true;
     }
-    
+
+
     public void Behaviour() {
         // Player.Instance.StatusDecrease(25f);
     }

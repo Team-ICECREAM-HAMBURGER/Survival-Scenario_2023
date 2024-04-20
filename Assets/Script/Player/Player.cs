@@ -4,9 +4,9 @@ using UnityEngine;
 public class Player : GameControlSingleton<Player> { // Model
     private PlayerInformation information;
 
-    private GameControlDictionary.Inventory inventory;
-    private GameControlDictionary.Status status;
-    private GameControlDictionary.StatusEffect statusEffect;
+    private GameControlDictionary.PlayerInventory inventory;
+    private GameControlDictionary.PlayerStatus status;
+    public GameControlDictionary.PlayerStatusEffect StatusEffect { get; private set; }
     
     
     private void Init() {
@@ -14,7 +14,7 @@ public class Player : GameControlSingleton<Player> { // Model
         
         this.inventory = this.information.inventory;
         this.status = this.information.status;
-        this.statusEffect = this.information.statusEffect;
+        this.StatusEffect = this.information.statusEffect;
     }
 
     private void Start() {
@@ -43,11 +43,16 @@ public class Player : GameControlSingleton<Player> { // Model
     }
 
     // 각 상태의 수치를 value만큼 업데이트
-    public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
-        this.status[GameControlType.Status.STAMINA].CurrentValue += stamina;
-        this.status[GameControlType.Status.BODY_HEAT].CurrentValue += bodyHeat;
-        this.status[GameControlType.Status.HYDRATION].CurrentValue += hydration;
-        this.status[GameControlType.Status.CALORIES].CurrentValue += calories;
+    public void StatusUpdate(float[] values) {
+        this.status[GameControlType.Status.STAMINA].CurrentValue += values[0];
+        this.status[GameControlType.Status.BODY_HEAT].CurrentValue += values[1];
+        this.status[GameControlType.Status.HYDRATION].CurrentValue += values[2];
+        this.status[GameControlType.Status.CALORIES].CurrentValue += values[3];
+        
+        Debug.Log(this.status[GameControlType.Status.STAMINA].CurrentValue);
+        Debug.Log(this.status[GameControlType.Status.BODY_HEAT].CurrentValue);
+        Debug.Log(this.status[GameControlType.Status.HYDRATION].CurrentValue);
+        Debug.Log(this.status[GameControlType.Status.CALORIES].CurrentValue);
     }
 
     // type 상태의 수치를 value만큼 업데이트
@@ -56,13 +61,13 @@ public class Player : GameControlSingleton<Player> { // Model
     }
     
     // type 상태 이상 효과가 적용되어 있는가?
-    public bool StatusEffectCheck(GameControlType.StatusEffect type) {
-        return this.statusEffect.ContainsKey(type);
+    public bool StatusEffectCheck(string type) {
+        return this.StatusEffect.ContainsKey(type);
     }
     
-    // type 상태 이상 효과 업데이트
-    public void StatusEffectUpdate( value) {
-        this.statusEffect.TryAdd(value.StatusEffectType, value);
+    // type 상태 이상 효과 업데이트 
+    public void StatusEffectUpdate(string type, int value) {
+        this.StatusEffect.TryAdd(type, value);
         
         GameInformation.Instance.PlayerDataSave();
     }
