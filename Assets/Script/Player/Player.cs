@@ -6,7 +6,7 @@ public class Player : GameControlSingleton<Player> { // Model
 
     private GameControlDictionary.PlayerInventory inventory;
     private GameControlDictionary.PlayerStatus status;
-    public GameControlDictionary.PlayerStatusEffect StatusEffect { get; private set; }
+    private GameControlDictionary.PlayerStatusEffect StatusEffect;
     
     
     private void Init() {
@@ -61,13 +61,16 @@ public class Player : GameControlSingleton<Player> { // Model
     }
     
     // type 상태 이상 효과가 적용되어 있는가?
-    public bool StatusEffectCheck(string type) {
-        return this.StatusEffect.ContainsKey(type);
+    public StatusEffect StatusEffectCheck(string type) {
+        return this.StatusEffect.GetValueOrDefault(type);
     }
     
     // type 상태 이상 효과 업데이트 
     public void StatusEffectUpdate(StatusEffect effect) {
-        this.StatusEffect.TryAdd(effect.name, effect);
+        if (!this.StatusEffect.TryAdd(effect.name, effect)) {
+            this.StatusEffect[effect.name].durationTerm = effect.durationTerm;
+        }
+        
         GameInformation.Instance.PlayerDataSave();
     }
     
