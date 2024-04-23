@@ -6,6 +6,9 @@ public class GameInformation : GameControlSingleton<GameInformation> {
     public PlayerInformation playerInformation;
     public WorldInformation worldInformation;
     
+    public delegate void GameDavaSaveEventHandler();
+    public static GameDavaSaveEventHandler OnGameDavaSave;
+    
     
     private void Init() {
         // Save File Load/New
@@ -19,24 +22,26 @@ public class GameInformation : GameControlSingleton<GameInformation> {
                 GameControlSaveLoad.Instance.ObjectToJson(new PlayerInformation()));
             this.playerInformation = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformation>();
         }
+        
+        OnGameDavaSave += PlayerDataSave;
+        OnGameDavaSave += WorldDataSave;
     }
 
-    private void Awake() {
+    private void Start() {
         Init();
     }
-
-    // TODO: Generic
-    public void PlayerDataSave() {
+    
+    private void PlayerDataSave() {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformation);
+        
         Debug.Log(saveData);
         GameControlSaveLoad.Instance.CreateJsonFile(saveData);
     }
 
-    public void WorldTimeTermUpdate(int term) {
-        this.worldInformation.timeTerm += term;
-    }
-
-    public void WorldTimeDayUpdate(int value) {
-        this.worldInformation.timeDay += value;
+    private void WorldDataSave() {
+        var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.worldInformation);
+        
+        Debug.Log(saveData);
+        GameControlSaveLoad.Instance.CreateJsonFile(saveData);
     }
 }

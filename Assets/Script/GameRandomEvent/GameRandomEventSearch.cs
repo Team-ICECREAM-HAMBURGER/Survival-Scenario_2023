@@ -25,7 +25,7 @@ public class GameRandomEventSearch : MonoBehaviour {
     private void RandomEventSelect() {
         this.weightSum = 0;
         this.weightLimit = Random.Range(0, 100);
-        GameInformation.Instance.WorldTimeTermUpdate(15);
+        // GameInformation.Instance.WorldTimeTermUpdate(15);
         
         foreach (var VARIABLE in this.randomEvents) {
             this.weightSum += VARIABLE.Weight;

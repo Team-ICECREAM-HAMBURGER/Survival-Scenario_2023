@@ -10,7 +10,7 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
 
 
     private void Init() {
-        this.Weight = 95f;
+        this.Weight = 0f;
         this.content = new();
     }
 

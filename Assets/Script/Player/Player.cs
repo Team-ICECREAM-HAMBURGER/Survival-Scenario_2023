@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : GameControlSingleton<Player> { // Model
@@ -6,7 +7,7 @@ public class Player : GameControlSingleton<Player> { // Model
 
     private GameControlDictionary.PlayerInventory inventory;
     private GameControlDictionary.PlayerStatus status;
-    private GameControlDictionary.PlayerStatusEffect StatusEffect;
+    private GameControlDictionary.PlayerStatusEffect statusEffect;
     
     
     private void Init() {
@@ -14,7 +15,12 @@ public class Player : GameControlSingleton<Player> { // Model
         
         this.inventory = this.information.inventory;
         this.status = this.information.status;
-        this.StatusEffect = this.information.statusEffect;
+        this.statusEffect = this.information.statusEffect;
+        
+        // TODO: StatusEffectManager로 옮길 수 있는지 확인할 것
+        foreach (var VARIABLE in this.statusEffect.Values) {
+            StatusEffectManager.OnStatusEffectInvoke += VARIABLE.Invoke;
+        }
     }
 
     private void Start() {
@@ -62,16 +68,17 @@ public class Player : GameControlSingleton<Player> { // Model
     
     // type 상태 이상 효과가 적용되어 있는가?
     public StatusEffect StatusEffectCheck(string type) {
-        return this.StatusEffect.GetValueOrDefault(type);
+        return this.statusEffect.GetValueOrDefault(type);
     }
     
     // type 상태 이상 효과 업데이트 
     public void StatusEffectUpdate(StatusEffect effect) {
-        if (!this.StatusEffect.TryAdd(effect.name, effect)) {
-            this.StatusEffect[effect.name].durationTerm = effect.durationTerm;
+        if (!this.statusEffect.TryAdd(effect.name, effect)) {
+            this.statusEffect[effect.name].durationTerm = effect.durationTerm;
+            return;
         }
         
-        GameInformation.Instance.PlayerDataSave();
+        StatusEffectManager.OnStatusEffectInvoke += this.statusEffect[effect.name].Invoke;
     }
     
     // 인벤토리에 type 아이템이 존재하는가?
@@ -89,8 +96,6 @@ public class Player : GameControlSingleton<Player> { // Model
                 this.inventory[VARIABLE.Key] = VARIABLE.Value;
             }
         }
-        
-        GameInformation.Instance.PlayerDataSave();
     }
 
     public void InventoryUpdate(string item, int value) {

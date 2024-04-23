@@ -1,14 +1,9 @@
 public class StatusEffectManager : GameControlSingleton<StatusEffectManager> {
     private StatusEffect statusEffect;
     
-    
-    private void Init() {
-        this.statusEffect = new StatusEffect();
-    }
+    public delegate void StatusEffectInvokeEventHandler(int value);
+    public static StatusEffectInvokeEventHandler OnStatusEffectInvoke;
 
-    private void Start() {
-        Init();
-    }
     
     public void Event(StatusEffect effect) {
         this.statusEffect = effect;

@@ -39,12 +39,15 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         if (!BehaviourCheck()) {
             return;
         }
-
+        
         // Player Status Update
         //Player.Instance.StatusUpdate(this.requireStatusValues);
         
         // Random Event; Search
         GameRandomEventSearch.OnSearchRandomEvent();
+        
+        // Time Update
+        TimeManager.Instance.WorldTermUpdate(15);
     }
     
     private void UpdateView(string title, string content) {

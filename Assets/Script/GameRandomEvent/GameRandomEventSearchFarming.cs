@@ -14,7 +14,7 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
     
     
     private void Init() {
-        this.Weight = 0f;
+        this.Weight = 100f;
         this.acquiredItems = new();
         this.title = String.Empty;
         this.content = new();
