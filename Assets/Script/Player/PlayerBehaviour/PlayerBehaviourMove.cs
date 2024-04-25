@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
 
 
     public void Behaviour() {
-        // Player.Instance.StatusDecrease(25f);
+        throw new System.NotImplementedException();
     }
 
     public bool BehaviourCheck() {

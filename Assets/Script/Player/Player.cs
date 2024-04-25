@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : GameControlSingleton<Player> { // Model
@@ -64,6 +63,7 @@ public class Player : GameControlSingleton<Player> { // Model
     // type 상태의 수치를 value만큼 업데이트
     public void StatusUpdate(GameControlType.Status type, float value) {
         this.status[type].CurrentValue += value;
+        GameInformation.OnPlayerGameDataSave();
     }
     
     // type 상태 이상 효과가 적용되어 있는가?
@@ -79,6 +79,7 @@ public class Player : GameControlSingleton<Player> { // Model
         }
         
         StatusEffectManager.OnStatusEffectInvoke += this.statusEffect[effect.name].Invoke;
+        GameInformation.OnPlayerGameDataSave();
     }
     
     // 인벤토리에 type 아이템이 존재하는가?
@@ -96,11 +97,15 @@ public class Player : GameControlSingleton<Player> { // Model
                 this.inventory[VARIABLE.Key] = VARIABLE.Value;
             }
         }
+        
+        GameInformation.OnPlayerGameDataSave();
     }
 
     public void InventoryUpdate(string item, int value) {
         if (!this.inventory.TryAdd(item, value)) {
             this.inventory[item] += value;
         }
+        
+        GameInformation.OnPlayerGameDataSave();
     }
 }

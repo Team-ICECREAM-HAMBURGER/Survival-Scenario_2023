@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     public bool BehaviourCheck() {
         return true;
     }
-    
+
     public void Behaviour() {
         if (!BehaviourCheck()) {
             return;
@@ -47,7 +48,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         GameRandomEventSearch.OnSearchRandomEvent();
         
         // Time Update
-        TimeManager.Instance.WorldTermUpdate(15);
+        TimeManager.Instance.WorldTimeUpdate(15);
     }
     
     private void UpdateView(string title, string content) {

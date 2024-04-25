@@ -6,25 +6,32 @@ public class GameInformation : GameControlSingleton<GameInformation> {
     public PlayerInformation playerInformation;
     public WorldInformation worldInformation;
     
-    public delegate void GameDavaSaveEventHandler();
-    public static GameDavaSaveEventHandler OnGameDavaSave;
+    public delegate void GameDataSaveEventHandler();
+    public static GameDataSaveEventHandler OnPlayerGameDataSave;
+    public static GameDataSaveEventHandler OnWorldGameDataSave;
     
     
     private void Init() {
         // Save File Load/New
         try {
-            this.playerInformation = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformation>();
+            this.playerInformation = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformation>("Player");
+            this.worldInformation = GameControlSaveLoad.Instance.LoadJsonFile<WorldInformation>("World");
         }
         catch (FileNotFoundException e) {
-            Debug.Log("Player Information Save File Created.");
+            Debug.Log("Save File Created.");
+
+            var playerInit = GameControlSaveLoad.Instance.ObjectToJson(new PlayerInformation());
+            var worldInit = GameControlSaveLoad.Instance.ObjectToJson(new WorldInformation());
             
-            GameControlSaveLoad.Instance.CreateJsonFile(
-                GameControlSaveLoad.Instance.ObjectToJson(new PlayerInformation()));
-            this.playerInformation = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformation>();
+            GameControlSaveLoad.Instance.CreateJsonFile(playerInit, "Player");
+            GameControlSaveLoad.Instance.CreateJsonFile(worldInit, "World");
+            
+            this.playerInformation = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformation>("Player");
+            this.worldInformation = GameControlSaveLoad.Instance.LoadJsonFile<WorldInformation>("World");
         }
         
-        OnGameDavaSave += PlayerDataSave;
-        OnGameDavaSave += WorldDataSave;
+        OnPlayerGameDataSave += PlayerDataSave;
+        OnWorldGameDataSave += WorldDataSave;
     }
 
     private void Start() {
@@ -35,13 +42,13 @@ public class GameInformation : GameControlSingleton<GameInformation> {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformation);
         
         Debug.Log(saveData);
-        GameControlSaveLoad.Instance.CreateJsonFile(saveData);
+        GameControlSaveLoad.Instance.CreateJsonFile(saveData, "Player");
     }
 
     private void WorldDataSave() {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.worldInformation);
         
         Debug.Log(saveData);
-        GameControlSaveLoad.Instance.CreateJsonFile(saveData);
+        GameControlSaveLoad.Instance.CreateJsonFile(saveData, "World");
     }
 }

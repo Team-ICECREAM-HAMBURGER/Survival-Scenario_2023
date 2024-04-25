@@ -29,23 +29,23 @@ public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
         return JsonConvert.DeserializeObject<T>(jsonData);
     }
 
-    // Json -> File
-    public void CreateJsonFile(string jsonData) {
-        FileStream fileStream = new FileStream($"{this.filePath}/{this.fileName}.json", FileMode.Create);
-        byte[] data = Encoding.UTF8.GetBytes(jsonData);
+    // Json -> File; New
+    public void CreateJsonFile(string jsonData, string type) {
+        var fileStream = new FileStream($"{this.filePath}/{this.fileName}_{type}.json", FileMode.Create);
+        var data = Encoding.UTF8.GetBytes(jsonData);
         
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
     }
     
     // Json -> Obj
-    public T LoadJsonFile<T>() {
-        if (!File.Exists($"{this.filePath}/{this.fileName}.json")) {
+    public T LoadJsonFile<T>(string type) {
+        if (!File.Exists($"{this.filePath}/{this.fileName}_{type}.json")) {
             throw new FileNotFoundException();
         }
         
-        FileStream fileStream = new FileStream($"{this.filePath}/{this.fileName}.json", FileMode.Open);
-        byte[] data = new byte[fileStream.Length];
+        var fileStream = new FileStream($"{this.filePath}/{this.fileName}_{type}.json", FileMode.Open);
+        var data = new byte[fileStream.Length];
 
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();

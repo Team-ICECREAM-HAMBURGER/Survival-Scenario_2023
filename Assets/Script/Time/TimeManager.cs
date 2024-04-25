@@ -17,19 +17,14 @@ public class TimeManager : GameControlSingleton<TimeManager> {
         Init();
     }
     
-    public void WorldTermUpdate(int value) {
+    public void WorldTimeUpdate(int value) {
         this.currentTimeTerm += value;
         
-        if (this.currentTimeTerm >= 2) {
-            WorldTimeDayUpdate(1);
-            this.currentTimeTerm -= 0;
+        if (this.currentTimeTerm >= 500) {
+            this.currentTimeDay += 1;
+            this.currentTimeTerm -= 500;
         }
         
         StatusEffectManager.OnStatusEffectInvoke?.Invoke(value);
-    }
-
-    public void WorldTimeDayUpdate(int value) {
-        this.currentTimeDay += value;
-        GameInformation.OnGameDavaSave();
     }
 }
