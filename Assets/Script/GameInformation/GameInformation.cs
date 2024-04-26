@@ -34,7 +34,7 @@ public class GameInformation : GameControlSingleton<GameInformation> {
         OnWorldGameDataSave += WorldDataSave;
     }
 
-    private void Start() {
+    private void Awake() {  // TODO: Start()로 바꾸면 게임 데이터 저장이 안된다... 나한테 왜 그래... ;ㅅ;)
         Init();
     }
     

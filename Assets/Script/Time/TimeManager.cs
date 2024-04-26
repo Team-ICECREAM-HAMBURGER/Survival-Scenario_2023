@@ -20,9 +20,9 @@ public class TimeManager : GameControlSingleton<TimeManager> {
     public void WorldTimeUpdate(int value) {
         this.currentTimeTerm += value;
         
-        if (this.currentTimeTerm >= 500) {
+        if (this.currentTimeTerm >= 2) {
             this.currentTimeDay += 1;
-            this.currentTimeTerm -= 500;
+            this.currentTimeTerm -= 0;
         }
         
         StatusEffectManager.OnStatusEffectInvoke?.Invoke(value);
