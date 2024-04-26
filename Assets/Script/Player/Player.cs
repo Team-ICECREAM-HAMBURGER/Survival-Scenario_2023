@@ -79,7 +79,6 @@ public class Player : GameControlSingleton<Player> { // Model
         }
         
         StatusEffectManager.OnStatusEffectInvoke += this.statusEffect[effect.name].Invoke;
-        GameInformation.OnPlayerGameDataSave();
     }
     
     // 인벤토리에 type 아이템이 존재하는가?
@@ -97,15 +96,11 @@ public class Player : GameControlSingleton<Player> { // Model
                 this.inventory[VARIABLE.Key] = VARIABLE.Value;
             }
         }
-        
-        GameInformation.OnPlayerGameDataSave();
     }
 
     public void InventoryUpdate(string item, int value) {
         if (!this.inventory.TryAdd(item, value)) {
             this.inventory[item] += value;
         }
-        
-        GameInformation.OnPlayerGameDataSave();
     }
 }
