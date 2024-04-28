@@ -10,7 +10,7 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
 
 
     private void Init() {
-        this.Weight = 0f;
+        this.Weight = 100f;
         this.content = new();
     }
 
@@ -20,8 +20,10 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     
     public void Event() {
         Debug.Log("InjuredEvent");
+
+        var statusEffectInjuredEffectCommand = new StatusEffectInjuredCommand(new StatusEffectInjured());
         
-        StatusEffectManager.Instance.Event(new StatusEffectInjured());
+        StatusEffectManager.Instance.Execute(statusEffectInjuredEffectCommand);
         EventResult();
     }
 

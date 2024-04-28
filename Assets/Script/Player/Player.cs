@@ -15,11 +15,6 @@ public class Player : GameControlSingleton<Player> { // Model
         this.inventory = this.information.inventory;
         this.status = this.information.status;
         this.statusEffect = this.information.statusEffect;
-        
-        // TODO: StatusEffectManager로 옮길 수 있는지 확인할 것
-        foreach (var VARIABLE in this.statusEffect.Values) {
-            StatusEffectManager.OnStatusEffectInvoke += VARIABLE.Invoke;
-        }
     }
 
     private void Start() {
@@ -74,11 +69,8 @@ public class Player : GameControlSingleton<Player> { // Model
     // type 상태 이상 효과 업데이트 
     public void StatusEffectUpdate(StatusEffect effect) {
         if (!this.statusEffect.TryAdd(effect.name, effect)) {
-            this.statusEffect[effect.name].durationTerm = effect.durationTerm;
-            return;
+            this.statusEffect[effect.name].term = effect.term;
         }
-        
-        StatusEffectManager.OnStatusEffectInvoke += this.statusEffect[effect.name].Invoke;
     }
     
     // 인벤토리에 type 아이템이 존재하는가?

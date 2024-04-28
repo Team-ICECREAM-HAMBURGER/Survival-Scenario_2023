@@ -27,7 +27,5 @@ public class TimeManager : GameControlSingleton<TimeManager> {
             GameInformation.OnPlayerGameDataSave();
             GameInformation.OnWorldGameDataSave();
         }
-        
-        StatusEffectManager.OnStatusEffectInvoke?.Invoke(value);
     }
 }
