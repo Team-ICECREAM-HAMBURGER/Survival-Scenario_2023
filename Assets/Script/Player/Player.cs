@@ -8,6 +8,42 @@ public class Player : GameControlSingleton<Player> { // Model
     private GameControlDictionary.PlayerStatus status;
     private GameControlDictionary.PlayerStatusEffect statusEffect;
     
+    /*
+     * GameControlDictionary StatusEffect <string name, int term> statusEffect
+     * StatusEffectManager.Instance.statusEffects[statusEffect.Key]
+     * 
+     * Serializable Dictionary에는 string과 int만 사용되기 때문에, StatusEffect 객체들을 인터페이스로 계층화할 수 있다.
+     * 계층화 된 StatusEffect 객체들은 메서드 오버라이딩을 할 수 있다.
+     *
+     * IStatusEffect
+     * - public string Name { get; }
+     * - public GameControlType.StatusEffect StatusEffectType { get; }
+     * - public int Term { get; }
+     *
+     * + public void Effect();
+     * + public void Invoke(int value);
+     *
+     * 
+     * StatusEffectInjured : IStatusEffect
+     * - public string Name = "부상";
+     * - public GameControlType.StatusEffect StatusEffectType = Duration;
+     * - public int Term = Random.Range(1, 5) * 500;
+     * - private float statusReduceMultiplier;
+     * 
+     * + public void Effect()
+     * -- GameDataSave();
+     * -- Player.StatusUpdate(health, *2);
+     * -- Player.Instance.StatusEffectUpdate(this)
+     *
+     *
+     * + StatusEffectUpdate(string key, int value)
+     * -- if (!TryAdd() :
+     *      - StatusEffect[effect.name].Value = effect.term;
+     * 
+     */
+    
+    
+    
     
     private void Init() {
         this.information = GameInformation.Instance.playerInformation;
