@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 [Serializable]
 public class PlayerInformation {
     public string name = string.Empty;
-    public GameControlDictionary.PlayerInventory inventory = new();
-    public GameControlDictionary.PlayerStatus status = new();
-    public GameControlDictionary.PlayerStatusEffect statusEffect = new();
+    public GameControlDictionary.Inventory inventory = new();
+    public GameControlDictionary.Status status = new();
+    public GameControlDictionary.StatusEffect statusEffect = new();
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 public class Player : GameControlSingleton<Player> { // Model
     private PlayerInformation information;
 
-    private GameControlDictionary.PlayerInventory inventory;
-    private GameControlDictionary.PlayerStatus status;
-    private GameControlDictionary.PlayerStatusEffect statusEffect;
+    private GameControlDictionary.Inventory inventory;          // <name, amount>
+    private GameControlDictionary.Status status;                // <, >
+    private GameControlDictionary.StatusEffect statusEffect;    // <name, term>
     
     /*
      * GameControlDictionary StatusEffect <string name, int term> statusEffect
@@ -98,16 +98,16 @@ public class Player : GameControlSingleton<Player> { // Model
     }
     
     // type 상태 이상 효과가 적용되어 있는가?
-    public StatusEffect StatusEffectCheck(string type) {
-        return this.statusEffect.GetValueOrDefault(type);
-    }
+    // public StatusEffect StatusEffectCheck(string type) {
+    //     return this.statusEffect.GetValueOrDefault(type);
+    // }
     
     // type 상태 이상 효과 업데이트 
-    public void StatusEffectUpdate(StatusEffect effect) {
-        if (!this.statusEffect.TryAdd(effect.name, effect)) {
-            this.statusEffect[effect.name].term = effect.term;
-        }
-    }
+    // public void StatusEffectUpdate(StatusEffect effect) {
+    //     if (!this.statusEffect.TryAdd(effect.name, effect)) {
+    //         this.statusEffect[effect.name].term = effect.term;
+    //     }
+    // }
     
     // 인벤토리에 type 아이템이 존재하는가?
     public bool InventoryCheck(string type) {

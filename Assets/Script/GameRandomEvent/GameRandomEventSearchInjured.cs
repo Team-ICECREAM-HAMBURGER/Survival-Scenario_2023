@@ -20,10 +20,7 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     
     public void Event() {
         Debug.Log("InjuredEvent");
-
-        var statusEffectInjuredEffectCommand = new StatusEffectInjuredCommand(new StatusEffectInjured());
         
-        StatusEffectManager.Instance.Execute(statusEffectInjuredEffectCommand);
         EventResult();
     }
 

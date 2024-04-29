@@ -1,25 +1,32 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class StatusEffectInjured : StatusEffect {
+public class StatusEffectInjured : MonoBehaviour, IStatusEffect {
+    public string Name { get; private set; }
+    public GameControlType.StatusEffect Type { get; private set; }
+    public int Term { get; private set; }
+
     private float statusReduceMultiplier;
     
     
-    public StatusEffectInjured() {
-        this.name = "부상";
-        this.type = GameControlType.StatusEffect.DURATION;
-        this.term = Random.Range(1, 5) * 500;
+    public void Init() {
+        this.Name = "부상";
+        this.Type = GameControlType.StatusEffect.DURATION;
+        this.Term = Random.Range(1, 5) * 500;
     }
 
-    public void Effect() {
-        this.statusReduceMultiplier = 2f;
-        
-        GameInformation.OnPlayerGameDataSave();
-        GameInformation.OnWorldGameDataSave();
-
-        Player.Instance.StatusEffectUpdate(this);
+    private void Awake() {
+        Init();
     }
 
-    private void Invoke(int value) {
-        
+    public void StatusEffectInvoke() {
+        // GameDataSave();
+        // Player.StatusUpdate(health, *2);
+        // Player.Instance.StatusEffectUpdate(this)
+    }
+
+    public void StatusEffectUpdate() {
+        // if (!TryAdd() :
+        //      StatusEffect[effect.name].Value = effect.term;
     }
 }
