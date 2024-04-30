@@ -98,16 +98,16 @@ public class Player : GameControlSingleton<Player> { // Model
     }
     
     // type 상태 이상 효과가 적용되어 있는가?
-    // public StatusEffect StatusEffectCheck(string type) {
-    //     return this.statusEffect.GetValueOrDefault(type);
-    // }
+    public bool StatusEffectCheck(string key) { 
+        return this.statusEffect.ContainsKey(key);
+    }
     
     // type 상태 이상 효과 업데이트 
-    // public void StatusEffectUpdate(StatusEffect effect) {
-    //     if (!this.statusEffect.TryAdd(effect.name, effect)) {
-    //         this.statusEffect[effect.name].term = effect.term;
-    //     }
-    // }
+    public void StatusEffectUpdate(IStatusEffect effect) {
+        if (!this.statusEffect.TryAdd(effect.Name, effect.Term)) {
+            this.statusEffect[effect.Name] = effect.Term;
+        }
+    }
     
     // 인벤토리에 type 아이템이 존재하는가?
     public bool InventoryCheck(string type) {

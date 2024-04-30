@@ -20,7 +20,8 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     
     public void Event() {
         Debug.Log("InjuredEvent");
-        
+
+        StatusEffectManager.Instance.StatusEffects["부상"].Active();
         EventResult();
     }
 

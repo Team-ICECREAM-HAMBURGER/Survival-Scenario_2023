@@ -12,21 +12,24 @@ public class StatusEffectInjured : MonoBehaviour, IStatusEffect {
     public void Init() {
         this.Name = "부상";
         this.Type = GameControlType.StatusEffect.DURATION;
-        this.Term = Random.Range(1, 5) * 500;
     }
 
     private void Awake() {
         Init();
     }
 
-    public void StatusEffectInvoke() {
-        // GameDataSave();
+    public void Invoke() {  // 갱신, 이미 적용된 상태를 업데이트
+        GameInformation.OnPlayerGameDataSave();
+        GameInformation.OnWorldGameDataSave();
+
+        
         // Player.StatusUpdate(health, *2);
         // Player.Instance.StatusEffectUpdate(this)
     }
 
-    public void StatusEffectUpdate() {
-        // if (!TryAdd() :
-        //      StatusEffect[effect.name].Value = effect.term;
+    public void Active() {  // 신규, 새로운 상태 이상이 발동
+        this.Term = Random.Range(1, 5) * 500;
+        Player.Instance.StatusEffectUpdate(this);
+        Invoke();
     }
 }

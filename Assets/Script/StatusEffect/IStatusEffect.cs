@@ -5,4 +5,6 @@ public interface IStatusEffect {
 
 
     public void Init();
+    public void Active();
+    public void Invoke();
 }
