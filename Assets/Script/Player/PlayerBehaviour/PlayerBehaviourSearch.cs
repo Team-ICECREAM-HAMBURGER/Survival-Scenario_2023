@@ -42,7 +42,10 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         }
         
         // Player Status Update
-        // Player.Instance.StatusUpdate(this.requireStatusValues);
+        Player.Instance.StatusUpdate(this.requireStatusValues);
+        
+        // Player Status Effects Invoke
+        Player.Instance.StatusEffectInvoke();
         
         // Random Event; Search
         GameRandomEventSearch.OnSearchRandomEvent();

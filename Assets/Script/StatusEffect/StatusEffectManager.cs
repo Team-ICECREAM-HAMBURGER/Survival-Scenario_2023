@@ -10,6 +10,8 @@ public class StatusEffectManager : GameControlSingleton<StatusEffectManager> {
         
         foreach (var VARIABLE in GetComponents<IStatusEffect>()) {
             this.StatusEffects[VARIABLE.Name] = VARIABLE;
+            this.StatusEffects[VARIABLE.Name].Term = Player.Instance.StatusEffect[VARIABLE.Name];
+            Player.OnStatusEffectInvoke += this.StatusEffects[VARIABLE.Name].Invoke;
         }
     }
 
