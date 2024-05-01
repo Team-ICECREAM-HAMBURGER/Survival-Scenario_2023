@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
-    public float Weight { get; private set; }
+    [field: SerializeField] public float Weight { get; set; }
 
     private string title;
     private StringBuilder content;
 
 
     private void Init() {
-        this.Weight = 100f;
+        //this.Weight = 100f;
         this.content = new();
     }
 
@@ -21,7 +21,7 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     public void Event() {
         Debug.Log("InjuredEvent");
 
-        StatusEffectManager.Instance.StatusEffects["부상"].Active();
+        PlayerStatusEffectManager.Instance.StatusEffects["부상"].Active();
         EventResult();
     }
 

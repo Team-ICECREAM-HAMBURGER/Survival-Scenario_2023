@@ -2326,7 +2326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 337161020}
+  m_AnchoredPosition: {x: -399.9992, y: 337732200}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -17203,7 +17203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 337161020}
+  m_AnchoredPosition: {x: -399.9992, y: 337732200}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -20343,6 +20343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0761460988c34ba58b92feb0642d1eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Weight>k__BackingField: 100
 --- !u!114 &1152889181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20355,6 +20356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6af915c769f471fb092addf43f385c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Weight>k__BackingField: 0
   spendItem: "\uC0AC\uB0E5 \uB3C4\uAD6C"
   spendItemAmount: 1
 --- !u!114 &1152889182
@@ -20369,6 +20371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbee7bb5386248f8b6df8cdc87b5605b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Weight>k__BackingField: 0
 --- !u!114 &1152889183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24831,7 +24834,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 28.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -27767,7 +27770,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 28.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

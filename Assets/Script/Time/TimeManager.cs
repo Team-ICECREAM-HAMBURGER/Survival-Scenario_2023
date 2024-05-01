@@ -23,9 +23,9 @@ public class TimeManager : GameControlSingleton<TimeManager> {
         if (this.currentTimeTerm >= 500) {
             this.currentTimeDay += 1;
             this.currentTimeTerm -= 500;
-            
-            GameInformation.OnPlayerGameDataSave();
-            GameInformation.OnWorldGameDataSave();
         }
+                    
+        GameInformation.OnPlayerGameDataSave();
+        GameInformation.OnWorldGameDataSave();
     }
 }
