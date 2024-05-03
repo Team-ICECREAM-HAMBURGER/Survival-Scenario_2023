@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerStatusEffectManager : GameControlSingleton<PlayerStatusEffectManager> {
     public Dictionary<string, IPlayerStatusEffect> StatusEffects { get; private set; }

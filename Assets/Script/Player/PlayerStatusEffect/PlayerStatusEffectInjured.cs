@@ -10,9 +10,9 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
     
 
     public void Invoke(int value) {  // 갱신, 이미 적용된 상태를 업데이트
-        // var status = Player.Instance.Status[GameControlType.Status.STAMINA];
+        var status = Player.Instance.Status[GameControlType.Status.STAMINA];
         
-        // Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, -status * statusReducePercent);
+        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * statusReducePercent * -0.01f);
         this.Term += value;
         
         if (this.Term <= 0) {
@@ -26,6 +26,5 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
     public void Active() {  // 신규, 새로운 상태 이상이 발동
         this.Term = Random.Range(1, 5) * 500;
         Player.Instance.StatusEffectAdd(this);
-        Invoke(0);
     }
 }

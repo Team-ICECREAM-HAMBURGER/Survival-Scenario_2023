@@ -1,12 +1,12 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Player : GameControlSingleton<Player> { // Model
     private PlayerInformation information;
 
     private GameControlDictionary.Inventory inventory;          // <name, amount>
-    private GameControlDictionary.Status status;                // <Enum, float>
-    private GameControlDictionary.StatusEffect statusEffect;    // <name, term>
+    public GameControlDictionary.Status Status { get; private set; }                // <Enum, float>
+    public GameControlDictionary.StatusEffect StatusEffect { get; private set; }    // <name, term>
     
     private delegate void StatusEffectInvokeHandler(int value);
     private StatusEffectInvokeHandler OnStatusEffectInvoke;
@@ -16,13 +16,16 @@ public class Player : GameControlSingleton<Player> { // Model
         this.information = GameInformation.Instance.playerInformation;
         
         this.inventory = this.information.inventory;
-        this.status = this.information.status;
-        this.statusEffect = this.information.statusEffect;
+        this.Status = this.information.status;
+        this.StatusEffect = this.information.statusEffect;
 
-        foreach (var VARIABLE in this.statusEffect) {
-            PlayerStatusEffectManager.Instance.StatusEffects[VARIABLE.Key].Term = this.statusEffect[VARIABLE.Key];
+        foreach (var VARIABLE in this.StatusEffect) {
+            PlayerStatusEffectManager.Instance.StatusEffects[VARIABLE.Key].Term = this.StatusEffect[VARIABLE.Key];
             OnStatusEffectInvoke += PlayerStatusEffectManager.Instance.StatusEffects[VARIABLE.Key].Invoke;
         }
+
+        // DEBUG
+        this.Status[GameControlType.Status.STAMINA] = 100f;
     }
 
     private void Start() {
@@ -50,12 +53,12 @@ public class Player : GameControlSingleton<Player> { // Model
 
     // type 상태의 수치를 value만큼 업데이트
     public void StatusUpdate(GameControlType.Status type, float value) {
-        this.status[type] += value;
+        this.Status[type] += MathF.Floor(value);
     }
     
     // type 상태 이상 효과가 적용되어 있는가?
     public bool StatusEffectCheck(string key) { 
-        return this.statusEffect.ContainsKey(key);
+        return this.StatusEffect.ContainsKey(key);
     }
 
     // 구독 중인 상태 이상에 효과 알림 전송
@@ -65,21 +68,21 @@ public class Player : GameControlSingleton<Player> { // Model
     
     // type 상태 이상 효과 추가 
     public void StatusEffectAdd(IPlayerStatusEffect effect) {
-        if (!this.statusEffect.TryAdd(effect.Name, effect.Term)) {
-            this.statusEffect[effect.Name] = effect.Term;
+        if (!this.StatusEffect.TryAdd(effect.Name, effect.Term)) {  // 이미 있음
+            this.StatusEffect[effect.Name] = effect.Term;
         }
-        else {
+        else {  // 신규 할당
             OnStatusEffectInvoke += effect.Invoke;
         }
     }
 
     public void StatusEffectUpdate(IPlayerStatusEffect effect) {
-        this.statusEffect[effect.Name] = effect.Term;
+        this.StatusEffect[effect.Name] = effect.Term;
     }
     
     // type 상태 이상 효과 삭제
     public void StatusEffectRemove(IPlayerStatusEffect effect) {
-        this.statusEffect.Remove(effect.Name);
+        this.StatusEffect.Remove(effect.Name);
     }
     
     // 인벤토리에 type 아이템이 존재하는가?
