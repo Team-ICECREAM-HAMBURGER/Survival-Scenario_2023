@@ -1,24 +1,18 @@
-public class PlayerStatusHydration : IPlayerStatus {
-    public float MaxValue { get; } = 100f;
-    public float LimitValue { get; } = 20f;
+using UnityEngine;
 
+public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
+    public float LimitValue { get; } = 30f;
     public float CurrentValue { get; set; }
-    // public float CurrentValue { get; private set; }
     
-    public string StatusName { get; } = "수분";
-    public GameControlType.Status Status { get; } = GameControlType.Status.HYDRATION;
-    public float StatusDecreaseMultiplier { get; set; }
+    public string Name { get; } = "수분";
+    public GameControlType.Status Type { get; } = GameControlType.Status.HYDRATION;
 
 
-    public void StatusIncrease(float value) {
-        this.CurrentValue += value;
-    }
+    public void Invoke(float value) {
+        this.CurrentValue = value;
 
-    public void StatusDecrease(float value) {
-        this.CurrentValue -= value * this.StatusDecreaseMultiplier;
-    }
-    
-    public bool StatusLimitCheck(float value) {
-        return this.CurrentValue >= this.LimitValue;
+        if (Player.Instance.Status[GameControlType.Status.HYDRATION] <= this.LimitValue) {
+            Player.Instance.StatusEffectMap[GameControlType.StatusEffect.DEHYDRATION].Active();
+        }
     }
 }

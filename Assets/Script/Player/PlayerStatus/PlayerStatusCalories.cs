@@ -1,24 +1,14 @@
-public class PlayerStatusCalories : IPlayerStatus {
-    public float MaxValue { get; } = 100f;
+using UnityEngine;
+
+public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {
     public float LimitValue { get; } = 15f;
-
     public float CurrentValue { get; set; }
-    // public float CurrentValue { get; private set; }
     
-    public string StatusName { get; } = "칼로리";
-    public GameControlType.Status Status { get; } = GameControlType.Status.CALORIES;
-    public float StatusDecreaseMultiplier { get; set; }
+    public string Name { get; } = "칼로리";
+    public GameControlType.Status Type { get; } = GameControlType.Status.CALORIES;
 
 
-    public void StatusIncrease(float value) {
-        this.CurrentValue += value;
-    }
-
-    public void StatusDecrease(float value) {
-        this.CurrentValue -= value * this.StatusDecreaseMultiplier;
-    }
-    
-    public bool StatusLimitCheck(float value) {
-        return this.CurrentValue >= this.LimitValue;
+    public void Invoke(float value) {
+        this.CurrentValue = value;
     }
 }

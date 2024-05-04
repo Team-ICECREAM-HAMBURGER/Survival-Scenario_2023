@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Player : GameControlSingleton<Player> { // Model
     private PlayerInformation information;
-
     private GameControlDictionary.Inventory inventory;          // <name, amount>
     public GameControlDictionary.Status Status { get; private set; }                // <Enum, float>
-    public GameControlDictionary.StatusEffect StatusEffect { get; private set; }    // <name, term>
+    public GameControlDictionary.StatusEffect StatusEffect { get; private set; }    // <Enum, term>
+    
+    public Dictionary<GameControlType.Status, IPlayerStatus> StatusMap { get; private set; }
+    public Dictionary<GameControlType.StatusEffect, IPlayerStatusEffect> StatusEffectMap { get; private set; }
     
     private delegate void StatusEffectInvokeHandler(int value);
     private StatusEffectInvokeHandler OnStatusEffectInvoke;
@@ -18,14 +21,25 @@ public class Player : GameControlSingleton<Player> { // Model
         this.inventory = this.information.inventory;
         this.Status = this.information.status;
         this.StatusEffect = this.information.statusEffect;
-
+        this.StatusMap = new();
+        this.StatusEffectMap = new();
+        
+        foreach (var VARIABLE in GetComponents<IPlayerStatus>()) {
+            this.StatusMap[VARIABLE.Type] = VARIABLE;
+        }
+        
+        foreach (var VARIABLE in GetComponents<IPlayerStatusEffect>()) {
+            this.StatusEffectMap[VARIABLE.Type] = VARIABLE;
+        }
+        
         foreach (var VARIABLE in this.StatusEffect) {
-            PlayerStatusEffectManager.Instance.StatusEffects[VARIABLE.Key].Term = this.StatusEffect[VARIABLE.Key];
-            OnStatusEffectInvoke += PlayerStatusEffectManager.Instance.StatusEffects[VARIABLE.Key].Invoke;
+            this.StatusEffectMap[VARIABLE.Key].Term = this.StatusEffect[VARIABLE.Key];
+            OnStatusEffectInvoke += this.StatusEffectMap[VARIABLE.Key].Invoke;
         }
 
-        // DEBUG
-        this.Status[GameControlType.Status.STAMINA] = 100f;
+        foreach (var VARIABLE in this.StatusMap) {
+            this.StatusMap[VARIABLE.Key].CurrentValue = this.Status[VARIABLE.Key];
+        }
     }
 
     private void Start() {
@@ -47,17 +61,14 @@ public class Player : GameControlSingleton<Player> { // Model
         return true;
     }
 
-    // 각 상태의 수치를 value만큼 업데이트
-    public void StatusUpdate(float[] values) {
-    }
-
     // type 상태의 수치를 value만큼 업데이트
     public void StatusUpdate(GameControlType.Status type, float value) {
         this.Status[type] += MathF.Floor(value);
+        this.StatusMap[type].Invoke(this.Status[type]);
     }
     
     // type 상태 이상 효과가 적용되어 있는가?
-    public bool StatusEffectCheck(string key) { 
+    public bool StatusEffectCheck(GameControlType.StatusEffect key) { 
         return this.StatusEffect.ContainsKey(key);
     }
 
@@ -68,8 +79,8 @@ public class Player : GameControlSingleton<Player> { // Model
     
     // type 상태 이상 효과 추가 
     public void StatusEffectAdd(IPlayerStatusEffect effect) {
-        if (!this.StatusEffect.TryAdd(effect.Name, effect.Term)) {  // 이미 있음
-            this.StatusEffect[effect.Name] = effect.Term;
+        if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {  // 이미 있음
+            this.StatusEffect[effect.Type] = effect.Term;
         }
         else {  // 신규 할당
             OnStatusEffectInvoke += effect.Invoke;
@@ -77,12 +88,12 @@ public class Player : GameControlSingleton<Player> { // Model
     }
 
     public void StatusEffectUpdate(IPlayerStatusEffect effect) {
-        this.StatusEffect[effect.Name] = effect.Term;
+        this.StatusEffect[effect.Type] = effect.Term;
     }
     
     // type 상태 이상 효과 삭제
     public void StatusEffectRemove(IPlayerStatusEffect effect) {
-        this.StatusEffect.Remove(effect.Name);
+        this.StatusEffect.Remove(effect.Type);
     }
     
     // 인벤토리에 type 아이템이 존재하는가?

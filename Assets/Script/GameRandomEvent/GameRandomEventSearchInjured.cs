@@ -21,7 +21,7 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     public void Event() {
         Debug.Log("InjuredEvent");
 
-        PlayerStatusEffectManager.Instance.StatusEffects["부상"].Active();
+        Player.Instance.StatusEffectMap[GameControlType.StatusEffect.INJURED].Active();
         EventResult();
     }
 

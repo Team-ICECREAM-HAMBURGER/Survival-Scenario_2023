@@ -1,14 +1,9 @@
 public interface IPlayerStatus {
-    public float MaxValue { get; }
     public float LimitValue { get; }
     public float CurrentValue { get; set; }
-    
-    public string StatusName { get; }
-    public GameControlType.Status Status { get; }
-    public float StatusDecreaseMultiplier { get; set; }
-    
-    
-    public void StatusIncrease(float value);
-    public void StatusDecrease(float value);
-    public bool StatusLimitCheck(float value);
+    public string Name { get; }
+    public GameControlType.Status Type { get; }
+
+
+    public void Invoke(float value);
 }

@@ -1,24 +1,14 @@
-public class PlayerStatusStamina : IPlayerStatus {
-    public float MaxValue { get; } = 100f;
+using UnityEngine;
+
+public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {
     public float LimitValue { get; } = 0f;
-
     public float CurrentValue { get; set; }
-    // public float CurrentValue { get; private set; }
     
-    public string StatusName { get; } = "체력";
-    public GameControlType.Status Status { get; } = GameControlType.Status.STAMINA;
-    public float StatusDecreaseMultiplier { get; set; }
-    
-    
-    public void StatusIncrease(float value) {
-        this.CurrentValue += value;
-    }
+    public string Name { get; } = "체력";
+    public GameControlType.Status Type { get; } = GameControlType.Status.STAMINA;
 
-    public void StatusDecrease(float value) {
-        this.CurrentValue -= value * this.StatusDecreaseMultiplier;
-    }
-    
-    public bool StatusLimitCheck(float value) {
-        return this.CurrentValue >= this.LimitValue;
+
+    public void Invoke(float value) {
+        this.CurrentValue = value;
     }
 }

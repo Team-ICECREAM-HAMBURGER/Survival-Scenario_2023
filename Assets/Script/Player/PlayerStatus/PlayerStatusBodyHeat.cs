@@ -1,24 +1,13 @@
-public class PlayerStatusBodyHeat : IPlayerStatus {
-    public float MaxValue { get; } = 100f;
+using UnityEngine;
+
+public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
     public float LimitValue { get; } = 25f;
-
     public float CurrentValue { get; set; }
-    // public float CurrentValue { get; private set; }
-    
-    public string StatusName { get; } = "체온";
-    public GameControlType.Status Status { get; } = GameControlType.Status.BODY_HEAT;
-    public float StatusDecreaseMultiplier { get; set; }
+    public string Name { get; } = "체온";
+    public GameControlType.Status Type { get; } = GameControlType.Status.BODY_HEAT;
 
 
-    public void StatusIncrease(float value) {
-        this.CurrentValue += value;
-    }
-
-    public void StatusDecrease(float value) {
-        this.CurrentValue -= value * this.StatusDecreaseMultiplier;
-    }
-    
-    public bool StatusLimitCheck(float value) {
-        return this.CurrentValue >= this.LimitValue;
+    public void Invoke(float value) {
+        this.CurrentValue = value;
     }
 }

@@ -4,7 +4,13 @@ using TMPro;
 using UnityEngine;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
-    [SerializeField] private float[] requireStatusValues = new float[4];
+    [Header("Require Status")]
+    [SerializeField] private float requireStatusStamina;
+    [SerializeField] private float requireStatusBodyHeat;
+    [SerializeField] private float requireStatusHydration;
+    [SerializeField] private float requireStatusCalories;
+    
+    [Space(10f)]
     
     [SerializeField] private Canvas canvasSearch;
     [SerializeField] private Canvas canvasOutside;
@@ -42,7 +48,10 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         }
         
         // Player Status Update
-        Player.Instance.StatusUpdate(this.requireStatusValues);
+        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, requireStatusStamina);
+        Player.Instance.StatusUpdate(GameControlType.Status.BODY_HEAT, requireStatusBodyHeat);
+        Player.Instance.StatusUpdate(GameControlType.Status.HYDRATION, requireStatusHydration);
+        Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, requireStatusCalories);
         
         // Player Status Effects Invoke
         Player.Instance.StatusEffectInvoke(-15);
