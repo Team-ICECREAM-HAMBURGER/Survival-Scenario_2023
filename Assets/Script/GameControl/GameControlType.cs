@@ -34,7 +34,8 @@ public class GameControlType {
     }
     
     public enum StatusEffect {
-        DEHYDRATION,
-        INJURED
+        DEHYDRATION,    // 탈수
+        INJURED,        // 부상
+        EXHAUSTION      // 탈진
     }
 }

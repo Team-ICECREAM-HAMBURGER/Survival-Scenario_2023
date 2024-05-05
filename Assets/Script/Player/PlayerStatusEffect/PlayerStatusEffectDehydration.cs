@@ -16,9 +16,10 @@ public class PlayerStatusEffectDehydration : MonoBehaviour, IPlayerStatusEffect 
     public void Invoke(int value) { // 갱신, 이미 적용된 상태를 업데이트
         var status = Player.Instance.Status[GameControlType.Status.HYDRATION];
         
-        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * statusReducePercent * -0.01f);
+        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * this.statusReducePercent * -0.01f);
 
-        if (Player.Instance.Status[GameControlType.Status.HYDRATION] > Player.Instance.StatusMap[GameControlType.Status.HYDRATION].LimitValue) {
+        if (Player.Instance.Status[GameControlType.Status.HYDRATION] > 
+            Player.Instance.StatusMap[GameControlType.Status.HYDRATION].LimitValue) {
             Player.Instance.StatusEffectRemove(this);
         }
     }

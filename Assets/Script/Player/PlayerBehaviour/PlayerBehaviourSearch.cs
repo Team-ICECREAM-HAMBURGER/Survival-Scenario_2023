@@ -39,11 +39,16 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     }
 
     public bool BehaviourCheck() {
-        return true;
+        // 행동 수행 조건
+        var check = Player.Instance.StatusCheck(Mathf.Abs(this.requireStatusStamina), Mathf.Abs(this.requireStatusBodyHeat),
+                        Mathf.Abs(this.requireStatusHydration), Mathf.Abs(this.requireStatusCalories));
+
+        return check;
     }
 
     public void Behaviour() {
         if (!BehaviourCheck()) {
+            Debug.Log("False");
             return;
         }
         

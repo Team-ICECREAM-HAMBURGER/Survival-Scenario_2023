@@ -26,6 +26,7 @@ public class Player : GameControlSingleton<Player> { // Model
         
         foreach (var VARIABLE in GetComponents<IPlayerStatus>()) {
             this.StatusMap[VARIABLE.Type] = VARIABLE;
+            this.StatusMap[VARIABLE.Type].Init(this.Status[VARIABLE.Type]);
         }
         
         foreach (var VARIABLE in GetComponents<IPlayerStatusEffect>()) {
@@ -50,15 +51,15 @@ public class Player : GameControlSingleton<Player> { // Model
     public bool StatusCheck(GameControlType.Status type, float value) { 
         return true;
     }
-
-    // 모든 상태의 수치가 value 이상인가?
-    public bool StatusCheck(float value) {
-        return true;
-    }
     
     // 각 상태의 수치가 모두 기준치를 넘는가?
     public bool StatusCheck(float stamina, float bodyHeat, float hydration, float calories) {
-        return true;
+        var check = this.Status[GameControlType.Status.STAMINA] >= stamina &&
+                    this.Status[GameControlType.Status.BODY_HEAT] >= bodyHeat &&
+                    this.Status[GameControlType.Status.HYDRATION] >= hydration &&
+                    this.Status[GameControlType.Status.CALORIES] >= calories;
+        
+        return check;
     }
 
     // type 상태의 수치를 value만큼 업데이트
