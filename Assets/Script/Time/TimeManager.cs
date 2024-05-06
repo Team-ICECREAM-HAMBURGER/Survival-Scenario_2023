@@ -8,11 +8,14 @@ public class TimeManager : GameControlSingleton<TimeManager> {
 
     
     private void Init() {
-        this.information = GameInformation.Instance.worldInformation;
+        this.information = GameInformationManager.Instance.worldInformation;
         this.currentTimeTerm = this.information.timeTerm;
         this.currentTimeDay = this.information.timeDay;
     }
 
+    private void Awake() {
+    }
+    
     private void Start() {
         Init();
     }
@@ -25,7 +28,7 @@ public class TimeManager : GameControlSingleton<TimeManager> {
             this.currentTimeTerm -= 500;
         }
                     
-        GameInformation.OnPlayerGameDataSave();
-        GameInformation.OnWorldGameDataSave();
+        GameInformationManager.OnPlayerGameDataSave();
+        GameInformationManager.OnWorldGameDataSave();
     }
 }

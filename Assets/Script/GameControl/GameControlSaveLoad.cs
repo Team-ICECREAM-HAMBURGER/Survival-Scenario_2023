@@ -3,7 +3,6 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using Newtonsoft.Json;
-using UnityEditor;
 
 public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
     private string fileName;
@@ -15,7 +14,7 @@ public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
         this.filePath = Application.persistentDataPath;
     }
 
-    private void Awake() {
+    private void Start() {
         Init();
     }
 
@@ -53,5 +52,10 @@ public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
         var jsonData = Encoding.UTF8.GetString(data);
 
         return JsonConvert.DeserializeObject<T>(jsonData);
+    }
+
+    public void DeleteJsonFile() {
+        File.Delete($"{filePath}/{fileName}_Player.json");
+        File.Delete($"{filePath}/{fileName}_World.json");
     }
 }

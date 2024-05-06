@@ -31,7 +31,7 @@ public class Player : GameControlSingleton<Player> { // Model
     
     
     private void Init() {
-        this.information = GameInformation.Instance.playerInformation;
+        this.information = GameInformationManager.Instance.playerInformation;
         
         this.inventory = this.information.inventory;
         this.Status = this.information.status;
@@ -58,7 +58,10 @@ public class Player : GameControlSingleton<Player> { // Model
         }
     }
 
-    private void Start() {
+    private void Awake() {
+    }
+    
+    private void Start() {  
         Init();
     }
 

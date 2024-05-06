@@ -32,25 +32,27 @@ public class GameEventGameOver : MonoBehaviour {
         this.canvasGroup.alpha = 0f;
         
         this.badEndingMenu.SetActive(false);
-        this.badEndingTitle.gameObject.SetActive(false);
         this.badEndingContent.gameObject.SetActive(false);
+        this.badEndingTitle.gameObject.SetActive(false);
         this.badEndingReturnButton.gameObject.SetActive(false);
-        
+
         this.goodEndingMenu.SetActive(false);
-        this.goodEndingTitle.gameObject.SetActive(false);
         this.goodEndingContent.gameObject.SetActive(false);
+        this.goodEndingTitle.gameObject.SetActive(false);
         this.goodEndingReturnButton.gameObject.SetActive(false);
         
         OnGameOverBadEnding += BadEnding;
         OnGameOverGoodEnding += GoodEnding;
     }
 
-    private void Awake() {
+    private void Awake() { 
         Init();
     }
     
     private void BadEnding(string title, string content) {
         this.badEndingMenu.SetActive(true);
+        this.goodEndingMenu.SetActive(false);
+        
         this.badEndingTitle.text = title;
         this.badEndingContent.text = content;
         
@@ -58,7 +60,9 @@ public class GameEventGameOver : MonoBehaviour {
     }
 
     private void GoodEnding(string title, string content) {
+        this.badEndingMenu.SetActive(false);
         this.goodEndingMenu.SetActive(true);
+        
         this.goodEndingTitle.text = title;
         this.goodEndingContent.text = content;
         
@@ -89,7 +93,9 @@ public class GameEventGameOver : MonoBehaviour {
         button.gameObject.SetActive(true);
     }
 
-    public void ResetView() {
+    public void GameReset() {
+        GameInformationManager.OnGameDataReset();
+        
         SceneManager.LoadScene(0);
     }
 }

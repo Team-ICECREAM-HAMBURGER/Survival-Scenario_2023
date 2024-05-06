@@ -1,14 +1,15 @@
+using System;
 using System.IO;
 using UnityEngine;
 
-public class GameInformation : GameControlSingleton<GameInformation> {
+public class GameInformationManager : GameControlSingleton<GameInformationManager> {
     public PlayerInformation playerInformation;
     public WorldInformation worldInformation;
     
     public delegate void GameDataSaveEventHandler();
     public static GameDataSaveEventHandler OnPlayerGameDataSave;
     public static GameDataSaveEventHandler OnWorldGameDataSave;
-    
+    public static GameDataSaveEventHandler OnGameDataReset;
     
     private void Init() {
         // Save File Load/New
@@ -31,23 +32,27 @@ public class GameInformation : GameControlSingleton<GameInformation> {
         
         OnPlayerGameDataSave += PlayerDataSave;
         OnWorldGameDataSave += WorldDataSave;
+        OnGameDataReset += GameDataReset;
     }
 
-    private void Awake() {  // TODO: Start()로 바꾸면 게임 데이터 저장이 안된다... 나한테 왜 그래... ;ㅅ;)
+    private void Start() {
+        Init();
+    }
+
+    private void GameDataReset() {
+        GameControlSaveLoad.Instance.DeleteJsonFile();
         Init();
     }
     
     private void PlayerDataSave() {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformation);
         
-        Debug.Log(saveData);
         GameControlSaveLoad.Instance.CreateJsonFile(saveData, "Player");
     }
 
     private void WorldDataSave() {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.worldInformation);
         
-        Debug.Log(saveData);
         GameControlSaveLoad.Instance.CreateJsonFile(saveData, "World");
     }
 }
