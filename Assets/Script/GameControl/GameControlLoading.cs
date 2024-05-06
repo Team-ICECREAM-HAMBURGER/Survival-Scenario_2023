@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,9 +17,14 @@ public class GameControlLoading : MonoBehaviour {
     }
 
     private IEnumerator Loading() {
-        while (this.indicator.value < 1) {
-            this.indicator.value = Mathf.Lerp(0, 1, this.indicator.value + Time.deltaTime);
-            yield return new WaitForSeconds(Time.deltaTime);
+        var elapsedTime = 0f;
+        var duration = 2f; // 로딩이 완료되는 데 걸리는 시간
+
+        while (elapsedTime < duration) {
+            elapsedTime += Time.deltaTime;
+            this.indicator.value = Mathf.Lerp(0, 1, elapsedTime / duration);
+            
+            yield return null;
         }
 
         this.indicator.value = 0;

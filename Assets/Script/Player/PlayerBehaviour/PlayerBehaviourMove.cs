@@ -13,12 +13,7 @@ public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
     private void Awake() {
         Init();
     }
-
-    public bool CanBehaviour() {
-        return true;
-    }
-
-
+    
     public void Behaviour() {
         throw new System.NotImplementedException();
     }

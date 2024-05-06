@@ -19,7 +19,7 @@ public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {
     public void Invoke(float value) {
         this.CurrentValue = value;
         
-        if (Player.Instance.Status[GameControlType.Status.STAMINA] <= this.LimitValue) {
+        if (this.CurrentValue <= this.LimitValue) {
             Player.Instance.StatusEffectMap[GameControlType.StatusEffect.EXHAUSTION].Active();
         }
         

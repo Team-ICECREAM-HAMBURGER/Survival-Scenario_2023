@@ -19,7 +19,12 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
     public void Invoke(float value) {
         this.CurrentValue = value;
 
-        if (Player.Instance.Status[GameControlType.Status.HYDRATION] <= this.LimitValue) {
+        if (this.CurrentValue <= 0f) {  // 갈사
+            DeathByDehydration();
+            return;
+        }
+        
+        if (this.CurrentValue <= this.LimitValue) {
             Player.Instance.StatusEffectMap[GameControlType.StatusEffect.DEHYDRATION].Active();
         }
         
@@ -28,5 +33,12 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
     
     public void UpdateView() {
         this.statusGauge.value = Mathf.Clamp(this.CurrentValue, 0f, 100f);
+    }
+    
+    private void DeathByDehydration() {
+        var title = "갈사했습니다.";
+        var content = "목이 타들어갑니다. 점점 시야가 흐려집니다...";
+
+        GameEventGameOver.OnGameOverBadEnding(title, content);
     }
 }

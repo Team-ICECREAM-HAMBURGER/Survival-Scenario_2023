@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -38,20 +37,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         Init();
     }
 
-    public bool BehaviourCheck() {
-        // 행동 수행 조건
-        var check = Player.Instance.StatusCheck(Mathf.Abs(this.requireStatusStamina), Mathf.Abs(this.requireStatusBodyHeat),
-                        Mathf.Abs(this.requireStatusHydration), Mathf.Abs(this.requireStatusCalories));
-
-        return check;
-    }
-
     public void Behaviour() {
-        if (!BehaviourCheck()) {
-            Debug.Log("False");
-            return;
-        }
-        
         // Player Status Update
         Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, requireStatusStamina);
         Player.Instance.StatusUpdate(GameControlType.Status.BODY_HEAT, requireStatusBodyHeat);
@@ -62,7 +48,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         Player.Instance.StatusEffectInvoke(-15);
         
         // Random Event; Search
-        GameRandomEventSearch.OnSearchRandomEvent();
+        GameEventSearch.OnSearchRandomEvent();
         
         // Time Update
         TimeManager.Instance.WorldTimeUpdate(15);

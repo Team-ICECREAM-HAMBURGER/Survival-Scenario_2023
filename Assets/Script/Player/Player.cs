@@ -2,6 +2,21 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *  IEnumerator Fade(bool isFadeIn) {
+        float timer = 0;
+
+        while (timer <= 1) {
+            yield return null;
+            timer += Time.unscaledDeltaTime * 2f;
+            this.sceneLoaderCanvasGroup.alpha = Mathf.Lerp(isFadeIn ? 0 : 1, isFadeIn ? 1 : 0, timer);
+        }
+
+        if (!isFadeIn) {
+            gameObject.SetActive(false);
+        }
+    }
+ */
 public class Player : GameControlSingleton<Player> { // Model
     private PlayerInformation information;
     private GameControlDictionary.Inventory inventory;          // <name, amount>
@@ -46,31 +61,11 @@ public class Player : GameControlSingleton<Player> { // Model
     private void Start() {
         Init();
     }
-    
-    // type 상태의 수치가 value 이상인가?
-    public bool StatusCheck(GameControlType.Status type, float value) { 
-        return true;
-    }
-    
-    // 각 상태의 수치가 모두 기준치를 넘는가?
-    public bool StatusCheck(float stamina, float bodyHeat, float hydration, float calories) {
-        var check = this.Status[GameControlType.Status.STAMINA] >= stamina &&
-                    this.Status[GameControlType.Status.BODY_HEAT] >= bodyHeat &&
-                    this.Status[GameControlType.Status.HYDRATION] >= hydration &&
-                    this.Status[GameControlType.Status.CALORIES] >= calories;
-        
-        return check;
-    }
 
     // type 상태의 수치를 value만큼 업데이트
     public void StatusUpdate(GameControlType.Status type, float value) {
         this.Status[type] += MathF.Floor(value);
         this.StatusMap[type].Invoke(this.Status[type]);
-    }
-    
-    // type 상태 이상 효과가 적용되어 있는가?
-    public bool StatusEffectCheck(GameControlType.StatusEffect key) { 
-        return this.StatusEffect.ContainsKey(key);
     }
 
     // 구독 중인 상태 이상에 효과 알림 전송

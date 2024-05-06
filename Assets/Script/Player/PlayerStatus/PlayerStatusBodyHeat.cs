@@ -4,12 +4,12 @@ using UnityEngine.UI;
 public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
     [SerializeField] private Slider statusGauge;
     
-    public float LimitValue { get; } = 25f;
+    public float LimitValue { get; } = 20f;
     public float CurrentValue { get; set; }
     public string Name { get; } = "체온";
     public GameControlType.Status Type { get; } = GameControlType.Status.BODY_HEAT;
-
-
+    
+    
     public void Init(float value) {
         this.CurrentValue = value;
         UpdateView();
@@ -17,10 +17,27 @@ public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
     
     public void Invoke(float value) {
         this.CurrentValue = value;
+
+        if (this.CurrentValue <= 0f) {  // 동사
+            DeathByHypothermia();
+            return;
+        }
+        
+        if (this.CurrentValue <= this.LimitValue) {
+            Player.Instance.StatusEffectMap[GameControlType.StatusEffect.COLDNESS].Active();
+        }
+        
         UpdateView();
     }
     
     public void UpdateView() {
         this.statusGauge.value = Mathf.Clamp(this.CurrentValue, 0f, 100f);
+    }
+
+    private void DeathByHypothermia() {
+        var title = "동사했습니다.";
+        var content = "냉혹한 추위 속에서 잠이 몰려옵니다...";
+
+        GameEventGameOver.OnGameOverBadEnding(title, content);
     }
 }

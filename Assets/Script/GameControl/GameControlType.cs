@@ -34,8 +34,10 @@ public class GameControlType {
     }
     
     public enum StatusEffect {
-        DEHYDRATION,    // 탈수
         INJURED,        // 부상
-        EXHAUSTION      // 탈진
+        EXHAUSTION,     // 탈진 (체력)
+        COLDNESS,       // 추위 (체온)
+        DEHYDRATION,    // 탈수 (수분)
+        HUNGER,         // 기아 (칼로리)
     }
 }
