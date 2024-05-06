@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GameRandomEventSearch : MonoBehaviour {
+public class GameEventSearch : MonoBehaviour {
     private List<IGameRandomEvent> randomEvents;
     private float weightSum;
     private float weightLimit;
@@ -25,7 +24,6 @@ public class GameRandomEventSearch : MonoBehaviour {
     private void RandomEventSelect() {
         this.weightSum = 0;
         this.weightLimit = Random.Range(0, 100);
-        // GameInformation.Instance.WorldTimeTermUpdate(15);
         
         foreach (var VARIABLE in this.randomEvents) {
             this.weightSum += VARIABLE.Weight;

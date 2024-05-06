@@ -1,112 +1,95 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *  IEnumerator Fade(bool isFadeIn) {
+        float timer = 0;
+
+        while (timer <= 1) {
+            yield return null;
+            timer += Time.unscaledDeltaTime * 2f;
+            this.sceneLoaderCanvasGroup.alpha = Mathf.Lerp(isFadeIn ? 0 : 1, isFadeIn ? 1 : 0, timer);
+        }
+
+        if (!isFadeIn) {
+            gameObject.SetActive(false);
+        }
+    }
+ */
 public class Player : GameControlSingleton<Player> { // Model
     private PlayerInformation information;
-
-    private GameControlDictionary.PlayerInventory inventory;
-    private GameControlDictionary.PlayerStatus status;
-    private GameControlDictionary.PlayerStatusEffect statusEffect;
+    private GameControlDictionary.Inventory inventory;          // <name, amount>
+    public GameControlDictionary.Status Status { get; private set; }                // <Enum, float>
+    public GameControlDictionary.StatusEffect StatusEffect { get; private set; }    // <Enum, term>
     
-    /*
-     * GameControlDictionary StatusEffect <string name, int term> statusEffect
-     * StatusEffectManager.Instance.statusEffects[statusEffect.Key]
-     * 
-     * Serializable Dictionary에는 string과 int만 사용되기 때문에, StatusEffect 객체들을 인터페이스로 계층화할 수 있다.
-     * 계층화 된 StatusEffect 객체들은 메서드 오버라이딩을 할 수 있다.
-     *
-     * IStatusEffect
-     * - public string Name { get; }
-     * - public GameControlType.StatusEffect StatusEffectType { get; }
-     * - public int Term { get; }
-     *
-     * + public void Effect();
-     * + public void Invoke(int value);
-     *
-     * 
-     * StatusEffectInjured : IStatusEffect
-     * - public string Name = "부상";
-     * - public GameControlType.StatusEffect StatusEffectType = Duration;
-     * - public int Term = Random.Range(1, 5) * 500;
-     * - private float statusReduceMultiplier;
-     * 
-     * + public void Effect()
-     * -- GameDataSave();
-     * -- Player.StatusUpdate(health, *2);
-     * -- Player.Instance.StatusEffectUpdate(this)
-     *
-     *
-     * + StatusEffectUpdate(string key, int value)
-     * -- if (!TryAdd() :
-     *      - StatusEffect[effect.name].Value = effect.term;
-     * 
-     */
+    public Dictionary<GameControlType.Status, IPlayerStatus> StatusMap { get; private set; }
+    public Dictionary<GameControlType.StatusEffect, IPlayerStatusEffect> StatusEffectMap { get; private set; }
     
-    
+    private delegate void StatusEffectInvokeHandler(int value);
+    private StatusEffectInvokeHandler OnStatusEffectInvoke;
     
     
     private void Init() {
         this.information = GameInformation.Instance.playerInformation;
         
         this.inventory = this.information.inventory;
-        this.status = this.information.status;
-        this.statusEffect = this.information.statusEffect;
+        this.Status = this.information.status;
+        this.StatusEffect = this.information.statusEffect;
+        this.StatusMap = new();
+        this.StatusEffectMap = new();
+        
+        foreach (var VARIABLE in GetComponents<IPlayerStatus>()) {
+            this.StatusMap[VARIABLE.Type] = VARIABLE;
+            this.StatusMap[VARIABLE.Type].Init(this.Status[VARIABLE.Type]);
+        }
+        
+        foreach (var VARIABLE in GetComponents<IPlayerStatusEffect>()) {
+            this.StatusEffectMap[VARIABLE.Type] = VARIABLE;
+        }
+        
+        foreach (var VARIABLE in this.StatusEffect) {
+            this.StatusEffectMap[VARIABLE.Key].Term = this.StatusEffect[VARIABLE.Key];
+            OnStatusEffectInvoke += this.StatusEffectMap[VARIABLE.Key].Invoke;
+        }
+
+        foreach (var VARIABLE in this.StatusMap) {
+            this.StatusMap[VARIABLE.Key].CurrentValue = this.Status[VARIABLE.Key];
+        }
     }
 
     private void Start() {
         Init();
     }
-    
-    // type 상태의 수치가 value 이상인가?
-    public bool StatusCheck(GameControlType.Status type, float value) { 
-        return (this.status[type].CurrentValue >= value);
-    }
-
-    // 모든 상태의 수치가 value 이상인가?
-    public bool StatusCheck(float value) {
-        return (this.status[GameControlType.Status.STAMINA].CurrentValue >= value &&
-                this.status[GameControlType.Status.BODY_HEAT].CurrentValue >= value &&
-                this.status[GameControlType.Status.CALORIES].CurrentValue >= value &&
-                this.status[GameControlType.Status.HYDRATION].CurrentValue >= value);
-    }
-    
-    // 각 상태의 수치가 모두 기준치를 넘는가?
-    public bool StatusCheck(float stamina, float bodyHeat, float hydration, float calories) {
-        return (this.status[GameControlType.Status.STAMINA].CurrentValue >= stamina &&
-                this.status[GameControlType.Status.BODY_HEAT].CurrentValue >= bodyHeat &&
-                this.status[GameControlType.Status.CALORIES].CurrentValue >= hydration &&
-                this.status[GameControlType.Status.HYDRATION].CurrentValue >= calories);
-    }
-
-    // 각 상태의 수치를 value만큼 업데이트
-    public void StatusUpdate(float[] values) {
-        this.status[GameControlType.Status.STAMINA].CurrentValue += values[0];
-        this.status[GameControlType.Status.BODY_HEAT].CurrentValue += values[1];
-        this.status[GameControlType.Status.HYDRATION].CurrentValue += values[2];
-        this.status[GameControlType.Status.CALORIES].CurrentValue += values[3];
-        
-        Debug.Log(this.status[GameControlType.Status.STAMINA].CurrentValue);
-        Debug.Log(this.status[GameControlType.Status.BODY_HEAT].CurrentValue);
-        Debug.Log(this.status[GameControlType.Status.HYDRATION].CurrentValue);
-        Debug.Log(this.status[GameControlType.Status.CALORIES].CurrentValue);
-    }
 
     // type 상태의 수치를 value만큼 업데이트
     public void StatusUpdate(GameControlType.Status type, float value) {
-        this.status[type].CurrentValue += value;
-        GameInformation.OnPlayerGameDataSave();
+        this.Status[type] += MathF.Floor(value);
+        this.StatusMap[type].Invoke(this.Status[type]);
+    }
+
+    // 구독 중인 상태 이상에 효과 알림 전송
+    public void StatusEffectInvoke(int value) {
+        OnStatusEffectInvoke?.Invoke(value);
     }
     
-    // type 상태 이상 효과가 적용되어 있는가?
-    public StatusEffect StatusEffectCheck(string type) {
-        return this.statusEffect.GetValueOrDefault(type);
-    }
-    
-    // type 상태 이상 효과 업데이트 
-    public void StatusEffectUpdate(StatusEffect effect) {
-        if (!this.statusEffect.TryAdd(effect.name, effect)) {
-            this.statusEffect[effect.name].term = effect.term;
+    // type 상태 이상 효과 추가 
+    public void StatusEffectAdd(IPlayerStatusEffect effect) {
+        if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {  // 이미 있음
+            this.StatusEffect[effect.Type] = effect.Term;
         }
+        else {  // 신규 할당
+            OnStatusEffectInvoke += effect.Invoke;
+        }
+    }
+
+    public void StatusEffectUpdate(IPlayerStatusEffect effect) {
+        this.StatusEffect[effect.Type] = effect.Term;
+    }
+    
+    // type 상태 이상 효과 삭제
+    public void StatusEffectRemove(IPlayerStatusEffect effect) {
+        this.StatusEffect.Remove(effect.Type);
     }
     
     // 인벤토리에 type 아이템이 존재하는가?

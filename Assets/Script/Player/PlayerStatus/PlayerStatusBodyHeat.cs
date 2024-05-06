@@ -1,24 +1,43 @@
-public class PlayerStatusBodyHeat : IPlayerStatus {
-    public float MaxValue { get; } = 100f;
-    public float LimitValue { get; } = 25f;
+using UnityEngine;
+using UnityEngine.UI;
 
+public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
+    [SerializeField] private Slider statusGauge;
+    
+    public float LimitValue { get; } = 20f;
     public float CurrentValue { get; set; }
-    // public float CurrentValue { get; private set; }
+    public string Name { get; } = "체온";
+    public GameControlType.Status Type { get; } = GameControlType.Status.BODY_HEAT;
     
-    public string StatusName { get; } = "체온";
-    public GameControlType.Status Status { get; } = GameControlType.Status.BODY_HEAT;
-    public float StatusDecreaseMultiplier { get; set; }
-
-
-    public void StatusIncrease(float value) {
-        this.CurrentValue += value;
-    }
-
-    public void StatusDecrease(float value) {
-        this.CurrentValue -= value * this.StatusDecreaseMultiplier;
+    
+    public void Init(float value) {
+        this.CurrentValue = value;
+        UpdateView();
     }
     
-    public bool StatusLimitCheck(float value) {
-        return this.CurrentValue >= this.LimitValue;
+    public void Invoke(float value) {
+        this.CurrentValue = value;
+
+        if (this.CurrentValue <= 0f) {  // 동사
+            DeathByHypothermia();
+            return;
+        }
+        
+        if (this.CurrentValue <= this.LimitValue) {
+            Player.Instance.StatusEffectMap[GameControlType.StatusEffect.COLDNESS].Active();
+        }
+        
+        UpdateView();
+    }
+    
+    public void UpdateView() {
+        this.statusGauge.value = Mathf.Clamp(this.CurrentValue, 0f, 100f);
+    }
+
+    private void DeathByHypothermia() {
+        var title = "동사했습니다.";
+        var content = "냉혹한 추위 속에서 잠이 몰려옵니다...";
+
+        GameEventGameOver.OnGameOverBadEnding(title, content);
     }
 }

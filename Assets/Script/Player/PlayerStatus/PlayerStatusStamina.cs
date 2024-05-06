@@ -1,24 +1,32 @@
-public class PlayerStatusStamina : IPlayerStatus {
-    public float MaxValue { get; } = 100f;
-    public float LimitValue { get; } = 0f;
+using UnityEngine;
+using UnityEngine.UI;
 
+public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {
+    [SerializeField] private Slider statusGauge;
+    
+    public float LimitValue { get; } = 30f;
     public float CurrentValue { get; set; }
-    // public float CurrentValue { get; private set; }
     
-    public string StatusName { get; } = "체력";
-    public GameControlType.Status Status { get; } = GameControlType.Status.STAMINA;
-    public float StatusDecreaseMultiplier { get; set; }
+    public string Name { get; } = "체력";
+    public GameControlType.Status Type { get; } = GameControlType.Status.STAMINA;
+
+
+    public void Init(float value) {
+        this.CurrentValue = value;
+        UpdateView();
+    }
     
-    
-    public void StatusIncrease(float value) {
-        this.CurrentValue += value;
+    public void Invoke(float value) {
+        this.CurrentValue = value;
+        
+        if (this.CurrentValue <= this.LimitValue) {
+            Player.Instance.StatusEffectMap[GameControlType.StatusEffect.EXHAUSTION].Active();
+        }
+        
+        UpdateView();
     }
 
-    public void StatusDecrease(float value) {
-        this.CurrentValue -= value * this.StatusDecreaseMultiplier;
-    }
-    
-    public bool StatusLimitCheck(float value) {
-        return this.CurrentValue >= this.LimitValue;
+    public void UpdateView() {
+        this.statusGauge.value = Mathf.Clamp(this.CurrentValue, 0f, 100f);
     }
 }

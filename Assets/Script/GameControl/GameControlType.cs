@@ -27,14 +27,17 @@ public class GameControlType {
     }
     
     public enum Status {
-        STAMINA,    // 체력
-        BODY_HEAT,  // 체온
-        HYDRATION,  // 수분
-        CALORIES    // 칼로리
+        STAMINA = 0,    // 체력
+        BODY_HEAT = 1,  // 체온
+        HYDRATION = 2,  // 수분
+        CALORIES = 3    // 칼로리
     }
     
     public enum StatusEffect {
-        DURATION,
-        CONDITION
+        INJURED,        // 부상
+        EXHAUSTION,     // 탈진 (체력)
+        COLDNESS,       // 추위 (체온)
+        DEHYDRATION,    // 탈수 (수분)
+        HUNGER,         // 기아 (칼로리)
     }
 }

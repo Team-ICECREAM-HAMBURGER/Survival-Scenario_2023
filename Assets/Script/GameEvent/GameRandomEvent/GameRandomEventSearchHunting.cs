@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   // Presenter
-    public float Weight { get; private set; }
+    [field: SerializeField] public float Weight { get; set; }
 
-    [SerializeField] private string spendItem;
-    [SerializeField] private int spendItemAmount;
+    // TODO: 사냥 가능 조건 부분 수정 필요
+    private string spendItem;
+    private int spendItemAmount;
     
     private string title;
     private StringBuilder content;
@@ -18,7 +17,7 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
     
     
     private void Init() {
-        this.Weight = 0f;
+        //this.Weight = 0f;
         this.acquiredItems = new();
         this.spentItems = new();
         this.content = new();
