@@ -15,7 +15,7 @@ public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
     }
     
     public void Behaviour() {
-        throw new System.NotImplementedException();
+        
     }
 
     public bool BehaviourCheck() {

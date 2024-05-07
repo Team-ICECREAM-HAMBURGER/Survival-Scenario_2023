@@ -110,6 +110,6 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
            this.content.Append("우선 제작에 필요한 재료를 모아보자.\n");
         }
         
-        PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
+        // PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
 }

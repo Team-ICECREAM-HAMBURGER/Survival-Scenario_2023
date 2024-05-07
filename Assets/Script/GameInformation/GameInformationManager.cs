@@ -9,7 +9,7 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     public delegate void GameDataSaveEventHandler();
     public static GameDataSaveEventHandler OnPlayerGameDataSave;
     public static GameDataSaveEventHandler OnWorldGameDataSave;
-    public static GameDataSaveEventHandler OnGameDataReset;
+
     
     private void Init() {
         // Save File Load/New
@@ -32,18 +32,12 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
         
         OnPlayerGameDataSave += PlayerDataSave;
         OnWorldGameDataSave += WorldDataSave;
-        OnGameDataReset += GameDataReset;
     }
 
     private void Start() {
         Init();
     }
 
-    private void GameDataReset() {
-        GameControlSaveLoad.Instance.DeleteJsonFile();
-        Init();
-    }
-    
     private void PlayerDataSave() {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformation);
         

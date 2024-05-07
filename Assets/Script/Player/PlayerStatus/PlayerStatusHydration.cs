@@ -10,29 +10,14 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
     public string Name { get; } = "수분";
     public GameControlType.Status Type { get; } = GameControlType.Status.HYDRATION;
 
-
-    public void Init(float value) {
-        this.CurrentValue = value;
+    
+    public void Invoke() {
+        this.CurrentValue = Player.Instance.Status[this.Type];
         UpdateView();
     }
-    
-    public void Invoke(float value) {
-        this.CurrentValue = value;
 
-        if (this.CurrentValue <= 0f) {  // 갈사
-            DeathByDehydration();
-            return;
-        }
-        
-        if (this.CurrentValue <= this.LimitValue) {
-            Player.Instance.StatusEffectMap[GameControlType.StatusEffect.DEHYDRATION].Active();
-        }
-        
-        UpdateView();
-    }
-    
     public void UpdateView() {
-        this.statusGauge.value = Mathf.Clamp(this.CurrentValue, 0f, 100f);
+        this.statusGauge.value = this.CurrentValue;
     }
     
     private void DeathByDehydration() {

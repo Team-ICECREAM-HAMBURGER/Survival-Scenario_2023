@@ -8,13 +8,13 @@ public class GameEventSearch : MonoBehaviour {
     private float weightSum;
     private float weightLimit;
 
-    public delegate void SearchEventHandler();
-    public static SearchEventHandler OnSearchRandomEvent;
+    // public delegate void SearchEventHandler();
+    // public static SearchEventHandler OnSearchRandomEvent;
 
 
     private void Init() {
         this.randomEvents = gameObject.GetComponents<IGameRandomEvent>().ToList();
-        OnSearchRandomEvent += RandomEventSelect;
+        // OnSearchRandomEvent += RandomEventSelect;
     }
 
     private void Awake() {

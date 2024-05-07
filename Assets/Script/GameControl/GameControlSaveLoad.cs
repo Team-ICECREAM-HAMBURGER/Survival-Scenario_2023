@@ -53,9 +53,4 @@ public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
 
         return JsonConvert.DeserializeObject<T>(jsonData);
     }
-
-    public void DeleteJsonFile() {
-        File.Delete($"{filePath}/{fileName}_Player.json");
-        File.Delete($"{filePath}/{fileName}_World.json");
-    }
 }

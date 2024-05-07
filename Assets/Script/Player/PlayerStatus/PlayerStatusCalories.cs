@@ -9,30 +9,15 @@ public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {
     
     public string Name { get; } = "칼로리";
     public GameControlType.Status Type { get; } = GameControlType.Status.CALORIES;
-
-
-    public void Init(float value) {
-        this.CurrentValue = value;
+    
+    
+    public void Invoke() {
+        this.CurrentValue = Player.Instance.Status[this.Type];
         UpdateView();
     }
-    
-    public void Invoke(float value) {
-        this.CurrentValue = value;
-        
-        if (this.CurrentValue <= 0f) {  // 아사
-            DeathByStarvation();
-            return;
-        }
-        
-        if (this.CurrentValue <= this.LimitValue) {
-            Player.Instance.StatusEffectMap[GameControlType.StatusEffect.HUNGER].Active();
-        }
-        
-        UpdateView();
-    }
-    
+
     public void UpdateView() {
-        this.statusGauge.value = Mathf.Clamp(this.CurrentValue, 0f, 100f);
+        this.statusGauge.value = this.CurrentValue;
     }
 
     private void DeathByStarvation() {

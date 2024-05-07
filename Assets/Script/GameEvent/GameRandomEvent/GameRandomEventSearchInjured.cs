@@ -21,7 +21,7 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
     public void Event() {
         Debug.Log("InjuredEvent");
 
-        Player.Instance.StatusEffectMap[GameControlType.StatusEffect.INJURED].Active();
+        //Player.Instance.StatusEffectMap[GameControlType.StatusEffect.INJURED].Active();
         EventResult();
     }
 
@@ -49,6 +49,6 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
 
         this.content.Append("부상 상태 이상 효과가 적용됨.\n");
         
-        PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
+        // PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
 }

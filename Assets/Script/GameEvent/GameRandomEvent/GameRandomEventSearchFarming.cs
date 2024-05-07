@@ -79,6 +79,6 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
             this.content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
         }
         
-        PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
+        // PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
 }

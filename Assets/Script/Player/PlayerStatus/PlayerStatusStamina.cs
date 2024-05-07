@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,23 +11,13 @@ public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {
     public string Name { get; } = "체력";
     public GameControlType.Status Type { get; } = GameControlType.Status.STAMINA;
 
-
-    public void Init(float value) {
-        this.CurrentValue = value;
-        UpdateView();
-    }
     
-    public void Invoke(float value) {
-        this.CurrentValue = value;
-        
-        if (this.CurrentValue <= this.LimitValue) {
-            Player.Instance.StatusEffectMap[GameControlType.StatusEffect.EXHAUSTION].Active();
-        }
-        
+    public void Invoke() {
+        this.CurrentValue = Player.Instance.Status[this.Type];
         UpdateView();
     }
 
     public void UpdateView() {
-        this.statusGauge.value = Mathf.Clamp(this.CurrentValue, 0f, 100f);
+        this.statusGauge.value = this.CurrentValue;
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
     [Header("Require Status")]
@@ -25,30 +26,16 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     
     [SerializeField] private GameObject searchLoading;
     
-    public delegate void SearchEventUpdateViewHandler(string value1, string value2);
-    public static SearchEventUpdateViewHandler OnSearchEventUpdateView;
-
-
-    private void Init() {
-        OnSearchEventUpdateView += UpdateView;
-    }
-
-    private void Awake() {
-        Init();
-    }
 
     public void Behaviour() {
         // Player Status Update
-        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, requireStatusStamina);
-        Player.Instance.StatusUpdate(GameControlType.Status.BODY_HEAT, requireStatusBodyHeat);
-        Player.Instance.StatusUpdate(GameControlType.Status.HYDRATION, requireStatusHydration);
-        Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, requireStatusCalories);
+        Player.Instance.StatusUpdate(this.requireStatusStamina, this.requireStatusBodyHeat, this.requireStatusHydration, this.requireStatusCalories);
         
         // Player Status Effects Invoke
-        Player.Instance.StatusEffectInvoke(-15);
+        Player.Instance.StatusEffectInvoke();
         
         // Random Event; Search
-        GameEventSearch.OnSearchRandomEvent();
+        // GameEventSearch.OnSearchRandomEvent();
         
         // Time Update
         TimeManager.Instance.WorldTimeUpdate(15);

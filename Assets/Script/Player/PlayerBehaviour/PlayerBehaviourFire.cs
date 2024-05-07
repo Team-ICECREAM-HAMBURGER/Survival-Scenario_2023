@@ -210,7 +210,6 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
 
 
     public void Behaviour() {
-        throw new System.NotImplementedException();
     }
 
     public bool BehaviourCheck() {

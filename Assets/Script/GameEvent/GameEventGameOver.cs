@@ -94,8 +94,6 @@ public class GameEventGameOver : MonoBehaviour {
     }
 
     public void GameReset() {
-        GameInformationManager.OnGameDataReset();
-        
         SceneManager.LoadScene(0);
     }
 }
