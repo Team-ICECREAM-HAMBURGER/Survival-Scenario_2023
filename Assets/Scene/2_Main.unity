@@ -1945,7 +1945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 8519144}
+  m_AnchoredPosition: {x: -399.9992, y: 9243617}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -2948,6 +2948,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227118934}
   m_CullTransparentMesh: 1
+--- !u!1 &232328977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232328978}
+  - component: {fileID: 232328980}
+  - component: {fileID: 232328979}
+  m_Layer: 0
+  m_Name: Player Behaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &232328978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232328977}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1234693839}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &232328979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232328977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebce65318014469e83f28ab08240a508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requireStatusStamina: -5
+  requireStatusBodyHeat: -7
+  requireStatusHydration: -20
+  requireStatusCalories: -7
+  canvasSearch: {fileID: 0}
+  canvasOutside: {fileID: 0}
+  canvasInformation: {fileID: 0}
+  searchResult: {fileID: 0}
+  searchResultTitle: {fileID: 0}
+  searchResultContent: {fileID: 0}
+  searchLoading: {fileID: 0}
+--- !u!114 &232328980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232328977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cfa354a749e7843bd43668338b5576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &232791874
 GameObject:
   m_ObjectHideFlags: 0
@@ -12832,7 +12900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 8519144}
+  m_AnchoredPosition: {x: -399.9992, y: 9243617}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -16435,8 +16503,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1234693839}
   - component: {fileID: 1234693841}
-  - component: {fileID: 1234693843}
-  - component: {fileID: 1234693842}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -16459,6 +16525,7 @@ Transform:
   m_Children:
   - {fileID: 244481238}
   - {fileID: 1370118459}
+  - {fileID: 232328978}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1234693841
@@ -16473,6 +16540,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae64de88416c488ab3ed889076ab1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatus: {fileID: 244481237}
+  playerStatusEffect: {fileID: 1370118458}
+  playerBehaviour: {fileID: 232328977}
   onStatusUpdate:
     m_PersistentCalls:
       m_Calls:
@@ -16527,41 +16597,6 @@ MonoBehaviour:
   onStatusEffectUpdate:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1234693842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1234693838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebce65318014469e83f28ab08240a508, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requireStatusStamina: -5
-  requireStatusBodyHeat: -7
-  requireStatusHydration: -20
-  requireStatusCalories: -7
-  canvasSearch: {fileID: 0}
-  canvasOutside: {fileID: 0}
-  canvasInformation: {fileID: 0}
-  searchResult: {fileID: 0}
-  searchResultTitle: {fileID: 0}
-  searchResultContent: {fileID: 0}
-  searchLoading: {fileID: 0}
---- !u!114 &1234693843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1234693838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93cfa354a749e7843bd43668338b5576, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1243670412
 GameObject:
   m_ObjectHideFlags: 0
@@ -24884,7 +24919,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1234693842}
+      - m_Target: {fileID: 232328979}
         m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
         m_MethodName: Behaviour
         m_Mode: 1

@@ -14,16 +14,13 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
     }
     
     public void Invoke() {
-        // var status = Player.Instance.Status[GameControlType.Status.STAMINA];
-        //
-        // Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * this.statusReducePercent * -0.01f);
-        // this.Term += value;
-        //
-        // if (this.Term <= 0) {
-        //     Player.Instance.StatusEffectRemove(this);
-        // }
-        // else {
-        //     Player.Instance.StatusEffectUpdate(this);
-        // }
+        var status = Player.Instance.Status[GameControlType.Status.STAMINA];
+        
+        this.Term -= TimeManager.Instance.SpentTerm;
+        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * this.statusReducePercent * -0.01f);
+
+        if (this.Term <= 0) {
+            Player.Instance.StatusEffectRemove(this);
+        }
     }
 }

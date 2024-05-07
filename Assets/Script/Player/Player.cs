@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-
 
 public class Player : GameControlSingleton<Player> { // Model
+    [SerializeField] private GameObject playerStatus;
+    [SerializeField] private GameObject playerStatusEffect;
+    [SerializeField] private GameObject playerBehaviour;
+    
     private PlayerInformation information;
     private GameControlDictionary.Inventory inventory;          // <name, amount>
     public GameControlDictionary.Status Status { get; private set; }                // <Enum, float>
@@ -25,7 +27,7 @@ public class Player : GameControlSingleton<Player> { // Model
         
         this.onStatusUpdate.Invoke();
 
-        foreach (var VARIABLE in GetComponents<IPlayerStatusEffect>()) {
+        foreach (var VARIABLE in this.playerStatusEffect.GetComponents<IPlayerStatusEffect>()) {
             this.statusEffectMap[VARIABLE.Type] = VARIABLE;
         }
         
@@ -75,13 +77,11 @@ public class Player : GameControlSingleton<Player> { // Model
     }
     
     // type 상태 이상 효과 추가 
-    public void StatusEffectAdd(IPlayerStatusEffect effect) {
-        // if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {  // 이미 있음
-        //     this.StatusEffect[effect.Type] = effect.Term;
-        // }
-        // else {  // 신규 할당
-        //     OnStatusEffectInvoke += effect.Invoke;
-        // }
+    public void StatusEffectAdd(GameControlType.StatusEffect type) {
+        if (!this.statusEffect.ContainsKey(type)) {  // 이미 있는 효과라면 패스
+            this.statusEffect[type] = this.statusEffectMap[type].Term;
+            this.onStatusEffectUpdate.AddListener(this.statusEffectMap[type].Invoke);
+        }
     }
 
     public void StatusEffectUpdate(IPlayerStatusEffect effect) {
@@ -89,8 +89,8 @@ public class Player : GameControlSingleton<Player> { // Model
     }
     
     // type 상태 이상 효과 삭제
-    public void StatusEffectRemove(IPlayerStatusEffect effect) {
-        this.statusEffect.Remove(effect.Type);
+    public void StatusEffectRemove(GameControlType.StatusEffect type) {
+        
     }
     
     // 인벤토리에 type 아이템이 존재하는가?

@@ -11,13 +11,17 @@ public class PlayerStatusEffectHunger : MonoBehaviour, IPlayerStatusEffect {
     public void Init(int term) {
         this.Term = term;
     }
-    
-    public void Active() {
-        this.Term = 1;
-        Player.Instance.StatusEffectAdd(this);
-    }
+
 
     public void Invoke() {
+        
+        
+        
+        
+        
+        
+        
+        
         // var statusCalories = Player.Instance.Status[GameControlType.Status.CALORIES];
         // var statusStamina = Player.Instance.Status[GameControlType.Status.STAMINA];
         //

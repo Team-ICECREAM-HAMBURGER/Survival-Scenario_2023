@@ -3,8 +3,9 @@ using UnityEngine;
 public class TimeManager : GameControlSingleton<TimeManager> {
     private WorldInformation information;
 
-    private float currentTimeTerm;
-    private float currentTimeDay;
+    public int SpentTerm { get; private set; }
+    private int currentTimeTerm;
+    private int currentTimeDay;
 
     
     private void Init() {
@@ -22,6 +23,7 @@ public class TimeManager : GameControlSingleton<TimeManager> {
     
     public void WorldTimeUpdate(int value) {
         this.currentTimeTerm += value;
+        this.SpentTerm = value;
         
         if (this.currentTimeTerm >= 500) {
             this.currentTimeDay += 1;

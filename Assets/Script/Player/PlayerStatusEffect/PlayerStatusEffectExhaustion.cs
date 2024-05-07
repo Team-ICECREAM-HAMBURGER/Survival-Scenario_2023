@@ -11,11 +11,6 @@ public class PlayerStatusEffectExhaustion : MonoBehaviour, IPlayerStatusEffect {
     public void Init(int term) {
         this.Term = term;
     }
-    
-    public void Active() { // 신규, 새로운 상태 이상이 발동
-        this.Term = 1;
-        Player.Instance.StatusEffectAdd(this);
-    }
 
     public void Invoke() { // 갱신, 이미 적용된 상태를 업데이트
         // var statusBodyHeat = Player.Instance.Status[GameControlType.Status.BODY_HEAT];

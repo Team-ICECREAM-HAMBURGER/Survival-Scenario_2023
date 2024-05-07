@@ -13,6 +13,11 @@ public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {
     
     public void Invoke() {
         this.CurrentValue = Player.Instance.Status[this.Type];
+        
+        if (this.CurrentValue <= this.LimitValue) {
+            Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.HUNGER);
+        }
+        
         UpdateView();
     }
 

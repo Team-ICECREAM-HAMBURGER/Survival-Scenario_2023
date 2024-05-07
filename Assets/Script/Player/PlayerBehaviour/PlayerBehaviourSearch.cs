@@ -28,6 +28,9 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     
 
     public void Behaviour() {
+        // Time Update
+        TimeManager.Instance.WorldTimeUpdate(15);
+        
         // Player Status Update
         Player.Instance.StatusUpdate(this.requireStatusStamina, this.requireStatusBodyHeat, this.requireStatusHydration, this.requireStatusCalories);
         
@@ -35,10 +38,11 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         Player.Instance.StatusEffectInvoke();
         
         // Random Event; Search
+        
+        
         // GameEventSearch.OnSearchRandomEvent();
         
-        // Time Update
-        TimeManager.Instance.WorldTimeUpdate(15);
+
     }
     
     private void UpdateView(string title, string content) {
