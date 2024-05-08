@@ -18,6 +18,9 @@ public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {
         if (this.CurrentValue <= this.LimitValue) {
             Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.EXHAUSTION);
         }
+        else {
+            Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.EXHAUSTION);
+        }
         
         UpdateView();
     }

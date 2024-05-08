@@ -30,7 +30,7 @@ public class TimeManager : GameControlSingleton<TimeManager> {
             this.currentTimeTerm -= 500;
         }
                     
-        GameInformationManager.OnPlayerGameDataSave();
-        GameInformationManager.OnWorldGameDataSave();
+        GameInformationManager.OnPlayerGameDataSaveEvent();
+        GameInformationManager.OnWorldGameDataSaveEvent();
     }
 }

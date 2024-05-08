@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311924, g: 0.38073963, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1945,7 +1945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 15540728}
+  m_AnchoredPosition: {x: -399.9992, y: 16108882}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -2994,8 +2994,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requireStatusStamina: -5
-  requireStatusBodyHeat: -7
-  requireStatusHydration: -20
+  requireStatusBodyHeat: -9
+  requireStatusHydration: -10
   requireStatusCalories: -7
   searchResultPanel: {fileID: 455032948}
   searchLoadingPanel: {fileID: 59030600}
@@ -6472,8 +6472,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 156.27155, y: -162.5}
-  m_SizeDelta: {x: 312.5431, y: 75}
+  m_AnchoredPosition: {x: 155, y: -162.5}
+  m_SizeDelta: {x: 310, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468124928
 MonoBehaviour:
@@ -9177,8 +9177,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 156.27155, y: -37.5}
-  m_SizeDelta: {x: 312.5431, y: 75}
+  m_AnchoredPosition: {x: 155, y: -37.5}
+  m_SizeDelta: {x: 310, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &732687026
 MonoBehaviour:
@@ -9350,7 +9350,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 741171211}
         m_TargetAssemblyTypeName: Test, Assembly-CSharp
-        m_MethodName: m
+        m_MethodName: BackToIntro
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12910,7 +12910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 15540728}
+  m_AnchoredPosition: {x: -399.9992, y: 16108882}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -15530,7 +15530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0761460988c34ba58b92feb0642d1eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Weight>k__BackingField: 0
+  <Weight>k__BackingField: 5
 --- !u!114 &1152889181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15543,7 +15543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6af915c769f471fb092addf43f385c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Weight>k__BackingField: 0
+  <Weight>k__BackingField: 5
 --- !u!114 &1152889182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15556,7 +15556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbee7bb5386248f8b6df8cdc87b5605b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Weight>k__BackingField: 100
+  <Weight>k__BackingField: 90
 --- !u!1 &1163547746
 GameObject:
   m_ObjectHideFlags: 0
@@ -16591,9 +16591,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onStatusEffectUpdate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1243670412
 GameObject:
   m_ObjectHideFlags: 0
@@ -17475,7 +17472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a9c1c8ed2743fe8a1476c7cadb5aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusReducePercent: 0
+  statusReducePercent: 10
 --- !u!114 &1370118461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17488,7 +17485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68533a5b871a482f8a164546848f1ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusReducePercent: 0
+  statusReducePercent: 9
 --- !u!114 &1370118462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17501,7 +17498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b82b80ec344769aae5f67356488142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusReducePercent: 0
+  statusReducePercent: 5
 --- !u!114 &1370118463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17514,7 +17511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340e437d0432438aba10371fe6f703ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusReducePercent: 0
+  statusReducePercent: 7
 --- !u!114 &1370118464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17527,7 +17524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8647704cbb4deaa565d564458a6332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusReducePercent: 0
+  statusReducePercent: 17
 --- !u!1 &1371915397
 GameObject:
   m_ObjectHideFlags: 0

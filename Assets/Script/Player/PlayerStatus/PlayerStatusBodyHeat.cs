@@ -12,9 +12,15 @@ public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
     
     public void Invoke() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-
-        if (this.CurrentValue <= this.LimitValue) {
+        
+        if (this.CurrentValue <= 0) {
+            DeathByHypothermia();
+        }
+        else if (this.CurrentValue <= this.LimitValue) {
             Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.COLDNESS);
+        }
+        else {
+            Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.COLDNESS);
         }
         
         UpdateView();
@@ -27,7 +33,5 @@ public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
     private void DeathByHypothermia() {
         var title = "동사했습니다.";
         var content = "냉혹한 추위 속에서 잠이 몰려옵니다...";
-
-        GameEventGameOver.OnGameOverBadEnding(title, content);
     }
 }

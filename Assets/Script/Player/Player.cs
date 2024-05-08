@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,36 +8,45 @@ public class Player : GameControlSingleton<Player> { // Model
     [SerializeField] private GameObject playerStatusEffect;
     [SerializeField] private GameObject playerBehaviour;
     
+    [Space(10f)]
+    
+    [SerializeField] private UnityEvent onStatusUpdate;
+
     private PlayerInformation information;
     private GameControlDictionary.Inventory inventory;          // <name, amount>
     public GameControlDictionary.Status Status { get; private set; }                // <Enum, float>
     private GameControlDictionary.StatusEffect statusEffect;    // <Enum, term>
     private Dictionary<GameControlType.StatusEffect, IPlayerStatusEffect> statusEffectMap;
     
-    [SerializeField] private UnityEvent onStatusUpdate;
-    [SerializeField] private UnityEvent onStatusEffectUpdate;
+    private UnityEvent onStatusEffectUpdate;
     
     
     private void Init() {
-        this.information = GameInformationManager.Instance.playerInformation;
-        this.statusEffectMap = new();
-        
-        this.inventory = this.information.inventory;
-        this.Status = this.information.status;
-        this.statusEffect = this.information.statusEffect;
-        
-        this.onStatusUpdate.Invoke();
+        try {
+            this.information = GameInformationManager.Instance.playerInformation;
+            this.statusEffectMap = new();
+            this.onStatusEffectUpdate = new();
 
-        foreach (var VARIABLE in this.playerStatusEffect.GetComponents<IPlayerStatusEffect>()) {
-            this.statusEffectMap[VARIABLE.Type] = VARIABLE;
+            this.inventory = this.information.inventory;
+            this.Status = this.information.status;
+            this.statusEffect = this.information.statusEffect;
+
+            this.onStatusUpdate.Invoke();
+
+            foreach (var VARIABLE in this.playerStatusEffect.GetComponents<IPlayerStatusEffect>()) {
+                this.statusEffectMap[VARIABLE.Type] = VARIABLE;
+            }
+
+            foreach (var VARIABLE in this.statusEffect) {
+                this.statusEffectMap[VARIABLE.Key].Init(this.statusEffect[VARIABLE.Key]);
+                this.onStatusEffectUpdate.AddListener(this.statusEffectMap[VARIABLE.Key].Invoke);
+            }
         }
-        
-        foreach (var VARIABLE in this.statusEffect) {
-            this.statusEffectMap[VARIABLE.Key].Init(this.statusEffect[VARIABLE.Key]);
-            this.onStatusEffectUpdate.AddListener(this.statusEffectMap[VARIABLE.Key].Invoke);
+        catch (NullReferenceException e) {
+            Debug.Log("GameOver!!");
         }
     }
-
+    
     private void Awake() {
     }
     
@@ -73,7 +83,7 @@ public class Player : GameControlSingleton<Player> { // Model
     }
 
     public void StatusEffectInvoke() {
-        this.onStatusEffectUpdate.Invoke();
+        this.onStatusEffectUpdate?.Invoke();
     }
     
     // type 상태 이상 효과 추가 

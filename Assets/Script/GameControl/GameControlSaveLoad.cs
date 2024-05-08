@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
     private string fileName;
     private string filePath;
-
+    
 
     private void Init() {
         this.fileName = DateTime.Now.ToString("yyyy-MM-dd");
@@ -52,5 +52,11 @@ public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
         var jsonData = Encoding.UTF8.GetString(data);
 
         return JsonConvert.DeserializeObject<T>(jsonData);
+    }
+
+    public void DeleteJsonFile() {
+        foreach(var VARIABLE in Directory.GetFiles(this.filePath, $"{this.fileName}_*.json")) {
+            File.Delete(VARIABLE);
+        }
     }
 }

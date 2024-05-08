@@ -6,10 +6,11 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     public PlayerInformation playerInformation;
     public WorldInformation worldInformation;
     
-    public delegate void GameDataSaveEventHandler();
-    public static GameDataSaveEventHandler OnPlayerGameDataSave;
-    public static GameDataSaveEventHandler OnWorldGameDataSave;
-
+    public delegate void GameDataEventHandler();
+    public static GameDataEventHandler OnPlayerGameDataSaveEvent;
+    public static GameDataEventHandler OnWorldGameDataSaveEvent;
+    public static GameDataEventHandler OnGameDataDeleteEvent;
+    
     
     private void Init() {
         // Save File Load/New
@@ -30,8 +31,9 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
             this.worldInformation = GameControlSaveLoad.Instance.LoadJsonFile<WorldInformation>("World");
         }
         
-        OnPlayerGameDataSave += PlayerDataSave;
-        OnWorldGameDataSave += WorldDataSave;
+        OnPlayerGameDataSaveEvent += PlayerDataSave;
+        OnWorldGameDataSaveEvent += WorldDataSave;
+        OnGameDataDeleteEvent += GameDataDelete;
     }
 
     private void Start() {
@@ -48,5 +50,11 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.worldInformation);
         
         GameControlSaveLoad.Instance.CreateJsonFile(saveData, "World");
+    }
+
+    private void GameDataDelete() {
+        GameControlSaveLoad.Instance.DeleteJsonFile();
+        this.playerInformation = null;
+        this.worldInformation = null;
     }
 }

@@ -26,9 +26,12 @@ public class GameEventGameOver : MonoBehaviour {
     
     public static UnityEvent<string, string> OnGoodEndingGameOver;
     public static UnityEvent<string, string> OnBadEndingGameOver;
-
+    
     
     private void Init() {
+        OnGoodEndingGameOver = new();
+        OnBadEndingGameOver = new();
+        
         this.canvasGroup.alpha = 0f;
         
         this.badEndingMenu.SetActive(false);
@@ -94,6 +97,7 @@ public class GameEventGameOver : MonoBehaviour {
     }
 
     public void GameReset() {
+        GameInformationManager.OnGameDataDeleteEvent();
         SceneManager.LoadScene(0);
     }
 }

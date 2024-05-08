@@ -14,8 +14,14 @@ public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {
     public void Invoke() {
         this.CurrentValue = Player.Instance.Status[this.Type];
         
-        if (this.CurrentValue <= this.LimitValue) {
+        if (this.CurrentValue <= 0) {
+            DeathByStarvation();
+        }
+        else if (this.CurrentValue <= this.LimitValue) {
             Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.HUNGER);
+        }
+        else {
+            Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.HUNGER);
         }
         
         UpdateView();
@@ -28,7 +34,7 @@ public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {
     private void DeathByStarvation() {
         var title = "아사했습니다.";
         var content = "굶주림을 이기지 못했습니다. 서서히 눈이 감겨옵니다...";
-
-        GameEventGameOver.OnGameOverBadEnding(title, content);
+        
+        GameEventGameOver.OnBadEndingGameOver.Invoke(title, content);
     }
 }

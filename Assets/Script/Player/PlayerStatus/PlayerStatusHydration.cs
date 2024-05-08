@@ -13,16 +13,15 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
     
     public void Invoke() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-        
-        if (this.CurrentValue <= this.LimitValue) {
-            Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.DEHYDRATION);
-        }
-        else if (this.CurrentValue > this.LimitValue) {
-            Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.DEHYDRATION);
-        }
-        
+
         if (this.CurrentValue <= 0) {
             DeathByDehydration();
+        }
+        else if (this.CurrentValue <= this.LimitValue) {
+            Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.DEHYDRATION);
+        }
+        else {
+            Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.DEHYDRATION);
         }
         
         UpdateView();
