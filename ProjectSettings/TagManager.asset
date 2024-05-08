@@ -5,11 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Button
-  - Canvas
   - Panel
-  - Item_Material
-  - Item_Tool
-  - Item_Food
+  - Search
+  - Outside
   layers:
   - Default
   - TransparentFX

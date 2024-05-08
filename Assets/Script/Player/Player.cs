@@ -90,7 +90,10 @@ public class Player : GameControlSingleton<Player> { // Model
     
     // type 상태 이상 효과 삭제
     public void StatusEffectRemove(GameControlType.StatusEffect type) {
-        
+        if (this.statusEffect.ContainsKey(type)) {
+            this.statusEffect.Remove(type);
+            this.onStatusEffectUpdate.RemoveListener(this.statusEffectMap[type].Invoke);
+        }
     }
     
     // 인벤토리에 type 아이템이 존재하는가?

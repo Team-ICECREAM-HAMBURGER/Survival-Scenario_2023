@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   // Presenter
+public class GameRandomEventHunting : MonoBehaviour, IGameRandomEvent {   // Presenter
     [field: SerializeField] public float Weight { get; set; }
 
     // TODO: 사냥 가능 조건 부분 수정 필요
@@ -27,7 +27,7 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
         Init();
     }
     
-    public void Event() {
+    public (string, string) Event() {
         Debug.Log("HuntingEvent");
         
         this.isHuntingSuccess = false;
@@ -69,6 +69,8 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
         }
         
         EventResult();
+        
+        return (this.title, this.content.ToString());
     }
 
     public void EventResult() {
@@ -78,14 +80,6 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
         if (this.isHuntingSuccess) {
             this.content.Append("- 결과\n");
             this.content.Append("끈질긴 추격전 끝에 사냥에 성공했다.\n");
-            
-            this.content.Append("\n");
-            
-            this.content.Append("- 스테이터스 잔여량\n");
-            this.content.Append($"체력: %\n");
-            this.content.Append($"체온: %\n");
-            this.content.Append($"수분: %\n");
-            this.content.Append($"열량: %\n");
             
             this.content.Append("\n");
 
@@ -109,7 +103,5 @@ public class GameRandomEventSearchHunting : MonoBehaviour, IGameRandomEvent {   
            this.content.Append("도구 제작은 '인벤토리' 메뉴에서 할 수 있다.\n");
            this.content.Append("우선 제작에 필요한 재료를 모아보자.\n");
         }
-        
-        // PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
 }

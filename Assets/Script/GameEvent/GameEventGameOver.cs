@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -23,11 +24,10 @@ public class GameEventGameOver : MonoBehaviour {
     [SerializeField] private TMP_Text goodEndingContent;
     [SerializeField] private Button goodEndingReturnButton;
     
-    public delegate void GameOverEventHandler(string title, string content);
-    public static GameOverEventHandler OnGameOverGoodEnding;
-    public static GameOverEventHandler OnGameOverBadEnding;
+    public static UnityEvent<string, string> OnGoodEndingGameOver;
+    public static UnityEvent<string, string> OnBadEndingGameOver;
 
-
+    
     private void Init() {
         this.canvasGroup.alpha = 0f;
         
@@ -41,8 +41,8 @@ public class GameEventGameOver : MonoBehaviour {
         this.goodEndingTitle.gameObject.SetActive(false);
         this.goodEndingReturnButton.gameObject.SetActive(false);
         
-        OnGameOverBadEnding += BadEnding;
-        OnGameOverGoodEnding += GoodEnding;
+        OnGoodEndingGameOver.AddListener(GoodEnding);
+        OnBadEndingGameOver.AddListener(BadEnding);
     }
 
     private void Awake() { 

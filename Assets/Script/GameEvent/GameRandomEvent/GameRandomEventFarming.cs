@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { // Presenter
+public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent { // Presenter
     [field: SerializeField] public float Weight { get; set; }
     
     private string title;
@@ -14,7 +14,6 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
     
     
     private void Init() {
-        //this.Weight = 0f;
         this.acquiredItems = new();
         this.title = String.Empty;
         this.content = new();
@@ -24,7 +23,7 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         Init();
     }
     
-    public void Event() {
+    public (string, string) Event() {
         // Debug
         Debug.Log("FarmingEvent");
         
@@ -53,23 +52,16 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         
         // UI Update
         EventResult();
+
+        return (this.title, this.content.ToString());
     }
 
     public void EventResult() {
         this.title = "탐색 결과";
-
         this.content.Clear();
         
         this.content.Append("- 결과\n");
         this.content.Append("주변을 탐색하여 쓸만한 것들을 찾았다.\n");
-
-        this.content.Append("\n");
-        
-        this.content.Append("- 스테이터스 잔여량\n");
-        this.content.Append($"체력: %\n");
-        this.content.Append($"체온: %\n");
-        this.content.Append($"수분: %\n");
-        this.content.Append($"열량: %\n");
         
         this.content.Append("\n");
         
@@ -78,7 +70,5 @@ public class GameRandomEventSearchFarming : MonoBehaviour, IGameRandomEvent { //
         foreach (var VARIABLE in this.acquiredItems) {
             this.content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
         }
-        
-        // PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
 }

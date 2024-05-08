@@ -21,9 +21,8 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
             Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.DEHYDRATION);
         }
         
-        
         if (this.CurrentValue <= 0) {
-            
+            DeathByDehydration();
         }
         
         UpdateView();
@@ -37,6 +36,6 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
         var title = "갈사했습니다.";
         var content = "목이 타들어갑니다. 점점 시야가 흐려집니다...";
 
-        GameEventGameOver.OnGameOverBadEnding(title, content);
+        GameEventGameOver.OnBadEndingGameOver.Invoke(title, content);
     }
 }

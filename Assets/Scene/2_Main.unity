@@ -1945,7 +1945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 9243617}
+  m_AnchoredPosition: {x: -399.9992, y: 15540728}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -2785,7 +2785,7 @@ GameObject:
   - component: {fileID: 226454299}
   m_Layer: 5
   m_Name: Canvas Sleep
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2997,13 +2997,10 @@ MonoBehaviour:
   requireStatusBodyHeat: -7
   requireStatusHydration: -20
   requireStatusCalories: -7
-  canvasSearch: {fileID: 0}
-  canvasOutside: {fileID: 0}
-  canvasInformation: {fileID: 0}
-  searchResult: {fileID: 0}
-  searchResultTitle: {fileID: 0}
-  searchResultContent: {fileID: 0}
-  searchLoading: {fileID: 0}
+  searchResultPanel: {fileID: 455032948}
+  searchLoadingPanel: {fileID: 59030600}
+  searchResultTitle: {fileID: 1850115037}
+  searchResultContent: {fileID: 1301594471}
 --- !u!114 &232328980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3984,7 +3981,7 @@ GameObject:
   - component: {fileID: 285985442}
   m_Layer: 5
   m_Name: Canvas Crafting
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5788,7 +5785,7 @@ GameObject:
   - component: {fileID: 390710427}
   m_Layer: 5
   m_Name: Canvas Shelter
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8096,7 +8093,7 @@ GameObject:
   - component: {fileID: 655298123}
   m_Layer: 5
   m_Name: Canvas Rain Gutter
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9277,6 +9274,7 @@ GameObject:
   - component: {fileID: 741171209}
   - component: {fileID: 741171208}
   - component: {fileID: 741171210}
+  - component: {fileID: 741171211}
   m_Layer: 5
   m_Name: Move
   m_TagString: Button
@@ -9350,9 +9348,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerBehaviourMove, Assembly-CSharp
-        m_MethodName: Behaviour
+      - m_Target: {fileID: 741171211}
+        m_TargetAssemblyTypeName: Test, Assembly-CSharp
+        m_MethodName: m
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9400,6 +9398,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &741171211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741171206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e8986e1483a4ae0bdee0295d839325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &741595912
 GameObject:
   m_ObjectHideFlags: 0
@@ -10798,7 +10808,7 @@ GameObject:
   - component: {fileID: 811513493}
   m_Layer: 5
   m_Name: Canvas Gameover
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12900,7 +12910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 9243617}
+  m_AnchoredPosition: {x: -399.9992, y: 15540728}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -13756,7 +13766,7 @@ GameObject:
   - component: {fileID: 1057916461}
   m_Layer: 5
   m_Name: Canvas Fire
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15229,7 +15239,7 @@ GameObject:
   - component: {fileID: 1149816856}
   m_Layer: 5
   m_Name: Canvas Inventory
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15405,13 +15415,12 @@ GameObject:
   - component: {fileID: 1152889175}
   - component: {fileID: 1152889174}
   - component: {fileID: 1152889179}
-  - component: {fileID: 1152889183}
   - component: {fileID: 1152889182}
   - component: {fileID: 1152889181}
   - component: {fileID: 1152889180}
   m_Layer: 5
   m_Name: Canvas Search
-  m_TagString: Canvas
+  m_TagString: Search
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15521,7 +15530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0761460988c34ba58b92feb0642d1eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Weight>k__BackingField: 5
+  <Weight>k__BackingField: 0
 --- !u!114 &1152889181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15534,7 +15543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6af915c769f471fb092addf43f385c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Weight>k__BackingField: 5
+  <Weight>k__BackingField: 0
 --- !u!114 &1152889182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15547,19 +15556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbee7bb5386248f8b6df8cdc87b5605b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Weight>k__BackingField: 90
---- !u!114 &1152889183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152889173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b06c05c03c097495a980c510870c2305, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  <Weight>k__BackingField: 100
 --- !u!1 &1163547746
 GameObject:
   m_ObjectHideFlags: 0
@@ -20152,7 +20149,7 @@ GameObject:
   - component: {fileID: 1589722233}
   m_Layer: 5
   m_Name: Canvas Outside
-  m_TagString: Canvas
+  m_TagString: Outside
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21537,7 +21534,7 @@ GameObject:
   - component: {fileID: 1743660644}
   m_Layer: 5
   m_Name: Canvas Rest
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22815,6 +22812,7 @@ GameObject:
   - component: {fileID: 1847885688}
   - component: {fileID: 1847885687}
   - component: {fileID: 1847885686}
+  - component: {fileID: 1847885689}
   m_Layer: 5
   m_Name: Ok
   m_TagString: Button
@@ -22886,13 +22884,37 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 232328979}
         m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
-        m_MethodName: ResetView
+        m_MethodName: PanelReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1847885689}
+        m_TargetAssemblyTypeName: GameSceneManagerMain, Assembly-CSharp
+        m_MethodName: OnCanvasChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1847885689}
+        m_TargetAssemblyTypeName: GameSceneManagerMain, Assembly-CSharp
+        m_MethodName: OnCanvasEnable
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2025123718}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Canvas, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -22936,6 +22958,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1847885684}
   m_CullTransparentMesh: 1
+--- !u!114 &1847885689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847885684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92c50f35258493bba619b7a1f6a718b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fromCanvas: {fileID: 1152889176}
+  toCanvas: {fileID: 1589722235}
 --- !u!1 &1850115035
 GameObject:
   m_ObjectHideFlags: 0
@@ -24816,6 +24852,7 @@ GameObject:
   - component: {fileID: 1989273574}
   - component: {fileID: 1989273573}
   - component: {fileID: 1989273572}
+  - component: {fileID: 1989273575}
   m_Layer: 5
   m_Name: Search
   m_TagString: Button
@@ -24931,6 +24968,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1989273575}
+        m_TargetAssemblyTypeName: GameSceneManagerMain, Assembly-CSharp
+        m_MethodName: OnCanvasChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1989273575}
+        m_TargetAssemblyTypeName: GameSceneManagerMain, Assembly-CSharp
+        m_MethodName: OnCanvasDisable
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2025123718}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Canvas, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1989273574
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24939,6 +25000,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989273570}
   m_CullTransparentMesh: 1
+--- !u!114 &1989273575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989273570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92c50f35258493bba619b7a1f6a718b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fromCanvas: {fileID: 1589722235}
+  toCanvas: {fileID: 1152889176}
 --- !u!1 &1990067351
 GameObject:
   m_ObjectHideFlags: 0
@@ -25430,7 +25505,7 @@ GameObject:
   - component: {fileID: 2025123716}
   m_Layer: 5
   m_Name: Canvas Information
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25922,10 +25997,9 @@ GameObject:
   - component: {fileID: 2047952176}
   - component: {fileID: 2047952175}
   - component: {fileID: 2047952174}
-  - component: {fileID: 2047952178}
   m_Layer: 5
   m_Name: Canvas Move
-  m_TagString: Canvas
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26016,18 +26090,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2047952178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047952173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3f801809604cbda87c8a29e7285dc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2049066010
 GameObject:
   m_ObjectHideFlags: 0

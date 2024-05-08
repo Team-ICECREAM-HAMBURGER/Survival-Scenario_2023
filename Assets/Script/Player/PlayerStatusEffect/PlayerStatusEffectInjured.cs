@@ -1,5 +1,4 @@
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   // Presenter
     public string Name { get; } = "부상";
@@ -20,7 +19,7 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
         Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * this.statusReducePercent * -0.01f);
 
         if (this.Term <= 0) {
-            Player.Instance.StatusEffectRemove(this);
+            Player.Instance.StatusEffectRemove(this.Type);
         }
     }
 }

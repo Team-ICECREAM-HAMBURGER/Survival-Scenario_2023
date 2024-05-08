@@ -2,7 +2,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
+public class GameRandomEventInjured : MonoBehaviour, IGameRandomEvent {
     [field: SerializeField] public float Weight { get; set; }
 
     private string title;
@@ -18,11 +18,12 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
         Init();
     }
     
-    public void Event() {
+    public (string, string) Event() {
         Debug.Log("InjuredEvent");
 
-        //Player.Instance.StatusEffectMap[GameControlType.StatusEffect.INJURED].Active();
         EventResult();
+
+        return (this.title, this.content.ToString());
     }
 
     public void EventResult() {
@@ -36,19 +37,9 @@ public class GameRandomEventSearchInjured : MonoBehaviour, IGameRandomEvent {
         this.content.Append("\n");
         
         this.content.Append("부상 회복까지 일(텀) 남음.\n");
-
-        this.content.Append("\n");
-        
-        this.content.Append("- 스테이터스 잔여량\n");
-        this.content.Append($"체력: %\n");
-        this.content.Append($"체온: %\n");
-        this.content.Append($"수분: %\n");
-        this.content.Append($"열량: %\n");
         
         this.content.Append("\n");
 
         this.content.Append("부상 상태 이상 효과가 적용됨.\n");
-        
-        // PlayerBehaviourSearch.OnSearchEventUpdateView(this.title, this.content.ToString());
     }
 }
