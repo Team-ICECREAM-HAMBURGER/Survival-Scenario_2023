@@ -2,16 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
-    [SerializeField] private Slider statusGauge;
-    
     public float LimitValue { get; } = 30f;
     public float CurrentValue { get; set; }
     
     public string Name { get; } = "수분";
     public GameControlType.Status Type { get; } = GameControlType.Status.HYDRATION;
 
-    
-    public void Invoke() {
+
+    public void Init() {
+        throw new System.NotImplementedException();
+    }
+
+    public void StatusUpdate() {
         this.CurrentValue = Player.Instance.Status[this.Type];
 
         if (this.CurrentValue <= 0) {
@@ -28,7 +30,6 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
     }
 
     public void UpdateView() {
-        this.statusGauge.value = this.CurrentValue;
     }
     
     private void DeathByDehydration() {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311924, g: 0.38073963, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -298,7 +298,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 421394339}
         m_TargetAssemblyTypeName: PlayerInformationViewer, Assembly-CSharp
-        m_MethodName: OnInvoke
+        m_MethodName: StatusEffectPanelUpdate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1487,9 +1487,9 @@ RectTransform:
   - {fileID: 1065976105}
   m_Father: {fileID: 149866787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -730}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133378657
@@ -1957,7 +1957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 20434958}
+  m_AnchoredPosition: {x: -399.9992, y: 20797034}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -3340,7 +3340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ab3a1a2a304124a9882277134202d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusGauge: {fileID: 1381146738}
 --- !u!114 &244481240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3353,7 +3352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c5830df8cb4b4896bb8a38d88cf602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusGauge: {fileID: 260111966}
 --- !u!114 &244481241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3366,7 +3364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941170dd49e245e4b610a267c9dac7ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusGauge: {fileID: 170220096}
 --- !u!114 &244481242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3379,7 +3376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde13b157d7b4da5892d1358b8ae800d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusGauge: {fileID: 557702705}
 --- !u!1 &247663774
 GameObject:
   m_ObjectHideFlags: 0
@@ -4808,9 +4804,9 @@ RectTransform:
   - {fileID: 583231298}
   m_Father: {fileID: 149866787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &345066306
@@ -6058,8 +6054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9079a5d6f4e34abfa194acb485ad62c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusEffectInformationPanel: {fileID: 31902414}
-  statusEffectInformationPanelIndicator: {fileID: 1685579045}
+  statusEffectPanel: {fileID: 31902414}
+  statusEffectPanelIndicator: {fileID: 1685579045}
   statusStaminaGauge: {fileID: 557702705}
   statusBodyHeatGauge: {fileID: 170220096}
   statusHydrationGauge: {fileID: 260111966}
@@ -8653,9 +8649,9 @@ RectTransform:
   - {fileID: 799958270}
   m_Father: {fileID: 149866787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -600}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690360349
@@ -12941,7 +12937,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 20434958}
+  m_AnchoredPosition: {x: -399.9992, y: 20797034}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -13696,9 +13692,9 @@ RectTransform:
   - {fileID: 1896526463}
   m_Father: {fileID: 149866787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -210}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1054509933
@@ -14974,9 +14970,9 @@ RectTransform:
   - {fileID: 692155182}
   m_Father: {fileID: 149866787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -340}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1137179180
@@ -16576,7 +16572,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 244481242}
         m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
-        m_MethodName: Invoke
+        m_MethodName: StatusUpdate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16588,7 +16584,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 244481241}
         m_TargetAssemblyTypeName: PlayerStatusBodyHeat, Assembly-CSharp
-        m_MethodName: Invoke
+        m_MethodName: StatusUpdate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16600,7 +16596,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 244481240}
         m_TargetAssemblyTypeName: PlayerStatusHydration, Assembly-CSharp
-        m_MethodName: Invoke
+        m_MethodName: StatusUpdate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16612,7 +16608,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 244481239}
         m_TargetAssemblyTypeName: PlayerStatusCalories, Assembly-CSharp
-        m_MethodName: Invoke
+        m_MethodName: StatusUpdate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20621,9 +20617,9 @@ RectTransform:
   - {fileID: 781115537}
   m_Father: {fileID: 149866787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -470}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636247110
@@ -21978,9 +21974,9 @@ RectTransform:
   - {fileID: 1956464781}
   m_Father: {fileID: 969297691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760321712
@@ -26859,8 +26855,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2119271094}
   - component: {fileID: 2119271095}
+  - component: {fileID: 2119271096}
   m_Layer: 5
-  m_Name: Game Information
+  m_Name: World Information
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26914,6 +26911,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2119271096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119271093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9b3b76262c459daa7c7c616e3e680c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

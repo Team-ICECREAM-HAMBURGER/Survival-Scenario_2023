@@ -7,12 +7,12 @@ public class PlayerStatusEffectColdness : MonoBehaviour, IPlayerStatusEffect {
 
     [SerializeField] private float statusReducePercent;
 
-
-    public void Init(int term) {
-        this.Term = term;
+    
+    public void Init() {
+        throw new System.NotImplementedException();
     }
 
-    public void Invoke() {
+    public void StatusEffectActive() {
         var statusBodyHeat = Player.Instance.Status[GameControlType.Status.BODY_HEAT];
         var statusStamina = Player.Instance.Status[GameControlType.Status.STAMINA];
         

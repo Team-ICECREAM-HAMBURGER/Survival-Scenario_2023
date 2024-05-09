@@ -6,9 +6,13 @@ public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
     public float CurrentValue { get; set; }
     public string Name { get; } = "체온";
     public GameControlType.Status Type { get; } = GameControlType.Status.BODY_HEAT;
-    
-    
-    public void Invoke() {
+
+
+    public void Init() {
+        throw new System.NotImplementedException();
+    }
+
+    public void StatusUpdate() {
         this.CurrentValue = Player.Instance.Status[this.Type];
         
         if (this.CurrentValue <= 0) {
@@ -21,12 +25,11 @@ public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
             Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.COLDNESS);
         }
         
-        // UpdateView();
+        UpdateView();
     }
 
-    // public void UpdateView() {
-    //     this.statusGauge.value = this.CurrentValue;
-    // }
+    public void UpdateView() {
+    }
 
     private void DeathByHypothermia() {
         var title = "동사했습니다.";

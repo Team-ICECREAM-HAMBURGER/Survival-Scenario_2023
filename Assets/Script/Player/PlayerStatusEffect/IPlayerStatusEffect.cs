@@ -4,6 +4,6 @@ public interface IPlayerStatusEffect {
     public int Term { get; }
 
 
-    public void Init(int value);
-    public void Invoke();
+    public void Init();
+    public void StatusEffectActive();
 }

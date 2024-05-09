@@ -8,42 +8,39 @@ public class Player : GameControlSingleton<Player> { // Model
     [SerializeField] private GameObject playerStatusEffect;
     [SerializeField] private GameObject playerBehaviour;
     
-    [Space(10f)]
-    
-    [SerializeField] private UnityEvent onStatusUpdate;
+    private UnityEvent onStatusUpdate;          // 상태 수치 변동
+    private UnityEvent onStatusEffectActive;    // 상태 이상 효과 발동
 
     private PlayerInformation information;
-    private GameControlDictionary.Inventory inventory;          // <name, amount>
-    public GameControlDictionary.Status Status { get; private set; }                // <Enum, float>
-    private GameControlDictionary.StatusEffect statusEffect;    // <Enum, term>
-    private Dictionary<GameControlType.StatusEffect, IPlayerStatusEffect> statusEffectMap;
-    
-    private UnityEvent onStatusEffectUpdate;
+    public GameControlDictionary.Inventory Inventory { get; private set; }         // <name, amount>
+    public GameControlDictionary.Status Status { get; private set; }               // <Enum, float>
+    public GameControlDictionary.StatusEffect StatusEffect { get; private set; }   // <Enum, term>
     
     
     private void Init() {
         try {
             this.information = GameInformationManager.Instance.playerInformation;
-            this.statusEffectMap = new();
-            this.onStatusEffectUpdate = new();
-
-            this.inventory = this.information.inventory;
+            this.Inventory = this.information.inventory;
             this.Status = this.information.status;
-            this.statusEffect = this.information.statusEffect;
+            this.StatusEffect = this.information.statusEffect;
 
-            this.onStatusUpdate.Invoke();
-
-            foreach (var VARIABLE in this.playerStatusEffect.GetComponents<IPlayerStatusEffect>()) {
-                this.statusEffectMap[VARIABLE.Type] = VARIABLE;
+            this.onStatusUpdate = new();
+            this.onStatusEffectActive = new();
+            
+            foreach (var VARIABLE in this.playerStatus.GetComponents<IPlayerStatus>()) {
+                VARIABLE.Init();
+                this.onStatusUpdate.AddListener(VARIABLE.StatusUpdate);
             }
 
-            foreach (var VARIABLE in this.statusEffect) {
-                this.statusEffectMap[VARIABLE.Key].Init(this.statusEffect[VARIABLE.Key]);
-                this.onStatusEffectUpdate.AddListener(this.statusEffectMap[VARIABLE.Key].Invoke);
+            foreach (var VARIABLE in this.playerStatusEffect.GetComponents<IPlayerStatusEffect>()) {
+                if (this.StatusEffect.ContainsKey(VARIABLE.Type)) {
+                    VARIABLE.Init();
+                    this.onStatusEffectActive.AddListener(VARIABLE.StatusEffectActive);
+                }
             }
         }
         catch (NullReferenceException e) {
-            Debug.Log("GameOver!!");
+            Debug.Log("Game Over");
         }
     }
     
@@ -54,23 +51,10 @@ public class Player : GameControlSingleton<Player> { // Model
         Init();
     }
 
-    public List<IPlayerStatusEffect> StatusEffectCheck() {
-        var effects = new List<IPlayerStatusEffect>();
-        
-        foreach (var VARIABLE in this.statusEffect) {
-            effects.Add(this.statusEffectMap[VARIABLE.Key]);
-        }
-
-        return effects;
-    }
-
-    // type 상태의 수치를 value만큼 업데이트
     public void StatusUpdate(GameControlType.Status type, float value) {
-        // JSON 데이터 업데이트
         this.Status[type] += Mathf.Floor(value);
         this.Status[type] = Mathf.Clamp(this.Status[type], 0f, 100f);
         
-        // 객체 데이터 업데이트
         this.onStatusUpdate.Invoke();
     }
 
@@ -93,49 +77,31 @@ public class Player : GameControlSingleton<Player> { // Model
     }
 
     public void StatusEffectInvoke() {
-        this.onStatusEffectUpdate?.Invoke();
+        this.onStatusEffectActive?.Invoke();
     }
     
-    // type 상태 이상 효과 추가 
     public void StatusEffectAdd(GameControlType.StatusEffect type) {
-        if (!this.statusEffect.ContainsKey(type)) {  // 이미 있는 효과라면 패스
-            this.statusEffect[type] = this.statusEffectMap[type].Term;
-            this.onStatusEffectUpdate.AddListener(this.statusEffectMap[type].Invoke);
-        }
+
+    }
+    
+    public void StatusEffectRemove(GameControlType.StatusEffect type) {
+
     }
 
-    public void StatusEffectUpdate(IPlayerStatusEffect effect) {
-        this.statusEffect[effect.Type] = effect.Term;
-    }
-    
-    // type 상태 이상 효과 삭제
-    public void StatusEffectRemove(GameControlType.StatusEffect type) {
-        if (this.statusEffect.ContainsKey(type)) {
-            this.statusEffect.Remove(type);
-            this.onStatusEffectUpdate.RemoveListener(this.statusEffectMap[type].Invoke);
-        }
-    }
-    
-    // 인벤토리에 type 아이템이 존재하는가?
-    public bool InventoryCheck(string type) {
-        return this.inventory.ContainsKey(type);
-    }
-    
-    // 인벤토리에 type 아이템들을 업데이트; ItemGet
     public void InventoryUpdate(Dictionary<string, int> items) {
         foreach (var VARIABLE in items) {
-            if (this.inventory.ContainsKey(VARIABLE.Key)) {
-                this.inventory[VARIABLE.Key] += VARIABLE.Value;
+            if (this.Inventory.ContainsKey(VARIABLE.Key)) {
+                this.Inventory[VARIABLE.Key] += VARIABLE.Value;
             }
             else {
-                this.inventory[VARIABLE.Key] = VARIABLE.Value;
+                this.Inventory[VARIABLE.Key] = VARIABLE.Value;
             }
         }
     }
 
     public void InventoryUpdate(string item, int value) {
-        if (!this.inventory.TryAdd(item, value)) {
-            this.inventory[item] += value;
+        if (!this.Inventory.TryAdd(item, value)) {
+            this.Inventory[item] += value;
         }
     }
 }

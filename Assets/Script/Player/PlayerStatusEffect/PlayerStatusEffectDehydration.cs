@@ -6,13 +6,13 @@ public class PlayerStatusEffectDehydration : MonoBehaviour, IPlayerStatusEffect 
     public int Term { get; private set; } = 1;
 
     [SerializeField] private float statusReducePercent;
-
     
-    public void Init(int term) {
-        this.Term = term;
+
+    public void Init() {
+        throw new System.NotImplementedException();
     }
 
-    public void Invoke() {
+    public void StatusEffectActive() {
         var status = Player.Instance.Status[GameControlType.Status.STAMINA];
         
         Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * statusReducePercent * -0.01f);

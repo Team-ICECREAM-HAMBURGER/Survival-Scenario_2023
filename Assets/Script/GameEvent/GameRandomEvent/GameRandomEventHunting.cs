@@ -28,48 +28,47 @@ public class GameRandomEventHunting : MonoBehaviour, IGameRandomEvent {   // Pre
     }
     
     public (string, string) Event() {
-        Debug.Log("HuntingEvent");
-        
-        this.isHuntingSuccess = false;
-        
-        if (Player.Instance.InventoryCheck(this.spendItem)) {
-            this.isHuntingSuccess = true;
-            
-            // Item Random Get Event
-            this.acquiredItems.Clear();
-
-            for (var i = 0; i < Random.Range(1, 5); i++) {
-                var pivot = Random.Range(0, 1f);
-                var randomWeightSum = 0f;
-
-                foreach (var VARIABLE in ItemManager.Instance.HuntingItems) {
-                    randomWeightSum += VARIABLE.randomWeight;
-
-                    if (randomWeightSum >= pivot) {
-                        // TODO: 획득 개수 무작위 함수 적용
-                        if (!this.acquiredItems.TryAdd(VARIABLE.ItemName, 1)) {
-                            this.acquiredItems[VARIABLE.ItemName] += 1;
-                        }
-                    
-                        break;
-                    }
-                }
-            }
-            
-            Player.Instance.InventoryUpdate(this.acquiredItems);
-            
-            // Item Spend
-            this.spentItems.Clear();
-            
-            if (!this.spentItems.TryAdd(this.spendItem, this.spendItemAmount)) {
-                this.spentItems[this.spendItem] += this.spendItemAmount;
-            }
-            
-            Player.Instance.InventoryUpdate(this.spendItem, -this.spendItemAmount);
-        }
-        
-        EventResult();
-        
+        // Debug.Log("HuntingEvent");
+        //
+        // this.isHuntingSuccess = false;
+        //
+        // if (Player.Instance.InventoryCheck(this.spendItem)) {
+        //     this.isHuntingSuccess = true;
+        //     
+        //     // Item Random Get Event
+        //     this.acquiredItems.Clear();
+        //
+        //     for (var i = 0; i < Random.Range(1, 5); i++) {
+        //         var pivot = Random.Range(0, 1f);
+        //         var randomWeightSum = 0f;
+        //
+        //         foreach (var VARIABLE in ItemManager.Instance.HuntingItems) {
+        //             randomWeightSum += VARIABLE.randomWeight;
+        //
+        //             if (randomWeightSum >= pivot) {
+        //                 if (!this.acquiredItems.TryAdd(VARIABLE.ItemName, 1)) {
+        //                     this.acquiredItems[VARIABLE.ItemName] += 1;
+        //                 }
+        //             
+        //                 break;
+        //             }
+        //         }
+        //     }
+        //     
+        //     Player.Instance.InventoryUpdate(this.acquiredItems);
+        //     
+        //     // Item Spend
+        //     this.spentItems.Clear();
+        //     
+        //     if (!this.spentItems.TryAdd(this.spendItem, this.spendItemAmount)) {
+        //         this.spentItems[this.spendItem] += this.spendItemAmount;
+        //     }
+        //     
+        //     Player.Instance.InventoryUpdate(this.spendItem, -this.spendItemAmount);
+        // }
+        //
+        // EventResult();
+        //
         return (this.title, this.content.ToString());
     }
 

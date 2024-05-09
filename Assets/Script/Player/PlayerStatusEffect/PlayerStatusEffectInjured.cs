@@ -6,13 +6,13 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
     public int Term { get; private set; }
 
     [SerializeField] private float statusReducePercent;
-    
 
-    public void Init(int term) {
-        this.Term = term;
+
+    public void Init() {
+        throw new System.NotImplementedException();
     }
-    
-    public void Invoke() {
+
+    public void StatusEffectActive() {
         var status = Player.Instance.Status[GameControlType.Status.STAMINA];
         
         this.Term -= TimeManager.Instance.SpentTerm;
