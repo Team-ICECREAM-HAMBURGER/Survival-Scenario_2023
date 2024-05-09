@@ -54,6 +54,16 @@ public class Player : GameControlSingleton<Player> { // Model
         Init();
     }
 
+    public List<IPlayerStatusEffect> StatusEffectCheck() {
+        var effects = new List<IPlayerStatusEffect>();
+        
+        foreach (var VARIABLE in this.statusEffect) {
+            effects.Add(this.statusEffectMap[VARIABLE.Key]);
+        }
+
+        return effects;
+    }
+
     // type 상태의 수치를 value만큼 업데이트
     public void StatusUpdate(GameControlType.Status type, float value) {
         // JSON 데이터 업데이트

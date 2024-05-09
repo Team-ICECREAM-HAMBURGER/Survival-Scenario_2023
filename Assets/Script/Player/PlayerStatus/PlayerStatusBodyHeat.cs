@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
-    [SerializeField] private Slider statusGauge;
-    
     public float LimitValue { get; } = 20f;
     public float CurrentValue { get; set; }
     public string Name { get; } = "체온";
@@ -23,12 +21,12 @@ public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
             Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.COLDNESS);
         }
         
-        UpdateView();
+        // UpdateView();
     }
 
-    public void UpdateView() {
-        this.statusGauge.value = this.CurrentValue;
-    }
+    // public void UpdateView() {
+    //     this.statusGauge.value = this.CurrentValue;
+    // }
 
     private void DeathByHypothermia() {
         var title = "동사했습니다.";

@@ -5,5 +5,5 @@ public interface IPlayerStatus {
     public GameControlType.Status Type { get; }
 
     public void Invoke();
-    public void UpdateView();
+    // public void UpdateView();
 }
