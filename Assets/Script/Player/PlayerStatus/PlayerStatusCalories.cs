@@ -1,41 +1,30 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {
     public float LimitValue { get; } = 15f;
-    public float CurrentValue { get; set; }
+    public float CurrentValue { get; private set; }
     
     public string Name { get; } = "칼로리";
     public GameControlType.Status Type { get; } = GameControlType.Status.CALORIES;
-
+    
 
     public void Init() {
-        throw new System.NotImplementedException();
+        this.CurrentValue = Player.Instance.Status[this.Type];
+        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public void StatusUpdate() {
         this.CurrentValue = Player.Instance.Status[this.Type];
+        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
-        if (this.CurrentValue <= 0) {
-            DeathByStarvation();
+        if (this.CurrentValue <= 0) {   // Player Death
+            GameEventGameOver.OnBadEnding.Invoke("아사했습니다.", "굶주림을 느낄 기력조차 남지 않았습니다.\n이제 남은 건 졸음 뿐입니다...");
         }
-        else if (this.CurrentValue <= this.LimitValue) {
-            Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.HUNGER);
+        else if (this.CurrentValue <= this.LimitValue) {    // Player Status Effect Active
+            PlayerStatusEffectHunger.OnStatusEffectAdd.Invoke();
         }
-        else {
-            Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.HUNGER);
+        else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.COLDNESS)) {
+            PlayerStatusEffectHunger.OnStatusEffectRemove.Invoke();
         }
-        
-        UpdateView();
-    }
-
-    public void UpdateView() {
-    }
-
-    private void DeathByStarvation() {
-        var title = "아사했습니다.";
-        var content = "굶주림을 이기지 못했습니다. 서서히 눈이 감겨옵니다...";
-        
-        GameEventGameOver.OnBadEndingGameOver.Invoke(title, content);
     }
 }

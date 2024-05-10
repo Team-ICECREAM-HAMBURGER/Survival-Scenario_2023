@@ -48,7 +48,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
             this.requireStatusCalories);
         
         // Player Status Effects Invoke
-        Player.Instance.StatusEffectInvoke();
+        Player.Instance.StatusEffectUpdate();
         
         // Random Event; Search
         RandomEventCall();
@@ -62,8 +62,8 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
             this.weightSum += VARIABLE.Weight;
             
             if (this.weightSum > this.weightLimit) {
-                PanelUpdate(VARIABLE.Event());
-                
+                VARIABLE.Event();
+                PanelUpdate(VARIABLE.EventResult());
                 break;
             }
         }

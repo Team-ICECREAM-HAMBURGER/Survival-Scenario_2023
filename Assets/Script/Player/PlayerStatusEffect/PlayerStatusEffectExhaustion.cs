@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStatusEffectExhaustion : MonoBehaviour, IPlayerStatusEffect {
     public string Name { get; } = "탈진";
@@ -7,12 +8,23 @@ public class PlayerStatusEffectExhaustion : MonoBehaviour, IPlayerStatusEffect {
     
     [SerializeField] private float statusReducePercent;
 
+    public static UnityEvent OnStatusEffectAdd;
+    public static UnityEvent OnStatusEffectRemove;
+    
     
     public void Init() {
-        this.Term = Player.Instance.StatusEffect[this.Type];
+        OnStatusEffectAdd = new();
+        OnStatusEffectRemove = new();
+        
+        OnStatusEffectAdd.AddListener(StatusEffectAdd);
+        OnStatusEffectRemove.AddListener(StatusEffectRemove);
     }
 
-    public void StatusEffectActive() {
+    private void StatusEffectAdd() {
+        Player.Instance.StatusEffectAdd(this);
+    }
+
+    public void StatusEffectUpdate() {
         var statusBodyHeat = Player.Instance.Status[GameControlType.Status.BODY_HEAT];
         var statusHydration = Player.Instance.Status[GameControlType.Status.HYDRATION];
         var statusCalories = Player.Instance.Status[GameControlType.Status.CALORIES];
@@ -20,5 +32,9 @@ public class PlayerStatusEffectExhaustion : MonoBehaviour, IPlayerStatusEffect {
         Player.Instance.StatusUpdate(GameControlType.Status.BODY_HEAT, statusBodyHeat * this.statusReducePercent * -0.01f);
         Player.Instance.StatusUpdate(GameControlType.Status.HYDRATION, statusHydration * this.statusReducePercent * -0.01f);
         Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, statusCalories * this.statusReducePercent * -0.01f);
+    }
+    
+    private void StatusEffectRemove() {
+        Player.Instance.StatusEffectRemove(this);
     }
 }

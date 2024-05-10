@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStatusEffectHunger : MonoBehaviour, IPlayerStatusEffect {
     public string Name { get; } = "기아";
@@ -6,22 +7,32 @@ public class PlayerStatusEffectHunger : MonoBehaviour, IPlayerStatusEffect {
     public int Term { get; set; }
     
     [SerializeField] private float statusReducePercent;
+    
+    public static UnityEvent OnStatusEffectAdd;
+    public static UnityEvent OnStatusEffectRemove;
 
     
-    public void Init(int term) {
-        this.Term = term;
-    }
-
-
     public void Init() {
-        throw new System.NotImplementedException();
+        OnStatusEffectAdd = new();
+        OnStatusEffectRemove = new();
+        
+        OnStatusEffectAdd.AddListener(StatusEffectAdd);
+        OnStatusEffectRemove.AddListener(StatusEffectRemove);
     }
 
-    public void StatusEffectActive() {
+    private void StatusEffectAdd() {
+        Player.Instance.StatusEffectAdd(this);
+    }
+
+    public void StatusEffectUpdate() {
         var statusCalories = Player.Instance.Status[GameControlType.Status.CALORIES];
         var statusStamina = Player.Instance.Status[GameControlType.Status.STAMINA];
         
         Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, statusCalories * this.statusReducePercent * -0.01f);
         Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, statusStamina * this.statusReducePercent * -0.01f);
+    }
+    
+    private void StatusEffectRemove() {
+        Player.Instance.StatusEffectRemove(this);
     }
 }

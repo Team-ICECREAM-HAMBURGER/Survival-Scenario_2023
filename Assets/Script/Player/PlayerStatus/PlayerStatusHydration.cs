@@ -1,41 +1,24 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
     public float LimitValue { get; } = 30f;
-    public float CurrentValue { get; set; }
+    public float CurrentValue { get; private set; }
     
     public string Name { get; } = "수분";
     public GameControlType.Status Type { get; } = GameControlType.Status.HYDRATION;
-
-
+    
+    
     public void Init() {
-        throw new System.NotImplementedException();
+        this.CurrentValue = Player.Instance.Status[this.Type];
+        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public void StatusUpdate() {
         this.CurrentValue = Player.Instance.Status[this.Type];
+        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
 
-        if (this.CurrentValue <= 0) {
-            DeathByDehydration();
+        if (this.CurrentValue <= 0) {   // Player Death
+            GameEventGameOver.OnBadEnding.Invoke("갈사했습니다.", "목이 타들어갑니다.\n한계를 느낄 무렵 시야가 흐려지기 시작합니다...");
         }
-        else if (this.CurrentValue <= this.LimitValue) {
-            Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.DEHYDRATION);
-        }
-        else {
-            Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.DEHYDRATION);
-        }
-        
-        UpdateView();
-    }
-
-    public void UpdateView() {
-    }
-    
-    private void DeathByDehydration() {
-        var title = "갈사했습니다.";
-        var content = "목이 타들어갑니다. 점점 시야가 흐려집니다...";
-
-        GameEventGameOver.OnBadEndingGameOver.Invoke(title, content);
     }
 }

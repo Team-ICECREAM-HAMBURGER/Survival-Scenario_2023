@@ -9,7 +9,7 @@ public class Player : GameControlSingleton<Player> { // Model
     [SerializeField] private GameObject playerBehaviour;
     
     private UnityEvent onStatusUpdate;          // 상태 수치 변동
-    private UnityEvent onStatusEffectActive;    // 상태 이상 효과 발동
+    private UnityEvent onStatusEffectUpdate;    // 상태 이상 효과 발동
 
     private PlayerInformation information;
     public GameControlDictionary.Inventory Inventory { get; private set; }         // <name, amount>
@@ -25,7 +25,7 @@ public class Player : GameControlSingleton<Player> { // Model
             this.StatusEffect = this.information.statusEffect;
 
             this.onStatusUpdate = new();
-            this.onStatusEffectActive = new();
+            this.onStatusEffectUpdate = new();
             
             foreach (var VARIABLE in this.playerStatus.GetComponents<IPlayerStatus>()) {
                 VARIABLE.Init();
@@ -33,9 +33,10 @@ public class Player : GameControlSingleton<Player> { // Model
             }
 
             foreach (var VARIABLE in this.playerStatusEffect.GetComponents<IPlayerStatusEffect>()) {
+                VARIABLE.Init();
+                
                 if (this.StatusEffect.ContainsKey(VARIABLE.Type)) {
-                    VARIABLE.Init();
-                    this.onStatusEffectActive.AddListener(VARIABLE.StatusEffectActive);
+                    this.onStatusEffectUpdate.AddListener(VARIABLE.StatusEffectUpdate);
                 }
             }
         }
@@ -76,16 +77,22 @@ public class Player : GameControlSingleton<Player> { // Model
         this.onStatusUpdate.Invoke();
     }
 
-    public void StatusEffectInvoke() {
-        this.onStatusEffectActive?.Invoke();
+    public void StatusEffectAdd(IPlayerStatusEffect effect) {
+        if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {
+            this.StatusEffect[effect.Type] = effect.Term;
+            this.onStatusEffectUpdate.AddListener(effect.StatusEffectUpdate);
+        }
     }
     
-    public void StatusEffectAdd(GameControlType.StatusEffect type) {
-
+    public void StatusEffectUpdate() {
+        this.onStatusEffectUpdate?.Invoke();
     }
     
-    public void StatusEffectRemove(GameControlType.StatusEffect type) {
-
+    public void StatusEffectRemove(IPlayerStatusEffect effect) {
+        if (this.StatusEffect.ContainsKey(effect.Type)) {
+            this.StatusEffect.Remove(effect.Type);
+            this.onStatusEffectUpdate.RemoveListener(effect.StatusEffectUpdate);
+        }
     }
 
     public void InventoryUpdate(Dictionary<string, int> items) {

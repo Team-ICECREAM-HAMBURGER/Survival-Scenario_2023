@@ -1,38 +1,29 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
     public float LimitValue { get; } = 20f;
-    public float CurrentValue { get; set; }
+    public float CurrentValue { get; private set; }
     public string Name { get; } = "체온";
     public GameControlType.Status Type { get; } = GameControlType.Status.BODY_HEAT;
-
+    
 
     public void Init() {
-        throw new System.NotImplementedException();
+        this.CurrentValue = Player.Instance.Status[this.Type];
+        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public void StatusUpdate() {
         this.CurrentValue = Player.Instance.Status[this.Type];
+        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
-        if (this.CurrentValue <= 0) {
-            DeathByHypothermia();
+        if (this.CurrentValue <= 0) {   // Player Death
+            GameEventGameOver.OnBadEnding.Invoke("동사했습니다.", "추위가 더위로 바뀌어갑니다.\n문득 몰려오는 아늑함에 눈꺼풀이 감깁니다...");
         }
-        else if (this.CurrentValue <= this.LimitValue) {
-            Player.Instance.StatusEffectAdd(GameControlType.StatusEffect.COLDNESS);
+        else if (this.CurrentValue <= this.LimitValue) {    // Player Status Effect Active
+            PlayerStatusEffectColdness.OnStatusEffectAdd.Invoke();
         }
-        else {
-            Player.Instance.StatusEffectRemove(GameControlType.StatusEffect.COLDNESS);
+        else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.COLDNESS)) {
+            PlayerStatusEffectColdness.OnStatusEffectRemove.Invoke();
         }
-        
-        UpdateView();
-    }
-
-    public void UpdateView() {
-    }
-
-    private void DeathByHypothermia() {
-        var title = "동사했습니다.";
-        var content = "냉혹한 추위 속에서 잠이 몰려옵니다...";
     }
 }

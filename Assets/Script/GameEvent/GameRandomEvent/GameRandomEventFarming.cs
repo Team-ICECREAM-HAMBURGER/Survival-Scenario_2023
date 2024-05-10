@@ -8,22 +8,18 @@ using Random = UnityEngine.Random;
 public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent { // Presenter
     [field: SerializeField] public float Weight { get; set; }
     
-    private string title;
-    private StringBuilder content;
     private Dictionary<string, int> acquiredItems;
     
     
     private void Init() {
         this.acquiredItems = new();
-        this.title = String.Empty;
-        this.content = new();
     }
 
     private void Awake() {
         Init();
     }
     
-    public (string, string) Event() {
+    public void Event() {
         // Debug
         Debug.Log("FarmingEvent");
         
@@ -49,26 +45,26 @@ public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent { // Prese
         }
         
         Player.Instance.InventoryUpdate(this.acquiredItems);
-        
-        // UI Update
-        EventResult();
-
-        return (this.title, this.content.ToString());
     }
 
-    public void EventResult() {
-        this.title = "탐색 결과";
-        this.content.Clear();
+    public (string, string) EventResult() {
+        var title = String.Empty;
+        var content = new StringBuilder();
         
-        this.content.Append("- 결과\n");
-        this.content.Append("주변을 탐색하여 쓸만한 것들을 찾았다.\n");
+        title = "탐색 결과";
+        content.Clear();
         
-        this.content.Append("\n");
+        content.Append("- 결과\n");
+        content.Append("주변을 탐색하여 쓸만한 것들을 찾았다.\n");
         
-        this.content.Append("- 획득한 아이템\n");
+        content.Append("\n");
+        
+        content.Append("- 획득한 아이템\n");
 
         foreach (var VARIABLE in this.acquiredItems) {
-            this.content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
+            content.Append($"{VARIABLE.Key}: {VARIABLE.Value}\n");
         }
+
+        return (title, content.ToString());
     }
 }
