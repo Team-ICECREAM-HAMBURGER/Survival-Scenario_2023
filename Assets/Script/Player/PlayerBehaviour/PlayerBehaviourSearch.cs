@@ -5,6 +5,10 @@ using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
+    [SerializeField] private GameObject canvasObject;
+    
+    [Space(10f)]
+    
     [Header("Require Status")]
     [SerializeField] private float requireStatusStamina;
     [SerializeField] private float requireStatusBodyHeat;
@@ -29,7 +33,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     private void Init() {
         this.weightSum = 0;
         this.weightLimit = 0;
-        this.randomEvents = GameObject.FindGameObjectWithTag("Search").GetComponents<IGameRandomEvent>();
+        this.randomEvents = this.canvasObject.GetComponents<IGameRandomEvent>();
     }
 
     private void Awake() {
@@ -37,9 +41,6 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     }
 
     public void Behaviour() {
-        // Time Update
-        TimeManager.Instance.WorldTimeUpdate(15);
-        
         // Player Status Update
         Player.Instance.StatusUpdate(
             this.requireStatusStamina, 
@@ -52,6 +53,8 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         
         // Random Event; Search
         RandomEventCall();
+        
+        TimeManager.Instance.WorldTimeUpdate(5);
     }
     
     private void RandomEventCall() {

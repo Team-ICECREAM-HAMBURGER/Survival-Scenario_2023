@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Button
   - Panel
-  - Search
-  - Outside
   layers:
   - Default
   - TransparentFX

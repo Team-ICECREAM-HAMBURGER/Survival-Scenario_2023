@@ -8,8 +8,8 @@ public class Player : GameControlSingleton<Player> { // Model
     [SerializeField] private GameObject playerStatusEffect;
     [SerializeField] private GameObject playerBehaviour;
     
-    private UnityEvent onStatusUpdate;          // 상태 수치 변동
-    private UnityEvent onStatusEffectUpdate;    // 상태 이상 효과 발동
+    private UnityEvent OnStatusUpdate;          // 상태 수치 변동
+    private UnityEvent OnStatusEffectUpdate;    // 상태 이상 효과 발동
 
     private PlayerInformation information;
     public GameControlDictionary.Inventory Inventory { get; private set; }         // <name, amount>
@@ -24,19 +24,19 @@ public class Player : GameControlSingleton<Player> { // Model
             this.Status = this.information.status;
             this.StatusEffect = this.information.statusEffect;
 
-            this.onStatusUpdate = new();
-            this.onStatusEffectUpdate = new();
+            this.OnStatusUpdate = new();
+            this.OnStatusEffectUpdate = new();
             
             foreach (var VARIABLE in this.playerStatus.GetComponents<IPlayerStatus>()) {
                 VARIABLE.Init();
-                this.onStatusUpdate.AddListener(VARIABLE.StatusUpdate);
+                this.OnStatusUpdate.AddListener(VARIABLE.StatusUpdate);
             }
 
             foreach (var VARIABLE in this.playerStatusEffect.GetComponents<IPlayerStatusEffect>()) {
                 VARIABLE.Init();
                 
                 if (this.StatusEffect.ContainsKey(VARIABLE.Type)) {
-                    this.onStatusEffectUpdate.AddListener(VARIABLE.StatusEffectUpdate);
+                    this.OnStatusEffectUpdate.AddListener(VARIABLE.StatusEffectUpdate);
                 }
             }
         }
@@ -56,7 +56,7 @@ public class Player : GameControlSingleton<Player> { // Model
         this.Status[type] += Mathf.Floor(value);
         this.Status[type] = Mathf.Clamp(this.Status[type], 0f, 100f);
         
-        this.onStatusUpdate.Invoke();
+        this.OnStatusUpdate.Invoke();
     }
 
     public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
@@ -74,34 +74,31 @@ public class Player : GameControlSingleton<Player> { // Model
         this.Status[GameControlType.Status.CALORIES] =
             Mathf.Clamp(this.Status[GameControlType.Status.CALORIES], 0f, 100f);
         
-        this.onStatusUpdate.Invoke();
+        this.OnStatusUpdate.Invoke();
     }
 
     public void StatusEffectAdd(IPlayerStatusEffect effect) {
         if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {
             this.StatusEffect[effect.Type] = effect.Term;
-            this.onStatusEffectUpdate.AddListener(effect.StatusEffectUpdate);
+            this.OnStatusEffectUpdate.AddListener(effect.StatusEffectUpdate);
         }
     }
     
     public void StatusEffectUpdate() {
-        this.onStatusEffectUpdate?.Invoke();
+        this.OnStatusEffectUpdate?.Invoke();
     }
     
     public void StatusEffectRemove(IPlayerStatusEffect effect) {
         if (this.StatusEffect.ContainsKey(effect.Type)) {
             this.StatusEffect.Remove(effect.Type);
-            this.onStatusEffectUpdate.RemoveListener(effect.StatusEffectUpdate);
+            this.OnStatusEffectUpdate.RemoveListener(effect.StatusEffectUpdate);
         }
     }
 
     public void InventoryUpdate(Dictionary<string, int> items) {
         foreach (var VARIABLE in items) {
-            if (this.Inventory.ContainsKey(VARIABLE.Key)) {
+            if (!this.Inventory.TryAdd(VARIABLE.Key, VARIABLE.Value)) {
                 this.Inventory[VARIABLE.Key] += VARIABLE.Value;
-            }
-            else {
-                this.Inventory[VARIABLE.Key] = VARIABLE.Value;
             }
         }
     }

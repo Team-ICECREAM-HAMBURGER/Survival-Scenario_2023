@@ -5,7 +5,10 @@ using UnityEditor;
 using System.Reflection;
 using System;
 
-[CustomPropertyDrawer(typeof(StatusGauges))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.StatusGauge))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.ItemTool))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.ItemMaterial))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.ItemFood))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
 	const string KeysFieldName = "m_keys";

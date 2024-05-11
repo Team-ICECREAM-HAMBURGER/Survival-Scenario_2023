@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-
-[System.Serializable] public class StatusGauges : SerializableDictionary<GameControlType.Status, Slider> { } 
 public class PlayerInformationViewer : MonoBehaviour {
     [Header("Status Effect")]
     [SerializeField] private GameObject statusEffectPanel;
@@ -12,11 +10,12 @@ public class PlayerInformationViewer : MonoBehaviour {
     [Space(10f)]
 
     [Header("Status")]
-    [field: SerializeField] private StatusGauges statusGauges;
+    [field: SerializeField] private GameControlDictionary.StatusGauge statusGauges;
     
     private float z;
+    
     public static UnityEvent<GameControlType.Status, float> OnStatusGaugeUpdate;
-        
+    
     
     private void Init() {
         this.z = -90f;

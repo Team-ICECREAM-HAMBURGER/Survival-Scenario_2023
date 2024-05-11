@@ -19,11 +19,27 @@ public class GameControlType {
     }
     
     public enum Item {
-        MATERIAL,   // 재료
-        FOOD,       // 음식
-        TOOL,       // 도구
-        WEAPON,     // 무기
-        GEAR        // 장비
+        // 식량
+        BERRY,
+        BOTTLE_OF_WATER,
+        COOKED_MEAT,
+        ENERGY_BAR,
+        MRE,
+        RAW_MEAT,
+        
+        // 재료
+        ANIMAL_SKIN,
+        CAN,
+        PIECE_OF_CLOTH,
+        ROPE,
+        STONE,
+        TINDER,
+        WOOD,
+        
+        // 도구
+        FIRE_TOOL,
+        GATHERING_TOOL,
+        HUNTING_TOOL,
     }
     
     public enum Status {

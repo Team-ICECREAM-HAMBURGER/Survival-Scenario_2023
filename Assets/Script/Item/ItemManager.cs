@@ -1,43 +1,68 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ItemManager : GameControlSingleton<ItemManager> {  // Model
-    [field: SerializeField] public List<ItemSpawn> FarmingItems { get; private set; }
-    [field: SerializeField] public List<ItemSpawn> HuntingItems { get; private set; }
-    [field: SerializeField] public List<ItemCraft> CraftingItems { get; private set; }
+    [field: SerializeField] private GameControlDictionary.ItemFood itemFoods;
+    [field: SerializeField] private GameControlDictionary.ItemMaterial itemMaterials;
+    [field: SerializeField] private GameControlDictionary.ItemTool itemTools;
+
+    private float randomPercentSum;
+    private Dictionary<GameControlType.Item, IItem> items;
+    
+    private UnityEvent<float> OnItemInit;
     
     
     private void Init() {
-        // Farming Spawn Items Init();
-        this.FarmingItems = SpawnItemsInit(this.FarmingItems);
-
-        // Hunting Spawn Items Init();
-        this.HuntingItems = SpawnItemsInit(this.HuntingItems);
+        this.items = new();
+        this.OnItemInit = new();
+        this.randomPercentSum = 0;
         
-        // Crafting Spawn Items Init();
-        // this.craftingSpawnItems = CraftItemsInit(this.craftingSpawnItems);
+        foreach (var VARIABLE in this.itemFoods) {
+            this.randomPercentSum += VARIABLE.Value.RandomPercent;
+            this.OnItemInit.AddListener(VARIABLE.Value.Init);
+            this.items.Add(VARIABLE.Key, VARIABLE.Value);
+        }
+        
+        foreach (var VARIABLE in this.itemMaterials) {
+            this.randomPercentSum += VARIABLE.Value.RandomPercent;
+            this.OnItemInit.AddListener(VARIABLE.Value.Init);
+            this.items.Add(VARIABLE.Key, VARIABLE.Value);
+        }
+        
+        foreach (var VARIABLE in this.itemTools) {
+            this.randomPercentSum += VARIABLE.Value.RandomPercent;
+            this.OnItemInit.AddListener(VARIABLE.Value.Init);
+            this.items.Add(VARIABLE.Key, VARIABLE.Value);
+        }
+        
+        this.OnItemInit.Invoke(this.randomPercentSum);
     }
     
     private void Awake() {
         Init();
     }
 
-    private List<ItemSpawn> SpawnItemsInit(List<ItemSpawn> values) {
-        var totalPercent = 0f;
+    public Dictionary<string, int> RandomItemGet(int value) {
+        Dictionary<string, int> result = new();
+        
+        for (var i = 0; i < value; i++) {
+            var pivot = Random.Range(0, 1f);
+            var sum = 0f;
 
-        // 퍼센트 총합 계산
-        foreach (var VARIABLE in values) {
-            totalPercent += VARIABLE.randomPercent;
+            foreach (var VARIABLE in this.items.Values) {
+                sum += VARIABLE.RandomWeight;
+
+                if (sum >= pivot) {
+                    // 획득
+                    if (!result.TryAdd(VARIABLE.Name, Random.Range(1, VARIABLE.RandomMaxValue + 1))) {
+                        result[VARIABLE.Name] += Random.Range(1, VARIABLE.RandomMaxValue + 1);
+                    }
+                    break;
+                }
+            }
         }
-
-        // 퍼센트를 가중치 값으로 전환; 0 ~ 1 
-        foreach (var VARIABLE in values) {
-            VARIABLE.randomWeight = (VARIABLE.randomPercent / totalPercent);
-        }
-
-        return values.OrderBy(i => i.randomWeight).ToList();
+        
+        return result;
     }
-
-    // private List<ItemCraft> CraftItemsInit(List<ItemCraft> values) { }
 }
