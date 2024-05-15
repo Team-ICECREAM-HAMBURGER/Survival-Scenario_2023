@@ -31,9 +31,7 @@ public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent { // Prese
         
         content.Append("- 획득한 아이템\n");
         
-        // TODO: 획득한 아이템의 이름, 개수를 묶어서 출력.
         foreach (var VARIABLE in this.getItems) {
-            content.Append("- ");
             content.Append(VARIABLE.Key);
             content.Append(" ");
             content.Append(VARIABLE.Value);

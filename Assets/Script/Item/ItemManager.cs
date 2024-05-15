@@ -58,6 +58,7 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
                     if (!result.TryAdd(VARIABLE.Name, Random.Range(1, VARIABLE.RandomMaxValue + 1))) {
                         result[VARIABLE.Name] += Random.Range(1, VARIABLE.RandomMaxValue + 1);
                     }
+                    
                     break;
                 }
             }

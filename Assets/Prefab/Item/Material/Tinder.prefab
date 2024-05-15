@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 11
   <Name>k__BackingField: "\uBD88\uC3D8\uC2DC\uAC1C"
-  <RandomPercent>k__BackingField: 6
+  <RandomPercent>k__BackingField: 40
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0

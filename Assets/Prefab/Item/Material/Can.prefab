@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7163442005428921675}
-  - component: {fileID: 4239471845856729876}
+  - component: {fileID: 6187024783513222942}
   m_Layer: 0
-  m_Name: Piece of Cloth
+  m_Name: Can
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4239471845856729876
+--- !u!114 &6187024783513222942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073b952a91944154bf165112630112dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 8
-  <Name>k__BackingField: "\uCC9C \uC870\uAC01"
-  <RandomPercent>k__BackingField: 11
+  <Type>k__BackingField: 7
+  <Name>k__BackingField: "\uCE94"
+  <RandomPercent>k__BackingField: 16
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0

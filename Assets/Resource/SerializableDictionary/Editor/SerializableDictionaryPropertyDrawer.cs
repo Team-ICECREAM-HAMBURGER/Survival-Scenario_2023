@@ -5,7 +5,8 @@ using UnityEditor;
 using System.Reflection;
 using System;
 
-[CustomPropertyDrawer(typeof(GameControlDictionary.StatusGauge))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.StatusEffectText))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.StatusGaugeSlider))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemTool))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemMaterial))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemFood))]

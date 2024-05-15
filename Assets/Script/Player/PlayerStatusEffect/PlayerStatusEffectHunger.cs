@@ -7,7 +7,8 @@ public class PlayerStatusEffectHunger : MonoBehaviour, IPlayerStatusEffect {
     public int Term { get; set; }
     
     [SerializeField] private float statusReducePercent;
-    
+    [SerializeField] private string panelText;
+
     public static UnityEvent OnStatusEffectAdd;
     public static UnityEvent OnStatusEffectRemove;
 
@@ -18,10 +19,13 @@ public class PlayerStatusEffectHunger : MonoBehaviour, IPlayerStatusEffect {
         
         OnStatusEffectAdd.AddListener(StatusEffectAdd);
         OnStatusEffectRemove.AddListener(StatusEffectRemove);
+        
+        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 
     private void StatusEffectAdd() {
         Player.Instance.StatusEffectAdd(this);
+        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 
     public void StatusEffectUpdate() {
@@ -34,5 +38,6 @@ public class PlayerStatusEffectHunger : MonoBehaviour, IPlayerStatusEffect {
     
     private void StatusEffectRemove() {
         Player.Instance.StatusEffectRemove(this);
+        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 }

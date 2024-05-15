@@ -16,6 +16,7 @@ public class GameRandomEventInjured : MonoBehaviour, IGameRandomEvent {
     
     public void Event() {
         Debug.Log("InjuredEvent");
+        // TODO : 상태 이상 효과 추가
     }
 
     public (string, string) EventResult() {
