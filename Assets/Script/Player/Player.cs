@@ -12,7 +12,7 @@ public class Player : GameControlSingleton<Player> { // Model
     private UnityEvent OnStatusEffectUpdate;    // 상태 이상 효과 발동
 
     private PlayerInformation information;
-    public GameControlDictionary.Inventory Inventory { get; private set; }         // <name, amount>
+    public GameControlDictionary.Inventory Inventory { get; private set; }         // <Enum, amount>
     public GameControlDictionary.Status Status { get; private set; }               // <Enum, float>
     public GameControlDictionary.StatusEffect StatusEffect { get; private set; }   // <Enum, term>
     
@@ -95,17 +95,25 @@ public class Player : GameControlSingleton<Player> { // Model
         }
     }
 
-    public void InventoryUpdate(Dictionary<string, int> items) {
+    public void InventoryUpdate(Dictionary<IItem, int> items) {
         foreach (var VARIABLE in items) {
-            if (!this.Inventory.TryAdd(VARIABLE.Key, VARIABLE.Value)) {
-                this.Inventory[VARIABLE.Key] += VARIABLE.Value;
+            if (!this.Inventory.TryAdd(VARIABLE.Key.Type, VARIABLE.Value)) {
+                this.Inventory[VARIABLE.Key.Type] += VARIABLE.Value;
+                
+                if (this.Inventory[VARIABLE.Key.Type] <= 0) {
+                    this.Inventory.Remove(VARIABLE.Key.Type);
+                }
             }
         }
     }
 
-    public void InventoryUpdate(string item, int value) {
-        if (!this.Inventory.TryAdd(item, value)) {
-            this.Inventory[item] += value;
+    public void InventoryUpdate(GameControlType.Item type, int value) {
+        if (!this.Inventory.TryAdd(type, value)) {
+            this.Inventory[type] += value;
+            
+            if (this.Inventory[type] <= 0) {
+                this.Inventory.Remove(type);
+            }
         }
     }
 }

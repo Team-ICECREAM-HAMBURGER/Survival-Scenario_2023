@@ -35,11 +35,13 @@ public class GameControlType {
         STONE,
         TINDER,
         WOOD,
+        PLASTIC_BAG,
         
         // 도구
         FIRE_TOOL,
         GATHERING_TOOL,
         HUNTING_TOOL,
+        RAIN_GUTTER,
     }
     
     public enum Status {

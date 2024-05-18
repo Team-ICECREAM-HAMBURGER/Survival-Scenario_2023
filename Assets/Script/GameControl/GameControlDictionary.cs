@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameControlDictionary {
-    public class Inventory : SerializableDictionary<string, int> { }
+    public class Inventory : SerializableDictionary<GameControlType.Item, int> { }
     public class Status : SerializableDictionary<GameControlType.Status, float> { }
     public class StatusEffect : SerializableDictionary<GameControlType.StatusEffect, int> { }
     
