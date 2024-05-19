@@ -42,6 +42,7 @@ public class GameControlType {
         GATHERING_TOOL,
         HUNTING_TOOL,
         RAIN_GUTTER,
+        SHELTER,
     }
     
     public enum Status {
