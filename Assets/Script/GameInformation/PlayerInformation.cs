@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 
 [Serializable]
 public class PlayerInformation {
-    public string name = string.Empty;
+    public string name = "";
     public GameControlDictionary.Inventory inventory = new();
     public GameControlDictionary.Status status = new() {
         { GameControlType.Status.STAMINA, 100f },

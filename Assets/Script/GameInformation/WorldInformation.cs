@@ -3,8 +3,8 @@ using UnityEngine;
 
 [Serializable]
 public class WorldInformation {
-    public int timeTerm;
-    public int timeDay;
-    public IWeather weather;
-    public ILocation location;
+    public int timeTerm = 0;
+    public int timeDay = 0;
+    public bool isShelterSet = false;
+    public bool isRainGutterSet = false;
 }

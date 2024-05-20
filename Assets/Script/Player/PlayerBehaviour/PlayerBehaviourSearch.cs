@@ -1,11 +1,9 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
-    [SerializeField] private GameObject canvasObject;
+    [SerializeField] private GameObject canvasObject;   // TODO: 삭제 예정
     
     [Space(10f)]
     
@@ -18,12 +16,13 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     [Space(10f)]
 
     [SerializeField] private GameObject searchResultPanel;
-    [SerializeField] private GameObject searchLoadingPanel;
-    
-    [Space(10f)]
-    
     [SerializeField] private TMP_Text searchResultTitle;
     [SerializeField] private TMP_Text searchResultContent;
+
+    [Space(10f)]
+    
+    [SerializeField] private GameObject searchLoadingPanel;
+    [SerializeField] private TMP_Text searchLoadingTitle;
     
     private IGameRandomEvent[] randomEvents;
     private float weightSum;
@@ -54,7 +53,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         // Random Event; Search
         RandomEventCall();
         
-        TimeManager.Instance.WorldTimeUpdate(5);
+        World.Instance.WorldTimeUpdate(5);
     }
     
     private void RandomEventCall() {
@@ -73,18 +72,11 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     }
     
     private void PanelUpdate((string, string) value) {
+        this.searchLoadingTitle.text = "주변을 탐색하는 중...";
         this.searchResultTitle.text = value.Item1;
         this.searchResultContent.text = value.Item2;
         
         this.searchLoadingPanel.SetActive(true);
         this.searchResultPanel.SetActive(true);
-    }
-
-    public void PanelReset() {
-        this.searchResultTitle.text = String.Empty;
-        this.searchResultContent.text = String.Empty;
-        
-        this.searchLoadingPanel.SetActive(false);
-        this.searchResultPanel.SetActive(false);
     }
 }

@@ -31,7 +31,7 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
     public void StatusEffectUpdate() {
         var status = Player.Instance.Status[GameControlType.Status.STAMINA];
         
-        this.Term -= TimeManager.Instance.SpentTerm;
+        this.Term -= World.Instance.SpentTerm;
         Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * this.statusReducePercent * -0.01f);
 
         if (this.Term <= 0) {

@@ -15,18 +15,20 @@ public class Player : GameControlSingleton<Player> { // Model
     public GameControlDictionary.Inventory Inventory { get; private set; }         // <Enum, amount>
     public GameControlDictionary.Status Status { get; private set; }               // <Enum, float>
     public GameControlDictionary.StatusEffect StatusEffect { get; private set; }   // <Enum, term>
+    public string Name { get; private set; }
     
-    
+        
     private void Init() {
         try {
             this.information = GameInformationManager.Instance.playerInformation;
             this.Inventory = this.information.inventory;
             this.Status = this.information.status;
             this.StatusEffect = this.information.statusEffect;
-
+            this.Name = this.information.name;
+            
             this.OnStatusUpdate = new();
             this.OnStatusEffectUpdate = new();
-            
+
             foreach (var VARIABLE in this.playerStatus.GetComponents<IPlayerStatus>()) {
                 VARIABLE.Init();
                 this.OnStatusUpdate.AddListener(VARIABLE.StatusUpdate);

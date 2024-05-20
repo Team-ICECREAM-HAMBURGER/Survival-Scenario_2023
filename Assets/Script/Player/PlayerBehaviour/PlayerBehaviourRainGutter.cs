@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private GameObject rainGutterResultPanel;
-    [SerializeField] private GameObject rainGutterLoadingPanel;
+    [SerializeField] private TMP_Text rainGutterResultTitle;
+    [SerializeField] private TMP_Text rainGutterResultContent;
     
     [Space(10f)] 
     
-    [SerializeField] private TMP_Text rainGutterResultTitle;
-    [SerializeField] private TMP_Text rainGutterResultContent;
+    [SerializeField] private GameObject rainGutterLoadingPanel;
+    [SerializeField] private TMP_Text rainGutterLoadingTitle;
     
     
     public void Behaviour() {
@@ -25,7 +26,7 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
             PanelUpdate(num, false);
         }
         
-        TimeManager.Instance.WorldTimeUpdate(0);
+        World.Instance.WorldTimeUpdate(0);
     }
 
     private void PanelUpdate(int num, bool canCreate) {
@@ -57,18 +58,11 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
             content.Append("재료를 모아 빗물 받이를 먼저 만들어보자.\n");
         }
 
+        this.rainGutterLoadingTitle.text = "빗물 받이를 설치하는 중...";
         this.rainGutterResultTitle.text = title;
         this.rainGutterResultContent.text = content.ToString();
         
         this.rainGutterLoadingPanel.SetActive(canCreate);
         this.rainGutterResultPanel.SetActive(true);
-    }
-
-    public void PanelReset() {
-        this.rainGutterResultTitle.text = String.Empty;
-        this.rainGutterResultContent.text = String.Empty;
-        
-        this.rainGutterLoadingPanel.SetActive(false);
-        this.rainGutterResultPanel.SetActive(false);
     }
 }
