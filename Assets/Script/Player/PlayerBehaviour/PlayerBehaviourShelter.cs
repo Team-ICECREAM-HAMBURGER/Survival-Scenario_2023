@@ -15,7 +15,7 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
     
     
     public void Behaviour() {
-        if (!World.Instance.IsShelterSet) {
+        if (!World.Instance.HasShelter) {
             World.Instance.ShelterUpdate(true);
             PanelUpdate();
             
@@ -33,7 +33,8 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
         content.Append("- 결과\n");
         content.Append("휴식처를 설치하였다.\n");
         content.Append("이제 좀 더 편안한 생활을 즐길 수 있다.\n");
-        
+
+        this.shelterLoadingTitle.text = "휴식처를 설치하는 중...";
         this.shelterResultTitle.text = title;
         this.shelterResultContent.text = content.ToString();
         

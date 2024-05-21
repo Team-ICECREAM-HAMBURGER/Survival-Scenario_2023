@@ -12,19 +12,29 @@ public class Player : GameControlSingleton<Player> { // Model
     private UnityEvent OnStatusEffectUpdate;    // 상태 이상 효과 발동
 
     private PlayerInformation information;
+
+    private string playerName;
+    public string PlayerName {
+        get {
+            return this.playerName;
+        }
+        private set { 
+            this.playerName = value;
+            this.information.name = value;
+        }
+    }
     public GameControlDictionary.Inventory Inventory { get; private set; }         // <Enum, amount>
     public GameControlDictionary.Status Status { get; private set; }               // <Enum, float>
     public GameControlDictionary.StatusEffect StatusEffect { get; private set; }   // <Enum, term>
-    public string Name { get; private set; }
-    
-        
+
+
     private void Init() {
         try {
             this.information = GameInformationManager.Instance.playerInformation;
             this.Inventory = this.information.inventory;
             this.Status = this.information.status;
             this.StatusEffect = this.information.statusEffect;
-            this.Name = this.information.name;
+            this.PlayerName = this.information.name;
             
             this.OnStatusUpdate = new();
             this.OnStatusEffectUpdate = new();
