@@ -28,7 +28,7 @@ public class PlayerStatusEffectHunger : MonoBehaviour, IPlayerStatusEffect {
         PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 
-    public void StatusEffectUpdate(int value) {
+    public void StatusEffectInvoke(int value) {
         var statusCalories = Player.Instance.Status[GameControlType.Status.CALORIES];
         var statusStamina = Player.Instance.Status[GameControlType.Status.STAMINA];
         

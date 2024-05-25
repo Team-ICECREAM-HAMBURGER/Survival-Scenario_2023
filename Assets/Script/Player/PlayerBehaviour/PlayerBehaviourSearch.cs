@@ -50,7 +50,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
             this.requireStatusCalories);
         
         // Player Status Effects Invoke
-        Player.Instance.StatusEffectUpdate(this.spendTime);
+        Player.Instance.StatusEffectInvoke(this.spendTime);
         
         // Random Event; Search
         RandomEventCall();

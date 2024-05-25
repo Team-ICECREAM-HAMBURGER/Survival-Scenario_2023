@@ -9,7 +9,7 @@ public class Player : GameControlSingleton<Player> { // Model
     [SerializeField] private GameObject playerBehaviour;
     
     private UnityEvent OnStatusUpdate;          // 상태 수치 변동
-    private UnityEvent<int> OnStatusEffectUpdate;    // 상태 이상 효과 발동
+    private UnityEvent<int> OnStatusEffectInvoke;    // 상태 이상 효과 발동
 
     private PlayerInformation information;
 
@@ -37,7 +37,7 @@ public class Player : GameControlSingleton<Player> { // Model
             this.PlayerName = this.information.name;
             
             this.OnStatusUpdate = new();
-            this.OnStatusEffectUpdate = new();
+            this.OnStatusEffectInvoke = new();
 
             foreach (var VARIABLE in this.playerStatus.GetComponents<IPlayerStatus>()) {
                 VARIABLE.Init();
@@ -48,8 +48,7 @@ public class Player : GameControlSingleton<Player> { // Model
                 VARIABLE.Init();
                 
                 if (this.StatusEffect.ContainsKey(VARIABLE.Type)) {
-                    Debug.Log(VARIABLE.Type);
-                    this.OnStatusEffectUpdate.AddListener(VARIABLE.StatusEffectUpdate);
+                    this.OnStatusEffectInvoke.AddListener(VARIABLE.StatusEffectInvoke);
                 }
             }
         }
@@ -93,18 +92,22 @@ public class Player : GameControlSingleton<Player> { // Model
     public void StatusEffectAdd(IPlayerStatusEffect effect) {
         if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {
             this.StatusEffect[effect.Type] = effect.Term;
-            this.OnStatusEffectUpdate.AddListener(effect.StatusEffectUpdate);
+            this.OnStatusEffectInvoke.AddListener(effect.StatusEffectInvoke);
         }
     }
     
-    public void StatusEffectUpdate(int value) {
-        this.OnStatusEffectUpdate?.Invoke(value);
+    public void StatusEffectInvoke(int value) {
+        this.OnStatusEffectInvoke?.Invoke(value);
+    }
+
+    public void StatusEffectUpdate(IPlayerStatusEffect effect) {
+        this.StatusEffect[effect.Type] = effect.Term;
     }
     
     public void StatusEffectRemove(IPlayerStatusEffect effect) {
         if (this.StatusEffect.ContainsKey(effect.Type)) {
             this.StatusEffect.Remove(effect.Type);
-            this.OnStatusEffectUpdate.RemoveListener(effect.StatusEffectUpdate);
+            this.OnStatusEffectInvoke.RemoveListener(effect.StatusEffectInvoke);
         }
     }
 

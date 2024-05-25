@@ -12,14 +12,25 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
 
     [SerializeField] private GameObject shelterLoadingPanel;
     [SerializeField] private TMP_Text shelterLoadingTitle;
+
+    private int spendTime;
+
     
-    
+    private void Init() {
+        this.spendTime = 2;
+    }
+
+    private void Awake() {
+        Init();
+    }
+
     public void Behaviour() {
         if (!World.Instance.HasShelter) {
             World.Instance.HasShelter = true;
             PanelUpdate();
             
-            World.Instance.WorldTimeUpdate(2);
+            Player.Instance.StatusEffectInvoke(this.spendTime);
+            World.Instance.WorldTimeUpdate(this.spendTime);
         }
 
         WorldInformationViewer.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
