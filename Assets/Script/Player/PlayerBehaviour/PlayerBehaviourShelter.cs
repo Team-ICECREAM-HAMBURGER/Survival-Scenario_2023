@@ -18,6 +18,7 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
     
     private void Init() {
         this.spendTime = 2;
+        Debug.Log(this.spendTime);
     }
 
     private void Awake() {

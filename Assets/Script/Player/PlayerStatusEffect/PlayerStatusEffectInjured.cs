@@ -47,6 +47,7 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
         var status = Player.Instance.Status[GameControlType.Status.STAMINA];
 
         this.Term -= value;
+        Debug.Log(value);
         
         Player.Instance.StatusEffectUpdate(this);
         Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * this.statusReducePercent * -0.01f);

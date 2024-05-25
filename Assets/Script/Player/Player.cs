@@ -92,6 +92,8 @@ public class Player : GameControlSingleton<Player> { // Model
     public void StatusEffectAdd(IPlayerStatusEffect effect) {
         if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {
             this.StatusEffect[effect.Type] = effect.Term;
+        }
+        else {
             this.OnStatusEffectInvoke.AddListener(effect.StatusEffectInvoke);
         }
     }
