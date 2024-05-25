@@ -28,7 +28,7 @@ public class PlayerStatusEffectDehydration : MonoBehaviour, IPlayerStatusEffect 
         PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 
-    public void StatusEffectUpdate() {
+    public void StatusEffectUpdate(int value) {
         var status = Player.Instance.Status[GameControlType.Status.STAMINA];
         
         Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * statusReducePercent * -0.01f);

@@ -27,11 +27,13 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     private IGameRandomEvent[] randomEvents;
     private float weightSum;
     private float weightLimit;
+    private int spendTime;
 
 
     private void Init() {
         this.weightSum = 0;
         this.weightLimit = 0;
+        this.spendTime = 5;
         this.randomEvents = this.canvasObject.GetComponents<IGameRandomEvent>();
     }
 
@@ -48,12 +50,12 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
             this.requireStatusCalories);
         
         // Player Status Effects Invoke
-        Player.Instance.StatusEffectUpdate();
+        Player.Instance.StatusEffectUpdate(this.spendTime);
         
         // Random Event; Search
         RandomEventCall();
         
-        World.Instance.WorldTimeUpdate(5);
+        World.Instance.WorldTimeUpdate(this.spendTime);
     }
     
     private void RandomEventCall() {

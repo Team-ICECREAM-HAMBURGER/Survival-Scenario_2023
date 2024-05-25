@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerInformationViewer : MonoBehaviour {
     [SerializeField] private GameObject playerInformationPanel;
     [SerializeField] private Image playerInformationPanelIndicator;
-
+    
     [Space(10f)]
 
     [Header("Status Effect")]
@@ -33,10 +33,10 @@ public class PlayerInformationViewer : MonoBehaviour {
         }
         
         OnStatusGaugeUpdate = new();
-        OnStatusGaugeUpdate.AddListener(StatusGaugeUpdate);
+        OnStatusGaugeUpdate.AddListener(StatusGaugeUpdate); // 씬 전환에서도 리스너 정보를 유지
 
         OnStatusEffectPanelUpdate = new();
-        OnStatusEffectPanelUpdate.AddListener(StatusEffectPanelUpdate);
+        OnStatusEffectPanelUpdate.AddListener(StatusEffectPanelUpdate); // 씬 전환에서도 리스너 정보를 유지
     }
 
     private void Awake() {

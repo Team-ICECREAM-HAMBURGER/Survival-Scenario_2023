@@ -16,11 +16,14 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
     
     public void Behaviour() {
         if (!World.Instance.HasShelter) {
-            World.Instance.ShelterUpdate(true);
+            World.Instance.HasShelter = true;
             PanelUpdate();
             
             World.Instance.WorldTimeUpdate(2);
         }
+
+        WorldInformationViewer.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
+        WorldInformationViewer.OnCurrentLocationUpdate.Invoke("휴식처");
     }
 
     private void PanelUpdate() {

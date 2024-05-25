@@ -27,12 +27,24 @@ public class World : GameControlSingleton<World> {  // Model
         }
     }
 
+    private string location;
+
+    public string Location {
+        get {
+            return this.location;
+        }
+        private set {
+            this.location = value;
+            this.information.location = value;
+        }
+    }
+
     private bool hasShelter;
     public bool HasShelter {
         get {
             return hasShelter;
         }
-        private set {
+        set {
             this.hasShelter = value;
             this.information.hasShelter = value;
         }
@@ -44,15 +56,11 @@ public class World : GameControlSingleton<World> {  // Model
             return hasRainGutter;
             
         }
-        private set {
+        set {
             this.hasRainGutter = value;
             this.information.hasRainGutter = value;
         }
     }
-
-    public int SpentTerm { get; private set; }
-    public int CurrentTimeTerm { get; private set; }
-    public int CurrentTimeDay { get; private set; }
     
     
     private void Init() {
@@ -61,8 +69,12 @@ public class World : GameControlSingleton<World> {  // Model
             
             this.TimeDay = this.information.timeDay;
             this.TimeTerm = this.information.timeTerm;
+            this.location = this.information.location;
             this.HasShelter = this.information.hasShelter;
             this.HasRainGutter = this.information.hasRainGutter;
+
+            WorldInformationViewer.OnCurrentTimeDayUpdate.Invoke(this.TimeDay);
+            WorldInformationViewer.OnCurrentLocationUpdate.Invoke(this.Location);
         }
         catch (NullReferenceException e) {
             Debug.Log("Game Over");
@@ -75,24 +87,15 @@ public class World : GameControlSingleton<World> {  // Model
     private void Start() {  
         Init();
     }
-
-    public void ShelterUpdate(bool value) {
-        this.HasShelter = value;
-    }
-
-    public void RainGutterUpdate(bool value) {
-        this.HasRainGutter = value;
-    }
     
     public void WorldTimeUpdate(int value) {
-        this.CurrentTimeTerm += value;
-        this.SpentTerm = value;
+        this.TimeTerm += value;
         
-        if (this.CurrentTimeTerm >= 500) {
-            this.CurrentTimeDay += 1;
-            this.CurrentTimeTerm -= 500;
+        if (this.TimeTerm >= 500) {
+            this.TimeDay += 1;
+            this.TimeTerm -= 500;
         }
-                    
+        
         GameInformationManager.OnPlayerGameDataSaveEvent();
         GameInformationManager.OnWorldGameDataSaveEvent();
     }

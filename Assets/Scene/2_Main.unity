@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1099,7 +1098,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4a070ebfecc7d584daaf7900019fb9ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a01ed5cebd9e542cc8308242b3c1bd0b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2039,7 +2038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 88458830}
+  m_AnchoredPosition: {x: -399.9992, y: 93909550}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &149866788
@@ -14640,7 +14639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 88458830}
+  m_AnchoredPosition: {x: -399.9992, y: 93909550}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -16431,7 +16430,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -16535,7 +16534,7 @@ GameObject:
   - component: {fileID: 1110413348}
   - component: {fileID: 1110413347}
   m_Layer: 5
-  m_Name: Day Counter
+  m_Name: Time Day
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23678,7 +23677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4a070ebfecc7d584daaf7900019fb9ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 744767eef23264adbb934b724f8e0934, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -30321,6 +30320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9b3b76262c459daa7c7c616e3e680c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLocation: {fileID: 1758758067}
+  currentWeather: {fileID: 1091223458}
+  currentDayNight: {fileID: 869625075}
+  currentTimeDay: {fileID: 1110413347}
 --- !u!1 &2121523328
 GameObject:
   m_ObjectHideFlags: 0

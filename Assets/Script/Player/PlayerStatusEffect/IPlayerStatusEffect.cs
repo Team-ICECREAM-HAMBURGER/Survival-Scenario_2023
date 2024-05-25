@@ -5,5 +5,5 @@ public interface IPlayerStatusEffect {
 
 
     public void Init();
-    public void StatusEffectUpdate();
+    public void StatusEffectUpdate(int value = 0);
 }

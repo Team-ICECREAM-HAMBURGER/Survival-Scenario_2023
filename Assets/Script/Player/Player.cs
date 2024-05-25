@@ -9,7 +9,7 @@ public class Player : GameControlSingleton<Player> { // Model
     [SerializeField] private GameObject playerBehaviour;
     
     private UnityEvent OnStatusUpdate;          // 상태 수치 변동
-    private UnityEvent OnStatusEffectUpdate;    // 상태 이상 효과 발동
+    private UnityEvent<int> OnStatusEffectUpdate;    // 상태 이상 효과 발동
 
     private PlayerInformation information;
 
@@ -48,6 +48,7 @@ public class Player : GameControlSingleton<Player> { // Model
                 VARIABLE.Init();
                 
                 if (this.StatusEffect.ContainsKey(VARIABLE.Type)) {
+                    Debug.Log(VARIABLE.Type);
                     this.OnStatusEffectUpdate.AddListener(VARIABLE.StatusEffectUpdate);
                 }
             }
@@ -96,8 +97,8 @@ public class Player : GameControlSingleton<Player> { // Model
         }
     }
     
-    public void StatusEffectUpdate() {
-        this.OnStatusEffectUpdate?.Invoke();
+    public void StatusEffectUpdate(int value) {
+        this.OnStatusEffectUpdate?.Invoke(value);
     }
     
     public void StatusEffectRemove(IPlayerStatusEffect effect) {

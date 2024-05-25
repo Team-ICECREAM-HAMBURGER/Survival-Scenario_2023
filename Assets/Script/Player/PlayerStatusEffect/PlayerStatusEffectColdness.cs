@@ -28,7 +28,7 @@ public class PlayerStatusEffectColdness : MonoBehaviour, IPlayerStatusEffect {
         PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
     
-    public void StatusEffectUpdate() {
+    public void StatusEffectUpdate(int value) {
         var statusBodyHeat = Player.Instance.Status[GameControlType.Status.BODY_HEAT];
         var statusStamina = Player.Instance.Status[GameControlType.Status.STAMINA];
         
