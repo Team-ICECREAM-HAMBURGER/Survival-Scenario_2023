@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
+public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus { // Presenter
     public float LimitValue { get; } = 30f;
     public float CurrentValue { get; private set; }
     
@@ -10,12 +10,12 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus {
     
     public void Init() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public void StatusUpdate() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
 
         if (this.CurrentValue <= 0) {   // Player Death
             GameEventGameOver.OnBadEnding.Invoke("갈사했습니다.", "목이 타들어갑니다.\n한계를 느낄 무렵 시야가 흐려지기 시작합니다...");

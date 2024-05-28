@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {
+public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {   // Presenter
     public float LimitValue { get; } = 30f;
     public float CurrentValue { get; private set; }
     
@@ -11,12 +11,12 @@ public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {
 
     public void Init() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public void StatusUpdate() {    // onStatusUpdate()
         this.CurrentValue = Player.Instance.Status[this.Type];
-        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
         if (this.CurrentValue <= this.LimitValue) {
             PlayerStatusEffectExhaustion.OnStatusEffectAdd.Invoke();

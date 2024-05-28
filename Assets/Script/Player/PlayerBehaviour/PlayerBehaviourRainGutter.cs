@@ -12,8 +12,11 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
     
     [SerializeField] private GameObject rainGutterLoadingPanel;
     [SerializeField] private TMP_Text rainGutterLoadingTitle;
-    
-    
+
+
+    public void Init() {
+    }
+
     public void Behaviour() {
         var num = 1;
         

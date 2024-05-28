@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
+public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {  // Presenter
     public float LimitValue { get; } = 20f;
     public float CurrentValue { get; private set; }
     public string Name { get; } = "체온";
@@ -9,12 +9,12 @@ public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {
 
     public void Init() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public void StatusUpdate() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
         if (this.CurrentValue <= 0) {   // Player Death
             GameEventGameOver.OnBadEnding.Invoke("동사했습니다.", "추위가 더위로 바뀌어갑니다.\n문득 몰려오는 아늑함에 눈꺼풀이 감깁니다...");

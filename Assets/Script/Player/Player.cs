@@ -1,9 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Player : GameControlSingleton<Player> { // Model
+    [SerializeField] private PlayerInformation playerInformation;
+    
+    [Space(10f)]
+    
     [SerializeField] private GameObject playerStatus;
     [SerializeField] private GameObject playerStatusEffect;
     [SerializeField] private GameObject playerBehaviour;
@@ -11,7 +16,7 @@ public class Player : GameControlSingleton<Player> { // Model
     private UnityEvent OnStatusUpdate;          // 상태 수치 변동
     private UnityEvent<int> OnStatusEffectInvoke;    // 상태 이상 효과 발동
 
-    private PlayerInformation information;
+    private PlayerInformationData informationData;
 
     private string playerName;
     public string PlayerName {
@@ -20,7 +25,7 @@ public class Player : GameControlSingleton<Player> { // Model
         }
         private set { 
             this.playerName = value;
-            this.information.name = value;
+            this.informationData.name = value;
         }
     }
     public GameControlDictionary.Inventory Inventory { get; private set; }         // <Enum, amount>
@@ -30,14 +35,17 @@ public class Player : GameControlSingleton<Player> { // Model
 
     private void Init() {
         try {
-            this.information = GameInformationManager.Instance.playerInformation;
-            this.Inventory = this.information.inventory;
-            this.Status = this.information.status;
-            this.StatusEffect = this.information.statusEffect;
-            this.PlayerName = this.information.name;
+            this.informationData = GameInformationManager.Instance.playerInformationData;
+            this.Inventory = this.informationData.inventory;
+            this.Status = this.informationData.status;
+            this.StatusEffect = this.informationData.statusEffect;
+            this.PlayerName = this.informationData.name;
             
             this.OnStatusUpdate = new();
             this.OnStatusEffectInvoke = new();
+
+            // Presenter Init //
+            this.playerInformation.Init();
 
             foreach (var VARIABLE in this.playerStatus.GetComponents<IPlayerStatus>()) {
                 VARIABLE.Init();
@@ -51,6 +59,10 @@ public class Player : GameControlSingleton<Player> { // Model
                     this.OnStatusEffectInvoke.AddListener(VARIABLE.StatusEffectInvoke);
                 }
             }
+
+            foreach (var VARIABLE in this.playerBehaviour.GetComponents<IPlayerBehaviour>()) {
+                VARIABLE.Init();
+            }
         }
         catch (NullReferenceException e) {
             Debug.Log("Game Over");
@@ -58,9 +70,6 @@ public class Player : GameControlSingleton<Player> { // Model
     }
     
     private void Awake() {
-    }
-    
-    private void Start() {  
         Init();
     }
 

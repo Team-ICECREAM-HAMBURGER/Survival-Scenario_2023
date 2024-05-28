@@ -5,11 +5,6 @@ public class TimeManager : GameControlSingleton<TimeManager> {
     }
 
     private void Awake() {
-    }
-    
-    private void Start() {
         Init();
     }
-    
-
 }

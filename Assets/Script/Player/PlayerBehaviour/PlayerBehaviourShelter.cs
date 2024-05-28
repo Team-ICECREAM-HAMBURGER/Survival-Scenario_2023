@@ -16,12 +16,8 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
     private int spendTime;
 
     
-    private void Init() {
+    public void Init() {
         this.spendTime = 2;
-    }
-
-    private void Awake() {
-        Init();
     }
 
     public void Behaviour() {
@@ -33,8 +29,8 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
             World.Instance.WorldTimeUpdate(this.spendTime);
         }
 
-        WorldInformationViewer.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
-        WorldInformationViewer.OnCurrentLocationUpdate.Invoke("휴식처");
+        WorldInformation.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
+        WorldInformation.OnCurrentLocationUpdate.Invoke("휴식처");
     }
 
     private void PanelUpdate() {

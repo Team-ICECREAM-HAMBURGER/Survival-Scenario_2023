@@ -14,7 +14,7 @@ public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
         this.filePath = Application.persistentDataPath;
     }
 
-    private void Start() {
+    private void Awake() {
         Init();
     }
 

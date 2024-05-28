@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class World : GameControlSingleton<World> {  // Model
-    private WorldInformation information;
+    [SerializeField] private WorldInformation worldInformation;
+    
+    private WorldInformationData informationData;
 
     private int timeDay;
     public int TimeDay {
@@ -12,7 +13,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         private set {
             this.timeDay = value;
-            this.information.timeDay = value;
+            this.informationData.timeDay = value;
         }
     }
 
@@ -23,7 +24,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         private set {
             this.timeTerm = value;
-            this.information.timeTerm = value;
+            this.informationData.timeTerm = value;
         }
     }
 
@@ -35,7 +36,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         private set {
             this.location = value;
-            this.information.location = value;
+            this.informationData.location = value;
         }
     }
 
@@ -46,7 +47,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         set {
             this.hasShelter = value;
-            this.information.hasShelter = value;
+            this.informationData.hasShelter = value;
         }
     }
 
@@ -58,23 +59,24 @@ public class World : GameControlSingleton<World> {  // Model
         }
         set {
             this.hasRainGutter = value;
-            this.information.hasRainGutter = value;
+            this.informationData.hasRainGutter = value;
         }
     }
     
     
     private void Init() {
         try {
-            this.information = GameInformationManager.Instance.worldInformation;
+            this.informationData = GameInformationManager.Instance.worldInformationData;
             
-            this.TimeDay = this.information.timeDay;
-            this.TimeTerm = this.information.timeTerm;
-            this.location = this.information.location;
-            this.HasShelter = this.information.hasShelter;
-            this.HasRainGutter = this.information.hasRainGutter;
+            this.TimeDay = this.informationData.timeDay;
+            this.TimeTerm = this.informationData.timeTerm;
+            this.location = this.informationData.location;
+            this.HasShelter = this.informationData.hasShelter;
+            this.HasRainGutter = this.informationData.hasRainGutter;
 
-            WorldInformationViewer.OnCurrentTimeDayUpdate.Invoke(this.TimeDay);
-            WorldInformationViewer.OnCurrentLocationUpdate.Invoke(this.Location);
+            // Presenter Init //
+            this.worldInformation.Init();
+
         }
         catch (NullReferenceException e) {
             Debug.Log("Game Over");
@@ -82,9 +84,6 @@ public class World : GameControlSingleton<World> {  // Model
     }
     
     private void Awake() {
-    }
-    
-    private void Start() {  
         Init();
     }
     

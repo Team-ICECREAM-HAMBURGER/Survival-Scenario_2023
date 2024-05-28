@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {
+public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {  // Presenter
     public float LimitValue { get; } = 15f;
     public float CurrentValue { get; private set; }
     
@@ -10,12 +10,12 @@ public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {
 
     public void Init() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public void StatusUpdate() {
         this.CurrentValue = Player.Instance.Status[this.Type];
-        PlayerInformationViewer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
         if (this.CurrentValue <= 0) {   // Player Death
             GameEventGameOver.OnBadEnding.Invoke("아사했습니다.", "굶주림을 느낄 기력조차 남지 않았습니다.\n이제 남은 건 졸음 뿐입니다...");

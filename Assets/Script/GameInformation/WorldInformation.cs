@@ -1,11 +1,47 @@
-using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
-[Serializable]
-public class WorldInformation {
-    public int timeTerm = 1;
-    public int timeDay = 1;
-    public string location = "조난 지역";
-    public bool hasShelter = false;
-    public bool hasRainGutter = false;
+public class WorldInformation : MonoBehaviour {
+    [SerializeField] private TMP_Text currentLocation;
+    [SerializeField] private TMP_Text currentWeather;
+    [SerializeField] private TMP_Text currentDayNight;
+    [SerializeField] private TMP_Text currentTimeDay;
+    
+    public static UnityEvent<int> OnCurrentTimeDayUpdate;
+    public static UnityEvent<string> OnCurrentLocationUpdate;
+    public static UnityEvent OnCurrentWeatherUpdate;
+    public static UnityEvent OnCurrentDayNight;
+    
+    
+    public void Init() {
+        OnCurrentLocationUpdate = new();
+        OnCurrentLocationUpdate.AddListener(CurrentLocationUpdate);
+        
+        OnCurrentWeatherUpdate = new();
+        OnCurrentWeatherUpdate.AddListener(CurrentWeatherUpdate);
+        
+        OnCurrentDayNight = new();
+        OnCurrentDayNight.AddListener(CurrentDayNight);
+        
+        OnCurrentTimeDayUpdate = new();
+        OnCurrentTimeDayUpdate.AddListener(CurrentTimeDayUpdate);   // 씬 전환에서도 리스너 정보를 유지
+        
+        OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
+        OnCurrentLocationUpdate.Invoke(World.Instance.Location);
+    }
+    
+    private void CurrentTimeDayUpdate(int value) {
+        this.currentTimeDay.text = value + "일 째 생존 중...";
+    }
+
+    private void CurrentLocationUpdate(string value) {
+        this.currentLocation.text = value;
+    }
+
+    private void CurrentWeatherUpdate() {
+    }
+
+    private void CurrentDayNight() {
+    }
 }

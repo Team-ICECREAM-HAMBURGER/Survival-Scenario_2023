@@ -1,15 +1,61 @@
-using System;
-using UnityEngine.Serialization;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
-[Serializable]
-public class PlayerInformation {
-    public string name = "";
-    public GameControlDictionary.Inventory inventory = new();
-    public GameControlDictionary.Status status = new() {
-        { GameControlType.Status.STAMINA, 100f },
-        { GameControlType.Status.BODY_HEAT, 100f },
-        { GameControlType.Status.HYDRATION, 100f },
-        { GameControlType.Status.CALORIES, 100f }
-    };
-    public GameControlDictionary.StatusEffect statusEffect = new();
+public class PlayerInformation : MonoBehaviour {    // Presenter
+    [SerializeField] private GameObject playerInformationPanel;
+    [SerializeField] private Image playerInformationPanelIndicator;
+    
+    [Space(10f)]
+
+    [Header("Status Effect")]
+    [SerializeField] private GameObject statusEffectContent;
+    [field: SerializeField] private GameControlDictionary.StatusEffectText statusEffectText;
+    
+    [Space(10f)]
+
+    [Header("Status")]
+    [field: SerializeField] private GameControlDictionary.StatusGaugeSlider statusGaugeSlider;
+    
+    private float z;
+    
+    public static UnityEvent<GameControlType.Status, float> OnStatusGaugeUpdate;
+    public static UnityEvent<GameControlType.StatusEffect, string> OnStatusEffectPanelUpdate;
+
+    
+    public void Init() {
+        this.z = -90f;
+        this.playerInformationPanel.SetActive(false);
+
+        foreach (var VARIABLE in this.statusEffectText.Values) {
+            VARIABLE.SetActive(false);
+        }
+        
+        OnStatusGaugeUpdate = new();
+        OnStatusGaugeUpdate.AddListener(StatusGaugeUpdate); // 씬 전환에서도 리스너 정보를 유지
+
+        OnStatusEffectPanelUpdate = new();
+        OnStatusEffectPanelUpdate.AddListener(StatusEffectPanelUpdate); // 씬 전환에서도 리스너 정보를 유지
+    }
+
+    private void StatusGaugeUpdate(GameControlType.Status type, float value) {
+        this.statusGaugeSlider[type].value = value;
+    }
+    
+    private void StatusEffectPanelUpdate(GameControlType.StatusEffect type, string value) {
+        if (Player.Instance.StatusEffect.ContainsKey(type)) {
+            this.statusEffectText[type].GetComponent<TMP_Text>().text = value;
+            this.statusEffectText[type].SetActive(true);
+        }
+        else {
+            this.statusEffectText[type].SetActive(false);
+        }
+    }
+    
+    public void OnStatusEffectPanelActive() {
+        this.z *= -1;
+        this.playerInformationPanel.SetActive(!this.playerInformationPanel.activeSelf);
+        this.playerInformationPanelIndicator.transform.rotation = Quaternion.Euler(0, 0, this.z);
+    }
 }

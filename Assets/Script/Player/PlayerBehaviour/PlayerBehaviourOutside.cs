@@ -1,11 +1,14 @@
 using UnityEngine;
 
 public class PlayerBehaviourOutside : MonoBehaviour, IPlayerBehaviour {
+    public void Init() {
+    }
+
     public void Behaviour() {
         PanelUpdate();
         
-        WorldInformationViewer.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
-        WorldInformationViewer.OnCurrentLocationUpdate.Invoke(World.Instance.Location);
+        WorldInformation.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
+        WorldInformation.OnCurrentLocationUpdate.Invoke(World.Instance.Location);
     }
     
     private void PanelUpdate() {

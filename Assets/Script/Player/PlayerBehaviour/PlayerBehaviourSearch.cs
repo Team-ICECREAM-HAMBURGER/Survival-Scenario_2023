@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
-    [SerializeField] private GameObject canvasObject;   // TODO: 삭제 예정
-    
+    [SerializeField] private GameObject searchRandomEventsObject;
+
     [Space(10f)]
-    
+
     [Header("Require Status")]
     [SerializeField] private float requireStatusStamina;
     [SerializeField] private float requireStatusBodyHeat;
@@ -23,22 +24,18 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     
     [SerializeField] private GameObject searchLoadingPanel;
     [SerializeField] private TMP_Text searchLoadingTitle;
-    
-    private IGameRandomEvent[] randomEvents;
+
+    private IGameRandomEvent[] searchRandomEvents;
     private float weightSum;
     private float weightLimit;
     private int spendTime;
 
 
-    private void Init() {
+    public void Init() {
         this.weightSum = 0;
         this.weightLimit = 0;
         this.spendTime = 5;
-        this.randomEvents = this.canvasObject.GetComponents<IGameRandomEvent>();
-    }
-
-    private void Awake() {
-        Init();
+        this.searchRandomEvents = this.searchRandomEventsObject.GetComponents<IGameRandomEvent>();
     }
 
     public void Behaviour() {
@@ -62,7 +59,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         this.weightSum = 0;
         this.weightLimit = Random.Range(0, 100);
         
-        foreach (var VARIABLE in this.randomEvents) {
+        foreach (var VARIABLE in this.searchRandomEvents) {
             this.weightSum += VARIABLE.Weight;
             
             if (this.weightSum > this.weightLimit) {

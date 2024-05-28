@@ -24,7 +24,7 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
 
         if (Player.Instance.StatusEffect.ContainsKey(this.Type)) {
             this.Term = Player.Instance.StatusEffect[this.Type];
-            PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, $"{this.panelText} ({this.Term}텀)");    
+            PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, $"{this.panelText} ({this.Term}텀)");    
         }
     }
 
@@ -40,7 +40,7 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
         
         Player.Instance.StatusEffectAdd(this);
         
-        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, $"{this.panelText} ({this.Term}텀)");
+        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, $"{this.panelText} ({this.Term}텀)");
     }
     
     public void StatusEffectInvoke(int value) {
@@ -56,12 +56,12 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
             Player.Instance.StatusEffectRemove(this);
         }
         
-        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, $"{this.panelText} ({this.Term}텀)");
+        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, $"{this.panelText} ({this.Term}텀)");
     }
     
     private void StatusEffectRemove() {
         Player.Instance.StatusEffectRemove(this);
         
-        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
+        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 }

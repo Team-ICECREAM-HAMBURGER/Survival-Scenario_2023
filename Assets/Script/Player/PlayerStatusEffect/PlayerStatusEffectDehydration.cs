@@ -20,12 +20,12 @@ public class PlayerStatusEffectDehydration : MonoBehaviour, IPlayerStatusEffect 
         OnStatusEffectAdd.AddListener(StatusEffectAdd);
         OnStatusEffectRemove.AddListener(StatusEffectRemove);
         
-        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
+        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 
     private void StatusEffectAdd() {
         Player.Instance.StatusEffectAdd(this);
-        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
+        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 
     public void StatusEffectInvoke(int value) {
@@ -36,6 +36,6 @@ public class PlayerStatusEffectDehydration : MonoBehaviour, IPlayerStatusEffect 
     
     private void StatusEffectRemove() {
         Player.Instance.StatusEffectRemove(this);
-        PlayerInformationViewer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
+        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 }
