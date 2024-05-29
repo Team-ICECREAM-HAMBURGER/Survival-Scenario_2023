@@ -271,7 +271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -308,9 +308,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 3
   <Name>k__BackingField: "\uC5D0\uB108\uC9C0 \uBC14"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 8868298379003469149}
+  <InventoryCountText>k__BackingField: {fileID: 8369707773206011318}
 --- !u!1 &2260304791493953664
 GameObject:
   m_ObjectHideFlags: 0

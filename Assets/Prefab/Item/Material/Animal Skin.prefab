@@ -577,9 +577,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 6
   <Name>k__BackingField: "\uAC00\uC8FD"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 2279290648730271092}
+  <InventoryCountText>k__BackingField: {fileID: 6222596322610682042}
 --- !u!1 &3910513633283321005
 GameObject:
   m_ObjectHideFlags: 0

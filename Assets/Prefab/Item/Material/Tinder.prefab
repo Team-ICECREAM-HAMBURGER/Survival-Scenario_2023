@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -127, y: 0}
+  m_AnchoredPosition: {x: -126.38, y: 0}
   m_SizeDelta: {x: 167.4, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &1614357236227613403
@@ -292,8 +292,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -147.20001, y: 0.00012207031}
-  m_SizeDelta: {x: -294.39, y: -0.00024414}
+  m_AnchoredPosition: {x: -146.89, y: 0.00012207031}
+  m_SizeDelta: {x: -293.77, y: -0.0002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2671340979523793065
 CanvasRenderer:
@@ -430,9 +430,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 11
   <Name>k__BackingField: "\uBD88\uC3D8\uC2DC\uAC1C"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 40
-  <RandomWeight>k__BackingField: 0.1851852
+  <RandomWeight>k__BackingField: 0.18518518
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 2512477819133001024}
+  <InventoryCountText>k__BackingField: {fileID: 2067429436990442474}
 --- !u!1 &5061351023105218412
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +635,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: "1\uAC1C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

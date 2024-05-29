@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -174,9 +174,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
   <Name>k__BackingField: "\uBB3C"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 3978047483713807224}
+  <InventoryCountText>k__BackingField: {fileID: 6573451885190723700}
 --- !u!1 &3004367668337177863
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +366,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBB3C\uBCD1"
+  m_text: "\uBB3C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

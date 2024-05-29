@@ -150,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -187,9 +187,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 5
   <Name>k__BackingField: "\uB0A0 \uACE0\uAE30"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 8474799780358504244}
+  <InventoryCountText>k__BackingField: {fileID: 7629732754995591007}
 --- !u!1 &2426688847127081161
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,7 +622,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uACE0\uAE30 (\uB0A0 \uAC83)"
+  m_text: "\uB0A0 \uACE0\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

@@ -260,7 +260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -297,9 +297,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
   <Name>k__BackingField: "\uC5F4\uB9E4"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 12
-  <RandomWeight>k__BackingField: 0.05555556
+  <RandomWeight>k__BackingField: 0.055555556
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 4605849062581616038}
+  <InventoryCountText>k__BackingField: {fileID: 4517365856469001835}
 --- !u!222 &7320092249140882903
 CanvasRenderer:
   m_ObjectHideFlags: 0

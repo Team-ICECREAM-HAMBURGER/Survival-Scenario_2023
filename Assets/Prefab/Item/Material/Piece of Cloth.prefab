@@ -564,9 +564,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 8
   <Name>k__BackingField: "\uCC9C \uC870\uAC01"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 11
-  <RandomWeight>k__BackingField: 0
+  <RandomWeight>k__BackingField: 0.050925925
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 4260221404201128085}
+  <InventoryCountText>k__BackingField: {fileID: 1659304875761625710}
 --- !u!1 &3399402032794624876
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: "1\uAC1C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

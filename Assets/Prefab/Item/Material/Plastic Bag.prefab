@@ -442,9 +442,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 13
   <Name>k__BackingField: "\uBE44\uB2D0 \uBD09\uC9C0"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 20
-  <RandomWeight>k__BackingField: 0
+  <RandomWeight>k__BackingField: 0.09259259
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 2114880492592998726}
+  <InventoryCountText>k__BackingField: {fileID: 6898993953825804262}
 --- !u!1 &5584659337231158659
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,8 +753,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -147.20001, y: 0.00012207031}
-  m_SizeDelta: {x: -294.39, y: -0.00024414062}
+  m_AnchoredPosition: {x: -146.89, y: 0.00012207031}
+  m_SizeDelta: {x: -293.77, y: -0.0002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7515859362747839973
 CanvasRenderer:
@@ -871,7 +874,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -127, y: 0}
+  m_AnchoredPosition: {x: -126.38, y: 0}
   m_SizeDelta: {x: 167.4, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &4654922096435900547

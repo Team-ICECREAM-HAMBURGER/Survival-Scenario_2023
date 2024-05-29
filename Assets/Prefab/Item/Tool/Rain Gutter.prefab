@@ -441,6 +441,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 16
   <Name>k__BackingField: "\uBE57\uBB3C \uBC1B\uC774"
+  <Content>k__BackingField: 
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
+  <InventoryNameText>k__BackingField: {fileID: 865757420032314231}
+  <InventoryCountText>k__BackingField: {fileID: 4083414170304921552}

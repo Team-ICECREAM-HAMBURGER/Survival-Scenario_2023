@@ -1,21 +1,20 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerInformation : MonoBehaviour {    // Presenter
-    [SerializeField] private GameObject playerInformationPanel;
-    [SerializeField] private Image playerInformationPanelIndicator;
-    
-    [Space(10f)]
+    [Header("Status Effect Monitor")]
+    [SerializeField] private GameObject statusEffectMonitorPanel;
+    [SerializeField] private GameObject statusEffectMonitorContent;
+    [SerializeField] private Image statusEffectMonitorToggleIndicator;
 
-    [Header("Status Effect")]
-    [SerializeField] private GameObject statusEffectContent;
     [field: SerializeField] private GameControlDictionary.StatusEffectText statusEffectText;
     
     [Space(10f)]
 
-    [Header("Status")]
+    [Header("Status Gauge")]
     [field: SerializeField] private GameControlDictionary.StatusGaugeSlider statusGaugeSlider;
     
     private float z;
@@ -26,7 +25,7 @@ public class PlayerInformation : MonoBehaviour {    // Presenter
     
     public void Init() {
         this.z = -90f;
-        this.playerInformationPanel.SetActive(false);
+        this.statusEffectMonitorPanel.SetActive(false);
 
         foreach (var VARIABLE in this.statusEffectText.Values) {
             VARIABLE.SetActive(false);
@@ -55,7 +54,7 @@ public class PlayerInformation : MonoBehaviour {    // Presenter
     
     public void OnStatusEffectPanelActive() {
         this.z *= -1;
-        this.playerInformationPanel.SetActive(!this.playerInformationPanel.activeSelf);
-        this.playerInformationPanelIndicator.transform.rotation = Quaternion.Euler(0, 0, this.z);
+        this.statusEffectMonitorPanel.SetActive(!this.statusEffectMonitorPanel.activeSelf);
+        this.statusEffectMonitorToggleIndicator.transform.rotation = Quaternion.Euler(0, 0, this.z);
     }
 }
