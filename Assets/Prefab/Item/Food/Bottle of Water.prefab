@@ -130,14 +130,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753789140353585682}
-  - component: {fileID: -5983570888545827870}
+  - component: {fileID: 1898179926880879642}
   m_Layer: 0
   m_Name: Bottle of Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -150,9 +150,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4725267488363772737}
   - {fileID: 1770678523688332321}
   - {fileID: 7243031922812941102}
-  - {fileID: 4725267488363772737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -160,7 +160,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-5983570888545827870
+--- !u!114 &1898179926880879642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,17 +169,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920890236755596896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60bd9fc8ea044b2c9e02ddf0fc6588a3, type: 3}
+  m_Script: {fileID: 11500000, guid: a7a87ddfd5b8f4a13bdf27be55f63149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
-  <Name>k__BackingField: "\uBB3C"
-  <Content>k__BackingField: 
+  <Name>k__BackingField: "\uC0DD\uC218\uBCD1"
+  <Content>k__BackingField: "\uC131\uC218\uB77C\uACE0 \uBCC4 \uAC70 \uC788\uB098\uC694?"
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
   <InventoryNameText>k__BackingField: {fileID: 3978047483713807224}
   <InventoryCountText>k__BackingField: {fileID: 6573451885190723700}
+  itemInfoButton: {fileID: 8080493465864736895}
+  itemUseButton: {fileID: 2640198027475218842}
+  itemDropButton: {fileID: 2845081141584062245}
 --- !u!1 &3004367668337177863
 GameObject:
   m_ObjectHideFlags: 0

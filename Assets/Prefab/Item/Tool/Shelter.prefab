@@ -265,7 +265,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3554046438342835892}
-  - component: {fileID: -6529131094531282018}
   m_Layer: 0
   m_Name: Shelter
   m_TagString: Untagged
@@ -293,26 +292,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-6529131094531282018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6837602540533377135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34def3a6703a457ab92e4a3f7d5fba1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Type>k__BackingField: 18
-  <Name>k__BackingField: "\uD734\uC2DD\uCC98"
-  <Content>k__BackingField: 
-  <RandomPercent>k__BackingField: 0
-  <RandomWeight>k__BackingField: 0
-  <RandomMaxValue>k__BackingField: 0
-  <InventoryNameText>k__BackingField: {fileID: 7770512671299840667}
-  <InventoryCountText>k__BackingField: {fileID: 2476237308209942837}
 --- !u!1 &8521560935468351951
 GameObject:
   m_ObjectHideFlags: 0

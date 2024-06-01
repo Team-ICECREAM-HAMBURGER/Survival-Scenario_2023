@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7163442005428921675}
-  - component: {fileID: -8291872737045856275}
+  - component: {fileID: 559782221328864910}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
@@ -297,9 +297,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7941626069214863208}
   - {fileID: 2559450881633668896}
   - {fileID: 3139413303041615279}
-  - {fileID: 7941626069214863208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -307,7 +307,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-8291872737045856275
+--- !u!114 &559782221328864910
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,17 +316,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3344575430677846928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073b952a91944154bf165112630112dd, type: 3}
+  m_Script: {fileID: 11500000, guid: f26e7d1d4f6cd4618a494e32200ab725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 10
+  <Type>k__BackingField: 11
   <Name>k__BackingField: "\uB3CC"
-  <Content>k__BackingField: 
-  <RandomPercent>k__BackingField: 20
-  <RandomWeight>k__BackingField: 0.09259259
-  <RandomMaxValue>k__BackingField: 0
+  <Content>k__BackingField: "\uC11D\uAE30 \uC2DC\uB300\uC5D0 \uC628 \uAC83\uC744
+    \uD658\uC601\uD569\uB2C8\uB2E4."
+  <RandomPercent>k__BackingField: 70
+  <RandomWeight>k__BackingField: 0
+  <RandomMaxValue>k__BackingField: 5
   <InventoryNameText>k__BackingField: {fileID: 3548389531639246405}
   <InventoryCountText>k__BackingField: {fileID: 8416758248947077870}
+  itemInfoButton: {fileID: 7474995534695099692}
+  itemUseButton: {fileID: 7395756713005786289}
+  itemDropButton: {fileID: 9190473851277963962}
 --- !u!1 &4596047450655973786
 GameObject:
   m_ObjectHideFlags: 0

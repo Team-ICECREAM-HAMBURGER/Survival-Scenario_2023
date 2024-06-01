@@ -31,11 +31,11 @@ public class GameControlType {
         ANIMAL_SKIN,
         CAN,
         PIECE_OF_CLOTH,
+        PLASTIC_BAG,
         ROPE,
         STONE,
         TINDER,
         WOOD,
-        PLASTIC_BAG,
         
         // 도구
         FIRE_TOOL,

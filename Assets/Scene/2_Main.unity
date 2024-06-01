@@ -3129,6 +3129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd8b11dcab37284fab006847aebe57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInfoTitle: {fileID: 744930007}
+  itemInfoContent: {fileID: 1141790513}
 --- !u!1 &241293607
 GameObject:
   m_ObjectHideFlags: 0
@@ -5736,29 +5738,29 @@ MonoBehaviour:
   itemFoods:
     m_keys: 000000000100000002000000030000000400000005000000
     m_values:
-    - {fileID: 9065758587651203294, guid: 37727420f6cd208478f0af0a2eca03fe, type: 3}
-    - {fileID: -5983570888545827870, guid: 4f5c0470882e0f24ea6f9479829be33c, type: 3}
-    - {fileID: 6038259699334412514, guid: e85e6465b206dd14baca141ee3874760, type: 3}
-    - {fileID: -6192854037536272998, guid: 415535f14f76c5744a0f2e533a5377b3, type: 3}
-    - {fileID: 8735424994463612892, guid: b127a649438af2f429dddd3c62ef55c8, type: 3}
-    - {fileID: -1349342924958566068, guid: 5431e95b689d79b4e8b4b780b862f72d, type: 3}
+    - {fileID: 4047896815937595676, guid: 37727420f6cd208478f0af0a2eca03fe, type: 3}
+    - {fileID: 1898179926880879642, guid: 4f5c0470882e0f24ea6f9479829be33c, type: 3}
+    - {fileID: 6303732779577785469, guid: e85e6465b206dd14baca141ee3874760, type: 3}
+    - {fileID: 3163646709705015387, guid: 415535f14f76c5744a0f2e533a5377b3, type: 3}
+    - {fileID: 841545645020198800, guid: b127a649438af2f429dddd3c62ef55c8, type: 3}
+    - {fileID: 3474361351651763349, guid: 5431e95b689d79b4e8b4b780b862f72d, type: 3}
   itemMaterials:
     m_keys: 060000000700000008000000090000000a0000000b0000000c0000000d000000
     m_values:
-    - {fileID: 6187024783513222942, guid: 9455ca63ad634eb4f9746cfa2ef03979, type: 3}
-    - {fileID: 6187024783513222942, guid: 23230babcf28a4db88974c0008e0a43b, type: 3}
-    - {fileID: 4239471845856729876, guid: 5afdde099adb53c49bb795ff42a87c56, type: 3}
-    - {fileID: -5535450810510329561, guid: ca424f303f41b8f469d532169dd58cda, type: 3}
-    - {fileID: -8291872737045856275, guid: 1034177d1cd0f3c45842b26530bfc32e, type: 3}
-    - {fileID: 2767177797021033118, guid: e8e783d1d838fac498f117b76057d62a, type: 3}
-    - {fileID: 7539658636930925391, guid: 87346f543a018414c893f7ce732a353d, type: 3}
-    - {fileID: 7539658636930925391, guid: 55bccbc4ea6afd24197bd8ce510b6e5b, type: 3}
+    - {fileID: 2813977879788944730, guid: 9455ca63ad634eb4f9746cfa2ef03979, type: 3}
+    - {fileID: 5435927613267526264, guid: 23230babcf28a4db88974c0008e0a43b, type: 3}
+    - {fileID: 4432992011076541510, guid: 5afdde099adb53c49bb795ff42a87c56, type: 3}
+    - {fileID: 4522060015118556093, guid: 55bccbc4ea6afd24197bd8ce510b6e5b, type: 3}
+    - {fileID: 5780296612314296313, guid: ca424f303f41b8f469d532169dd58cda, type: 3}
+    - {fileID: 559782221328864910, guid: 1034177d1cd0f3c45842b26530bfc32e, type: 3}
+    - {fileID: 8320699217119199662, guid: e8e783d1d838fac498f117b76057d62a, type: 3}
+    - {fileID: 3981105636338222117, guid: 87346f543a018414c893f7ce732a353d, type: 3}
   itemTools:
     m_keys: 0e0000000f00000010000000
     m_values:
-    - {fileID: 8907019335242049864, guid: 27b20aafbeb1896488e7a013b9669bda, type: 3}
-    - {fileID: 575754754972649720, guid: 3161e4723525a814aadcb9a4c94df569, type: 3}
-    - {fileID: -6529131094531282018, guid: 57b28de3e3cb245c2a524b67d8790ff3, type: 3}
+    - {fileID: 6057748316399199810, guid: 27b20aafbeb1896488e7a013b9669bda, type: 3}
+    - {fileID: 5730780904794600870, guid: 3161e4723525a814aadcb9a4c94df569, type: 3}
+    - {fileID: 6151042530270224082, guid: 57b28de3e3cb245c2a524b67d8790ff3, type: 3}
   inventoryViewPortContent: {fileID: 721363909}
 --- !u!1 &390710426
 GameObject:
@@ -8326,7 +8328,7 @@ GameObject:
   - component: {fileID: 651577792}
   - component: {fileID: 651577793}
   m_Layer: 5
-  m_Name: Item Explanation Panel
+  m_Name: Item Information Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12559,7 +12561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 6974621.5}
+  m_AnchoredPosition: {x: -399.9992, y: 17072666}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -20964,9 +20966,9 @@ RectTransform:
   - {fileID: 1956464781}
   m_Father: {fileID: 969297691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760321712

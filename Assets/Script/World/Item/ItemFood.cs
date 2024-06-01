@@ -1,7 +1,8 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ItemFood : MonoBehaviour, IItem {
+public abstract class ItemFood : MonoBehaviour, IItem {
     [field: SerializeField] public GameControlType.Item Type { get; set; }
     [field: SerializeField] public string Name { get; set; }
     [field: SerializeField] public string Content { get; set; }
@@ -12,24 +13,38 @@ public class ItemFood : MonoBehaviour, IItem {
     [field: SerializeField] public TMP_Text InventoryNameText { get; private set; }
     [field: SerializeField] public TMP_Text InventoryCountText { get; private set; }
     
+    [Space(25f)]
+    
+    [SerializeField] private Button itemInfoButton;
+    [SerializeField] private Button itemUseButton;
+    [SerializeField] private Button itemDropButton;
+    
     private GameObject obj;
-    private ItemFood itemFood;
+    private ItemFood item;
     
     
     public void Init(float value, Transform content) {
         this.RandomWeight = (this.RandomPercent / value);
         
         this.obj = Instantiate(gameObject, content);
-        this.itemFood = this.obj.GetComponent<ItemFood>();
-        this.itemFood.InventoryNameText.text = this.Name;
-        this.itemFood.InventoryCountText.text = "0개";
+        this.item = this.obj.GetComponent<ItemFood>();
+        this.item.InventoryNameText.text = this.Name;
+        this.item.InventoryCountText.text = "0개";
+        this.item.itemInfoButton.onClick.AddListener(InventoryInfoUpdate);
+        this.item.itemUseButton.onClick.AddListener(ItemUse);
         
         this.obj.SetActive(false);
     }
-
-
+    
     public void InventoryCountUpdate(int value) {
-        this.itemFood.InventoryCountText.text = value + "개";
+        this.item.InventoryCountText.text = value + "개";
         this.obj.SetActive(value > 0);
     }
+
+    public void InventoryInfoUpdate() {
+        PlayerBehaviourInventory.OnItemInfoUpdate.Invoke(this.Name, this.Content);
+    }
+
+    public abstract void ItemUse();
+    public abstract void ItemDrop();
 }

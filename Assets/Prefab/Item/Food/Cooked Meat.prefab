@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753789140353585682}
-  - component: {fileID: 6038259699334412514}
+  - component: {fileID: 6303732779577785469}
   m_Layer: 0
   m_Name: Cooked Meat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29,9 +29,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7466835256710212811}
   - {fileID: 4250959690970914984}
   - {fileID: 318619291912657470}
-  - {fileID: 7466835256710212811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6038259699334412514
+--- !u!114 &6303732779577785469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,17 +48,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920890236755596896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60bd9fc8ea044b2c9e02ddf0fc6588a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cdc9e1fbe63e46f8b3ee9da334e0540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 2
-  <Name>k__BackingField: "\uC775\uD78C \uACE0\uAE30"
-  <Content>k__BackingField: 
+  <Name>k__BackingField: "\uC870\uB9AC\uD55C \uACE0\uAE30"
+  <Content>k__BackingField: "\uB0A8\uC758 \uC0B4\uC774 \uC81C\uC77C \uB9DB\uC788\uB294
+    \uBC95\uC785\uB2C8\uB2E4. \uBB3C\uB860, \uC81C \uC0B4\uC740 \uC608\uC678\uC785\uB2C8\uB2E4."
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
   <InventoryNameText>k__BackingField: {fileID: 7549235769122116041}
   <InventoryCountText>k__BackingField: {fileID: 736188550071392558}
+  itemInfoButton: {fileID: 263842204940385621}
+  itemUseButton: {fileID: 4515123359790845631}
+  itemDropButton: {fileID: 1882076584459286511}
 --- !u!1 &2017592467983963135
 GameObject:
   m_ObjectHideFlags: 0

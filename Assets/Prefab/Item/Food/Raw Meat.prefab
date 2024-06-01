@@ -143,14 +143,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753789140353585682}
-  - component: {fileID: -1349342924958566068}
+  - component: {fileID: 3474361351651763349}
   m_Layer: 0
   m_Name: Raw Meat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -163,9 +163,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5456795212471816947}
   - {fileID: 4705077667976398640}
   - {fileID: 29087735673640336}
-  - {fileID: 5456795212471816947}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -173,7 +173,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-1349342924958566068
+--- !u!114 &3474361351651763349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,17 +182,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1920890236755596896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60bd9fc8ea044b2c9e02ddf0fc6588a3, type: 3}
+  m_Script: {fileID: 11500000, guid: d7a00cd2e22ee464aaff4796ae91b014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 5
-  <Name>k__BackingField: "\uB0A0 \uACE0\uAE30"
-  <Content>k__BackingField: 
+  <Name>k__BackingField: "\uB0A0\uACE0\uAE30"
+  <Content>k__BackingField: "\uB0A8\uC758 \uC0B4\uC774 \uB9DB\uC788\uAE34 \uD558\uC9C0\uB9CC
+    \uC774\uAC74 \uC544\uC9C1 \uC548 \uC775\uC5C8\uC2B5\uB2C8\uB2E4. \uC544\uB1E8,
+    \uC721\uD68C\uB791\uC740 \uB2E4\uB985\uB2C8\uB2E4."
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
   <InventoryNameText>k__BackingField: {fileID: 8474799780358504244}
   <InventoryCountText>k__BackingField: {fileID: 7629732754995591007}
+  itemInfoButton: {fileID: 6482542448413942893}
+  itemUseButton: {fileID: 1103890991309255486}
+  itemDropButton: {fileID: 7769425041335086439}
 --- !u!1 &2426688847127081161
 GameObject:
   m_ObjectHideFlags: 0

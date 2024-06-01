@@ -520,7 +520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7163442005428921675}
-  - component: {fileID: 4239471845856729876}
+  - component: {fileID: 4432992011076541510}
   m_Layer: 0
   m_Name: Piece of Cloth
   m_TagString: Untagged
@@ -540,9 +540,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6632916577325581497}
   - {fileID: 5876402552152227959}
   - {fileID: 609839619327347813}
-  - {fileID: 6632916577325581497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -550,7 +550,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4239471845856729876
+--- !u!114 &4432992011076541510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,17 +559,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3344575430677846928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073b952a91944154bf165112630112dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 9009234ad60f34daa8b68ad8c1f67828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 8
   <Name>k__BackingField: "\uCC9C \uC870\uAC01"
-  <Content>k__BackingField: 
-  <RandomPercent>k__BackingField: 11
-  <RandomWeight>k__BackingField: 0.050925925
-  <RandomMaxValue>k__BackingField: 0
+  <Content>k__BackingField: "\uC637\uC740 \uCC22\uACA8\uC838\uB3C4 \uC544\uB08C\uC5C6\uC774
+    \uC90D\uB2C8\uB2E4."
+  <RandomPercent>k__BackingField: 8
+  <RandomWeight>k__BackingField: 0
+  <RandomMaxValue>k__BackingField: 2
   <InventoryNameText>k__BackingField: {fileID: 4260221404201128085}
   <InventoryCountText>k__BackingField: {fileID: 1659304875761625710}
+  itemInfoButton: {fileID: 1167974901369032310}
+  itemUseButton: {fileID: 449416940654422098}
+  itemDropButton: {fileID: 539586500608139387}
 --- !u!1 &3399402032794624876
 GameObject:
   m_ObjectHideFlags: 0
