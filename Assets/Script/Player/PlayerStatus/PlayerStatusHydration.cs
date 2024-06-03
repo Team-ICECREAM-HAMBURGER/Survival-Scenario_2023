@@ -23,7 +23,7 @@ public class PlayerStatusHydration : MonoBehaviour, IPlayerStatus { // Presenter
         else if (this.CurrentValue <= this.LimitValue) {    // Player Status Effect Active
             PlayerStatusEffectDehydration.OnStatusEffectAdd.Invoke();
         }
-        else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.COLDNESS)) {
+        else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.DEHYDRATION)) {
             PlayerStatusEffectDehydration.OnStatusEffectRemove.Invoke();
         }
     }

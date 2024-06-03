@@ -319,13 +319,17 @@ MonoBehaviour:
   <Name>k__BackingField: "\uC5F4\uB9E4"
   <Content>k__BackingField: Very BERRY
   <RandomPercent>k__BackingField: 5
-  <RandomWeight>k__BackingField: 0
+  <RandomWeight>k__BackingField: 0.0203252
   <RandomMaxValue>k__BackingField: 2
   <InventoryNameText>k__BackingField: {fileID: 4605849062581616038}
   <InventoryCountText>k__BackingField: {fileID: 4517365856469001835}
   itemInfoButton: {fileID: 5323388429148911471}
   itemUseButton: {fileID: 3263660297054884913}
   itemDropButton: {fileID: 1221039130360904124}
+  stamina: 10
+  bodyHeat: 0
+  hydration: 7
+  calories: 5
 --- !u!1 &3760642227140698493
 GameObject:
   m_ObjectHideFlags: 0

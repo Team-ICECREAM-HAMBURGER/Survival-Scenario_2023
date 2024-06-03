@@ -23,7 +23,7 @@ public class PlayerStatusCalories : MonoBehaviour, IPlayerStatus {  // Presenter
         else if (this.CurrentValue <= this.LimitValue) {    // Player Status Effect Active
             PlayerStatusEffectHunger.OnStatusEffectAdd.Invoke();
         }
-        else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.COLDNESS)) {
+        else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.HUNGER)) {
             PlayerStatusEffectHunger.OnStatusEffectRemove.Invoke();
         }
     }

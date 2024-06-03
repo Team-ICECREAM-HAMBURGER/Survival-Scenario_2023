@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemToolHuntingTool : ItemTool {
-    public override void ItemUse() {
-        Debug.Log(this.Name + this.Content);
-    }
-
     public override void ItemDrop() {
+        Player.Instance.InventoryUpdate(Type, -1);
+        PlayerBehaviourInventory.OnItemUse.Invoke();
     }
 }

@@ -16,6 +16,5 @@ public interface IItem {
     public void Init(float value, Transform content);
     public void InventoryCountUpdate(int value);
     public void InventoryInfoUpdate();
-    public void ItemUse();
     public void ItemDrop();
 }

@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ItemFoodMRE : ItemFood {
     public override void ItemUse() {
-        Debug.Log(this.Name + " " + this.Content);
+        Player.Instance.StatusUpdate(stamina, bodyHeat, hydration, calories);
+        Player.Instance.InventoryUpdate(Type, -1);
+        PlayerBehaviourInventory.OnItemUse.Invoke();
     }
 
     public override void ItemDrop() {
+        Player.Instance.InventoryUpdate(Type, -1);
+        PlayerBehaviourInventory.OnItemUse.Invoke();
     }
 }

@@ -19,6 +19,13 @@ public abstract class ItemFood : MonoBehaviour, IItem {
     [SerializeField] private Button itemUseButton;
     [SerializeField] private Button itemDropButton;
     
+    [Space(25f)]
+
+    public float stamina;
+    public float bodyHeat;
+    public float hydration;
+    public float calories;
+    
     private GameObject obj;
     private ItemFood item;
     
@@ -32,6 +39,7 @@ public abstract class ItemFood : MonoBehaviour, IItem {
         this.item.InventoryCountText.text = "0개";
         this.item.itemInfoButton.onClick.AddListener(InventoryInfoUpdate);
         this.item.itemUseButton.onClick.AddListener(ItemUse);
+        this.item.itemDropButton.onClick.AddListener(ItemDrop);
         
         this.obj.SetActive(false);
     }

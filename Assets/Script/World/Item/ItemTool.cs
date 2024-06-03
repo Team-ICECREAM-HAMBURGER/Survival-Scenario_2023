@@ -16,7 +16,6 @@ public abstract class ItemTool : MonoBehaviour, IItem {
     [Space(25f)]
 
     [SerializeField] private Button itemInfoButton;
-    [SerializeField] private Button itemUseButton;
     [SerializeField] private Button itemDropButton;
     
     private GameObject obj;
@@ -31,7 +30,7 @@ public abstract class ItemTool : MonoBehaviour, IItem {
         this.item.InventoryNameText.text = this.Name;
         this.item.InventoryCountText.text = "0개";
         this.item.itemInfoButton.onClick.AddListener(InventoryInfoUpdate);    
-        this.item.itemUseButton.onClick.AddListener(ItemUse);
+        this.item.itemDropButton.onClick.AddListener(ItemDrop);
         
         this.obj.SetActive(false);
     }
@@ -44,7 +43,6 @@ public abstract class ItemTool : MonoBehaviour, IItem {
     public void InventoryInfoUpdate() {
         PlayerBehaviourInventory.OnItemInfoUpdate.Invoke(this.Name, this.Content);
     }
-
-    public abstract void ItemUse();
+    
     public abstract void ItemDrop();
 }

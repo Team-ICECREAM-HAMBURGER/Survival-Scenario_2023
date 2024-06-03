@@ -126,10 +126,6 @@ public class Player : GameControlSingleton<Player> { // Model
         foreach (var VARIABLE in items) {
             if (!this.Inventory.TryAdd(VARIABLE.Key.Type, VARIABLE.Value)) {
                 this.Inventory[VARIABLE.Key.Type] += VARIABLE.Value;
-                
-                if (this.Inventory[VARIABLE.Key.Type] <= 0) {
-                    this.Inventory.Remove(VARIABLE.Key.Type);
-                }
             }
         }
     }
@@ -137,10 +133,6 @@ public class Player : GameControlSingleton<Player> { // Model
     public void InventoryUpdate(GameControlType.Item type, int value) {
         if (!this.Inventory.TryAdd(type, value)) {
             this.Inventory[type] += value;
-            
-            if (this.Inventory[type] <= 0) {
-                this.Inventory.Remove(type);
-            }
         }
     }
 }

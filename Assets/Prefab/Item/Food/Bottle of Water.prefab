@@ -183,6 +183,10 @@ MonoBehaviour:
   itemInfoButton: {fileID: 8080493465864736895}
   itemUseButton: {fileID: 2640198027475218842}
   itemDropButton: {fileID: 2845081141584062245}
+  stamina: 0
+  bodyHeat: 0
+  hydration: 15
+  calories: 0
 --- !u!1 &3004367668337177863
 GameObject:
   m_ObjectHideFlags: 0
