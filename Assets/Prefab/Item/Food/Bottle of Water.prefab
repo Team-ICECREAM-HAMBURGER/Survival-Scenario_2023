@@ -174,7 +174,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
   <Name>k__BackingField: "\uC0DD\uC218\uBCD1"
-  <Content>k__BackingField: "\uC131\uC218\uB77C\uACE0 \uBCC4 \uAC70 \uC788\uB098\uC694?"
+  content: "\uADC0\uD558\uACE0 \uADC0\uD55C \uBB3C\uC785\uB2C8\uB2E4. '\uBB3C\uC758
+    \uBB38\uC81C'\uB294 \uC5B4\uB514\uC11C\uB098 \uC911\uC694\uD55C \uC0AC\uD56D\uC774\uC8E0.\n\n-
+    \uD6A8\uACFC\n\uC218\uBD84 +15"
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0

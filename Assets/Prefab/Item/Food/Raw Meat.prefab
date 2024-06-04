@@ -187,9 +187,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 5
   <Name>k__BackingField: "\uB0A0\uACE0\uAE30"
-  <Content>k__BackingField: "\uB0A8\uC758 \uC0B4\uC774 \uB9DB\uC788\uAE34 \uD558\uC9C0\uB9CC
-    \uC774\uAC74 \uC544\uC9C1 \uC548 \uC775\uC5C8\uC2B5\uB2C8\uB2E4. \uC544\uB1E8,
-    \uC721\uD68C\uB791\uC740 \uB2E4\uB985\uB2C8\uB2E4."
+  content: "\uB0A8\uC758 \uC0B4\uC774 \uB9DB\uC788\uB2E4\uACE0\uB294 \uD588\uC9C0\uB9CC
+    \uADF8\uB798\uB3C4 \uC774\uAC74 \uC548 \uC775\uC5C8\uC2B5\uB2C8\uB2E4. \uC544\uB2C8,
+    \uC721\uD68C\uB791\uC740 \uB2E4\uB974\uB2E4\uACE0\uC694?\n\n- \uD6A8\uACFC\n\uCCB4\uB825
+    +10, \uCE7C\uB85C\uB9AC +9\n"
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
@@ -198,6 +199,10 @@ MonoBehaviour:
   itemInfoButton: {fileID: 6482542448413942893}
   itemUseButton: {fileID: 1103890991309255486}
   itemDropButton: {fileID: 7769425041335086439}
+  stamina: 10
+  bodyHeat: 0
+  hydration: 0
+  calories: 9
 --- !u!1 &2426688847127081161
 GameObject:
   m_ObjectHideFlags: 0

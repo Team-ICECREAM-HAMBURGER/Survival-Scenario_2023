@@ -53,8 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 2
   <Name>k__BackingField: "\uC870\uB9AC\uD55C \uACE0\uAE30"
-  <Content>k__BackingField: "\uB0A8\uC758 \uC0B4\uC774 \uC81C\uC77C \uB9DB\uC788\uB294
-    \uBC95\uC785\uB2C8\uB2E4. \uBB3C\uB860, \uC81C \uC0B4\uC740 \uC608\uC678\uC785\uB2C8\uB2E4."
+  content: "\uB0A8\uC758 \uC0B4\uC774 \uAC00\uC7A5 \uB9DB\uC788\uB294 \uBC95\uC785\uB2C8\uB2E4.
+    \uBB3C\uB860, \uC81C \uC0B4\uC740 \uC608\uC678\uC785\uB2C8\uB2E4. \uADF8\uB7EC\uB2C8
+    \uADF8\uB7F0 \uB208\uC73C\uB85C \uBCF4\uC9C0 \uB9D0\uC544\uC8FC\uC138\uC694.\n\n-
+    \uD6A8\uACFC\n\uCCB4\uB825 +13, \uCE7C\uB85C\uB9AC +24"
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
@@ -63,6 +65,10 @@ MonoBehaviour:
   itemInfoButton: {fileID: 263842204940385621}
   itemUseButton: {fileID: 4515123359790845631}
   itemDropButton: {fileID: 1882076584459286511}
+  stamina: 13
+  bodyHeat: 0
+  hydration: 0
+  calories: 24
 --- !u!1 &2017592467983963135
 GameObject:
   m_ObjectHideFlags: 0
