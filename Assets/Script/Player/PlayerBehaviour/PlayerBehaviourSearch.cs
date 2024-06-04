@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
-    [SerializeField] private GameObject searchRandomEventsObject;
+    [SerializeField] private GameObject searchCanvasObject;
 
     [Space(10f)]
 
@@ -26,16 +27,16 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     [SerializeField] private TMP_Text searchLoadingTitle;
 
     private IGameRandomEvent[] searchRandomEvents;
-    private float weightSum;
-    private float weightLimit;
+    private float percentSum;
+    private float percentLimit;
     private int spendTime;
 
 
     public void Init() {
-        this.weightSum = 0;
-        this.weightLimit = 0;
+        this.percentSum = 0;
+        this.percentLimit = 0;
         this.spendTime = 5;
-        this.searchRandomEvents = this.searchRandomEventsObject.GetComponents<IGameRandomEvent>();
+        this.searchRandomEvents = this.searchCanvasObject.GetComponents<IGameRandomEvent>();
     }
 
     public void Behaviour() {
@@ -56,13 +57,13 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     }
     
     private void RandomEventCall() {
-        this.weightSum = 0;
-        this.weightLimit = Random.Range(0, 100);
+        this.percentSum = 0;
+        this.percentLimit = Random.Range(0, 100);
         
         foreach (var VARIABLE in this.searchRandomEvents) {
-            this.weightSum += VARIABLE.Weight;
+            this.percentSum += VARIABLE.Percent;
             
-            if (this.weightSum > this.weightLimit) {
+            if (this.percentSum > this.percentLimit) {
                 VARIABLE.Event();
                 PanelUpdate(VARIABLE.EventResult());
                 break;

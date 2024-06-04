@@ -4,7 +4,7 @@ using System.Text;
 using UnityEngine;
 
 public class GameRandomEventHunting : MonoBehaviour, IGameRandomEvent {   // Presenter
-    [field: SerializeField] public float Weight { get; set; }
+    [field: SerializeField] public float Percent { get; set; }
 
     // TODO: 사냥 가능 조건 부분 수정 필요
     private string spendItem;

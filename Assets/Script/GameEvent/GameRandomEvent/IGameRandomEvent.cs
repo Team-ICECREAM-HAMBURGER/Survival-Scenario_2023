@@ -1,5 +1,5 @@
 public interface IGameRandomEvent {
-    float Weight { get; }
+    float Percent { get; }
     void Event();
     (string, string) EventResult();
 }

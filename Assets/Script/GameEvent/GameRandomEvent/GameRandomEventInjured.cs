@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class GameRandomEventInjured : MonoBehaviour, IGameRandomEvent {
-    [field: SerializeField] public float Weight { get; set; }
+    [field: SerializeField] public float Percent { get; set; }
     
     
     private void Init() {

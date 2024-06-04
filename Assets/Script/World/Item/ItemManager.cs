@@ -21,6 +21,7 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         this.OnItemInit = new();
         this.randomPercentSum = 0;
         
+        // TODO: 랜덤 아이템 획득 확률 계산 기능 수정; 무작위 획득이 아닌 것도 % 계산에 0으로 포함되고 있음; if() 사용 고려
         foreach (var VARIABLE in this.itemFoods) {
             this.randomPercentSum += VARIABLE.Value.RandomPercent;
             this.OnItemInit.AddListener(VARIABLE.Value.Init);
@@ -34,7 +35,6 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         }
         
         foreach (var VARIABLE in this.itemTools) {
-            this.randomPercentSum += VARIABLE.Value.RandomPercent;
             this.OnItemInit.AddListener(VARIABLE.Value.Init);
             this.Items.Add(VARIABLE.Key, VARIABLE.Value);
         }

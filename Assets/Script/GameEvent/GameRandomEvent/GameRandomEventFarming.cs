@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent { // Presenter
-    [field: SerializeField] public float Weight { get; set; }
+    [field: SerializeField] public float Percent { get; set; }
     private Dictionary<IItem, int> getItems;
     
     
