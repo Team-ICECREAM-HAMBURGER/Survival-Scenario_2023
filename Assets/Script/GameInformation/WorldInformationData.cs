@@ -7,4 +7,5 @@ public class WorldInformationData {
     public string location = "조난 지역";
     public bool hasShelter = false;
     public bool hasRainGutter = false;
+    public bool hasFire = false;
 }

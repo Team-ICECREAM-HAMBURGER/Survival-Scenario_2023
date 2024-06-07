@@ -176,8 +176,8 @@ MonoBehaviour:
   <Name>k__BackingField: "\uBD88\uC3D8\uC2DC\uAC1C"
   <Content>k__BackingField: "\uC808\uB300 \uCC45\uC744 \uB9D0\uD558\uB294 \uAC8C
     \uC544\uB2D9\uB2C8\uB2E4. \uC544\uBB34\uD2BC \uC544\uB2D9\uB2C8\uB2E4."
-  <RandomPercent>k__BackingField: 27
-  <RandomWeight>k__BackingField: 0
+  <RandomPercent>k__BackingField: 45
+  <RandomWeight>k__BackingField: 0.1377953
   <RandomMaxValue>k__BackingField: 4
   <InventoryNameText>k__BackingField: {fileID: 2512477819133001024}
   <InventoryCountText>k__BackingField: {fileID: 2067429436990442474}

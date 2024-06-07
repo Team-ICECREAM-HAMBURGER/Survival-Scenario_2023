@@ -62,6 +62,18 @@ public class World : GameControlSingleton<World> {  // Model
             this.informationData.hasRainGutter = value;
         }
     }
+
+    private bool hasFire;
+
+    public bool HasFire {
+        get {
+            return hasFire;
+        }
+        set {
+            this.hasFire = value;
+            this.informationData.hasFire = value;
+        }
+    }
     
     
     private void Init() {
@@ -73,7 +85,8 @@ public class World : GameControlSingleton<World> {  // Model
             this.location = this.informationData.location;
             this.HasShelter = this.informationData.hasShelter;
             this.HasRainGutter = this.informationData.hasRainGutter;
-
+            this.HasFire = this.informationData.hasFire;
+            
             // Presenter Init //
             this.worldInformation.Init();
 
