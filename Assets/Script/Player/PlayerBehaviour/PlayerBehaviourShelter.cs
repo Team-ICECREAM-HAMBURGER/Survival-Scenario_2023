@@ -26,7 +26,7 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
             PanelUpdate();
             
             Player.Instance.StatusEffectInvoke(this.spendTime);
-            World.Instance.WorldTimeUpdate(this.spendTime);
+            World.Instance.TimeUpdate(this.spendTime);
         }
 
         WorldInformation.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);

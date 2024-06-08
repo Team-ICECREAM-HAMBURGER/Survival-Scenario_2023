@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2026,13 +2025,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4007fc8247b45440594f2dd737c74122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInformation:
+  playerInformationData:
     name: 
-  worldInformation:
+  worldInformationData:
     timeTerm: 0
     timeDay: 0
-    isShelterSet: 0
-    isRainGutterSet: 0
+    location: "\uC870\uB09C \uC9C0\uC5ED"
+    hasShelter: 0
+    hasRainGutter: 0
+    hasFire: 0
 --- !u!4 &1144291204
 Transform:
   m_ObjectHideFlags: 0

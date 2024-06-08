@@ -21,5 +21,8 @@ public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {   // Presenter
         if (this.CurrentValue <= this.LimitValue) {
             PlayerStatusEffectExhaustion.OnStatusEffectAdd.Invoke();
         }
+        else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.EXHAUSTION)) {
+            PlayerStatusEffectExhaustion.OnStatusEffectRemove.Invoke();
+        }
     }
 }

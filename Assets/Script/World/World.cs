@@ -29,7 +29,6 @@ public class World : GameControlSingleton<World> {  // Model
     }
 
     private string location;
-
     public string Location {
         get {
             return this.location;
@@ -64,7 +63,6 @@ public class World : GameControlSingleton<World> {  // Model
     }
 
     private bool hasFire;
-
     public bool HasFire {
         get {
             return hasFire;
@@ -72,6 +70,18 @@ public class World : GameControlSingleton<World> {  // Model
         set {
             this.hasFire = value;
             this.informationData.hasFire = value;
+        }
+    }
+
+    private int fireTerm;
+
+    public int FireTerm {
+        get {
+            return this.fireTerm;
+        }
+        set {
+            this.fireTerm = value;
+            this.informationData.fireTerm = value;
         }
     }
     
@@ -86,10 +96,10 @@ public class World : GameControlSingleton<World> {  // Model
             this.HasShelter = this.informationData.hasShelter;
             this.HasRainGutter = this.informationData.hasRainGutter;
             this.HasFire = this.informationData.hasFire;
+            this.FireTerm = this.informationData.fireTerm;
             
             // Presenter Init //
             this.worldInformation.Init();
-
         }
         catch (NullReferenceException e) {
             Debug.Log("Game Over");
@@ -100,15 +110,30 @@ public class World : GameControlSingleton<World> {  // Model
         Init();
     }
     
-    public void WorldTimeUpdate(int value) {
+    public void TimeUpdate(int value) {
         this.TimeTerm += value;
         
         if (this.TimeTerm >= 500) {
             this.TimeDay += 1;
             this.TimeTerm -= 500;
         }
+
+        if (this.HasFire) {
+            FireTimeUpdate(-value);
+        }
         
         GameInformationManager.OnPlayerGameDataSaveEvent();
         GameInformationManager.OnWorldGameDataSaveEvent();
+    }
+
+    public void FireTimeUpdate(int value) {
+        this.FireTerm += value;
+        
+        Debug.Log(this.FireTerm);
+
+        if (this.FireTerm <= 0) {
+            this.HasFire = false;
+            this.FireTerm = 0;
+        }
     }
 }

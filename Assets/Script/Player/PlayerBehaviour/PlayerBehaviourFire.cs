@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public enum PanelCode {
@@ -17,6 +18,8 @@ public enum PanelCode {
 public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private Canvas fireCanvas;
     [SerializeField] private Canvas outsideCanvas;
+    [SerializeField] private Canvas informationCanvas;
+    [SerializeField] private Canvas sideMenuCanvas;
     
     [Space(10f)]
     
@@ -28,21 +31,34 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     
     [Space(10f)] 
     
+    [SerializeField] private int minFireTerm;
+    [SerializeField] private int maxFireTerm;
+
+    [Space(10f)]
+    
+    [Header("Result Panel")]
     [SerializeField] private GameObject fireResultPanel;
     [SerializeField] private TMP_Text fireResultTitle;
     [SerializeField] private TMP_Text fireResultContent;
     
     [Space(10f)] 
     
+    [Header("Loading Panel")]
     [SerializeField] private GameObject fireLoadingPanel;
     [SerializeField] private TMP_Text fireLoadingTitle;
 
+    [Space(10f)]
+    
+    [Header("Fire Term Indicator")]
+    [SerializeField] private TMP_Text fireTermText;
+    
     private Dictionary<IItem, int> requiredItems;
     private float defaultPercent;
     private int requiredWoodAmount;
     private int requiredTinderAmount;
     private int requiredFireToolAmount;
     private int requiredStoneAmount;
+    private int fireTerm;
     
     
     public void Init() {
@@ -51,6 +67,8 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         this.requiredWoodAmount = 3;
         this.requiredTinderAmount = 1;
         this.requiredStoneAmount = 2;
+        this.fireTerm = World.Instance.FireTerm;
+        this.fireTermText.text = this.fireTerm + "텀 남음";
         
         this.requiredItems = new() {
             { ItemManager.Instance.Items[GameControlType.Item.WOOD], -this.requiredWoodAmount },
@@ -71,16 +89,22 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     }
 
     public void Behaviour() {
+        var spentTerm = 0;
+        this.fireTerm = World.Instance.FireTerm;
+        
         if (World.Instance.HasFire) {
-            Debug.Log("!");
             PanelUpdate(PanelCode.PASS, true);
+            
             return;
         }
-
+        
         if (CanBehaviour()) {
             var randomPercent = Random.Range(0, 100f);
             var isSuccess = false;
-
+            var code = PanelCode.PASS;
+            
+            this.fireTerm = Random.Range(minFireTerm, maxFireTerm);
+            
             if (CanPercentUp()) {    // 성공 확률 UP
                 isSuccess = (randomPercent <= this.defaultPercent + 
                     ItemManager.Instance.Items[GameControlType.Item.FIRE_TOOL].RandomPercent);
@@ -91,9 +115,9 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
                     this.requireStatusCalories);
                 Player.Instance.InventoryUpdate(GameControlType.Item.FIRE_TOOL, -this.requiredFireToolAmount);
                 Player.Instance.InventoryUpdate(this.requiredItems);
-                
-                PanelUpdate(PanelCode.TOOL, isSuccess);
-                World.Instance.WorldTimeUpdate(3);
+
+                code = PanelCode.TOOL;
+                spentTerm = 3;
             }
             else {  // 성공 확률 DEFAULT
                 isSuccess = (randomPercent <= this.defaultPercent);
@@ -104,16 +128,23 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
                     this.requireStatusCalories * 1.25f);
                 Player.Instance.InventoryUpdate(this.requiredItems);
                 
-                PanelUpdate(PanelCode.HAND, isSuccess);
-                World.Instance.WorldTimeUpdate(6);
+                code = PanelCode.HAND;
+                spentTerm = 6;
             }
 
-            World.Instance.HasFire = isSuccess;
+            if (isSuccess) {
+                World.Instance.HasFire = true;
+                World.Instance.FireTimeUpdate(this.fireTerm + spentTerm);
+            }
+            
+            PanelUpdate(code, isSuccess);
         }
         else {  // 재료 없음
+            World.Instance.HasFire = false;
             PanelUpdate(PanelCode.MATERIAL, false);
-            World.Instance.WorldTimeUpdate(6);
         }
+        
+        World.Instance.TimeUpdate(spentTerm);
     }
 
     private void PanelUpdate(PanelCode code, bool isSuccess) {
@@ -122,15 +153,19 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
 
         Debug.Log(code + " " + isSuccess);
         
+        this.fireTermText.text = this.fireTerm + "텀 남음";
+        
         if (code == PanelCode.PASS) {
             GameControlCanvas.OnCanvasUpdate.Invoke(this.fireCanvas, true);
             GameControlCanvas.OnCanvasUpdate.Invoke(this.outsideCanvas, false);
+            GameControlCanvas.OnCanvasUpdate.Invoke(this.informationCanvas, false);
+            GameControlCanvas.OnCanvasUpdate.Invoke(this.sideMenuCanvas, false);
             
             return;
         }
         
         if (isSuccess) {
-            title = "불이 붙었다.";
+            title = "불이 붙었다!";
             content.Clear();
 
             content.Append("- 결과\n");
@@ -159,6 +194,8 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
             
             GameControlCanvas.OnCanvasUpdate.Invoke(this.fireCanvas, true);
             GameControlCanvas.OnCanvasUpdate.Invoke(this.outsideCanvas, false);
+            GameControlCanvas.OnCanvasUpdate.Invoke(this.informationCanvas, false);
+            GameControlCanvas.OnCanvasUpdate.Invoke(this.sideMenuCanvas, false);
         }
         else {
             switch (code) {
@@ -223,8 +260,8 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         this.fireLoadingTitle.text = "불을 피우는 중...";
         this.fireResultTitle.text = title;
         this.fireResultContent.text = content.ToString();
-                 
-        this.fireLoadingPanel.SetActive(true);
+        
+        this.fireLoadingPanel.SetActive(code != PanelCode.MATERIAL);
         this.fireResultPanel.SetActive(true);
     }
 }

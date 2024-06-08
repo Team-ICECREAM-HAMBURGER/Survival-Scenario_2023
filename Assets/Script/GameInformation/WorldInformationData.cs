@@ -8,4 +8,5 @@ public class WorldInformationData {
     public bool hasShelter = false;
     public bool hasRainGutter = false;
     public bool hasFire = false;
+    public int fireTerm = 0;
 }

@@ -48,7 +48,7 @@ public class PlayerBehaviourInventory : MonoBehaviour, IPlayerBehaviour {
         this.inventoryAmountIndicator.value = this.inventoryCurrentValue;
         this.inventoryAmountValueText.text = this.inventoryCurrentValue + " / " + this.inventoryMaxValue;
         
-        World.Instance.WorldTimeUpdate(0);
+        World.Instance.TimeUpdate(0);
     }
 
     private void PanelUpdate(string title, string content) {
