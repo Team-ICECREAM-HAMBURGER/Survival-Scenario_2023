@@ -10,6 +10,7 @@ using System;
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemTool))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemMaterial))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemFood))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.RequireItemsFire))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
 	const string KeysFieldName = "m_keys";

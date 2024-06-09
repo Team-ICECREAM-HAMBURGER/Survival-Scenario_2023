@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -122,13 +123,17 @@ public class Player : GameControlSingleton<Player> { // Model
     }
 
     public void InventoryUpdate(Dictionary<IItem, int> items) {
-        foreach (var VARIABLE in items) {
-            if (!this.Inventory.TryAdd(VARIABLE.Key.Type, VARIABLE.Value)) {
-                this.Inventory[VARIABLE.Key.Type] += VARIABLE.Value;
-            }
+        foreach (var VARIABLE in items.Where(VARIABLE => !this.Inventory.TryAdd(VARIABLE.Key.Type, VARIABLE.Value))) {
+            this.Inventory[VARIABLE.Key.Type] += VARIABLE.Value;
         }
     }
 
+    public void InventoryUpdate(Dictionary<GameControlType.Item, int> items) {
+        foreach (var VARIABLE in items.Where(VARIABLE => !this.Inventory.TryAdd(VARIABLE.Key, VARIABLE.Value))) {
+            this.Inventory[VARIABLE.Key] += VARIABLE.Value;
+        }
+    }
+    
     public void InventoryUpdate(GameControlType.Item type, int value) {
         if (!this.Inventory.TryAdd(type, value)) {
             this.Inventory[type] += value;

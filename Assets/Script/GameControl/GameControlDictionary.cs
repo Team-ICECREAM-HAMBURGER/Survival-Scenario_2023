@@ -10,6 +10,7 @@ public class GameControlDictionary {
     [System.Serializable] public class ItemMaterial : SerializableDictionary<GameControlType.Item, global::ItemMaterial> { }
     [System.Serializable] public class ItemFood : SerializableDictionary<GameControlType.Item, global::ItemFood> { }
     [System.Serializable] public class StatusGaugeSlider : SerializableDictionary<GameControlType.Status, Slider> { }
-    [System.Serializable] public class StatusEffectText : SerializableDictionary<GameControlType.StatusEffect, GameObject> { } 
+    [System.Serializable] public class StatusEffectText : SerializableDictionary<GameControlType.StatusEffect, GameObject> { }
 
+    [System.Serializable] public class RequireItemsFire : SerializableDictionary<GameControlType.Item, int> { }
 }

@@ -1,19 +1,9 @@
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
-
-public enum PanelCode {
-    TOOL,   // 0
-    HAND,   // 1
-    MATERIAL,  // 2
-    FAIL_HAND,      // 3
-    FAIL_TOOL,      // 4
-    PASS            // 5
-}
 
 public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private Canvas fireCanvas;
@@ -28,169 +18,122 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private float requireStatusBodyHeat;
     [SerializeField] private float requireStatusHydration;
     [SerializeField] private float requireStatusCalories;
-    
+
     [Space(10f)] 
     
-    [SerializeField] private int minFireTerm;
-    [SerializeField] private int maxFireTerm;
-
+    [Header("Require Items")] 
+    [SerializeField] private GameControlDictionary.RequireItemsFire requireItems;
+    
     [Space(10f)]
     
     [Header("Result Panel")]
     [SerializeField] private GameObject fireResultPanel;
     [SerializeField] private TMP_Text fireResultTitle;
     [SerializeField] private TMP_Text fireResultContent;
+    private string fireResultPanelTitleText;
+    private StringBuilder fireResultPanelContentText;
     
     [Space(10f)] 
     
     [Header("Loading Panel")]
     [SerializeField] private GameObject fireLoadingPanel;
     [SerializeField] private TMP_Text fireLoadingTitle;
+    
 
     [Space(10f)]
     
     [Header("Fire Term Indicator")]
     [SerializeField] private TMP_Text fireTermText;
     
-    private Dictionary<IItem, int> requiredItems;
-    private float defaultPercent;
-    private int requiredWoodAmount;
-    private int requiredTinderAmount;
-    private int requiredFireToolAmount;
-    private int requiredStoneAmount;
+    private float successPercent;
     private int fireTerm;
+    private int fireTermRandomMin;
+    private int fireTermRandomMax;
+    private int spentTerm;
     
     
     public void Init() {
-        this.defaultPercent = 35f;
-        this.requiredFireToolAmount = 1;
-        this.requiredWoodAmount = 3;
-        this.requiredTinderAmount = 1;
-        this.requiredStoneAmount = 2;
+        this.successPercent = 55f;
+        this.spentTerm = 0;
         this.fireTerm = World.Instance.FireTerm;
+        this.fireTermRandomMin = 20;
+        this.fireTermRandomMax = 70;
+
+        this.fireResultPanelTitleText = String.Empty;
+        this.fireResultPanelContentText = new();
+
         this.fireTermText.text = this.fireTerm + "텀 남음";
-        
-        this.requiredItems = new() {
-            { ItemManager.Instance.Items[GameControlType.Item.WOOD], -this.requiredWoodAmount },
-            { ItemManager.Instance.Items[GameControlType.Item.TINDER], -this.requiredTinderAmount },
-            { ItemManager.Instance.Items[GameControlType.Item.STONE], -this.requiredStoneAmount }
-        };
     }
 
     private bool CanBehaviour() {
-        return (
-            Player.Instance.Inventory[GameControlType.Item.STONE] >= this.requiredStoneAmount &&
-            Player.Instance.Inventory[GameControlType.Item.WOOD] >= this.requiredWoodAmount &&
-            Player.Instance.Inventory[GameControlType.Item.TINDER] >= this.requiredTinderAmount);
+        return (this.requireItems.All(item => Player.Instance.Inventory[item.Key] >= this.requireItems[item.Key]));
     }
-
-    private bool CanPercentUp() {
-        return (Player.Instance.Inventory[GameControlType.Item.FIRE_TOOL] >= this.requiredFireToolAmount);
-    }
-
+    
     public void Behaviour() {
-        var spentTerm = 0;
-        this.fireTerm = World.Instance.FireTerm;
+        var randomPercentPivot = Random.Range(0, 100f);
+        var isSuccess = false;
         
         if (World.Instance.HasFire) {
-            PanelUpdate(PanelCode.PASS, true);
+            PanelUpdate();
             
             return;
         }
         
         if (CanBehaviour()) {
-            var randomPercent = Random.Range(0, 100f);
-            var isSuccess = false;
-            var code = PanelCode.PASS;
-            
-            this.fireTerm = Random.Range(minFireTerm, maxFireTerm);
-            
-            if (CanPercentUp()) {    // 성공 확률 UP
-                isSuccess = (randomPercent <= this.defaultPercent + 
-                    ItemManager.Instance.Items[GameControlType.Item.FIRE_TOOL].RandomPercent);
-                Player.Instance.StatusUpdate(
-                    this.requireStatusStamina, 
-                    this.requireStatusBodyHeat, 
-                    this.requireStatusHydration, 
-                    this.requireStatusCalories);
-                Player.Instance.InventoryUpdate(GameControlType.Item.FIRE_TOOL, -this.requiredFireToolAmount);
-                Player.Instance.InventoryUpdate(this.requiredItems);
+            isSuccess = (randomPercentPivot <= this.successPercent);
+            this.fireTerm = Random.Range(fireTermRandomMin, fireTermRandomMax);
+            this.spentTerm = (isSuccess) ? 3 : 6;
 
-                code = PanelCode.TOOL;
-                spentTerm = 3;
-            }
-            else {  // 성공 확률 DEFAULT
-                isSuccess = (randomPercent <= this.defaultPercent);
-                Player.Instance.StatusUpdate(
-                    this.requireStatusStamina * 1.25f, 
-                    this.requireStatusBodyHeat * 1.25f, 
-                    this.requireStatusHydration * 1.25f, 
-                    this.requireStatusCalories * 1.25f);
-                Player.Instance.InventoryUpdate(this.requiredItems);
-                
-                code = PanelCode.HAND;
-                spentTerm = 6;
-            }
-
-            if (isSuccess) {
-                World.Instance.HasFire = true;
-                World.Instance.FireTimeUpdate(this.fireTerm + spentTerm);
-            }
-            
-            PanelUpdate(code, isSuccess);
-        }
-        else {  // 재료 없음
-            World.Instance.HasFire = false;
-            PanelUpdate(PanelCode.MATERIAL, false);
+            Player.Instance.StatusUpdate(this.requireStatusStamina, this.requireStatusBodyHeat, this.requireStatusHydration, this.requireStatusCalories);
+            Player.Instance.InventoryUpdate(this.requireItems);
         }
         
+        World.Instance.HasFire = isSuccess;
+        World.Instance.FireTimeUpdate(this.fireTerm);
         World.Instance.TimeUpdate(spentTerm);
+        
+        PanelUpdate(isSuccess);
     }
 
-    private void PanelUpdate(PanelCode code, bool isSuccess) {
-        var title = String.Empty;
-        var content = new StringBuilder();
-
-        Debug.Log(code + " " + isSuccess);
+    private void PanelUpdate() {
+        GameControlCanvas.OnCanvasUpdate.Invoke(this.fireCanvas, true);
+        GameControlCanvas.OnCanvasUpdate.Invoke(this.outsideCanvas, false);
+        GameControlCanvas.OnCanvasUpdate.Invoke(this.informationCanvas, false);
+        GameControlCanvas.OnCanvasUpdate.Invoke(this.sideMenuCanvas, false);
+    }
+    
+    private void PanelUpdate(bool isSuccess) {
+        this.fireResultPanelTitleText = String.Empty;
+        this.fireResultPanelContentText.Clear();
         
         this.fireTermText.text = this.fireTerm + "텀 남음";
         
-        if (code == PanelCode.PASS) {
-            GameControlCanvas.OnCanvasUpdate.Invoke(this.fireCanvas, true);
-            GameControlCanvas.OnCanvasUpdate.Invoke(this.outsideCanvas, false);
-            GameControlCanvas.OnCanvasUpdate.Invoke(this.informationCanvas, false);
-            GameControlCanvas.OnCanvasUpdate.Invoke(this.sideMenuCanvas, false);
-            
-            return;
-        }
-        
         if (isSuccess) {
-            title = "불이 붙었다!";
-            content.Clear();
+            this.fireResultPanelTitleText = "불이 붙었다!";
 
-            content.Append("- 결과\n");
-            content.Append("무사히 불을 피우는 데 성공했다.\n");
-            content.Append("이제 휴식처에서 따뜻한 밤을 지낼 수 있다.\n");
+            this.fireResultPanelContentText.Append("- 결과\n");
+            this.fireResultPanelContentText.Append("무사히 불을 피우는 데 성공했다.\n");
+            this.fireResultPanelContentText.Append("이제 휴식처에서 따뜻한 밤을 지낼 수 있다.\n");
 
-            content.Append("\n");
+            this.fireResultPanelContentText.Append("\n");
             
-            content.Append("- 사용된 아이템\n");
+            this.fireResultPanelContentText.Append("- 사용된 아이템\n");
 
             if (code == PanelCode.TOOL) {
-                content.Append(ItemManager.Instance.Items[GameControlType.Item.FIRE_TOOL].Name);
-                content.Append(" ");
-                content.Append(this.requiredFireToolAmount);
-                content.Append("개\n");
+                this.fireResultPanelContentText.Append(ItemManager.Instance.Items[GameControlType.Item.FIRE_TOOL].Name);
+                this.fireResultPanelContentText.Append(" ");
+                this.fireResultPanelContentText.Append(this.requiredFireToolAmount);
+                this.fireResultPanelContentText.Append("개\n");
             }
             
-            content.Append(ItemManager.Instance.Items[GameControlType.Item.WOOD].Name);
-            content.Append(" ");
-            content.Append(this.requiredWoodAmount);
-            content.Append("개\n");
-            content.Append(ItemManager.Instance.Items[GameControlType.Item.TINDER].Name);
-            content.Append(" ");
-            content.Append(this.requiredTinderAmount);
-            content.Append("개\n");
+            this.fireResultPanelContentText.Append(ItemManager.Instance.Items[GameControlType.Item.WOOD].Name);
+            this.fireResultPanelContentText.Append(" ");
+            this.fireResultPanelContentText.Append(this.requiredWoodAmount);
+            this.fireResultPanelContentText.Append("개\n");
+            this.fireResultPanelContentText.Append(ItemManager.Instance.Items[GameControlType.Item.TINDER].Name);
+            this.fireResultPanelContentText.Append(" ");
+            this.fireResultPanelContentText.Append(this.requiredTinderAmount);
+            this.fireResultPanelContentText.Append("개\n");
             
             GameControlCanvas.OnCanvasUpdate.Invoke(this.fireCanvas, true);
             GameControlCanvas.OnCanvasUpdate.Invoke(this.outsideCanvas, false);
