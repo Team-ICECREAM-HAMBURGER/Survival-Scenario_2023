@@ -126,10 +126,13 @@ public class World : GameControlSingleton<World> {  // Model
         GameInformationManager.OnWorldGameDataSaveEvent();
     }
 
+    public void FireTimeSet(int value) {
+        this.fireTerm = value;
+        this.HasFire = true;
+    }
+    
     public void FireTimeUpdate(int value) {
         this.FireTerm += value;
-        
-        Debug.Log(this.FireTerm);
 
         if (this.FireTerm <= 0) {
             this.HasFire = false;

@@ -5,6 +5,13 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+enum FirePanelType {
+    SUCCESS,
+    FAILED,
+    NO_MATERIAL,
+    PASS
+}
+
 public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private Canvas fireCanvas;
     [SerializeField] private Canvas outsideCanvas;
@@ -30,8 +37,6 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private GameObject fireResultPanel;
     [SerializeField] private TMP_Text fireResultTitle;
     [SerializeField] private TMP_Text fireResultContent;
-    private string fireResultPanelTitleText;
-    private StringBuilder fireResultPanelContentText;
     
     [Space(10f)] 
     
@@ -45,12 +50,15 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [Header("Fire Term Indicator")]
     [SerializeField] private TMP_Text fireTermText;
     
-    private float successPercent;
     private int fireTerm;
     private int fireTermRandomMin;
     private int fireTermRandomMax;
     private int spentTerm;
-    
+    private float successPercent;
+    private string fireResultPanelTitleText;
+    private StringBuilder fireResultPanelContentText;
+    private FirePanelType panelChangeType;
+
     
     public void Init() {
         this.successPercent = 55f;
@@ -71,140 +79,120 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     
     public void Behaviour() {
         var randomPercentPivot = Random.Range(0, 100f);
-        var isSuccess = false;
+        var isSuccess = (randomPercentPivot <= this.successPercent);
+
+        this.fireTerm = World.Instance.FireTerm;
         
         if (World.Instance.HasFire) {
-            PanelUpdate();
+            this.panelChangeType = FirePanelType.PASS;
+            PanelUpdate(this.panelChangeType);
             
             return;
         }
         
-        if (CanBehaviour()) {
-            isSuccess = (randomPercentPivot <= this.successPercent);
+        if (CanBehaviour()) {   // 재료가 있음; 성공 or 실패
+            this.panelChangeType = (isSuccess) ? FirePanelType.SUCCESS : FirePanelType.FAILED;
+            
             this.fireTerm = Random.Range(fireTermRandomMin, fireTermRandomMax);
             this.spentTerm = (isSuccess) ? 3 : 6;
 
             Player.Instance.StatusUpdate(this.requireStatusStamina, this.requireStatusBodyHeat, this.requireStatusHydration, this.requireStatusCalories);
             Player.Instance.InventoryUpdate(this.requireItems);
         }
+        else {
+            this.panelChangeType = FirePanelType.NO_MATERIAL;
+            this.spentTerm = 0;
+        }
         
         World.Instance.HasFire = isSuccess;
-        World.Instance.FireTimeUpdate(this.fireTerm);
-        World.Instance.TimeUpdate(spentTerm);
+        World.Instance.FireTimeSet(this.fireTerm + this.spentTerm);
         
-        PanelUpdate(isSuccess);
+        World.Instance.TimeUpdate(this.spentTerm);
+        
+        PanelUpdate(this.panelChangeType);
     }
 
-    private void PanelUpdate() {
+    private void CanvasSet() {
         GameControlCanvas.OnCanvasUpdate.Invoke(this.fireCanvas, true);
         GameControlCanvas.OnCanvasUpdate.Invoke(this.outsideCanvas, false);
         GameControlCanvas.OnCanvasUpdate.Invoke(this.informationCanvas, false);
         GameControlCanvas.OnCanvasUpdate.Invoke(this.sideMenuCanvas, false);
     }
     
-    private void PanelUpdate(bool isSuccess) {
+    private void PanelUpdate(FirePanelType type) {
+        var isLoading = true;
+        
         this.fireResultPanelTitleText = String.Empty;
         this.fireResultPanelContentText.Clear();
-        
+
         this.fireTermText.text = this.fireTerm + "텀 남음";
+
+        switch (type) {
+            case FirePanelType.SUCCESS :    // 불 피우기 성공
+                isLoading = true;
+                
+                this.fireResultPanelTitleText = "불이 붙었다!";
+
+                this.fireResultPanelContentText.Append("- 결과\n");
+                this.fireResultPanelContentText.Append("무사히 불을 피우는 데 성공했다.\n");
+                this.fireResultPanelContentText.Append("이제 휴식처에서 따뜻한 밤을 지낼 수 있다.\n");
+                
+                this.fireResultPanelContentText.Append("\n");
         
-        if (isSuccess) {
-            this.fireResultPanelTitleText = "불이 붙었다!";
-
-            this.fireResultPanelContentText.Append("- 결과\n");
-            this.fireResultPanelContentText.Append("무사히 불을 피우는 데 성공했다.\n");
-            this.fireResultPanelContentText.Append("이제 휴식처에서 따뜻한 밤을 지낼 수 있다.\n");
-
-            this.fireResultPanelContentText.Append("\n");
-            
-            this.fireResultPanelContentText.Append("- 사용된 아이템\n");
-
-            if (code == PanelCode.TOOL) {
-                this.fireResultPanelContentText.Append(ItemManager.Instance.Items[GameControlType.Item.FIRE_TOOL].Name);
-                this.fireResultPanelContentText.Append(" ");
-                this.fireResultPanelContentText.Append(this.requiredFireToolAmount);
-                this.fireResultPanelContentText.Append("개\n");
-            }
-            
-            this.fireResultPanelContentText.Append(ItemManager.Instance.Items[GameControlType.Item.WOOD].Name);
-            this.fireResultPanelContentText.Append(" ");
-            this.fireResultPanelContentText.Append(this.requiredWoodAmount);
-            this.fireResultPanelContentText.Append("개\n");
-            this.fireResultPanelContentText.Append(ItemManager.Instance.Items[GameControlType.Item.TINDER].Name);
-            this.fireResultPanelContentText.Append(" ");
-            this.fireResultPanelContentText.Append(this.requiredTinderAmount);
-            this.fireResultPanelContentText.Append("개\n");
-            
-            GameControlCanvas.OnCanvasUpdate.Invoke(this.fireCanvas, true);
-            GameControlCanvas.OnCanvasUpdate.Invoke(this.outsideCanvas, false);
-            GameControlCanvas.OnCanvasUpdate.Invoke(this.informationCanvas, false);
-            GameControlCanvas.OnCanvasUpdate.Invoke(this.sideMenuCanvas, false);
-        }
-        else {
-            switch (code) {
-            case PanelCode.MATERIAL:
-                title = "재료가 부족함.";
-                content.Clear();
-            
-                content.Append("- 결과\n");
-                content.Append("불을 피울 재료가 없다.\n");
-                content.Append("최소한 나무 3개와 뗄감 1개, 돌 2개가 필요하다.\n");
-            
-                break;
-            case PanelCode.TOOL:
-                title = "실패했다.";
-                content.Clear();
-            
-                content.Append("- 결과\n");
-                content.Append("도구의 힘을 빌렸으나 역부족이었던 것 같다.\n");
-                content.Append("그래도 다시 시도해볼 가치가 있어 보인다.\n");
-
-                content.Append("\n");
-
-                content.Append("- 사용된 아이템\n");
-                content.Append(ItemManager.Instance.Items[GameControlType.Item.FIRE_TOOL].Name);
-                content.Append(" ");
-                content.Append(this.requiredFireToolAmount);
-                content.Append("개\n");
-                content.Append(ItemManager.Instance.Items[GameControlType.Item.WOOD].Name);
-                content.Append(" ");
-                content.Append(this.requiredWoodAmount);
-                content.Append("개\n");
-                content.Append(ItemManager.Instance.Items[GameControlType.Item.TINDER].Name);
-                content.Append(" ");
-                content.Append(this.requiredTinderAmount);
-                content.Append("개\n");
-            
-                break;
-            case PanelCode.HAND:
-                title = "실패했다.";
-                content.Clear();
-            
-                content.Append("- 결과\n");
-                content.Append("온 우주의 힘을 빌려 맨 손으로 발악을 해보았지만 소용 없었다.\n");
-                content.Append("아무래도 도구의 힘이 필요해보인다.\n");
-
-                content.Append("\n");
-
-                content.Append("- 사용된 아이템\n");
-                content.Append(ItemManager.Instance.Items[GameControlType.Item.WOOD].Name);
-                content.Append(" ");
-                content.Append(this.requiredWoodAmount);
-                content.Append("개\n");
-                content.Append(ItemManager.Instance.Items[GameControlType.Item.TINDER].Name);
-                content.Append(" ");
-                content.Append(this.requiredTinderAmount);
-                content.Append("개\n");
+                this.fireResultPanelContentText.Append("- 사용된 아이템\n");
+                
+                CanvasSet();
                 
                 break;
-            }
+            
+            case FirePanelType.FAILED :     // 불 피우기 실패
+                isLoading = true;
+                
+                this.fireResultPanelTitleText = "실패했다.";
+            
+                this.fireResultPanelContentText.Append("- 결과\n");
+                this.fireResultPanelContentText.Append("온 우주의 힘을 빌려 발악을 해보았지만 소용 없었다.\n");
+                this.fireResultPanelContentText.Append("그래도 다시 시도해볼 가치가 있어 보인다.\n");
+
+                this.fireResultPanelContentText.Append("\n");
+        
+                this.fireResultPanelContentText.Append("- 사용된 아이템\n");
+
+                break;
+            
+            case FirePanelType.NO_MATERIAL :    // 재료가 없음
+                isLoading = false;
+                
+                this.fireResultPanelTitleText = "재료가 부족하다.";
+            
+                this.fireResultPanelContentText.Append("- 결과\n");
+                this.fireResultPanelContentText.Append("불을 피우는 데 필요한 재료가 부족하다.\n");
+                this.fireResultPanelContentText.Append("재료를 모아서 다시 시도해보자.\n");
+                
+                this.fireResultPanelContentText.Append("\n");
+        
+                this.fireResultPanelContentText.Append("- 필요한 아이템\n");
+
+                break;
+            case FirePanelType.PASS :
+                isLoading = false;
+                CanvasSet();
+
+                return;
+        }
+        
+        foreach (var VARIABLE in this.requireItems) {
+            this.fireResultPanelContentText.Append(ItemManager.Instance.Items[VARIABLE.Key].Name);
+            this.fireResultPanelContentText.Append(" ");
+            this.fireResultPanelContentText.Append(VARIABLE.Value);
+            this.fireResultPanelContentText.Append("개\n");
         }
         
         this.fireLoadingTitle.text = "불을 피우는 중...";
-        this.fireResultTitle.text = title;
-        this.fireResultContent.text = content.ToString();
+        this.fireResultTitle.text = this.fireResultPanelTitleText;
+        this.fireResultContent.text = this.fireResultPanelContentText.ToString();
         
-        this.fireLoadingPanel.SetActive(code != PanelCode.MATERIAL);
+        this.fireLoadingPanel.SetActive(isLoading);
         this.fireResultPanel.SetActive(true);
     }
 }
