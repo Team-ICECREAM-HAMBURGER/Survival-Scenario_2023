@@ -124,6 +124,11 @@ public class World : GameControlSingleton<World> {  // Model
         GameInformationManager.OnPlayerGameDataSaveEvent();
         GameInformationManager.OnWorldGameDataSaveEvent();
     }
+
+    public void WorldDataSave() {
+        GameInformationManager.OnPlayerGameDataSaveEvent();
+        GameInformationManager.OnWorldGameDataSaveEvent();
+    }
     
     public void FireTimeUpdate(int value) {
         this.FireTerm += value;

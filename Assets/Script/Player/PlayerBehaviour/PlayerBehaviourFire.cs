@@ -9,6 +9,7 @@ enum FirePanelType {
     SUCCESS,
     FAILED,
     NO_MATERIAL,
+    NO_WOODS,
     PASS
 }
 
@@ -51,6 +52,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private TMP_Text fireTermText;
     
     private int fireTerm;
+    private int fireTermAddWood;
     private int fireTermRandomMin;
     private int fireTermRandomMax;
     private int spentTerm;
@@ -64,8 +66,9 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         this.successPercent = 55f;
         this.spentTerm = 0;
         this.fireTerm = World.Instance.FireTerm;
-        this.fireTermRandomMin = 20;
-        this.fireTermRandomMax = 70;
+        this.fireTermRandomMin = 2;
+        this.fireTermRandomMax = 10;
+        this.fireTermAddWood = 3;
 
         this.fireResultPanelTitleText = String.Empty;
         this.fireResultPanelContentText = new();
@@ -76,6 +79,25 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     private bool CanBehaviour() {
         return (this.requireItems.All(item => 
             Player.Instance.Inventory[item.Key] >= Mathf.Abs(this.requireItems[item.Key])));
+    }
+
+    public void BehaviourAddWoods(int value) {
+        if (Player.Instance.Inventory[GameControlType.Item.WOOD] >= Mathf.Abs(value)) {
+            Player.Instance.InventoryUpdate(GameControlType.Item.WOOD, value);
+            this.fireTerm += this.fireTermAddWood;
+
+            World.Instance.FireTerm = this.fireTerm;
+            
+            PanelUpdateFireTerm();
+            World.Instance.WorldDataSave();
+        }
+        else {
+            PanelUpdate(FirePanelType.NO_WOODS);
+        }
+    }
+
+    public void BehaviourCooking() {
+        
     }
     
     public void Behaviour() {
@@ -121,6 +143,10 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         GameControlCanvas.OnCanvasUpdate.Invoke(this.informationCanvas, false);
         GameControlCanvas.OnCanvasUpdate.Invoke(this.sideMenuCanvas, false);
     }
+
+    private void PanelUpdateFireTerm() {
+        this.fireTermText.text = this.fireTerm + "텀 남음";
+    }
     
     private void PanelUpdate(FirePanelType type) {
         var isLoading = true;
@@ -128,14 +154,12 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         this.fireResultPanelTitleText = String.Empty;
         this.fireResultPanelContentText.Clear();
 
-        this.fireTermText.text = this.fireTerm + "텀 남음";
-        
-        Debug.Log(type);
+        PanelUpdateFireTerm();
         
         switch (type) {
             case FirePanelType.SUCCESS :    // 불 피우기 성공
                 isLoading = true;
-                
+
                 this.fireResultPanelTitleText = "불이 붙었다!";
 
                 this.fireResultPanelContentText.Append("- 결과\n");
@@ -145,9 +169,9 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
                 this.fireResultPanelContentText.Append("\n");
         
                 this.fireResultPanelContentText.Append("- 사용된 아이템\n");
-                
+
                 CanvasSet();
-                
+
                 break;
             
             case FirePanelType.FAILED :     // 불 피우기 실패
@@ -179,6 +203,24 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
                 this.fireResultPanelContentText.Append("- 필요한 아이템\n");
 
                 break;
+            case FirePanelType.NO_WOODS :
+                isLoading = false;
+                
+                this.fireResultPanelTitleText = "나무가 없다.";
+
+                this.fireResultPanelContentText.Append("- 결과\n");
+                this.fireResultPanelContentText.Append("불을 연장할만큼의 나무가 없다.\n");
+
+                this.fireResultPanelContentText.Append("\n");
+                
+                this.fireResultPanelContentText.Append("- 필요한 아이템\n");
+                this.fireResultPanelContentText.Append("나무 5개\n");
+                
+                this.fireResultTitle.text = this.fireResultPanelTitleText;
+                this.fireResultContent.text = this.fireResultPanelContentText.ToString();
+                this.fireResultPanel.SetActive(true);
+                
+                return;
             case FirePanelType.PASS :
                 isLoading = false;
                 CanvasSet();
