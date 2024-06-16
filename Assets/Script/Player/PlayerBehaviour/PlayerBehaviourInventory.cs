@@ -1,9 +1,7 @@
-using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerBehaviourInventory : MonoBehaviour, IPlayerBehaviour {
@@ -48,7 +46,7 @@ public class PlayerBehaviourInventory : MonoBehaviour, IPlayerBehaviour {
         this.inventoryAmountIndicator.value = this.inventoryCurrentValue;
         this.inventoryAmountValueText.text = this.inventoryCurrentValue + " / " + this.inventoryMaxValue;
         
-        World.Instance.TimeUpdate(0);
+        GameInformationManager.OnGameDataSaveEvent();
     }
 
     private void PanelUpdate(string title, string content) {

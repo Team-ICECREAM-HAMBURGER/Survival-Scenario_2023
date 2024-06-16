@@ -33,9 +33,9 @@ public class PlayerStatusEffectExhaustion : MonoBehaviour, IPlayerStatusEffect {
         var statusHydration = Player.Instance.Status[GameControlType.Status.HYDRATION];
         var statusCalories = Player.Instance.Status[GameControlType.Status.CALORIES];
         
-        Player.Instance.StatusUpdate(GameControlType.Status.BODY_HEAT, statusBodyHeat * this.statusReducePercent * -0.01f);
-        Player.Instance.StatusUpdate(GameControlType.Status.HYDRATION, statusHydration * this.statusReducePercent * -0.01f);
-        Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, statusCalories * this.statusReducePercent * -0.01f);
+        Player.Instance.StatusUpdate(GameControlType.Status.BODY_HEAT, statusBodyHeat * this.statusReducePercent * 0.01f);
+        Player.Instance.StatusUpdate(GameControlType.Status.HYDRATION, statusHydration * this.statusReducePercent * 0.01f);
+        Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, statusCalories * this.statusReducePercent * 0.01f);
     }
     
     private void StatusEffectRemove() {

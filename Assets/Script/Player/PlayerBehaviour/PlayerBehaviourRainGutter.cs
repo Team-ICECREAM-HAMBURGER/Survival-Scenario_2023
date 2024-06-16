@@ -29,7 +29,7 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
             PanelUpdate(num, false);
         }
         
-        World.Instance.TimeUpdate(0);
+        GameInformationManager.OnGameDataSaveEvent();
     }
 
     private void PanelUpdate(int num, bool canCreate) {

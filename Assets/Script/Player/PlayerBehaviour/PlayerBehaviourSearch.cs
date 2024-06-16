@@ -54,6 +54,7 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
         RandomEventCall();
         
         World.Instance.TimeUpdate(this.spendTime);
+        GameInformationManager.OnGameDataSaveEvent();
     }
     
     private void RandomEventCall() {

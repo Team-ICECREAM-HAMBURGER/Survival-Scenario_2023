@@ -120,17 +120,9 @@ public class World : GameControlSingleton<World> {  // Model
         if (this.HasFire) {
             FireTimeUpdate(-value);
         }
-        
-        GameInformationManager.OnPlayerGameDataSaveEvent();
-        GameInformationManager.OnWorldGameDataSaveEvent();
-    }
-
-    public void WorldDataSave() {
-        GameInformationManager.OnPlayerGameDataSaveEvent();
-        GameInformationManager.OnWorldGameDataSaveEvent();
     }
     
-    public void FireTimeUpdate(int value) {
+    private void FireTimeUpdate(int value) {
         this.FireTerm += value;
 
         if (this.FireTerm <= 0) {

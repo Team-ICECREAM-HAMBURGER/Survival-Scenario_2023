@@ -10,6 +10,7 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     public delegate void GameDataEventHandler();
     public static GameDataEventHandler OnPlayerGameDataSaveEvent;
     public static GameDataEventHandler OnWorldGameDataSaveEvent;
+    public static GameDataEventHandler OnGameDataSaveEvent;
     public static GameDataEventHandler OnGameDataDeleteEvent;
     
     
@@ -31,16 +32,20 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
             this.playerInformationData = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformationData>("Player");
             this.worldInformationData = GameControlSaveLoad.Instance.LoadJsonFile<WorldInformationData>("World");
         }
+
+        OnGameDataSaveEvent += PlayerDataSave;
+        OnGameDataSaveEvent += WorldDataSave;
         
         OnPlayerGameDataSaveEvent += PlayerDataSave;
         OnWorldGameDataSaveEvent += WorldDataSave;
+        
         OnGameDataDeleteEvent += GameDataDelete;
     }
 
     private void Awake() {
         Init();
     }
-
+    
     private void PlayerDataSave() {
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformationData);
         

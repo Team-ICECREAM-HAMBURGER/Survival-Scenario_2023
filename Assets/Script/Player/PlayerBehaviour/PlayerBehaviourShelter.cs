@@ -27,6 +27,8 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
             
             Player.Instance.StatusEffectInvoke(this.spendTime);
             World.Instance.TimeUpdate(this.spendTime);
+            
+            GameInformationManager.OnGameDataSaveEvent();
         }
 
         WorldInformation.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);

@@ -49,7 +49,7 @@ public class PlayerStatusEffectInjured : MonoBehaviour, IPlayerStatusEffect {   
         this.Term -= value;
         
         Player.Instance.StatusEffectUpdate(this);
-        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * this.statusReducePercent * -0.01f);
+        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, status * this.statusReducePercent * 0.01f);
         
         if (this.Term <= 0) {
             Player.Instance.StatusEffectRemove(this);
