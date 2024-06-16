@@ -74,7 +74,6 @@ public class World : GameControlSingleton<World> {  // Model
     }
 
     private int fireTerm;
-
     public int FireTerm {
         get {
             return this.fireTerm;
@@ -124,11 +123,6 @@ public class World : GameControlSingleton<World> {  // Model
         
         GameInformationManager.OnPlayerGameDataSaveEvent();
         GameInformationManager.OnWorldGameDataSaveEvent();
-    }
-
-    public void FireTimeSet(int value) {
-        this.fireTerm = value;
-        this.HasFire = true;
     }
     
     public void FireTimeUpdate(int value) {

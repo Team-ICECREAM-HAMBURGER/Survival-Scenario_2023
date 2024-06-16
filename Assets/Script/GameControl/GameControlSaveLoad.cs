@@ -20,7 +20,7 @@ public class GameControlSaveLoad : GameControlSingleton<GameControlSaveLoad> {
 
     // Obj -> Json
     public string ObjectToJson(object obj) {
-        return JsonConvert.SerializeObject(obj);
+        return JsonConvert.SerializeObject(obj, Formatting.Indented);
     }
 
     // Json -> Obj

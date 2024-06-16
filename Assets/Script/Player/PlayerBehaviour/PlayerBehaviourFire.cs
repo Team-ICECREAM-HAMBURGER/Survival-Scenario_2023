@@ -74,7 +74,8 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     }
 
     private bool CanBehaviour() {
-        return (this.requireItems.All(item => Player.Instance.Inventory[item.Key] >= this.requireItems[item.Key]));
+        return (this.requireItems.All(item => 
+            Player.Instance.Inventory[item.Key] >= Mathf.Abs(this.requireItems[item.Key])));
     }
     
     public void Behaviour() {
@@ -92,23 +93,25 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         
         if (CanBehaviour()) {   // 재료가 있음; 성공 or 실패
             this.panelChangeType = (isSuccess) ? FirePanelType.SUCCESS : FirePanelType.FAILED;
-            
             this.fireTerm = Random.Range(fireTermRandomMin, fireTermRandomMax);
             this.spentTerm = (isSuccess) ? 3 : 6;
-
-            Player.Instance.StatusUpdate(this.requireStatusStamina, this.requireStatusBodyHeat, this.requireStatusHydration, this.requireStatusCalories);
+            
+            Player.Instance.StatusUpdate(
+                this.requireStatusStamina, 
+                this.requireStatusBodyHeat, 
+                this.requireStatusHydration, 
+                this.requireStatusCalories);
             Player.Instance.InventoryUpdate(this.requireItems);
+            
+            World.Instance.HasFire = isSuccess;
+            World.Instance.FireTerm = (this.fireTerm + this.spentTerm);
         }
         else {
             this.panelChangeType = FirePanelType.NO_MATERIAL;
             this.spentTerm = 0;
         }
         
-        World.Instance.HasFire = isSuccess;
-        World.Instance.FireTimeSet(this.fireTerm + this.spentTerm);
-        
         World.Instance.TimeUpdate(this.spentTerm);
-        
         PanelUpdate(this.panelChangeType);
     }
 
@@ -126,7 +129,9 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         this.fireResultPanelContentText.Clear();
 
         this.fireTermText.text = this.fireTerm + "텀 남음";
-
+        
+        Debug.Log(type);
+        
         switch (type) {
             case FirePanelType.SUCCESS :    // 불 피우기 성공
                 isLoading = true;
@@ -184,7 +189,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         foreach (var VARIABLE in this.requireItems) {
             this.fireResultPanelContentText.Append(ItemManager.Instance.Items[VARIABLE.Key].Name);
             this.fireResultPanelContentText.Append(" ");
-            this.fireResultPanelContentText.Append(VARIABLE.Value);
+            this.fireResultPanelContentText.Append(Mathf.Abs(VARIABLE.Value));
             this.fireResultPanelContentText.Append("개\n");
         }
         
