@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {   // Presenter
     public float LimitValue { get; } = 30f;
     public float CurrentValue { get; private set; }
-    
     public string Name { get; } = "체력";
     public GameControlType.Status Type { get; } = GameControlType.Status.STAMINA;
     

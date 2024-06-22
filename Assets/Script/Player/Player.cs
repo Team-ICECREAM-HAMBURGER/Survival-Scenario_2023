@@ -12,12 +12,11 @@ public class Player : GameControlSingleton<Player> { // Model
     [SerializeField] private GameObject playerStatus;
     [SerializeField] private GameObject playerStatusEffect;
     [SerializeField] private GameObject playerBehaviour;
+
+    public GameControlDictionary.Inventory Inventory { get; private set; }         // <Enum, amount>
+    public GameControlDictionary.Status Status { get; private set; }               // <Enum, float>
+    public GameControlDictionary.StatusEffect StatusEffect { get; private set; }   // <Enum, term>
     
-    private UnityEvent OnStatusUpdate;          // 상태 수치 변동
-    private UnityEvent<int> OnStatusEffectInvoke;    // 상태 이상 효과 발동
-
-    private PlayerInformationData informationData;
-
     private string playerName;
     public string PlayerName {
         get {
@@ -28,10 +27,23 @@ public class Player : GameControlSingleton<Player> { // Model
             this.informationData.name = value;
         }
     }
-    public GameControlDictionary.Inventory Inventory { get; private set; }         // <Enum, amount>
-    public GameControlDictionary.Status Status { get; private set; }               // <Enum, float>
-    public GameControlDictionary.StatusEffect StatusEffect { get; private set; }   // <Enum, term>
 
+    private int playerID;
+    public int PlayerID {
+        get {
+            return this.playerID;
+        }
+        private set {
+            this.playerID = value;
+            this.informationData.id = value;
+        }
+    }
+    
+    private PlayerInformationData informationData;
+    
+    private UnityEvent OnStatusUpdate;          // 상태 수치 변동
+    private UnityEvent<int> OnStatusEffectInvoke;    // 상태 이상 효과 발동
+    
 
     private void Init() {
         try {
@@ -40,6 +52,7 @@ public class Player : GameControlSingleton<Player> { // Model
             this.Status = this.informationData.status;
             this.StatusEffect = this.informationData.statusEffect;
             this.PlayerName = this.informationData.name;
+            this.PlayerID = this.informationData.id;
             
             this.OnStatusUpdate = new();
             this.OnStatusEffectInvoke = new();
@@ -80,24 +93,15 @@ public class Player : GameControlSingleton<Player> { // Model
         this.OnStatusUpdate.Invoke();
     }
 
-    public void StatusUpdate(float stamina, float bodyHeat, float hydration, float calories) {
-        this.Status[GameControlType.Status.STAMINA] += Mathf.Floor(stamina);
-        this.Status[GameControlType.Status.BODY_HEAT] += Mathf.Floor(bodyHeat);
-        this.Status[GameControlType.Status.HYDRATION] += Mathf.Floor(hydration);
-        this.Status[GameControlType.Status.CALORIES] += Mathf.Floor(calories);
-
-        this.Status[GameControlType.Status.STAMINA] =
-            Mathf.Clamp(this.Status[GameControlType.Status.STAMINA], 0f, 100f);
-        this.Status[GameControlType.Status.BODY_HEAT] =
-            Mathf.Clamp(this.Status[GameControlType.Status.BODY_HEAT], 0f, 100f);
-        this.Status[GameControlType.Status.HYDRATION] =
-            Mathf.Clamp(this.Status[GameControlType.Status.HYDRATION], 0f, 100f);
-        this.Status[GameControlType.Status.CALORIES] =
-            Mathf.Clamp(this.Status[GameControlType.Status.CALORIES], 0f, 100f);
+    public void StatusUpdate(GameControlDictionary.RequireStatus requireStatuses, int sign) {
+        foreach (var VARIABLE in requireStatuses) {
+            this.Status[VARIABLE.Key] += Mathf.Floor(VARIABLE.Value * sign);
+            this.Status[VARIABLE.Key] = Mathf.Clamp(this.Status[VARIABLE.Key], 0f, 100f);
+        }
         
         this.OnStatusUpdate.Invoke();
     }
-
+    
     public void StatusEffectAdd(IPlayerStatusEffect effect) {
         if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {
             this.StatusEffect[effect.Type] = effect.Term;

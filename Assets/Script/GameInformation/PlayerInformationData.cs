@@ -1,8 +1,10 @@
 using System;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class PlayerInformationData {
     public string name = "";
+    public int id = 0000;
     public GameControlDictionary.Inventory inventory = new() {
         { GameControlType.Item.BERRY, 0 },
         { GameControlType.Item.BOTTLE_OF_WATER, 0 },
@@ -30,5 +32,6 @@ public class PlayerInformationData {
         { GameControlType.Status.HYDRATION, 100f },
         { GameControlType.Status.CALORIES, 100f }
     };
+
     public GameControlDictionary.StatusEffect statusEffect = new();
 }

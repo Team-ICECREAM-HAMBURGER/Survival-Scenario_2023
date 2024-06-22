@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Reflection;
@@ -10,7 +9,8 @@ using System;
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemTool))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemMaterial))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemFood))]
-[CustomPropertyDrawer(typeof(GameControlDictionary.RequireItemsFire))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.RequireItem))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.RequireStatus))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
 	const string KeysFieldName = "m_keys";

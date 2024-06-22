@@ -1,6 +1,6 @@
 public class ItemFoodBottleOfWater : ItemFood {
     public override void ItemUse() {
-        Player.Instance.StatusUpdate(stamina, bodyHeat, hydration, calories);
+        Player.Instance.StatusUpdate(requireStatuses, +1);
         Player.Instance.InventoryUpdate(Type, -1);
         PlayerBehaviourInventory.OnItemUpdate.Invoke();
     }

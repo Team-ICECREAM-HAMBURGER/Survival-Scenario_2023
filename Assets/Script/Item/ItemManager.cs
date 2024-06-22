@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class ItemManager : GameControlSingleton<ItemManager> {  // Model
-    [field: SerializeField] private GameControlDictionary.ItemFood itemFoods;
-    [field: SerializeField] private GameControlDictionary.ItemMaterial itemMaterials;
-    [field: SerializeField] private GameControlDictionary.ItemTool itemTools;
+    [field: SerializeField] public GameControlDictionary.ItemFood ItemFoods { get; private set; }
+    [field: SerializeField] public GameControlDictionary.ItemMaterial ItemMaterials { get; private set; }
+    [field: SerializeField] public GameControlDictionary.ItemTool ItemTools { get; private set; }
 
     [SerializeField] private Transform inventoryViewPortContent;
 
@@ -22,19 +22,19 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         this.randomPercentSum = 0;
         
         // TODO: 랜덤 아이템 획득 확률 계산 기능 수정; 무작위 획득이 아닌 것도 % 계산에 0으로 포함되고 있음; if() 사용 고려
-        foreach (var VARIABLE in this.itemFoods) {
+        foreach (var VARIABLE in this.ItemFoods) {
             this.randomPercentSum += VARIABLE.Value.RandomPercent;
             this.OnItemInit.AddListener(VARIABLE.Value.Init);
             this.Items.Add(VARIABLE.Key, VARIABLE.Value);
         }
         
-        foreach (var VARIABLE in this.itemMaterials) {
+        foreach (var VARIABLE in this.ItemMaterials) {
             this.randomPercentSum += VARIABLE.Value.RandomPercent;
             this.OnItemInit.AddListener(VARIABLE.Value.Init);
             this.Items.Add(VARIABLE.Key, VARIABLE.Value); 
         }
         
-        foreach (var VARIABLE in this.itemTools) {
+        foreach (var VARIABLE in this.ItemTools) {
             this.OnItemInit.AddListener(VARIABLE.Value.Init);
             this.Items.Add(VARIABLE.Key, VARIABLE.Value);
         }

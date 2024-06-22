@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -7,7 +6,7 @@ using Random = UnityEngine.Random;
 
 enum FirePanelType {
     SUCCESS,
-    FAILED,
+    FAIL,
     NO_MATERIAL,
     NO_WOODS,
     PASS
@@ -22,15 +21,13 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [Space(10f)]
     
     [Header("Require Status")]
-    [SerializeField] private float requireStatusStamina;
-    [SerializeField] private float requireStatusBodyHeat;
-    [SerializeField] private float requireStatusHydration;
-    [SerializeField] private float requireStatusCalories;
-
+    [field: SerializeField] private GameControlDictionary.RequireStatus requireStatuses;
+    
     [Space(10f)] 
     
     [Header("Require Items")] 
-    [SerializeField] private GameControlDictionary.RequireItemsFire requireItems;
+    [SerializeField] private GameControlDictionary.RequireItem requireItemsFire;
+    [SerializeField] private GameControlDictionary.RequireItem requireItemsAddWood;
     
     [Space(10f)]
     
@@ -45,7 +42,6 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     [SerializeField] private GameObject fireLoadingPanel;
     [SerializeField] private TMP_Text fireLoadingTitle;
     
-
     [Space(10f)]
     
     [Header("Fire Term Indicator")]
@@ -54,7 +50,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     private int fireTermAddWood;
     private int fireTermRandomMin;
     private int fireTermRandomMax;
-    private int spentTerm;
+    private int spendTime;
     private float successPercent;
     private string fireResultPanelTitleText;
     private StringBuilder fireResultPanelContentText;
@@ -63,7 +59,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     
     public void Init() {
         this.successPercent = 55f;
-        this.spentTerm = 0;
+        this.spendTime = 0;
         this.fireTermRandomMin = 2;
         this.fireTermRandomMax = 10;
         this.fireTermAddWood = 3;
@@ -73,57 +69,63 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
 
         PanelUpdateFireTerm();
     }
-
-    private bool CanBehaviour() {
-        return (this.requireItems.All(item => 
-            Player.Instance.Inventory[item.Key] >= Mathf.Abs(this.requireItems[item.Key])));
-    }
     
     public void Behaviour() {
-        if (World.Instance.HasFire) {   // 불이 이미 피워져 있음; 화면 전환
+        if (World.Instance.HasFire) {   // Already Have Fire; Change Panel
             this.fireResultPanelChangeType = FirePanelType.PASS;
+            
             PanelUpdate(this.fireResultPanelChangeType);
             
             return;
         }
         
-        if (CanBehaviour()) {   // 재료가 있음; 성공 or 실패
-            var randomPercentPivot = Random.Range(0, 100f);
-            var isSuccess = (randomPercentPivot <= this.successPercent);
+        if (PlayerBehaviourManager.Instance.CanBehaviour(this.requireItemsFire)) {   // Can Make fire; Success or Fail
+            var isSuccess = GameEventManager.Instance.RandomEventPercentSelect(this.successPercent);
             
-            this.fireResultPanelChangeType = (isSuccess) ? FirePanelType.SUCCESS : FirePanelType.FAILED;
-            this.spentTerm = 5;
+            this.fireResultPanelChangeType = 
+                (isSuccess) ? FirePanelType.SUCCESS : FirePanelType.FAIL;
+            this.spendTime = 5;
             
-            Player.Instance.StatusUpdate(
-                this.requireStatusStamina, 
-                this.requireStatusBodyHeat, 
-                this.requireStatusHydration, 
-                this.requireStatusCalories);
-            Player.Instance.InventoryUpdate(this.requireItems);
+            // Player Status Update
+            Player.Instance.StatusUpdate(this.requireStatuses, -1);
             
+            // Player Status Effect Invoke
+            Player.Instance.StatusEffectInvoke(this.spendTime);
+            
+            // Player Inventory Update
+            Player.Instance.InventoryUpdate(this.requireItemsFire);
+            
+            // Word Info. Update
             World.Instance.HasFire = isSuccess;
-            World.Instance.FireTerm = (isSuccess) ? (Random.Range(this.fireTermRandomMin, this.fireTermRandomMax) + this.spentTerm) : 0;
-            World.Instance.TimeUpdate(this.spentTerm);
+            World.Instance.FireTerm = 
+                (isSuccess) ? (Random.Range(this.fireTermRandomMin, this.fireTermRandomMax) + this.spendTime) : 0;
+            World.Instance.TimeUpdate(this.spendTime);
             
+            // Game Data Update
             GameInformationManager.OnGameDataSaveEvent();
         }
-        else {  // 재료가 없음; 실패
+        else {  // Not Enough Materials
             this.fireResultPanelChangeType = FirePanelType.NO_MATERIAL;
-            this.spentTerm = 0;
+            this.spendTime = 0;
         }
         
         PanelUpdate(this.fireResultPanelChangeType);
     }
 
-    public void BehaviourAddWoods(int value) {
-        if (Player.Instance.Inventory[GameControlType.Item.WOOD] >= Mathf.Abs(value)) { // 나무 추가 가능
-            Player.Instance.InventoryUpdate(GameControlType.Item.WOOD, value);
+    public void BehaviourAddWoods() {
+        if (PlayerBehaviourManager.Instance.CanBehaviour(this.requireItemsAddWood)) { // Can Add Woods
+            // Player Inventory Update
+            Player.Instance.InventoryUpdate(this.requireItemsAddWood);
+            
+            // World Info. Update
             World.Instance.FireTerm += this.fireTermAddWood;
+
+            // Game Data Update
+            GameInformationManager.OnGameDataSaveEvent();
             
             PanelUpdateFireTerm();
-            GameInformationManager.OnGameDataSaveEvent();
         }
-        else {  // 나무 추가 불가; 재료 부족
+        else {  // Not Enough Woods;
             PanelUpdate(FirePanelType.NO_WOODS);
         }
     }
@@ -141,7 +143,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         PanelUpdateFireTerm();
         
         switch (type) {
-            case FirePanelType.SUCCESS :    // 불 피우기 성공
+            case FirePanelType.SUCCESS :    // Success!
                 isLoading = true;
 
                 this.fireResultPanelTitleText = "불이 붙었다!";
@@ -158,7 +160,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
 
                 break;
             
-            case FirePanelType.FAILED :     // 불 피우기 실패
+            case FirePanelType.FAIL :     // Fail!
                 isLoading = true;
                 
                 this.fireResultPanelTitleText = "실패했다.";
@@ -173,7 +175,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
 
                 break;
             
-            case FirePanelType.NO_MATERIAL :    // 재료가 없음
+            case FirePanelType.NO_MATERIAL :    // Not Enough Materials
                 isLoading = false;
                 
                 this.fireResultPanelTitleText = "재료가 부족하다.";
@@ -188,7 +190,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
 
                 break;
             
-            case FirePanelType.NO_WOODS :
+            case FirePanelType.NO_WOODS :   // Not Enough Woods
                 isLoading = false;
                 
                 this.fireResultPanelTitleText = "나무가 없다.";
@@ -199,7 +201,13 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
                 this.fireResultPanelContentText.Append("\n");
                 
                 this.fireResultPanelContentText.Append("- 필요한 아이템\n");
-                this.fireResultPanelContentText.Append("나무 5개\n");
+
+                foreach (var VARIABLE in this.requireItemsAddWood) {
+                    this.fireResultPanelContentText.Append(ItemManager.Instance.Items[VARIABLE.Key].Name);
+                    this.fireResultPanelContentText.Append(" ");
+                    this.fireResultPanelContentText.Append(Mathf.Abs(VARIABLE.Value));
+                    this.fireResultPanelContentText.Append("개\n");
+                }
                 
                 this.fireResultTitle.text = this.fireResultPanelTitleText;
                 this.fireResultContent.text = this.fireResultPanelContentText.ToString();
@@ -207,20 +215,23 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
                 
                 return;
             
-            case FirePanelType.PASS :
+            case FirePanelType.PASS :   // Already Have fire;
                 isLoading = false;
+                
                 PanelUpdateCanvasSet();
 
                 return;
         }
         
-        foreach (var VARIABLE in this.requireItems) {
+        // Require Items for Make Fire;
+        foreach (var VARIABLE in this.requireItemsFire) {   
             this.fireResultPanelContentText.Append(ItemManager.Instance.Items[VARIABLE.Key].Name);
             this.fireResultPanelContentText.Append(" ");
             this.fireResultPanelContentText.Append(Mathf.Abs(VARIABLE.Value));
             this.fireResultPanelContentText.Append("개\n");
         }
         
+        // Loading Panel Update
         this.fireLoadingTitle.text = "불을 피우는 중...";
         this.fireResultTitle.text = this.fireResultPanelTitleText;
         this.fireResultContent.text = this.fireResultPanelContentText.ToString();

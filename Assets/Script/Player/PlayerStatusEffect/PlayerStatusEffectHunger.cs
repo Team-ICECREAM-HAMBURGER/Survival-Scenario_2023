@@ -32,8 +32,8 @@ public class PlayerStatusEffectHunger : MonoBehaviour, IPlayerStatusEffect {
         var statusCalories = Player.Instance.Status[GameControlType.Status.CALORIES];
         var statusStamina = Player.Instance.Status[GameControlType.Status.STAMINA];
         
-        Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, statusCalories * this.statusReducePercent * 0.01f);
-        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, statusStamina * this.statusReducePercent * 0.01f);
+        Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, statusCalories * -this.statusReducePercent * 0.01f);
+        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, statusStamina * -this.statusReducePercent * 0.01f);
     }
     
     private void StatusEffectRemove() {

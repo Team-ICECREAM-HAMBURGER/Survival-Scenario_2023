@@ -23,6 +23,7 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
         // 빗물 받이 설치 검사
         if (Player.Instance.Inventory.ContainsKey(GameControlType.Item.RAIN_GUTTER)) {
             Player.Instance.InventoryUpdate(GameControlType.Item.RAIN_GUTTER, -num);
+            
             PanelUpdate(num, true);
         }
         else {

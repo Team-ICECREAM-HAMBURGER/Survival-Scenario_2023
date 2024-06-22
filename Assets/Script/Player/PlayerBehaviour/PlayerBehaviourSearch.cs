@@ -1,19 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
-    [SerializeField] private GameObject searchCanvasObject;
+    [SerializeField] private GameObject searchRandomObject;
 
     [Space(10f)]
 
     [Header("Require Status")]
-    [SerializeField] private float requireStatusStamina;
-    [SerializeField] private float requireStatusBodyHeat;
-    [SerializeField] private float requireStatusHydration;
-    [SerializeField] private float requireStatusCalories;
+    [field: SerializeField] private GameControlDictionary.RequireStatus requireStatuses;
     
     [Space(10f)]
 
@@ -26,50 +23,38 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     [SerializeField] private GameObject searchLoadingPanel;
     [SerializeField] private TMP_Text searchLoadingTitle;
 
-    private IGameRandomEvent[] searchRandomEvents;
-    private float percentSum;
-    private float percentLimit;
+    private List<IGameRandomEvent> searchRandomEvents;
+    private IGameRandomEvent randomEvent;
     private int spendTime;
-
+    
 
     public void Init() {
-        this.percentSum = 0;
-        this.percentLimit = 0;
         this.spendTime = 5;
-        this.searchRandomEvents = this.searchCanvasObject.GetComponents<IGameRandomEvent>();
+        this.searchRandomEvents = new List<IGameRandomEvent>(
+            this.searchRandomObject.GetComponents<IGameRandomEvent>()
+                .ToList()
+                .OrderBy(i => i.Percent)
+            );
     }
 
     public void Behaviour() {
         // Player Status Update
-        Player.Instance.StatusUpdate(
-            this.requireStatusStamina, 
-            this.requireStatusBodyHeat, 
-            this.requireStatusHydration, 
-            this.requireStatusCalories);
+        Player.Instance.StatusUpdate(this.requireStatuses, -1);
         
         // Player Status Effects Invoke
         Player.Instance.StatusEffectInvoke(this.spendTime);
         
         // Random Event; Search
-        RandomEventCall();
+        this.randomEvent = GameEventManager.Instance.RandomEventPercentSelect(this.searchRandomEvents);
+        this.randomEvent.Event();
         
+        // Word Info. Update
         World.Instance.TimeUpdate(this.spendTime);
-        GameInformationManager.OnGameDataSaveEvent();
-    }
-    
-    private void RandomEventCall() {
-        this.percentSum = 0;
-        this.percentLimit = Random.Range(0, 100);
         
-        foreach (var VARIABLE in this.searchRandomEvents) {
-            this.percentSum += VARIABLE.Percent;
-            
-            if (this.percentSum > this.percentLimit) {
-                VARIABLE.Event();
-                PanelUpdate(VARIABLE.EventResult());
-                break;
-            }
-        }
+        // Game Data Update
+        GameInformationManager.OnGameDataSaveEvent();
+        
+        PanelUpdate(this.randomEvent.EventResult());
     }
     
     private void PanelUpdate((string, string) value) {

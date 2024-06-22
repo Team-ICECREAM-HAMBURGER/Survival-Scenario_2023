@@ -13,32 +13,11 @@ public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent { // Prese
         // Debug
         Debug.Log("FarmingEvent");
 
-        this.getItems = RandomItemGet(Random.Range(1, 3));
+        // Items Random Get
+        this.getItems = GameEventManager.Instance.RandomItemWeightSelect(Random.Range(1, 3));
+        
+        // Player Inventory Update
         Player.Instance.InventoryUpdate(this.getItems);
-    }
-
-    private Dictionary<IItem, int> RandomItemGet(int value) {
-        Dictionary<IItem, int> result = new();
-        
-        for (var i = 0; i < value; i++) {
-            var pivot = Random.Range(0, 1f);
-            var sum = 0f;
-
-            foreach (var VARIABLE in ItemManager.Instance.Items.Values) {
-                sum += VARIABLE.RandomWeight;
-
-                if (sum >= pivot) {
-                    // 획득
-                    if (!result.TryAdd(VARIABLE, Random.Range(1, VARIABLE.RandomMaxValue + 1))) {
-                        result[VARIABLE] += Random.Range(1, VARIABLE.RandomMaxValue + 1);
-                    }
-                    
-                    break;
-                }
-            }
-        }
-        
-        return result;
     }
     
     public (string, string) EventResult() {

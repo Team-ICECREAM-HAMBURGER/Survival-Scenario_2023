@@ -1,23 +1,16 @@
 using System;
 using System.Text;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class GameRandomEventInjured : MonoBehaviour, IGameRandomEvent {
     [field: SerializeField] public float Percent { get; set; }
     
     
-    private void Init() {
-    }
-
-    private void Awake() {
-        Init();
-    }
-    
     public void Event() {
+        // Debug
         Debug.Log("InjuredEvent");
         
-        // TODO : 상태 이상 효과 추가
+        // Player Status Effect Add
         PlayerStatusEffectInjured.OnStatusEffectAdd.Invoke();
     }
 

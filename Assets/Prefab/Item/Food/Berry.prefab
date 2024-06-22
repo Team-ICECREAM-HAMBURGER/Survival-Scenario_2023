@@ -318,20 +318,19 @@ MonoBehaviour:
   <Type>k__BackingField: 0
   <Name>k__BackingField: "\uC5F4\uB9E4"
   content: "\uADF8\uB0E5 \uBA39\uC5B4\uB3C4 \uBCA0\uB9AC\uBCA0\uB9AC \uB9DB\uC788\uB294
-    \uC5F4\uB9E4\uC785\uB2C8\uB2E4.\n\n- \uD6A8\uACFC\n\uCCB4\uB825 +10, \uC218\uBD84
-    +10, \uCE7C\uB85C\uB9AC +5"
+    \uC5F4\uB9E4\uC785\uB2C8\uB2E4.\n\n- \uD6A8\uACFC\n\uCCB4\uB825 +5, \uC218\uBD84
+    +5, \uCE7C\uB85C\uB9AC +3"
   <RandomPercent>k__BackingField: 5
-  <RandomWeight>k__BackingField: 0.0203252
+  <RandomWeight>k__BackingField: 0.01644737
   <RandomMaxValue>k__BackingField: 2
   <InventoryNameText>k__BackingField: {fileID: 4605849062581616038}
   <InventoryCountText>k__BackingField: {fileID: 4517365856469001835}
   itemInfoButton: {fileID: 5323388429148911471}
   itemUseButton: {fileID: 3263660297054884913}
   itemDropButton: {fileID: 1221039130360904124}
-  stamina: 10
-  bodyHeat: 0
-  hydration: 7
-  calories: 5
+  requireStatuses:
+    m_keys: 000000000200000003000000
+    m_values: 050000000500000003000000
 --- !u!1 &3760642227140698493
 GameObject:
   m_ObjectHideFlags: 0

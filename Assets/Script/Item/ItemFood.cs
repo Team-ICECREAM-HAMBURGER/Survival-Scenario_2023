@@ -10,6 +10,7 @@ public abstract class ItemFood : MonoBehaviour, IItem {
         get => content;
         set => content = value;
     }
+    
     [field: SerializeField] public float RandomPercent { get; private set; }
     [field: SerializeField] public float RandomWeight { get; private set; }
     [field: SerializeField] public int RandomMaxValue { get; private set; }
@@ -24,11 +25,8 @@ public abstract class ItemFood : MonoBehaviour, IItem {
     [SerializeField] private Button itemDropButton;
     
     [Space(25f)]
-
-    public float stamina;
-    public float bodyHeat;
-    public float hydration;
-    public float calories;
+    
+    [field: SerializeField] public GameControlDictionary.RequireStatus requireStatuses;
     
     private GameObject obj;
     private ItemFood item;

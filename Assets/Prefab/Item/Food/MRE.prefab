@@ -176,7 +176,7 @@ MonoBehaviour:
   <Name>k__BackingField: "\uBE44\uC0C1\uC2DD\uB7C9"
   content: "\uC9EC\uBC25\uD558\uACE0\uB294 \uB2E4\uB985\uB2C8\uB2E4. \uC774\uAC8C
     \uB354 \uAC15\uB82C\uD55C \uBB3C\uAC74\uC774\uC8E0. \uC5EC\uB7EC\uBAA8\uB85C\uC694.\n\n-
-    \uD6A8\uACFC\n\uCCB4\uB825 +30, \uCE7C\uB85C\uB9AC +40\n"
+    \uD6A8\uACFC\n\uCCB4\uB825 +70, \uCE7C\uB85C\uB9AC +70\n"
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 0
@@ -185,10 +185,9 @@ MonoBehaviour:
   itemInfoButton: {fileID: 3005778006055012230}
   itemUseButton: {fileID: 7020980187536045990}
   itemDropButton: {fileID: 6889351763067939289}
-  stamina: 30
-  bodyHeat: 0
-  hydration: 0
-  calories: 40
+  requireStatuses:
+    m_keys: 0000000003000000
+    m_values: 4600000046000000
 --- !u!1 &4175095550553291557
 GameObject:
   m_ObjectHideFlags: 0

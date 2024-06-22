@@ -12,5 +12,6 @@ public class GameControlDictionary {
     [System.Serializable] public class StatusGaugeSlider : SerializableDictionary<GameControlType.Status, Slider> { }
     [System.Serializable] public class StatusEffectText : SerializableDictionary<GameControlType.StatusEffect, GameObject> { }
 
-    [System.Serializable] public class RequireItemsFire : SerializableDictionary<GameControlType.Item, int> { }
+    [System.Serializable] public class RequireItem : SerializableDictionary<GameControlType.Item, int> { }
+    [System.Serializable] public class RequireStatus : SerializableDictionary<GameControlType.Status, int> { }
 }
