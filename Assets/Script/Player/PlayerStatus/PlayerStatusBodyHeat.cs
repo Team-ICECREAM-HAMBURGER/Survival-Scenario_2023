@@ -1,12 +1,12 @@
 using UnityEngine;
 
 public class PlayerStatusBodyHeat : MonoBehaviour, IPlayerStatus {  // Presenter
-    public float LimitValue { get; } = 20f;
-    public float CurrentValue { get; private set; }
     public string Name { get; } = "체온";
     public GameControlType.Status Type { get; } = GameControlType.Status.BODY_HEAT;
-    
+    public float LimitValue { get; } = 20f;
+    public float CurrentValue { get; private set; }
 
+    
     public void Init() {
         this.CurrentValue = Player.Instance.Status[this.Type];
         PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
