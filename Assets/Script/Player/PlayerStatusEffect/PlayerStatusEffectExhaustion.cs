@@ -3,10 +3,11 @@ using UnityEngine.Events;
 
 public class PlayerStatusEffectExhaustion : MonoBehaviour, IPlayerStatusEffect {
     public string Name { get; } = "탈진";
+    public int Term { get; } = 1;
+
     public GameControlType.StatusEffect Type { get; } = GameControlType.StatusEffect.EXHAUSTION;
-    public int Term { get; private set; }
+    [field: SerializeField] public GameControlDictionary.RequireStatus StatusReducePercents { get; private set; }
     
-    [SerializeField] private float statusReducePercent;
     [SerializeField] private string panelText;
 
     public static UnityEvent OnStatusEffectAdd;
@@ -28,14 +29,8 @@ public class PlayerStatusEffectExhaustion : MonoBehaviour, IPlayerStatusEffect {
         PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
 
-    public void StatusEffectInvoke(int value) {
-        var statusBodyHeat = Player.Instance.Status[GameControlType.Status.BODY_HEAT];
-        var statusHydration = Player.Instance.Status[GameControlType.Status.HYDRATION];
-        var statusCalories = Player.Instance.Status[GameControlType.Status.CALORIES];
-        
-        Player.Instance.StatusUpdate(GameControlType.Status.BODY_HEAT, statusBodyHeat * -this.statusReducePercent * 0.01f);
-        Player.Instance.StatusUpdate(GameControlType.Status.HYDRATION, statusHydration * -this.statusReducePercent * 0.01f);
-        Player.Instance.StatusUpdate(GameControlType.Status.CALORIES, statusCalories * -this.statusReducePercent * 0.01f);
+    public void StatusEffect(int value) {        
+        Player.Instance.StatusUpdate(this.StatusReducePercents, -1);
     }
     
     private void StatusEffectRemove() {

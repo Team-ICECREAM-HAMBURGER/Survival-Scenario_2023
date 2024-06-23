@@ -12148,7 +12148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 59538816}
+  m_AnchoredPosition: {x: -399.9992, y: 60284550}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -16583,6 +16583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a9c1c8ed2743fe8a1476c7cadb5aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <StatusReducePercents>k__BackingField:
+    m_keys: 
+    m_values: 
   statusReducePercent: 10
   panelText: "- \uAD76\uC8FC\uB9AC\uB294 \uC911 (\uAE30\uC544)"
 --- !u!114 &1370118461
@@ -16597,6 +16600,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68533a5b871a482f8a164546848f1ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <StatusReducePercents>k__BackingField:
+    m_keys: 
+    m_values: 
   statusReducePercent: 9
   panelText: "- \uAE30\uB825\uC774 \uC5C6\uC74C (\uD0C8\uC9C4)"
 --- !u!114 &1370118462
@@ -16611,6 +16617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b82b80ec344769aae5f67356488142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <StatusReducePercents>k__BackingField:
+    m_keys: 
+    m_values: 
   statusReducePercent: 5
   panelText: "- \uAC08\uC99D\uC774 \uC2EC\uD568 (\uD0C8\uC218)"
 --- !u!114 &1370118463
@@ -16625,7 +16634,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340e437d0432438aba10371fe6f703ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusReducePercent: 7
+  <StatusReducePercents>k__BackingField:
+    m_keys: 0000000001000000
+    m_values: 0a00000008000000
   panelText: "- \uCCB4\uC628\uC774 \uB0AE\uC74C (\uC800\uCCB4\uC628\uC99D)"
 --- !u!114 &1370118464
 MonoBehaviour:
@@ -16639,6 +16650,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8647704cbb4deaa565d564458a6332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <StatusReducePercents>k__BackingField:
+    m_keys: 
+    m_values: 
   statusReducePercent: 17
   panelText: "- \uBD80\uC0C1\uC744 \uC785\uC74C"
 --- !u!1 &1371915397

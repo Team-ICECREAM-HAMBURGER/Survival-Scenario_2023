@@ -3,10 +3,10 @@ using UnityEngine.Events;
 
 public class PlayerStatusEffectColdness : MonoBehaviour, IPlayerStatusEffect {  // Presenter
     public string Name { get; } = "저채온증";
+    public int Term { get; } = 1;
     public GameControlType.StatusEffect Type { get; } = GameControlType.StatusEffect.COLDNESS;
-    public int Term { get; set; }
+    [field: SerializeField] public GameControlDictionary.RequireStatus StatusReducePercents { get; private set; }
 
-    [SerializeField] private float statusReducePercent;
     [SerializeField] private string panelText;
     
     public static UnityEvent OnStatusEffectAdd;
@@ -28,12 +28,8 @@ public class PlayerStatusEffectColdness : MonoBehaviour, IPlayerStatusEffect {  
         PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.panelText);
     }
     
-    public void StatusEffectInvoke(int value) {
-        var statusBodyHeat = Player.Instance.Status[GameControlType.Status.BODY_HEAT];
-        var statusStamina = Player.Instance.Status[GameControlType.Status.STAMINA];
-        
-        Player.Instance.StatusUpdate(GameControlType.Status.BODY_HEAT, statusBodyHeat * -this.statusReducePercent * 0.01f);
-        Player.Instance.StatusUpdate(GameControlType.Status.STAMINA, statusStamina * -this.statusReducePercent * 0.01f);
+    public void StatusEffect(int value) {
+        Player.Instance.StatusUpdate(this.StatusReducePercents, -1);
     }
     
     private void StatusEffectRemove() {

@@ -69,7 +69,7 @@ public class Player : GameControlSingleton<Player> { // Model
                 VARIABLE.Init();
                 
                 if (this.StatusEffect.ContainsKey(VARIABLE.Type)) {
-                    this.OnStatusEffectInvoke.AddListener(VARIABLE.StatusEffectInvoke);
+                    this.OnStatusEffectInvoke.AddListener(VARIABLE.StatusEffect);
                 }
             }
 
@@ -107,7 +107,7 @@ public class Player : GameControlSingleton<Player> { // Model
             this.StatusEffect[effect.Type] = effect.Term;
         }
         else {
-            this.OnStatusEffectInvoke.AddListener(effect.StatusEffectInvoke);
+            this.OnStatusEffectInvoke.AddListener(effect.StatusEffect);
         }
     }
     
@@ -122,7 +122,7 @@ public class Player : GameControlSingleton<Player> { // Model
     public void StatusEffectRemove(IPlayerStatusEffect effect) {
         if (this.StatusEffect.ContainsKey(effect.Type)) {
             this.StatusEffect.Remove(effect.Type);
-            this.OnStatusEffectInvoke.RemoveListener(effect.StatusEffectInvoke);
+            this.OnStatusEffectInvoke.RemoveListener(effect.StatusEffect);
         }
     }
 
