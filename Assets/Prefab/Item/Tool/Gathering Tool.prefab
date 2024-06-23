@@ -695,7 +695,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e3b2c89acc748a281c1ec51220d74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 15
+  <ItemType>k__BackingField: 15
+  <ItemGetType>k__BackingField: 0
   <Name>k__BackingField: "\uC218\uC9D1 \uB3C4\uAD6C"
   <Content>k__BackingField: "\uC774 \uC218\uC9D1\uD488 \uB2E4 \uB0B4\uAEBC \uB2E4\uC694"
   <RandomPercent>k__BackingField: 0

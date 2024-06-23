@@ -172,13 +172,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398c58351c0ab41cea054128bbe4d34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 12
+  <ItemType>k__BackingField: 12
+  <ItemGetType>k__BackingField: 0
   <Name>k__BackingField: "\uBD88\uC3D8\uC2DC\uAC1C"
   <Content>k__BackingField: "\uC808\uB300 \uCC45\uC744 \uB9D0\uD558\uB294 \uAC8C
     \uC544\uB2D9\uB2C8\uB2E4. \uC544\uBB34\uD2BC \uC544\uB2D9\uB2C8\uB2E4."
-  <RandomPercent>k__BackingField: 85
-  <RandomWeight>k__BackingField: 0.2796053
-  <RandomMaxValue>k__BackingField: 2
+  <RandomPercent>k__BackingField: 0
+  <RandomWeight>k__BackingField: 0
+  <RandomMaxValue>k__BackingField: 0
   <InventoryNameText>k__BackingField: {fileID: 2512477819133001024}
   <InventoryCountText>k__BackingField: {fileID: 2067429436990442474}
   itemInfoButton: {fileID: 5032946994795748938}

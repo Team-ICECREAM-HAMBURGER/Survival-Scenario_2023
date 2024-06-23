@@ -439,7 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3547f4e803994c86803862f63658194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 16
+  <ItemType>k__BackingField: 16
+  <ItemGetType>k__BackingField: 0
   <Name>k__BackingField: "\uC0AC\uB0E5 \uB3C4\uAD6C"
   <Content>k__BackingField: "\uC778\uB958\uC758 \uAC00\uC7A5 \uAC15\uB825\uD55C \uBB34\uAE30\uB294
     \uB450 \uC190\uACFC \uADF8 \uC190\uC774 \uB9CC\uB4E0 \uB3C4\uAD6C\uC785\uB2C8\uB2E4."

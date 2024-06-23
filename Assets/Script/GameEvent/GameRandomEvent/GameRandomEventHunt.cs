@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class GameRandomEventHunting : MonoBehaviour, IGameRandomEvent {   // Presenter
+public class GameRandomEventHunt : MonoBehaviour, IGameRandomEvent {   // Presenter
     [field: SerializeField] public float Percent { get; set; }
 
     // TODO: 사냥 가능 조건 부분 수정 필요

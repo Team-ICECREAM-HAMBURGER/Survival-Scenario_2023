@@ -127,8 +127,8 @@ public class Player : GameControlSingleton<Player> { // Model
     }
 
     public void InventoryUpdate(Dictionary<IItem, int> items) {
-        foreach (var VARIABLE in items.Where(VARIABLE => !this.Inventory.TryAdd(VARIABLE.Key.Type, VARIABLE.Value))) {
-            this.Inventory[VARIABLE.Key.Type] += VARIABLE.Value;
+        foreach (var VARIABLE in items.Where(VARIABLE => !this.Inventory.TryAdd(VARIABLE.Key.ItemType, VARIABLE.Value))) {
+            this.Inventory[VARIABLE.Key.ItemType] += VARIABLE.Value;
         }
     }
 

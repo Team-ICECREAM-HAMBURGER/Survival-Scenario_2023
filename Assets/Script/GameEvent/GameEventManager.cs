@@ -41,14 +41,14 @@ public class GameEventManager : GameControlSingleton<GameEventManager> {
         return (value >= this.percentLimit);
     }
 
-    public Dictionary<IItem, int> RandomItemWeightSelect(int value) {
+    public Dictionary<IItem, int> RandomItemWeightSelect(int value, Dictionary<GameControlType.Item, IItem> target) {
         var result = new Dictionary<IItem, int>();
         
         for (var i = 0; i < value; i++) {
             this.pivot = Random.Range(0f, 1f);
             this.pivotSum = 0f;
             
-            foreach (var VARIABLE in ItemManager.Instance.Items.Values) {
+            foreach (var VARIABLE in target.Values) {
                 this.pivotSum += VARIABLE.RandomWeight;
 
                 if (this.pivotSum >= pivot) {

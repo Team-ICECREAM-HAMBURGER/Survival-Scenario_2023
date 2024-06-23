@@ -306,14 +306,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4961b8b725b74d12ba22c58289ad6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 3
+  <ItemType>k__BackingField: 3
+  <ItemGetType>k__BackingField: 2
   <Name>k__BackingField: "\uC5D0\uB108\uC9C0 \uBC14"
   content: "\uC774 \uB2EC\uCF5C\uD55C \uB9DB\uACFC \uAFB8\uB355\uD55C \uC2DD\uAC10\uC740
     \uD798\uC384\uACE0 \uAC15\uD55C \uC544\uCE68\uC5D0 \uC798 \uC5B4\uC6B8\uB9BD\uB2C8\uB2E4.\n\n-
     \uD6A8\uACFC\n\uCCB4\uB825 +30, \uCE7C\uB85C\uB9AC +40\n"
   <RandomPercent>k__BackingField: 0
   <RandomWeight>k__BackingField: 0
-  <RandomMaxValue>k__BackingField: 0
+  <RandomMaxValue>k__BackingField: 1
   <InventoryNameText>k__BackingField: {fileID: 8868298379003469149}
   <InventoryCountText>k__BackingField: {fileID: 8369707773206011318}
   itemInfoButton: {fileID: 5736910907390806663}

@@ -5493,6 +5493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc06f6a664c049499438b788f89cf622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryViewPortContent: {fileID: 721363909}
   <ItemFoods>k__BackingField:
     m_keys: 000000000100000002000000030000000400000005000000
     m_values:
@@ -5519,7 +5520,6 @@ MonoBehaviour:
     - {fileID: 6057748316399199810, guid: 27b20aafbeb1896488e7a013b9669bda, type: 3}
     - {fileID: 5730780904794600870, guid: 3161e4723525a814aadcb9a4c94df569, type: 3}
     - {fileID: 6151042530270224082, guid: 57b28de3e3cb245c2a524b67d8790ff3, type: 3}
-  inventoryViewPortContent: {fileID: 721363909}
 --- !u!1 &390710426
 GameObject:
   m_ObjectHideFlags: 0
@@ -12148,7 +12148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 60284550}
+  m_AnchoredPosition: {x: -399.9992, y: 65045640}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -16586,7 +16586,6 @@ MonoBehaviour:
   <StatusReducePercents>k__BackingField:
     m_keys: 
     m_values: 
-  statusReducePercent: 10
   panelText: "- \uAD76\uC8FC\uB9AC\uB294 \uC911 (\uAE30\uC544)"
 --- !u!114 &1370118461
 MonoBehaviour:
@@ -16603,7 +16602,6 @@ MonoBehaviour:
   <StatusReducePercents>k__BackingField:
     m_keys: 
     m_values: 
-  statusReducePercent: 9
   panelText: "- \uAE30\uB825\uC774 \uC5C6\uC74C (\uD0C8\uC9C4)"
 --- !u!114 &1370118462
 MonoBehaviour:
@@ -16620,7 +16618,6 @@ MonoBehaviour:
   <StatusReducePercents>k__BackingField:
     m_keys: 
     m_values: 
-  statusReducePercent: 5
   panelText: "- \uAC08\uC99D\uC774 \uC2EC\uD568 (\uD0C8\uC218)"
 --- !u!114 &1370118463
 MonoBehaviour:
@@ -16653,7 +16650,6 @@ MonoBehaviour:
   <StatusReducePercents>k__BackingField:
     m_keys: 
     m_values: 
-  statusReducePercent: 17
   panelText: "- \uBD80\uC0C1\uC744 \uC785\uC74C"
 --- !u!1 &1371915397
 GameObject:
@@ -19676,9 +19672,9 @@ RectTransform:
   - {fileID: 1956464781}
   m_Father: {fileID: 969297691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -80}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760321712

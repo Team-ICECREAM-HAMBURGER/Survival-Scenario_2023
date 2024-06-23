@@ -4,17 +4,17 @@ using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GameRandomEventFarming : MonoBehaviour, IGameRandomEvent { // Presenter
+public class GameRandomEventFarm : MonoBehaviour, IGameRandomEvent { // Presenter
     [field: SerializeField] public float Percent { get; set; }
     private Dictionary<IItem, int> getItems;
     
     
     public void Event() {
         // Debug
-        Debug.Log("FarmingEvent");
+        Debug.Log("FarmEvent");
 
         // Items Random Get
-        this.getItems = GameEventManager.Instance.RandomItemWeightSelect(Random.Range(1, 3));
+        this.getItems = GameEventManager.Instance.RandomItemWeightSelect(Random.Range(1, 3), ItemManager.Instance.FarmItems);
         
         // Player Inventory Update
         Player.Instance.InventoryUpdate(this.getItems);

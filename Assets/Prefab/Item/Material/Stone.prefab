@@ -184,12 +184,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26e7d1d4f6cd4618a494e32200ab725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 11
+  <ItemType>k__BackingField: 11
+  <ItemGetType>k__BackingField: 2
   <Name>k__BackingField: "\uB3CC"
   <Content>k__BackingField: "\uC11D\uAE30 \uC2DC\uB300\uC5D0 \uC628 \uAC83\uC744
     \uD658\uC601\uD569\uB2C8\uB2E4."
   <RandomPercent>k__BackingField: 70
-  <RandomWeight>k__BackingField: 0.2302632
+  <RandomWeight>k__BackingField: 0
   <RandomMaxValue>k__BackingField: 2
   <InventoryNameText>k__BackingField: {fileID: 3548389531639246405}
   <InventoryCountText>k__BackingField: {fileID: 8416758248947077870}

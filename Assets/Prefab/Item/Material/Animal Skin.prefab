@@ -440,7 +440,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ed7282da5cd47de85e68382ae7e990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 6
+  <ItemType>k__BackingField: 6
+  <ItemGetType>k__BackingField: 3
   <Name>k__BackingField: "\uB3D9\uBB3C \uAC00\uC8FD"
   <Content>k__BackingField: "\uB3D9\uBB3C\uC740 \uAC00\uC8FD \uB54C\uBB38\uC5D0 \uC8FD\uACE0
     \uC0AC\uB78C\uC740 \uC774\uB984 \uB54C\uBB38\uC5D0 \uC8FD\uC2B5\uB2C8\uB2E4."

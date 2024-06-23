@@ -3,11 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class ItemMaterial : MonoBehaviour, IItem {
-    [field: SerializeField] public GameControlType.Item Type { get; set; }
+    [field: SerializeField] public GameControlType.Item ItemType { get; set; }
+    [field: SerializeField] public GameControlType.Behaviour ItemGetType { get; set; }
+
     [field: SerializeField] public string Name { get; set; }
     [field: SerializeField] public string Content { get; set; }
     [field: SerializeField] public float RandomPercent { get; private set; }
-    [field: SerializeField] public float RandomWeight { get; private set; }
+    [field: SerializeField] public float RandomWeight { get; set; }
     [field: SerializeField] public int RandomMaxValue { get; private set; }
     
     [field: SerializeField] public TMP_Text InventoryNameText { get; private set; }
@@ -22,9 +24,7 @@ public abstract class ItemMaterial : MonoBehaviour, IItem {
     private ItemMaterial item;
     
     
-    public void Init(float value, Transform content) {
-        this.RandomWeight = (this.RandomPercent / value);
-        
+    public void Init(Transform content) {
         this.obj = Instantiate(gameObject, content);
         this.item = this.obj.GetComponent<ItemMaterial>();
         this.item.InventoryNameText.text = this.Name;

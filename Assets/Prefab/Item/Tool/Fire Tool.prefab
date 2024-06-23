@@ -427,7 +427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e29c1412c9fc4deeaccf65b35f89e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 14
+  <ItemType>k__BackingField: 14
+  <ItemGetType>k__BackingField: 0
   <Name>k__BackingField: "\uC810\uD654 \uB3C4\uAD6C"
   <Content>k__BackingField: "\"\uBD88\uC774 \uC788\uC73C\uB77C\"\uB77C\uACE0 \uD558\uB2C8
     \uACE7 \uBD88\uC774... \uC557 \uB728\uAC70."

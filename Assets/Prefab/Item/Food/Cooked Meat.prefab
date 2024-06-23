@@ -51,7 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdc9e1fbe63e46f8b3ee9da334e0540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 2
+  <ItemType>k__BackingField: 2
+  <ItemGetType>k__BackingField: 1
   <Name>k__BackingField: "\uC870\uB9AC\uD55C \uACE0\uAE30"
   content: "\uB0A8\uC758 \uC0B4\uC774 \uAC00\uC7A5 \uB9DB\uC788\uB294 \uBC95\uC785\uB2C8\uB2E4.
     \uBB3C\uB860, \uC81C \uC0B4\uC740 \uC608\uC678\uC785\uB2C8\uB2E4. \uADF8\uB7EC\uB2C8
