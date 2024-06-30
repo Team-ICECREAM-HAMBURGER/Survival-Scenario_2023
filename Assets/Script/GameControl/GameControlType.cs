@@ -13,6 +13,12 @@ public class GameControlType {
         DANGER,     // 위험에 빠짐
         INJURED     // 부상을 입음
     }
+
+    public enum Weather {
+        CLEAR,
+        RAIN,
+        SNOW,
+    }
     
     public enum Item {
         // 식량

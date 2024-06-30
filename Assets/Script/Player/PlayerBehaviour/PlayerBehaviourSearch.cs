@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
     [SerializeField] private GameObject searchRandomObject;

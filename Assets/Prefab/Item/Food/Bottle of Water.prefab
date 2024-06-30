@@ -188,7 +188,7 @@ MonoBehaviour:
   itemDropButton: {fileID: 2845081141584062245}
   requireStatuses:
     m_keys: 02000000
-    m_values: 0a000000
+    m_values: 1e000000
 --- !u!1 &3004367668337177863
 GameObject:
   m_ObjectHideFlags: 0

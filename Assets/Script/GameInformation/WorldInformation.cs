@@ -8,9 +8,9 @@ public class WorldInformation : MonoBehaviour {
     [SerializeField] private TMP_Text currentDayNight;
     [SerializeField] private TMP_Text currentTimeDay;
     
-    public static UnityEvent<int> OnCurrentTimeDayUpdate;
+    public static UnityEvent<int> OnCurrentTimeDayCounterUpdate;
     public static UnityEvent<string> OnCurrentLocationUpdate;
-    public static UnityEvent OnCurrentWeatherUpdate;
+    public static UnityEvent<string> OnCurrentWeatherUpdate;
     public static UnityEvent OnCurrentDayNight;
     
     
@@ -24,14 +24,15 @@ public class WorldInformation : MonoBehaviour {
         OnCurrentDayNight = new();
         OnCurrentDayNight.AddListener(CurrentDayNight);
         
-        OnCurrentTimeDayUpdate = new();
-        OnCurrentTimeDayUpdate.AddListener(CurrentTimeDayUpdate);   // 씬 전환에서도 리스너 정보를 유지
+        OnCurrentTimeDayCounterUpdate = new();
+        OnCurrentTimeDayCounterUpdate.AddListener(CurrentTimeDayCounterUpdate);   // 씬 전환에서도 리스너 정보를 유지
         
-        OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
-        OnCurrentLocationUpdate.Invoke(World.Instance.Location);
+        OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
+        OnCurrentWeatherUpdate.Invoke(World.Instance.Weather.Item2);
+        OnCurrentLocationUpdate.Invoke(World.Instance.Location);    // TODO: (Enum, String)
     }
     
-    private void CurrentTimeDayUpdate(int value) {
+    private void CurrentTimeDayCounterUpdate(int value) {
         this.currentTimeDay.text = value + "일 째 생존 중...";
     }
 
@@ -39,7 +40,8 @@ public class WorldInformation : MonoBehaviour {
         this.currentLocation.text = value;
     }
 
-    private void CurrentWeatherUpdate() {
+    private void CurrentWeatherUpdate(string value) {
+        this.currentWeather.text = value;
     }
 
     private void CurrentDayNight() {

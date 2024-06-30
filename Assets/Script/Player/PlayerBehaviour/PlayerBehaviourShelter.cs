@@ -31,7 +31,7 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
             GameInformationManager.OnGameDataSaveEvent();
         }
 
-        WorldInformation.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
+        // WorldInformation.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
         WorldInformation.OnCurrentLocationUpdate.Invoke("휴식처");
     }
 

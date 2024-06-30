@@ -7,7 +7,7 @@ public class PlayerBehaviourOutside : MonoBehaviour, IPlayerBehaviour {
     public void Behaviour() {
         PanelUpdate();
         
-        WorldInformation.OnCurrentTimeDayUpdate.Invoke(World.Instance.TimeDay);
+        // WorldInformation.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
         WorldInformation.OnCurrentLocationUpdate.Invoke(World.Instance.Location);
     }
     

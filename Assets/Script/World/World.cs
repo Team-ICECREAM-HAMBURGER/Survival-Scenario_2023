@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class World : GameControlSingleton<World> {  // Model
     [SerializeField] private WorldInformation worldInformation;
@@ -39,6 +40,17 @@ public class World : GameControlSingleton<World> {  // Model
         }
     }
 
+    private (GameControlType.Weather, string) weather;
+    public (GameControlType.Weather, string) Weather {
+        get {
+            return this.weather;
+        }
+        private set {
+            this.weather = value;
+            this.informationData.weather = value;
+        }
+    }
+
     private bool hasShelter;
     public bool HasShelter {
         get {
@@ -73,6 +85,27 @@ public class World : GameControlSingleton<World> {  // Model
         }
     }
 
+    private bool hasWater;
+    public bool HasWater {
+        get {
+            return hasWater;
+        }
+        set {
+            this.hasWater = value;
+            this.informationData.hasWater = value;
+        }
+    }
+
+    private bool isWinter;
+    public bool IsWinter {
+        get {
+            return isWinter;
+        }
+        set {
+            this.isWinter = value;
+            this.informationData.isWinter = value;
+        }
+    }
     private int fireTerm;
     public int FireTerm {
         get {
@@ -91,10 +124,13 @@ public class World : GameControlSingleton<World> {  // Model
             
             this.TimeDay = this.informationData.timeDay;
             this.TimeTerm = this.informationData.timeTerm;
-            this.location = this.informationData.location;
+            this.Weather = this.informationData.weather;
+            this.Location = this.informationData.location;
             this.HasShelter = this.informationData.hasShelter;
             this.HasRainGutter = this.informationData.hasRainGutter;
+            this.HasWater = this.informationData.hasWater;
             this.HasFire = this.informationData.hasFire;
+            this.IsWinter = this.informationData.isWinter;
             this.FireTerm = this.informationData.fireTerm;
             
             // Presenter Init //
@@ -120,6 +156,33 @@ public class World : GameControlSingleton<World> {  // Model
         if (this.HasFire) {
             FireTimeUpdate(-value);
         }
+        
+        WorldInformation.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
+        
+        WeatherUpdate();
+    }
+
+    private void WeatherUpdate() {
+        if (GameEventManager.Instance.RandomEventPercentSelect(Random.Range(0, 100f))) {    // TODO: 지속 시간 추가
+            if (!this.IsWinter) {
+                this.Weather = (GameControlType.Weather.RAIN, "비");
+                
+                // Weather Effect
+            }
+            else {
+                this.Weather = (GameControlType.Weather.SNOW, "눈보라");
+                
+                // Weather Effect
+            }
+        }
+        else {
+            this.Weather = (GameControlType.Weather.CLEAR, "맑음");
+            
+            // Weather Effect; NORMAL
+        }
+        
+        Debug.Log("날씨: " + this.Weather.Item2);
+        WorldInformation.OnCurrentWeatherUpdate.Invoke(this.Weather.Item2);
     }
     
     private void FireTimeUpdate(int value) {
