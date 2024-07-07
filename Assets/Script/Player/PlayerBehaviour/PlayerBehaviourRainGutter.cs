@@ -42,8 +42,8 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
                 
                 if (emptyCans > 0) { // Has Empty Can;
                     // Get Water
-                    Player.Instance.Inventory[GameControlType.Item.BOTTLE_OF_WATER] += emptyCans;
-                    Player.Instance.Inventory[GameControlType.Item.CAN] = 0;
+                    ItemManager.Instance.ItemMaterials[GameControlType.Item.CAN].ItemUse(emptyCans);
+                    ItemManager.Instance.ItemFoods[GameControlType.Item.BOTTLE_OF_WATER].ItemAdd(emptyCans);
                     
                     // Loading
                     PanelUpdate(RainGutterPanelType.SUCCESS);
@@ -57,8 +57,8 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
                 if (World.Instance.HasWater) { // Water Left
                     if (emptyCans > 0) {  // Has Empty Can
                         // Get Water
-                        Player.Instance.Inventory[GameControlType.Item.BOTTLE_OF_WATER] += emptyCans;
-                        Player.Instance.Inventory[GameControlType.Item.CAN] = 0;
+                        ItemManager.Instance.ItemMaterials[GameControlType.Item.CAN].ItemUse(emptyCans);
+                        ItemManager.Instance.ItemFoods[GameControlType.Item.BOTTLE_OF_WATER].ItemAdd(emptyCans);
 
                         // Loading
                         PanelUpdate(RainGutterPanelType.SUCCESS);

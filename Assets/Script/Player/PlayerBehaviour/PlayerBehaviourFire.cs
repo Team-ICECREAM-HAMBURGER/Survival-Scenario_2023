@@ -93,7 +93,9 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
             Player.Instance.StatusEffectInvoke(this.spendTime);
             
             // Player Inventory Update
-            Player.Instance.InventoryUpdate(this.requireItemsFire);
+            foreach (var VARIABLE in this.requireItemsFire) {
+                ItemManager.Instance.ItemMaterials[VARIABLE.Key].ItemUse(VARIABLE.Value);
+            }
             
             // Word Info. Update
             World.Instance.HasFire = isSuccess;
@@ -115,7 +117,9 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     public void BehaviourAddWoods() {
         if (PlayerBehaviourManager.Instance.CanBehaviour(this.requireItemsAddWood)) { // Can Add Woods
             // Player Inventory Update
-            Player.Instance.InventoryUpdate(this.requireItemsAddWood);
+            foreach (var VARIABLE in this.requireItemsAddWood) {
+                ItemManager.Instance.ItemMaterials[VARIABLE.Key].ItemUse(VARIABLE.Value);
+            }
             
             // World Info. Update
             World.Instance.FireTerm += this.fireTermAddWood;
@@ -131,7 +135,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     }
 
     public void BehaviourCooking() {
-        
+        // TODO
     }
     
     private void PanelUpdate(FirePanelType type) {

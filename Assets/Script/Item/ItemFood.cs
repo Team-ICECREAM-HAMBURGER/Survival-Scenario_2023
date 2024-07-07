@@ -39,9 +39,16 @@ public abstract class ItemFood : MonoBehaviour, IItem {
         this.item = this.obj.GetComponent<ItemFood>();
         this.item.InventoryNameText.text = this.Name;
         this.item.InventoryCountText.text = "0개";
+        
         this.item.itemInfoButton.onClick.AddListener(InventoryInfoUpdate);
-        this.item.itemUseButton.onClick.AddListener(ItemUse);
-        this.item.itemDropButton.onClick.AddListener(ItemDrop);
+        this.item.itemUseButton.onClick.AddListener(() => {
+            ItemUse();
+            PlayerBehaviourInventory.OnItemUpdate.Invoke();
+        });
+        this.item.itemDropButton.onClick.AddListener(() => {
+            ItemDrop();
+            PlayerBehaviourInventory.OnItemUpdate.Invoke();
+        });
         
         this.obj.SetActive(false);
     }
@@ -55,6 +62,7 @@ public abstract class ItemFood : MonoBehaviour, IItem {
         PlayerBehaviourInventory.OnItemInfoUpdate.Invoke(this.Name, this.Content);
     }
 
-    public abstract void ItemUse();
-    public abstract void ItemDrop();
+    public abstract void ItemUse(int value = 1);
+    public abstract void ItemDrop(int value = 1);
+    public abstract void ItemAdd(int value = 1);
 }

@@ -1,6 +1,13 @@
 public class ItemMaterialPieceOfCloth : ItemMaterial {
-    public override void ItemDrop() {
-        Player.Instance.InventoryUpdate(ItemType, -1);
-        PlayerBehaviourInventory.OnItemUpdate.Invoke();
+    public override void ItemUse(int value = 1) {
+        Player.Instance.InventoryUpdate(ItemType, -value);
+    }
+
+    public override void ItemDrop(int value = 1) {
+        Player.Instance.InventoryUpdate(ItemType, -value);
+    }
+
+    public override void ItemAdd(int value = 1) {
+        Player.Instance.InventoryUpdate(ItemType, value);
     }
 }

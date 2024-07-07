@@ -132,12 +132,6 @@ public class Player : GameControlSingleton<Player> { // Model
         }
     }
 
-    public void InventoryUpdate(Dictionary<GameControlType.Item, int> items) {
-        foreach (var VARIABLE in items.Where(VARIABLE => !this.Inventory.TryAdd(VARIABLE.Key, VARIABLE.Value))) {
-            this.Inventory[VARIABLE.Key] += VARIABLE.Value;
-        }
-    }
-    
     public void InventoryUpdate(GameControlType.Item type, int value) {
         if (!this.Inventory.TryAdd(type, value)) {
             this.Inventory[type] += value;

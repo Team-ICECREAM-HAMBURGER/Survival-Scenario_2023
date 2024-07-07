@@ -15,7 +15,11 @@ public interface IItem {
     public TMP_Text InventoryCountText { get; }
 
     public void Init(Transform content);
-    public void InventoryCountUpdate(int value);
+    
     public void InventoryInfoUpdate();
-    public void ItemDrop();
+    public void InventoryCountUpdate(int value);
+    
+    public void ItemUse(int value);
+    public void ItemDrop(int value);
+    public void ItemAdd(int value);
 }

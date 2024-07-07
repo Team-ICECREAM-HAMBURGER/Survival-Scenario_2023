@@ -17,7 +17,9 @@ public class GameRandomEventFarm : MonoBehaviour, IGameRandomEvent { // Presente
         this.getItems = GameEventManager.Instance.RandomItemWeightSelect(Random.Range(1, 3), ItemManager.Instance.FarmItems);
         
         // Player Inventory Update
-        Player.Instance.InventoryUpdate(this.getItems);
+        foreach (var VARIABLE in this.getItems) {
+            ItemManager.Instance.FarmItems[VARIABLE.Key.ItemType].ItemAdd(VARIABLE.Value);
+        }
     }
     
     public (string, string) EventResult() {
