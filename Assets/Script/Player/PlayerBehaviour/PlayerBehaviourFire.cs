@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -58,7 +59,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
 
     
     public void Init() {
-        this.successPercent = 55f;
+        this.successPercent = 50f;
         this.spendTime = 0;
         this.fireTermRandomMin = 2;
         this.fireTermRandomMax = 10;
@@ -70,16 +71,21 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
         PanelUpdateFireTerm();
     }
     
+    private bool CanBehaviour(GameControlDictionary.RequireItem requireItem) {
+        return (requireItem.All(item => 
+                Player.Instance.Inventory[item.Key] >= Mathf.Abs(requireItem[item.Key]))
+            );
+    }
+    
     public void Behaviour() {
         if (World.Instance.HasFire) {   // Already Have Fire; Change Panel
             this.fireResultPanelChangeType = FirePanelType.PASS;
-            
             PanelUpdate(this.fireResultPanelChangeType);
             
             return;
         }
         
-        if (PlayerBehaviourManager.Instance.CanBehaviour(this.requireItemsFire)) {   // Can Make fire; Success or Fail
+        if (CanBehaviour(this.requireItemsFire)) {   // Can Make fire; Success or Fail
             var isSuccess = GameEventManager.Instance.RandomEventPercentSelect(this.successPercent);
             
             this.fireResultPanelChangeType = 
@@ -87,10 +93,14 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
             this.spendTime = 5;
             
             // Player Status Update
-            Player.Instance.StatusUpdate(this.requireStatuses, -1);
+            foreach (var VARIABLE in this.requireStatuses) {
+                PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(VARIABLE.Value);
+            }
+            
+            // Player.Instance.StatusUpdate(this.requireStatuses, -1);
             
             // Player Status Effect Invoke
-            Player.Instance.StatusEffectInvoke(this.spendTime);
+            // Player.Instance.StatusEffectInvoke(this.spendTime);
             
             // Player Inventory Update
             foreach (var VARIABLE in this.requireItemsFire) {
@@ -115,7 +125,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     }
 
     public void BehaviourAddWoods() {
-        if (PlayerBehaviourManager.Instance.CanBehaviour(this.requireItemsAddWood)) { // Can Add Woods
+        if (CanBehaviour(this.requireItemsAddWood)) { // Can Add Woods
             // Player Inventory Update
             foreach (var VARIABLE in this.requireItemsAddWood) {
                 ItemManager.Instance.ItemMaterials[VARIABLE.Key].ItemUse(VARIABLE.Value);

@@ -38,10 +38,12 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
 
     public void Behaviour() {
         // Player Status Update
-        Player.Instance.StatusUpdate(this.requireStatuses, -1);
+        foreach (var VARIABLE in this.requireStatuses) {
+            PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(VARIABLE.Value);
+        }
         
         // Player Status Effects Invoke
-        Player.Instance.StatusEffectInvoke(this.spendTime);
+        PlayerStatusManager.Instance.StatusEffectInvoke();
         
         // Random Event; Search
         this.randomEvent = GameEventManager.Instance.RandomEventPercentSelect(this.searchRandomEvents);

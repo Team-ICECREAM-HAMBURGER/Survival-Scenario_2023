@@ -19,6 +19,28 @@ public class GameEventManager : GameControlSingleton<GameEventManager> {
         Init();
     }
     
+    public bool RandomEventPercentSelect(float value) {
+        this.percentLimit = Random.Range(0f, 100f);
+
+        return (value >= this.percentLimit);
+    }
+
+    public bool RandomEventWeightSelect(List<float> weights) {
+        var result = false;
+        
+        foreach (var VARIABLE in weights) {
+            this.pivotSum += VARIABLE;
+
+            if (this.pivotSum >= this.pivot) {
+                result = true;
+                    
+                break;
+            }
+        }
+
+        return result;
+    }
+    
     public IGameRandomEvent RandomEventPercentSelect(List<IGameRandomEvent> randomEvents) {    // Random Event; Search
         this.percentSum = 0f;
         this.percentLimit = Random.Range(0f, 100f);
@@ -33,14 +55,7 @@ public class GameEventManager : GameControlSingleton<GameEventManager> {
 
         return null;
     }
-
-    public bool RandomEventPercentSelect(float value) {
-        this.percentSum = 0f;
-        this.percentLimit = Random.Range(0f, 100f);
-
-        return (value >= this.percentLimit);
-    }
-
+    
     public Dictionary<IItem, int> RandomItemWeightSelect(int value, Dictionary<GameControlType.Item, IItem> target) {
         var result = new Dictionary<IItem, int>();
         

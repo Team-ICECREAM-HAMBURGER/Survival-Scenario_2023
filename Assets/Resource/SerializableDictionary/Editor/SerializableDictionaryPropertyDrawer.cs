@@ -11,6 +11,8 @@ using System;
 [CustomPropertyDrawer(typeof(GameControlDictionary.ItemFood))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.RequireItem))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.RequireStatus))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.PlayerStatus))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.PlayerStatusEffect))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
 	const string KeysFieldName = "m_keys";

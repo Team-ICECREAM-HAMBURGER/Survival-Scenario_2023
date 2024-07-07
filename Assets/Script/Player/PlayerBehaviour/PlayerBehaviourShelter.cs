@@ -25,7 +25,7 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
             World.Instance.HasShelter = true;
             PanelUpdate();
             
-            Player.Instance.StatusEffectInvoke(this.spendTime);
+            // Player.Instance.StatusEffectInvoke(this.spendTime);
             World.Instance.TimeUpdate(this.spendTime);
             
             GameInformationManager.OnGameDataSaveEvent();

@@ -1,12 +1,17 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class World : GameControlSingleton<World> {  // Model
+    private const int DAYTERM = 500;
+    
     [SerializeField] private WorldInformation worldInformation;
     
     private WorldInformationData informationData;
-
+    private float weatherPercent;
+    private int weatherTime;
+    
     private int timeDay;
     public int TimeDay {
         get {
@@ -132,6 +137,9 @@ public class World : GameControlSingleton<World> {  // Model
             this.HasFire = this.informationData.hasFire;
             this.IsWinter = this.informationData.isWinter;
             this.FireTerm = this.informationData.fireTerm;
+
+            this.weatherTime = 0;
+            this.weatherPercent = 20f;
             
             // Presenter Init //
             this.worldInformation.Init();
@@ -148,9 +156,9 @@ public class World : GameControlSingleton<World> {  // Model
     public void TimeUpdate(int value) {
         this.TimeTerm += value;
         
-        if (this.TimeTerm >= 500) {
+        if (this.TimeTerm >= DAYTERM) {
             this.TimeDay += 1;
-            this.TimeTerm -= 500;
+            this.TimeTerm -= DAYTERM;
         }
 
         if (this.HasFire) {
@@ -159,26 +167,24 @@ public class World : GameControlSingleton<World> {  // Model
         
         WorldInformation.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
         
-        WeatherUpdate();
+        WeatherUpdate(value);
     }
 
-    private void WeatherUpdate() {
-        if (GameEventManager.Instance.RandomEventPercentSelect(Random.Range(0, 100f))) {    // TODO: 지속 시간 추가
-            if (!this.IsWinter) {
-                this.Weather = (GameControlType.Weather.RAIN, "비");
-                
-                // Weather Effect
-            }
-            else {
-                this.Weather = (GameControlType.Weather.SNOW, "눈보라");
-                
-                // Weather Effect
-            }
-        }
-        else {
-            this.Weather = (GameControlType.Weather.CLEAR, "맑음");
+    private void WeatherUpdate(int value) {
+        if (this.Weather.Item1 != GameControlType.Weather.CLEAR) {
+            this.weatherTime -= value;
             
-            // Weather Effect; NORMAL
+            if (this.weatherTime <= 0) {
+                this.Weather = (GameControlType.Weather.CLEAR, "맑음");
+            }
+            
+            return;
+        }
+        
+        if (GameEventManager.Instance.RandomEventPercentSelect(this.weatherPercent)) {
+            this.Weather = !this.IsWinter ? 
+                (GameControlType.Weather.RAIN, "비") : (GameControlType.Weather.SNOW, "눈보라");
+            this.weatherTime = Random.Range(3, 6) * DAYTERM;
         }
         
         Debug.Log("날씨: " + this.Weather.Item2);
@@ -186,6 +192,10 @@ public class World : GameControlSingleton<World> {  // Model
     }
     
     private void FireTimeUpdate(int value) {
+        if (this.Weather.Item1 != GameControlType.Weather.CLEAR) {
+            value *= 2;
+        }
+        
         this.FireTerm += value;
 
         if (this.FireTerm <= 0) {

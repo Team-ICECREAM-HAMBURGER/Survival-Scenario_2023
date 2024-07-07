@@ -11,7 +11,7 @@ public class GameRandomEventInjured : MonoBehaviour, IGameRandomEvent {
         Debug.Log("InjuredEvent");
         
         // Player Status Effect Add
-        PlayerStatusEffectInjured.OnStatusEffectAdd.Invoke();
+        PlayerStatusManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.INJURED);
     }
 
     public (string, string) EventResult() {

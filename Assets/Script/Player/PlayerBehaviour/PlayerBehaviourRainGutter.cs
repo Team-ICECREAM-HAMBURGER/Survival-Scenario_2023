@@ -30,7 +30,7 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
     public void Behaviour() {
         if (!World.Instance.HasRainGutter) {    // Hasn't Rain Gutter
             World.Instance.HasRainGutter = true;
-            Player.Instance.StatusEffectInvoke(this.spendTime);
+            // Player.Instance.StatusEffectInvoke(this.spendTime);
             
             PanelUpdate(RainGutterPanelType.PASS);
         }

@@ -12,6 +12,9 @@ public class GameControlDictionary {
     [System.Serializable] public class StatusGaugeSlider : SerializableDictionary<GameControlType.Status, Slider> { }
     [System.Serializable] public class StatusEffectText : SerializableDictionary<GameControlType.StatusEffect, GameObject> { }
 
+    [System.Serializable] public class PlayerStatus : SerializableDictionary<GameControlType.Status, global::PlayerStatus> { }
+    [System.Serializable] public class PlayerStatusEffect : SerializableDictionary<GameControlType.StatusEffect, global::PlayerStatusEffect> { }
+
     [System.Serializable] public class RequireItem : SerializableDictionary<GameControlType.Item, int> { }
-    [System.Serializable] public class RequireStatus : SerializableDictionary<GameControlType.Status, int> { }
+    [System.Serializable] public class RequireStatus : SerializableDictionary<GameControlType.Status, float> { }
 }

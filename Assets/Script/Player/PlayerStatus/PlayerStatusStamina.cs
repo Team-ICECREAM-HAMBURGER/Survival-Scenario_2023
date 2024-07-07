@@ -1,27 +1,24 @@
-using System;
-using UnityEngine;
-
-public class PlayerStatusStamina : MonoBehaviour, IPlayerStatus {   // Presenter
-    public string Name { get; } = "체력";
-    public GameControlType.Status Type { get; } = GameControlType.Status.STAMINA;
-    public float LimitValue { get; } = 30f;
-    public float CurrentValue { get; private set; }
-
-    
-    public void Init() {
+public class PlayerStatusStamina : PlayerStatus {   // Presenter
+    public override void Init() {
+        this.Name = "체력";
+        this.Type = GameControlType.Status.STAMINA;
+        this.LimitValue = 30f;
         this.CurrentValue = Player.Instance.Status[this.Type];
+        
         PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
-    public void StatusUpdate() {    // onStatusUpdate()
-        this.CurrentValue = Player.Instance.Status[this.Type];
+    public override void StatusUpdate(float value) {
+        this.CurrentValue += value;
+        Player.Instance.Status[this.Type] = this.CurrentValue;
+        
         PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
         if (this.CurrentValue <= this.LimitValue) {
-            PlayerStatusEffectExhaustion.OnStatusEffectAdd.Invoke();
+            PlayerStatusManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.EXHAUSTION);
         }
         else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.EXHAUSTION)) {
-            PlayerStatusEffectExhaustion.OnStatusEffectRemove.Invoke();
+            PlayerStatusManager.Instance.StatusEffectRemove(GameControlType.StatusEffect.EXHAUSTION);
         }
     }
 }
