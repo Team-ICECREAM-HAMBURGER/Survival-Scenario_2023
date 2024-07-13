@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -22,31 +20,25 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     [SerializeField] private GameObject searchLoadingPanel;
     [SerializeField] private TMP_Text searchLoadingTitle;
 
-    private List<IGameRandomEvent> searchRandomEvents;
-    private IGameRandomEvent randomEvent;
+    private GameRandomEvent randomEvent;
     private int spendTime;
     
 
     public void Init() {
-        this.spendTime = 5;
-        this.searchRandomEvents = new List<IGameRandomEvent>(
-            this.searchRandomObject.GetComponents<IGameRandomEvent>()
-                .ToList()
-                .OrderBy(i => i.Percent)
-            );
+        this.spendTime = 5; // TODO: 0
     }
 
     public void Behaviour() {
         // Player Status Update
         foreach (var VARIABLE in this.requireStatuses) {
-            PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(VARIABLE.Value);
+            PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
         }
         
         // Player Status Effects Invoke
-        PlayerStatusManager.Instance.StatusEffectInvoke();
+        PlayerStatusEffectManager.Instance.StatusEffectInvoke();
         
         // Random Event; Search
-        this.randomEvent = GameEventManager.Instance.RandomEventPercentSelect(this.searchRandomEvents);
+        this.randomEvent = GameRandomEventManager.Instance.RandomEventPercentSelect();
         this.randomEvent.Event();
         
         // Word Info. Update

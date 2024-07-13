@@ -36,7 +36,7 @@ public class PlayerStatusEffectInjured : PlayerStatusEffect {   // Presenter
     
     public override void StatusEffect() {
         if (this.limitTimeTerm <= World.Instance.TimeTerm) {    // TIME OUT
-            PlayerStatusManager.Instance.StatusEffectRemove(this.Type);
+            PlayerStatusEffectManager.Instance.StatusEffectRemove(this.Type);
             return;
         }
         

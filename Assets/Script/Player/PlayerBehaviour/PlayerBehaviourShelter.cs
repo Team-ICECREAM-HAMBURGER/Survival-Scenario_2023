@@ -23,15 +23,13 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
     public void Behaviour() {
         if (!World.Instance.HasShelter) {
             World.Instance.HasShelter = true;
+            
             PanelUpdate();
             
-            // Player.Instance.StatusEffectInvoke(this.spendTime);
             World.Instance.TimeUpdate(this.spendTime);
-            
             GameInformationManager.OnGameDataSaveEvent();
         }
-
-        // WorldInformation.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
+        
         WorldInformation.OnCurrentLocationUpdate.Invoke("휴식처");
     }
 

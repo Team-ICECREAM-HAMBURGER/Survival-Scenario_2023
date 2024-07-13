@@ -80,13 +80,14 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     public void Behaviour() {
         if (World.Instance.HasFire) {   // Already Have Fire; Change Panel
             this.fireResultPanelChangeType = FirePanelType.PASS;
+            
             PanelUpdate(this.fireResultPanelChangeType);
             
             return;
         }
         
         if (CanBehaviour(this.requireItemsFire)) {   // Can Make fire; Success or Fail
-            var isSuccess = GameEventManager.Instance.RandomEventPercentSelect(this.successPercent);
+            var isSuccess = GameRandomEventManager.Instance.RandomEventPercentSelect(this.successPercent);
             
             this.fireResultPanelChangeType = 
                 (isSuccess) ? FirePanelType.SUCCESS : FirePanelType.FAIL;
@@ -94,13 +95,11 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
             
             // Player Status Update
             foreach (var VARIABLE in this.requireStatuses) {
-                PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(VARIABLE.Value);
+                PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
             }
             
-            // Player.Instance.StatusUpdate(this.requireStatuses, -1);
-            
             // Player Status Effect Invoke
-            // Player.Instance.StatusEffectInvoke(this.spendTime);
+            PlayerStatusEffectManager.Instance.StatusEffectInvoke();
             
             // Player Inventory Update
             foreach (var VARIABLE in this.requireItemsFire) {

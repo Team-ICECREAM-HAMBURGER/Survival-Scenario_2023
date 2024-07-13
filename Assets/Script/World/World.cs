@@ -166,7 +166,6 @@ public class World : GameControlSingleton<World> {  // Model
         }
         
         WorldInformation.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
-        
         WeatherUpdate(value);
     }
 
@@ -181,7 +180,7 @@ public class World : GameControlSingleton<World> {  // Model
             return;
         }
         
-        if (GameEventManager.Instance.RandomEventPercentSelect(this.weatherPercent)) {
+        if (GameRandomEventManager.Instance.RandomEventPercentSelect(this.weatherPercent)) {
             this.Weather = !this.IsWinter ? 
                 (GameControlType.Weather.RAIN, "비") : (GameControlType.Weather.SNOW, "눈보라");
             this.weatherTime = Random.Range(3, 6) * DAYTERM;

@@ -30,7 +30,6 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
     public void Behaviour() {
         if (!World.Instance.HasRainGutter) {    // Hasn't Rain Gutter
             World.Instance.HasRainGutter = true;
-            // Player.Instance.StatusEffectInvoke(this.spendTime);
             
             PanelUpdate(RainGutterPanelType.PASS);
         }
@@ -78,8 +77,6 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
         }
         
         World.Instance.TimeUpdate(this.spendTime);
-        // WorldInformation.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
-        
         GameInformationManager.OnGameDataSaveEvent();
     }
 

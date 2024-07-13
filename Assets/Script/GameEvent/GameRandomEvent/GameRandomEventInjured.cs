@@ -2,19 +2,20 @@ using System;
 using System.Text;
 using UnityEngine;
 
-public class GameRandomEventInjured : MonoBehaviour, IGameRandomEvent {
-    [field: SerializeField] public float Percent { get; set; }
+public class GameRandomEventInjured : GameRandomEvent {
+    public override void Init() {
+        this.Percent = 5;
+    }
     
-    
-    public void Event() {
+    public override void Event() {
         // Debug
         Debug.Log("InjuredEvent");
         
         // Player Status Effect Add
-        PlayerStatusManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.INJURED);
+        PlayerStatusEffectManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.INJURED);
     }
 
-    public (string, string) EventResult() {
+    public override (string, string) EventResult() {
         var title = String.Empty;
         var content = new StringBuilder();
         

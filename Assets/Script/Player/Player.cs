@@ -1,17 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class Player : GameControlSingleton<Player> { // Model
-    [SerializeField] private PlayerInformation playerInformationMonitor;
+    [SerializeField] private PlayerInformation playerInformation;
     
-    [Space(10f)]
-    
-    // [SerializeField] private GameObject playerStatus;
-    // [SerializeField] private GameObject playerStatusEffect;
-    [SerializeField] private GameObject playerBehaviour;
-
     private PlayerInformationData informationData;
     
     private GameControlDictionary.Inventory inventory;
@@ -69,10 +61,6 @@ public class Player : GameControlSingleton<Player> { // Model
         }
     }
     
-    
-    // private UnityEvent OnStatusUpdate;          // 상태 수치 변동
-    // private UnityEvent<int> OnStatusEffectInvoke;    // 상태 이상 효과 발동
-    
 
     private void Init() {
         try {
@@ -83,34 +71,12 @@ public class Player : GameControlSingleton<Player> { // Model
             this.PlayerName = this.informationData.name;
             this.PlayerID = this.informationData.id;
             
-            // this.OnStatusUpdate = new();
-            // this.OnStatusEffectInvoke = new();
-
-            
             // TODO: 2024.07.07 --
-            this.playerInformationMonitor.Init();
-            
+            this.playerInformation.Init();
+
             PlayerStatusManager.Instance.Init();
-            
-            
-            
-            
-            // foreach (var VARIABLE in this.playerStatus.GetComponents<PlayerStatus>()) {
-            //     VARIABLE.Init();
-            //     this.OnStatusUpdate.AddListener(VARIABLE.StatusUpdate);
-            // }
-
-            // foreach (var VARIABLE in this.playerStatusEffect.GetComponents<PlayerStatusEffect>()) {
-            //     VARIABLE.Init();
-            //     
-            //     if (this.StatusEffect.ContainsKey(VARIABLE.Type)) {
-            //         this.OnStatusEffectInvoke.AddListener(VARIABLE.StatusEffect);
-            //     }
-            // }
-
-            foreach (var VARIABLE in this.playerBehaviour.GetComponents<IPlayerBehaviour>()) {
-                VARIABLE.Init();
-            }
+            PlayerStatusEffectManager.Instance.Init();
+            PlayerBehaviourManager.Instance.Init();
         }
         catch (NullReferenceException e) {
             Debug.Log("Game Over");
@@ -120,39 +86,6 @@ public class Player : GameControlSingleton<Player> { // Model
     private void Awake() {
         Init();
     }
-    
-    // public void StatusUpdate(GameControlDictionary.RequireStatus requireStatuses, int sign) {
-    //     foreach (var VARIABLE in requireStatuses) {
-    //         this.Status[VARIABLE.Key] += Mathf.Floor(VARIABLE.Value * sign);
-    //         this.Status[VARIABLE.Key] = Mathf.Clamp(this.Status[VARIABLE.Key], 0f, 100f);
-    //     }
-    //     
-    //     this.OnStatusUpdate.Invoke();
-    // }
-    
-    // public void StatusEffectAdd(PlayerStatusEffect effect) {
-    //     if (!this.StatusEffect.TryAdd(effect.Type, effect.Term)) {
-    //         this.StatusEffect[effect.Type] = effect.Term;
-    //     }
-    //     else {
-    //         this.OnStatusEffectInvoke.AddListener(effect.StatusEffect);
-    //     }
-    // }
-    
-    // public void StatusEffectInvoke(int value) {
-    //     this.OnStatusEffectInvoke?.Invoke(value);
-    // }
-
-    // public void StatusEffectUpdate(PlayerStatusEffect effect) {
-    //     this.StatusEffect[effect.Type] = effect.Term;
-    // }
-
-    // public void StatusEffectRemove(PlayerStatusEffect effect) {
-    //     if (this.StatusEffect.ContainsKey(effect.Type)) {
-    //         this.StatusEffect.Remove(effect.Type);
-    //         this.OnStatusEffectInvoke.RemoveListener(effect.StatusEffect);
-    //     }
-    // }
 
     public void InventoryUpdate(GameControlType.Item type, int value) {
         if (!this.Inventory.TryAdd(type, value)) {

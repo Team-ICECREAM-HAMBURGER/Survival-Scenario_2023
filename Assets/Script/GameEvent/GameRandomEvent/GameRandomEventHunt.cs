@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class GameRandomEventHunt : MonoBehaviour, IGameRandomEvent {   // Presenter
-    [field: SerializeField] public float Percent { get; set; }
-
+public class GameRandomEventHunt : GameRandomEvent {   // Presenter
     // TODO: 사냥 가능 조건 부분 수정 필요
     private string spendItem;
     private int spendItemAmount;
@@ -15,20 +13,18 @@ public class GameRandomEventHunt : MonoBehaviour, IGameRandomEvent {   // Presen
     private bool isHuntingSuccess;
     
     
-    private void Init() {
+    public override void Init() {
+        this.Percent = 5;
+        
         this.acquiredItems = new();
         this.spentItems = new();
     }
-
-    private void Awake() {
-        Init();
-    }
     
-    public void Event() {
+    public override void Event() {
         Debug.Log("HuntingEvent");
     }
 
-    public (string, string) EventResult() {
+    public override (string, string) EventResult() {
         var title = String.Empty;
         var content = new StringBuilder();
         

@@ -18,10 +18,10 @@ public class PlayerStatusCalories : PlayerStatus {  // Presenter
             GameEventGameOver.OnBadEnding.Invoke("아사했습니다.", "굶주림을 느낄 기력조차 남지 않았습니다.\n이제 남은 건 졸음 뿐입니다...");
         }
         else if (this.CurrentValue <= this.LimitValue) {
-            PlayerStatusManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.HUNGER);
+            PlayerStatusEffectManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.HUNGER);
         }
         else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.HUNGER)) {
-            PlayerStatusManager.Instance.StatusEffectRemove(GameControlType.StatusEffect.HUNGER);
+            PlayerStatusEffectManager.Instance.StatusEffectRemove(GameControlType.StatusEffect.HUNGER);
         }
     }
 }

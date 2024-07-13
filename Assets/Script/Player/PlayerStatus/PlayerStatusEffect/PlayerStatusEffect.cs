@@ -5,7 +5,7 @@ public abstract class PlayerStatusEffect : MonoBehaviour {
     public int Term { get; set; }
     public GameControlType.StatusEffect Type { get; set; }
     [field: SerializeField] public GameControlDictionary.RequireStatus StatusReducePercents { get; set; }
-
+    
     
     public abstract void Init();
     public abstract void StatusEffectAdd();

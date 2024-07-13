@@ -8,9 +8,8 @@ public class GameControlType {
     }
     
     public enum RandomEvent {
-        FARMING,    // 아이템 수집
-        HUNTING,    // 동물 사냥
-        DANGER,     // 위험에 빠짐
+        FARM,    // 아이템 수집
+        HUNT,    // 동물 사냥
         INJURED     // 부상을 입음
     }
 

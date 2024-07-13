@@ -15,10 +15,10 @@ public class PlayerStatusStamina : PlayerStatus {   // Presenter
         PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
         if (this.CurrentValue <= this.LimitValue) {
-            PlayerStatusManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.EXHAUSTION);
+            PlayerStatusEffectManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.EXHAUSTION);
         }
         else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.EXHAUSTION)) {
-            PlayerStatusManager.Instance.StatusEffectRemove(GameControlType.StatusEffect.EXHAUSTION);
+            PlayerStatusEffectManager.Instance.StatusEffectRemove(GameControlType.StatusEffect.EXHAUSTION);
         }
     }
 }

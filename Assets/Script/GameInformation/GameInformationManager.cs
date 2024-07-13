@@ -1,15 +1,12 @@
 using System;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameInformationManager : GameControlSingleton<GameInformationManager> {
-    [FormerlySerializedAs("playerInformation")] public PlayerInformationData playerInformationData;
-    [FormerlySerializedAs("worldInformation")] public WorldInformationData worldInformationData;
+    public PlayerInformationData playerInformationData;
+    public WorldInformationData worldInformationData;
     
     public delegate void GameDataEventHandler();
-    public static GameDataEventHandler OnPlayerGameDataSaveEvent;
-    public static GameDataEventHandler OnWorldGameDataSaveEvent;
     public static GameDataEventHandler OnGameDataSaveEvent;
     public static GameDataEventHandler OnGameDataDeleteEvent;
     
@@ -35,10 +32,6 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
 
         OnGameDataSaveEvent += PlayerDataSave;
         OnGameDataSaveEvent += WorldDataSave;
-        
-        OnPlayerGameDataSaveEvent += PlayerDataSave;
-        OnWorldGameDataSaveEvent += WorldDataSave;
-        
         OnGameDataDeleteEvent += GameDataDelete;
     }
 
@@ -47,12 +40,16 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     }
     
     private void PlayerDataSave() {
+        Debug.Log("Player Data Saved");
+        
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformationData);
         
         GameControlSaveLoad.Instance.CreateJsonFile(saveData, "Player");
     }
 
     private void WorldDataSave() {
+        Debug.Log("World Data Saved");
+
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.worldInformationData);
         
         GameControlSaveLoad.Instance.CreateJsonFile(saveData, "World");
