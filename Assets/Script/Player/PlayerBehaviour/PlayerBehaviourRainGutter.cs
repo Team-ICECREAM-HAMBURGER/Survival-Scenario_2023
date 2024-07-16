@@ -10,7 +10,7 @@ enum RainGutterPanelType {
     PASS
 }
 
-public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
+public class PlayerBehaviourRainGutter : PlayerBehaviour {
     [SerializeField] private GameObject rainGutterResultPanel;
     [SerializeField] private TMP_Text rainGutterResultTitle;
     [SerializeField] private TMP_Text rainGutterResultContent;
@@ -23,11 +23,11 @@ public class PlayerBehaviourRainGutter : MonoBehaviour, IPlayerBehaviour {
     private int spendTime;
     
 
-    public void Init() {
+    public override void Init() {
         this.spendTime = 1;
     }
 
-    public void Behaviour() {
+    public override void Behaviour() {
         if (!World.Instance.HasRainGutter) {    // Hasn't Rain Gutter
             World.Instance.HasRainGutter = true;
             

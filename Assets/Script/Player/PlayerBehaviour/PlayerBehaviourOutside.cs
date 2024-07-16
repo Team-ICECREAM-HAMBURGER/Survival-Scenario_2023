@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerBehaviourOutside : MonoBehaviour, IPlayerBehaviour {
-    public void Init() {
+public class PlayerBehaviourOutside : PlayerBehaviour {
+    public override void Init() {
     }
 
-    public void Behaviour() {
+    public override void Behaviour() {
         PanelUpdate();
         
         WorldInformation.OnCurrentLocationUpdate.Invoke(World.Instance.Location);

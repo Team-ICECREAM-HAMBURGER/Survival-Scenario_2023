@@ -2934,6 +2934,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 232328978}
+  - component: {fileID: 232328986}
   - component: {fileID: 232328983}
   - component: {fileID: 232328980}
   - component: {fileID: 232328979}
@@ -3097,6 +3098,28 @@ MonoBehaviour:
   fireLoadingPanel: {fileID: 1540002798}
   fireLoadingTitle: {fileID: 1317410252}
   fireTermText: {fileID: 605709592}
+--- !u!114 &232328986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232328977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5caca88a15a42209dd599685be6d81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Behaviour>k__BackingField:
+    m_keys: 0900000005000000060000000700000004000000080000000a000000
+    m_values:
+    - {fileID: 232328983}
+    - {fileID: 232328980}
+    - {fileID: 232328979}
+    - {fileID: 232328985}
+    - {fileID: 232328981}
+    - {fileID: 232328982}
+    - {fileID: 232328984}
 --- !u!1 &241293607
 GameObject:
   m_ObjectHideFlags: 0
@@ -12351,7 +12374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 77688230}
+  m_AnchoredPosition: {x: -399.9992, y: 79034840}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692

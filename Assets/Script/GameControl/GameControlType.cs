@@ -4,7 +4,14 @@ public class GameControlType {
         COOK,       // 요리하기
         FARM,       // 탐색하기
         HUNT,       // 사냥하기
-        WATER       // 빗물 모으기
+        WATER,       // 빗물 모으기
+        
+        MOVE,
+        SEARCH,
+        FIRE,
+        SHELTER,
+        OUTSIDE,
+        INVENTORY
     }
     
     public enum RandomEvent {

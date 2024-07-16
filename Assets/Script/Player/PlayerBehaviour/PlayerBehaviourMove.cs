@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class PlayerBehaviourMove : MonoBehaviour, IPlayerBehaviour {
-    public void Init() {
+public class PlayerBehaviourMove : PlayerBehaviour {
+    public override void Init() {
     }
     
-    public void Behaviour() {
+    public override void Behaviour() {
     }
 }

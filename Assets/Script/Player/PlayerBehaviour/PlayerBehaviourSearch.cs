@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Presenter
+public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
     [SerializeField] private GameObject searchRandomObject;
 
     [Space(10f)]
@@ -24,11 +24,11 @@ public class PlayerBehaviourSearch : MonoBehaviour, IPlayerBehaviour {   // Pres
     private int spendTime;
     
 
-    public void Init() {
-        this.spendTime = 5; // TODO: 0
+    public override void Init() {
+        this.spendTime = 5;
     }
 
-    public void Behaviour() {
+    public override void Behaviour() {
         // Player Status Update
         foreach (var VARIABLE in this.requireStatuses) {
             PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);

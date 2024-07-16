@@ -13,7 +13,7 @@ enum FirePanelType {
     PASS
 }
 
-public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
+public class PlayerBehaviourFire : PlayerBehaviour {
     [SerializeField] private Canvas fireCanvas;
     [SerializeField] private Canvas outsideCanvas;
     [SerializeField] private Canvas informationCanvas;
@@ -58,7 +58,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
     private FirePanelType fireResultPanelChangeType;
 
     
-    public void Init() {
+    public override void Init() {
         this.successPercent = 50f;
         this.spendTime = 0;
         this.fireTermRandomMin = 2;
@@ -77,7 +77,7 @@ public class PlayerBehaviourFire : MonoBehaviour, IPlayerBehaviour {
             );
     }
     
-    public void Behaviour() {
+    public override void Behaviour() {
         if (World.Instance.HasFire) {   // Already Have Fire; Change Panel
             this.fireResultPanelChangeType = FirePanelType.PASS;
             

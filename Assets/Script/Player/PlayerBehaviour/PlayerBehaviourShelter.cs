@@ -3,7 +3,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
+public class PlayerBehaviourShelter : PlayerBehaviour {
     [SerializeField] private GameObject shelterResultPanel;
     [SerializeField] private TMP_Text shelterResultTitle;
     [SerializeField] private TMP_Text shelterResultContent;
@@ -16,11 +16,11 @@ public class PlayerBehaviourShelter : MonoBehaviour, IPlayerBehaviour {
     private int spendTime;
 
     
-    public void Init() {
+    public override void Init() {
         this.spendTime = 2;
     }
 
-    public void Behaviour() {
+    public override void Behaviour() {
         if (!World.Instance.HasShelter) {
             World.Instance.HasShelter = true;
             

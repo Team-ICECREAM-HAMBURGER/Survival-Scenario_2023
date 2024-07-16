@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayerBehaviourInventory : MonoBehaviour, IPlayerBehaviour {
+public class PlayerBehaviourInventory : PlayerBehaviour {
     [Header("Item Information Panel")]
     [SerializeField] private TMP_Text itemInfoTitle;
     [SerializeField] private TMP_Text itemInfoContent;
@@ -22,7 +22,7 @@ public class PlayerBehaviourInventory : MonoBehaviour, IPlayerBehaviour {
     public static UnityEvent OnItemUpdate;
 
 
-    public void Init() {
+    public override void Init() {
         this.inventoryMaxValue = 25;
         this.inventoryCurrentValue = Player.Instance.Inventory.Sum(x => x.Value);
         
@@ -33,7 +33,7 @@ public class PlayerBehaviourInventory : MonoBehaviour, IPlayerBehaviour {
         OnItemUpdate.AddListener(Behaviour);
     }
 
-    public void Behaviour() {
+    public override void Behaviour() {
         this.itemInfoTitle.text = "인벤토리";
         this.itemInfoContent.text = "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다.";
         

@@ -13,6 +13,7 @@ using System;
 [CustomPropertyDrawer(typeof(GameControlDictionary.RequireStatus))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.PlayerStatus))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.PlayerStatusEffect))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.PlayerBehaviour))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.GameRandomEvent))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
