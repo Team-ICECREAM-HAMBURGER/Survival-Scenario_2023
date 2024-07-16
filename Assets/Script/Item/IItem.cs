@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface IItem {
     public GameControlType.Item ItemType { get; }
-    public GameControlType.Behaviour ItemGetType { get; }
+    public GameControlType.ItemGetRoot ItemGetType { get; }
     public string Name { get; }
     public string Content { get; }
     

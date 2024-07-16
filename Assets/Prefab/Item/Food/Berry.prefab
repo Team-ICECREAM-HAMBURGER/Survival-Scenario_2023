@@ -322,7 +322,7 @@ MonoBehaviour:
     \uC5F4\uB9E4\uC785\uB2C8\uB2E4.\n\n- \uD6A8\uACFC\n\uCCB4\uB825 +5, \uC218\uBD84
     +5, \uCE7C\uB85C\uB9AC +3"
   <RandomPercent>k__BackingField: 12
-  <RandomWeight>k__BackingField: 0
+  <RandomWeight>k__BackingField: 0.05660377
   <RandomMaxValue>k__BackingField: 1
   <InventoryNameText>k__BackingField: {fileID: 4605849062581616038}
   <InventoryCountText>k__BackingField: {fileID: 4517365856469001835}
@@ -330,8 +330,8 @@ MonoBehaviour:
   itemUseButton: {fileID: 3263660297054884913}
   itemDropButton: {fileID: 1221039130360904124}
   requireStatuses:
-    m_keys: 000000000200000003000000
-    m_values: 050000000500000003000000
+    m_keys: 
+    m_values: []
 --- !u!1 &3760642227140698493
 GameObject:
   m_ObjectHideFlags: 0

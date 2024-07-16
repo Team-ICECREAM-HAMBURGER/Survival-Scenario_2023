@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public abstract class ItemMaterial : MonoBehaviour, IItem {
     [field: SerializeField] public GameControlType.Item ItemType { get; set; }
-    [field: SerializeField] public GameControlType.Behaviour ItemGetType { get; set; }
+    [field: SerializeField] public GameControlType.ItemGetRoot ItemGetType { get; set; }
 
     [field: SerializeField] public string Name { get; set; }
     [field: SerializeField] public string Content { get; set; }

@@ -1,16 +1,10 @@
 public class GameControlType {
     public enum Behaviour {
-        CRAFT,      // 제작하기
-        COOK,       // 요리하기
-        FARM,       // 탐색하기
-        HUNT,       // 사냥하기
-        WATER,       // 빗물 모으기
-        
+        OUTSIDE,
         MOVE,
         SEARCH,
         FIRE,
         SHELTER,
-        OUTSIDE,
         INVENTORY
     }
     
@@ -51,6 +45,14 @@ public class GameControlType {
         HUNTING_TOOL,
         RAIN_GUTTER,
         SHELTER,
+    }
+
+    public enum ItemGetRoot {
+        CRAFT,      // 제작하기
+        COOK,       // 요리하기
+        FARM,       // 탐색하기
+        HUNT,       // 사냥하기
+        WATER,       // 빗물 모으기
     }
     
     public enum Status {

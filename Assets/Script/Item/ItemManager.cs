@@ -104,26 +104,26 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     private void ItemGetTypeSort() {
         foreach (var VARIABLE in this.Items) {  
             switch (VARIABLE.Value.ItemGetType) {
-                case GameControlType.Behaviour.FARM :
+                case GameControlType.ItemGetRoot.FARM :
                     this.FarmItems[VARIABLE.Key] = VARIABLE.Value;
                     
                     break;
                 
-                case GameControlType.Behaviour.HUNT :
+                case GameControlType.ItemGetRoot.HUNT :
                     this.HuntItems[VARIABLE.Key] = VARIABLE.Value;
                     
                     break;
                 
-                case GameControlType.Behaviour.CRAFT :
+                case GameControlType.ItemGetRoot.CRAFT :
                     this.CraftItems[VARIABLE.Key] = VARIABLE.Value;
                     
                     break;
                 
-                case GameControlType.Behaviour.COOK :
+                case GameControlType.ItemGetRoot.COOK :
                     this.CookItems[VARIABLE.Key] = VARIABLE.Value;
                     
                     break;
-                case GameControlType.Behaviour.WATER:
+                case GameControlType.ItemGetRoot.WATER:
                     this.WaterItems[VARIABLE.Key] = VARIABLE.Value;
                     
                     break;
