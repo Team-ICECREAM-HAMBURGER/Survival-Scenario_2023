@@ -1,10 +1,11 @@
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameInformationManager : GameControlSingleton<GameInformationManager> {
-    public PlayerInformationData playerInformationData;
-    public WorldInformationData worldInformationData;
+    [FormerlySerializedAs("playerInformationData")] public GameInformationPlayerData gameInformationPlayerData;
+    [FormerlySerializedAs("worldInformationData")] public GameInformationWorldData gameInformationWorldData;
     
     public delegate void GameDataEventHandler();
     public static GameDataEventHandler OnGameDataSaveEvent;
@@ -14,20 +15,20 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     private void Init() {
         // Save File Load/New
         try {
-            this.playerInformationData = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformationData>("Player");
-            this.worldInformationData = GameControlSaveLoad.Instance.LoadJsonFile<WorldInformationData>("World");
+            this.gameInformationPlayerData = GameControlSaveLoad.Instance.LoadJsonFile<GameInformationPlayerData>("Player");
+            this.gameInformationWorldData = GameControlSaveLoad.Instance.LoadJsonFile<GameInformationWorldData>("World");
         }
         catch (FileNotFoundException e) {
             Debug.Log("Save File Created.");
 
-            var playerInit = GameControlSaveLoad.Instance.ObjectToJson(new PlayerInformationData());
-            var worldInit = GameControlSaveLoad.Instance.ObjectToJson(new WorldInformationData());
+            var playerInit = GameControlSaveLoad.Instance.ObjectToJson(new GameInformationPlayerData());
+            var worldInit = GameControlSaveLoad.Instance.ObjectToJson(new GameInformationWorldData());
             
             GameControlSaveLoad.Instance.CreateJsonFile(playerInit, "Player");
             GameControlSaveLoad.Instance.CreateJsonFile(worldInit, "World");
             
-            this.playerInformationData = GameControlSaveLoad.Instance.LoadJsonFile<PlayerInformationData>("Player");
-            this.worldInformationData = GameControlSaveLoad.Instance.LoadJsonFile<WorldInformationData>("World");
+            this.gameInformationPlayerData = GameControlSaveLoad.Instance.LoadJsonFile<GameInformationPlayerData>("Player");
+            this.gameInformationWorldData = GameControlSaveLoad.Instance.LoadJsonFile<GameInformationWorldData>("World");
         }
 
         OnGameDataSaveEvent += PlayerDataSave;
@@ -42,7 +43,7 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     private void PlayerDataSave() {
         Debug.Log("Player Data Saved");
         
-        var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.playerInformationData);
+        var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.gameInformationPlayerData);
         
         GameControlSaveLoad.Instance.CreateJsonFile(saveData, "Player");
     }
@@ -50,14 +51,14 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     private void WorldDataSave() {
         Debug.Log("World Data Saved");
 
-        var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.worldInformationData);
+        var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.gameInformationWorldData);
         
         GameControlSaveLoad.Instance.CreateJsonFile(saveData, "World");
     }
 
     private void GameDataDelete() {
         GameControlSaveLoad.Instance.DeleteJsonFile();
-        this.playerInformationData = null;
-        this.worldInformationData = null;
+        this.gameInformationPlayerData = null;
+        this.gameInformationWorldData = null;
     }
 }

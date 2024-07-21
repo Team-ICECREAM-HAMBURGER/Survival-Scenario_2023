@@ -5,14 +5,14 @@ public class PlayerStatusStamina : PlayerStatus {   // Presenter
         this.LimitValue = 30f;
         this.CurrentValue = Player.Instance.Status[this.Type];
         
-        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public override void StatusUpdate(float value) {
         this.CurrentValue += value;
         Player.Instance.Status[this.Type] = this.CurrentValue;
         
-        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
         if (this.CurrentValue <= this.LimitValue) {
             PlayerStatusEffectManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.EXHAUSTION);

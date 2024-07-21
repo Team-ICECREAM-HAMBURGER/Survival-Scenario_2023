@@ -1,14 +1,15 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class World : GameControlSingleton<World> {  // Model
     private const int DAYTERM = 500;
     
-    [SerializeField] private WorldInformation worldInformation;
+    [FormerlySerializedAs("worldInformation")] [SerializeField] private GameInformationMonitorWorld gameInformationMonitorWorld;
     
-    private WorldInformationData informationData;
+    private GameInformationWorldData data;
     private float weatherPercent;
     private int weatherTime;
     
@@ -19,7 +20,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         private set {
             this.timeDay = value;
-            this.informationData.timeDay = value;
+            this.data.timeDay = value;
         }
     }
 
@@ -30,7 +31,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         private set {
             this.timeTerm = value;
-            this.informationData.timeTerm = value;
+            this.data.timeTerm = value;
         }
     }
 
@@ -41,7 +42,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         private set {
             this.location = value;
-            this.informationData.location = value;
+            this.data.location = value;
         }
     }
 
@@ -52,7 +53,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         private set {
             this.weather = value;
-            this.informationData.weather = value;
+            this.data.weather = value;
         }
     }
 
@@ -63,7 +64,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         set {
             this.hasShelter = value;
-            this.informationData.hasShelter = value;
+            this.data.hasShelter = value;
         }
     }
 
@@ -75,7 +76,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         set {
             this.hasRainGutter = value;
-            this.informationData.hasRainGutter = value;
+            this.data.hasRainGutter = value;
         }
     }
 
@@ -86,7 +87,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         set {
             this.hasFire = value;
-            this.informationData.hasFire = value;
+            this.data.hasFire = value;
         }
     }
 
@@ -97,7 +98,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         set {
             this.hasWater = value;
-            this.informationData.hasWater = value;
+            this.data.hasWater = value;
         }
     }
 
@@ -108,7 +109,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         set {
             this.isWinter = value;
-            this.informationData.isWinter = value;
+            this.data.isWinter = value;
         }
     }
     private int fireTerm;
@@ -118,31 +119,31 @@ public class World : GameControlSingleton<World> {  // Model
         }
         set {
             this.fireTerm = value;
-            this.informationData.fireTerm = value;
+            this.data.fireTerm = value;
         }
     }
     
     
     private void Init() {
         try {
-            this.informationData = GameInformationManager.Instance.worldInformationData;
+            this.data = GameInformationManager.Instance.gameInformationWorldData;
             
-            this.TimeDay = this.informationData.timeDay;
-            this.TimeTerm = this.informationData.timeTerm;
-            this.Weather = this.informationData.weather;
-            this.Location = this.informationData.location;
-            this.HasShelter = this.informationData.hasShelter;
-            this.HasRainGutter = this.informationData.hasRainGutter;
-            this.HasWater = this.informationData.hasWater;
-            this.HasFire = this.informationData.hasFire;
-            this.IsWinter = this.informationData.isWinter;
-            this.FireTerm = this.informationData.fireTerm;
+            this.TimeDay = this.data.timeDay;
+            this.TimeTerm = this.data.timeTerm;
+            this.Weather = this.data.weather;
+            this.Location = this.data.location;
+            this.HasShelter = this.data.hasShelter;
+            this.HasRainGutter = this.data.hasRainGutter;
+            this.HasWater = this.data.hasWater;
+            this.HasFire = this.data.hasFire;
+            this.IsWinter = this.data.isWinter;
+            this.FireTerm = this.data.fireTerm;
 
             this.weatherTime = 0;
             this.weatherPercent = 20f;
             
             // Presenter Init //
-            this.worldInformation.Init();
+            this.gameInformationMonitorWorld.Init();
         }
         catch (NullReferenceException e) {
             Debug.Log("Game Over");
@@ -165,7 +166,7 @@ public class World : GameControlSingleton<World> {  // Model
             FireTimeUpdate(-value);
         }
         
-        WorldInformation.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
+        GameInformationMonitorWorld.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
         WeatherUpdate(value);
     }
 
@@ -187,7 +188,7 @@ public class World : GameControlSingleton<World> {  // Model
         }
         
         Debug.Log("날씨: " + this.Weather.Item2);
-        WorldInformation.OnCurrentWeatherUpdate.Invoke(this.Weather.Item2);
+        GameInformationMonitorWorld.OnCurrentWeatherUpdate.Invoke(this.Weather.Item2);
     }
     
     private void FireTimeUpdate(int value) {

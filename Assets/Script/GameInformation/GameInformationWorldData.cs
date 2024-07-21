@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public class WorldInformationData {
+public class GameInformationWorldData {
     public int timeTerm = 1;
     public int timeDay = 1;
     public string location = "조난 지역";

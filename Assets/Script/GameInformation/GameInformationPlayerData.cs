@@ -2,7 +2,7 @@ using System;
 using Random = UnityEngine.Random;
 
 [Serializable]
-public class PlayerInformationData {
+public class GameInformationPlayerData {
     public string name = "";
     public int id = 0000;
     public GameControlDictionary.Inventory inventory = new() {

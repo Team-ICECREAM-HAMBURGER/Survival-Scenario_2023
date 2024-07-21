@@ -1,20 +1,15 @@
-using UnityEngine;
-using UnityEngine.Events;
-
-public class PlayerStatusEffectExhaustion : PlayerStatusEffect {
+public class PlayerStatusEffectColdness : PlayerStatusEffect {  // Presenter
     public override void Init() {
-        this.Name = "탈진";
+        this.Name = "저채온증";
         this.Term = 1;
-        // this.PanelText;
-        this.Type = GameControlType.StatusEffect.EXHAUSTION;
-        // this.StatusReducePercents
+        this.Type = GameControlType.StatusEffect.COLDNESS;
         
-        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
     
     public override void StatusEffectAdd() {
         Player.Instance.StatusEffect.TryAdd(this.Type, this.Term);
-        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
     
     public override void StatusEffect() {
@@ -25,6 +20,6 @@ public class PlayerStatusEffectExhaustion : PlayerStatusEffect {
     
     public override void StatusEffectRemove() {
         Player.Instance.StatusEffect.Remove(this.Type);
-        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
 }

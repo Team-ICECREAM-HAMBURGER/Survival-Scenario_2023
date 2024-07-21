@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : GameControlSingleton<Player> { // Model
-    [SerializeField] private PlayerInformation playerInformation;
+    [SerializeField] private GameInformationMonitorPlayer gameInformationMonitorPlayer;
     
-    private PlayerInformationData informationData;
+    private GameInformationPlayerData data;
     
     private GameControlDictionary.Inventory inventory;
     public GameControlDictionary.Inventory Inventory {
@@ -13,7 +14,7 @@ public class Player : GameControlSingleton<Player> { // Model
         }
         set {
             this.inventory = value;
-            this.informationData.inventory = value;
+            this.data.inventory = value;
         }
     } // <Enum, amount>
 
@@ -24,7 +25,7 @@ public class Player : GameControlSingleton<Player> { // Model
         }
         set {
             this.status = value;
-            this.informationData.status = value;
+            this.data.status = value;
         }
     } // <Enum, float>
 
@@ -35,7 +36,7 @@ public class Player : GameControlSingleton<Player> { // Model
         }
         set {
             this.statusEffect = value;
-            this.informationData.statusEffect = value;
+            this.data.statusEffect = value;
         }
     } // <Enum, term>
 
@@ -46,7 +47,7 @@ public class Player : GameControlSingleton<Player> { // Model
         }
         set { 
             this.playerName = value;
-            this.informationData.name = value;
+            this.data.name = value;
         }
     }
 
@@ -57,22 +58,21 @@ public class Player : GameControlSingleton<Player> { // Model
         }
         set {
             this.playerID = value;
-            this.informationData.id = value;
+            this.data.id = value;
         }
     }
     
 
     private void Init() {
         try {
-            this.informationData = GameInformationManager.Instance.playerInformationData;
-            this.Inventory = this.informationData.inventory;
-            this.Status = this.informationData.status;
-            this.StatusEffect = this.informationData.statusEffect;
-            this.PlayerName = this.informationData.name;
-            this.PlayerID = this.informationData.id;
+            this.data = GameInformationManager.Instance.gameInformationPlayerData;
+            this.Inventory = this.data.inventory;
+            this.Status = this.data.status;
+            this.StatusEffect = this.data.statusEffect;
+            this.PlayerName = this.data.name;
+            this.PlayerID = this.data.id;
             
-            // TODO: 2024.07.07 --
-            this.playerInformation.Init();
+            this.gameInformationMonitorPlayer.Init();
 
             PlayerStatusManager.Instance.Init();
             PlayerStatusEffectManager.Instance.Init();
@@ -85,11 +85,5 @@ public class Player : GameControlSingleton<Player> { // Model
     
     private void Awake() {
         Init();
-    }
-
-    public void InventoryUpdate(GameControlType.Item type, int value) {
-        if (!this.Inventory.TryAdd(type, value)) {
-            this.Inventory[type] += value;
-        }
     }
 }

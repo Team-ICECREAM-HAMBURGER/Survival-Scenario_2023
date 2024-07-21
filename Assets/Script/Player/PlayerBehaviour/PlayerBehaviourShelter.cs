@@ -30,7 +30,7 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
             GameInformationManager.OnGameDataSaveEvent();
         }
         
-        WorldInformation.OnCurrentLocationUpdate.Invoke("휴식처");
+        GameInformationMonitorWorld.OnCurrentLocationUpdate.Invoke("휴식처");
     }
 
     private void PanelUpdate() {

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManagerIntro : MonoBehaviour {
     public void Resume() {
-        if (GameInformationManager.Instance.playerInformationData is null) {
+        if (GameInformationManager.Instance.gameInformationPlayerData is null) {
             Debug.Log("XX");
             return;
         }

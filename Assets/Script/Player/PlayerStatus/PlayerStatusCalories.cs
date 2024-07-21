@@ -5,14 +5,14 @@ public class PlayerStatusCalories : PlayerStatus {  // Presenter
         this.LimitValue = 15f;
         this.CurrentValue = Player.Instance.Status[this.Type];
 
-        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public override void StatusUpdate(float value) {
         this.CurrentValue += value;
         Player.Instance.Status[this.Type] = this.CurrentValue;
         
-        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
         
         if (this.CurrentValue <= 0) {   // Player Death
             GameEventGameOver.OnBadEnding.Invoke("아사했습니다.", "굶주림을 느낄 기력조차 남지 않았습니다.\n이제 남은 건 졸음 뿐입니다...");

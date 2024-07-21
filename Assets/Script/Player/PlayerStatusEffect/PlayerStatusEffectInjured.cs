@@ -14,7 +14,7 @@ public class PlayerStatusEffectInjured : PlayerStatusEffect {   // Presenter
         
         if (Player.Instance.StatusEffect.ContainsKey(this.Type)) {
             this.Term = Player.Instance.StatusEffect[this.Type];
-            PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+            GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
         }
     }
 
@@ -31,7 +31,7 @@ public class PlayerStatusEffectInjured : PlayerStatusEffect {   // Presenter
         this.limitTimeTerm = World.Instance.TimeTerm + this.Term;
         
         Player.Instance.StatusEffect.TryAdd(this.Type, this.Term);
-        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
     
     public override void StatusEffect() {
@@ -44,11 +44,11 @@ public class PlayerStatusEffectInjured : PlayerStatusEffect {   // Presenter
             PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
         }
         
-        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
     
     public override void StatusEffectRemove() {
         Player.Instance.StatusEffect.Remove(this.Type);
-        PlayerInformation.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
 }

@@ -1,10 +1,9 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class PlayerInformation : MonoBehaviour {    // Presenter
+public class GameInformationMonitorPlayer : MonoBehaviour {    // Presenter
     [Header("Status Effect Monitor")]
     [SerializeField] private GameObject statusEffectMonitorPanel;
     [SerializeField] private GameObject statusEffectMonitorContent;

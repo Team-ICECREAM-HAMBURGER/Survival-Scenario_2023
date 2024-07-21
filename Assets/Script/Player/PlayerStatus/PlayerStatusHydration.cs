@@ -5,14 +5,14 @@ public class PlayerStatusHydration : PlayerStatus { // Presenter
         this.LimitValue = 30f;
         this.CurrentValue = Player.Instance.Status[this.Type];
         
-        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
     public override void StatusUpdate(float value) {
         this.CurrentValue += value;
         Player.Instance.Status[this.Type] = this.CurrentValue;
         
-        PlayerInformation.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
 
         if (this.CurrentValue <= 0) {   // Player Death
             GameEventGameOver.OnBadEnding.Invoke("갈사했습니다.", "목이 타들어갑니다.\n한계를 느낄 무렵 시야가 흐려지기 시작합니다...");

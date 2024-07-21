@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
     [field: SerializeField] public GameControlDictionary.PlayerStatus Statuses { get; private set; }

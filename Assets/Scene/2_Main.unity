@@ -5880,7 +5880,7 @@ GameObject:
   - component: {fileID: 421394338}
   - component: {fileID: 421394339}
   m_Layer: 5
-  m_Name: Player Information
+  m_Name: Player Information Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12373,7 +12373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 79652480}
+  m_AnchoredPosition: {x: -399.9992, y: 80930750}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -22731,7 +22731,7 @@ GameObject:
   - component: {fileID: 2025123717}
   - component: {fileID: 2025123716}
   m_Layer: 5
-  m_Name: Canvas Information
+  m_Name: Canvas Information Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24023,7 +24023,7 @@ GameObject:
   - component: {fileID: 2119271095}
   - component: {fileID: 2119271096}
   m_Layer: 5
-  m_Name: World Information
+  m_Name: World Information Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class WorldInformation : MonoBehaviour {
+public class GameInformationMonitorWorld : MonoBehaviour {
     [SerializeField] private TMP_Text currentLocation;
     [SerializeField] private TMP_Text currentWeather;
     [SerializeField] private TMP_Text currentDayNight;
