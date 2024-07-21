@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Player : GameControlSingleton<Player> { // Model
     [SerializeField] private GameInformationMonitorPlayer gameInformationMonitorPlayer;
-    
+
     private GameInformationPlayerData data;
     
     private GameControlDictionary.Inventory inventory;

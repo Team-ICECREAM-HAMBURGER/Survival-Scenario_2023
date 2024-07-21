@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 
 public class PlayerBehaviourShelter : PlayerBehaviour {
+    [Space(25f)]
+    
     [SerializeField] private GameObject shelterResultPanel;
     [SerializeField] private TMP_Text shelterResultTitle;
     [SerializeField] private TMP_Text shelterResultContent;
@@ -14,19 +16,27 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
     [SerializeField] private TMP_Text shelterLoadingTitle;
 
     private int spendTime;
+    private string shelterResultTitleText;
+    private StringBuilder shelterResultContentText;
 
     
     public override void Init() {
         this.spendTime = 2;
+        this.shelterResultTitleText = String.Empty;
+        this.shelterResultContentText = new();
+    }
+
+    private bool CanBehaviour() {
+        return World.Instance.HasShelter;
     }
 
     public override void Behaviour() {
-        if (!World.Instance.HasShelter) {
-            World.Instance.HasShelter = true;
+        if (!CanBehaviour()) {
+            World.Instance.HasShelter = true; // TODO: World -> PlayerBehaviourManager
             
             PanelUpdate();
             
-            World.Instance.TimeUpdate(this.spendTime);
+            World.Instance.TimeUpdate(this.spendTime);  // TODO: World -> PlayerBehaviourManager
             GameInformationManager.OnGameDataSaveEvent();
         }
         
@@ -34,19 +44,19 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
     }
 
     private void PanelUpdate() {
-        var title = String.Empty;
-        var content = new StringBuilder();
+        this.shelterResultTitleText = String.Empty;
+        this.shelterResultContentText.Clear();
         
-        title = "작업 완료";
-        content.Clear();
+        this.shelterResultTitleText = "작업 완료";
+        this.shelterResultContentText.Clear();
 
-        content.Append("- 결과\n");
-        content.Append("휴식처를 설치하였다.\n");
-        content.Append("이제 좀 더 편안한 생활을 즐길 수 있다.\n");
+        this.shelterResultContentText.Append("- 결과\n");
+        this.shelterResultContentText.Append("휴식처를 설치하였다.\n");
+        this.shelterResultContentText.Append("이제 좀 더 편안한 생활을 즐길 수 있다.\n");
 
         this.shelterLoadingTitle.text = "휴식처를 설치하는 중...";
-        this.shelterResultTitle.text = title;
-        this.shelterResultContent.text = content.ToString();
+        this.shelterResultTitle.text = this.shelterResultTitleText;
+        this.shelterResultContent.text = this.shelterResultContentText.ToString();
         
         this.shelterLoadingPanel.SetActive(true);
         this.shelterResultPanel.SetActive(true);

@@ -6,5 +6,5 @@ public abstract class GameRandomEvent : MonoBehaviour {
 
     public abstract void Init();
     public abstract void Event();
-    public abstract (string, string) EventResult();
+    // public abstract (string, string) EventResult();
 }

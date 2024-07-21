@@ -2976,14 +2976,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebce65318014469e83f28ab08240a508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRandomObject: {fileID: 1152889173}
-  requireStatuses:
-    m_keys: 00000000010000000200000003000000
-    m_values:
-    - 5
-    - 9
-    - 10
-    - 7
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 244481242}
+        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481241}
+        m_TargetAssemblyTypeName: PlayerStatusBodyHeat, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -9
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481240}
+        m_TargetAssemblyTypeName: PlayerStatusHydration, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481239}
+        m_TargetAssemblyTypeName: PlayerStatusCalories, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -7
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   searchResultPanel: {fileID: 2048229646}
   searchResultTitle: {fileID: 929636683}
   searchResultContent: {fileID: 951291988}
@@ -3001,6 +3044,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cfa354a749e7843bd43668338b5576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &232328981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3013,6 +3059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb9eb528d8d4461b484c3ba91cc99df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   rainGutterResultPanel: {fileID: 2048229646}
   rainGutterResultTitle: {fileID: 929636683}
   rainGutterResultContent: {fileID: 951291988}
@@ -3030,6 +3079,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ded2558204f4a0898acb64f92d48171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   shelterResultPanel: {fileID: 2048229646}
   shelterResultTitle: {fileID: 929636683}
   shelterResultContent: {fileID: 951291988}
@@ -3047,6 +3099,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76aab4745bbc4854e81616f9f81bc453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &232328984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3059,10 +3114,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd8b11dcab37284fab006847aebe57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   itemInfoTitle: {fileID: 744930007}
   itemInfoContent: {fileID: 1141790513}
-  inventoryAmountIndicator: {fileID: 245254218}
-  inventoryAmountValueText: {fileID: 1178572190}
+  inventorySpaceText: {fileID: 1178572190}
+  inventorySpaceIndicator: {fileID: 245254218}
 --- !u!114 &232328985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3075,17 +3133,115 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b0f1465340f491abafd64344d149b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 244481242}
+        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481241}
+        m_TargetAssemblyTypeName: PlayerStatusBodyHeat, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481240}
+        m_TargetAssemblyTypeName: PlayerStatusHydration, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -7
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481239}
+        m_TargetAssemblyTypeName: PlayerStatusCalories, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -8
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPlayerInventoryUpdateMakeFire:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3981105636338222117, guid: 87346f543a018414c893f7ce732a353d, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterialWood, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8320699217119199662, guid: e8e783d1d838fac498f117b76057d62a, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterialTinder, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6057748316399199810, guid: 27b20aafbeb1896488e7a013b9669bda, type: 3}
+        m_TargetAssemblyTypeName: ItemToolFireTool, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPlayerInventoryUpdateAddWood:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3981105636338222117, guid: 87346f543a018414c893f7ce732a353d, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterialWood, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   fireCanvas: {fileID: 1057916463}
   outsideCanvas: {fileID: 1589722235}
   informationCanvas: {fileID: 2025123718}
   sideMenuCanvas: {fileID: 205796672}
-  requireStatuses:
-    m_keys: 00000000010000000200000003000000
-    m_values:
-    - 10
-    - 5
-    - 7
-    - 8
   requireItemsFire:
     m_keys: 0d0000000c0000000e000000
     m_values: 020000000100000001000000
@@ -3119,6 +3275,93 @@ MonoBehaviour:
     - {fileID: 232328985}
     - {fileID: 232328982}
     - {fileID: 232328984}
+  OnPlayerBehaviourInit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 232328983}
+        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 232328980}
+        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 232328979}
+        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 232328985}
+        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 232328981}
+        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 232328982}
+        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 232328984}
+        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &241293607
 GameObject:
   m_ObjectHideFlags: 0
@@ -3356,6 +3599,57 @@ MonoBehaviour:
     - {fileID: 244481241}
     - {fileID: 244481240}
     - {fileID: 244481239}
+  OnPlayerStatusInit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 244481242}
+        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481241}
+        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481240}
+        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 244481239}
+        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &245254216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3367,7 +3661,7 @@ GameObject:
   - component: {fileID: 245254217}
   - component: {fileID: 245254218}
   m_Layer: 5
-  m_Name: Amount Indicator
+  m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5001,7 +5295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11e4d498aa3574aa519096533a58e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldInformation: {fileID: 2119271096}
+  gameInformationMonitorWorld: {fileID: 2119271096}
 --- !u!1 &361273410
 GameObject:
   m_ObjectHideFlags: 0
@@ -5543,9 +5837,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc06f6a664c049499438b788f89cf622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryViewPortContent: {fileID: 721363909}
-  <ItemFoods>k__BackingField:
-    m_keys: 000000000100000002000000030000000400000005000000
+  <Item>k__BackingField:
+    m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f00000010000000
     m_values:
     - {fileID: 4047896815937595676, guid: 37727420f6cd208478f0af0a2eca03fe, type: 3}
     - {fileID: 1898179926880879642, guid: 4f5c0470882e0f24ea6f9479829be33c, type: 3}
@@ -5553,9 +5846,6 @@ MonoBehaviour:
     - {fileID: 3163646709705015387, guid: 415535f14f76c5744a0f2e533a5377b3, type: 3}
     - {fileID: 841545645020198800, guid: b127a649438af2f429dddd3c62ef55c8, type: 3}
     - {fileID: 3474361351651763349, guid: 5431e95b689d79b4e8b4b780b862f72d, type: 3}
-  <ItemMaterials>k__BackingField:
-    m_keys: 060000000700000008000000090000000a0000000b0000000c0000000d000000
-    m_values:
     - {fileID: 2813977879788944730, guid: 9455ca63ad634eb4f9746cfa2ef03979, type: 3}
     - {fileID: 5435927613267526264, guid: 23230babcf28a4db88974c0008e0a43b, type: 3}
     - {fileID: 4432992011076541510, guid: 5afdde099adb53c49bb795ff42a87c56, type: 3}
@@ -5564,12 +5854,216 @@ MonoBehaviour:
     - {fileID: 559782221328864910, guid: 1034177d1cd0f3c45842b26530bfc32e, type: 3}
     - {fileID: 8320699217119199662, guid: e8e783d1d838fac498f117b76057d62a, type: 3}
     - {fileID: 3981105636338222117, guid: 87346f543a018414c893f7ce732a353d, type: 3}
-  <ItemTools>k__BackingField:
-    m_keys: 0e0000000f00000010000000
-    m_values:
     - {fileID: 6057748316399199810, guid: 27b20aafbeb1896488e7a013b9669bda, type: 3}
     - {fileID: 5730780904794600870, guid: 3161e4723525a814aadcb9a4c94df569, type: 3}
     - {fileID: 6151042530270224082, guid: 57b28de3e3cb245c2a524b67d8790ff3, type: 3}
+  OnItemInit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4047896815937595676, guid: 37727420f6cd208478f0af0a2eca03fe, type: 3}
+        m_TargetAssemblyTypeName: ItemFood, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1898179926880879642, guid: 4f5c0470882e0f24ea6f9479829be33c, type: 3}
+        m_TargetAssemblyTypeName: ItemFood, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6303732779577785469, guid: e85e6465b206dd14baca141ee3874760, type: 3}
+        m_TargetAssemblyTypeName: ItemFood, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3163646709705015387, guid: 415535f14f76c5744a0f2e533a5377b3, type: 3}
+        m_TargetAssemblyTypeName: ItemFood, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 841545645020198800, guid: b127a649438af2f429dddd3c62ef55c8, type: 3}
+        m_TargetAssemblyTypeName: ItemFood, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3474361351651763349, guid: 5431e95b689d79b4e8b4b780b862f72d, type: 3}
+        m_TargetAssemblyTypeName: ItemFood, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2813977879788944730, guid: 9455ca63ad634eb4f9746cfa2ef03979, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterial, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5435927613267526264, guid: 23230babcf28a4db88974c0008e0a43b, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterial, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4432992011076541510, guid: 5afdde099adb53c49bb795ff42a87c56, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterial, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4522060015118556093, guid: 55bccbc4ea6afd24197bd8ce510b6e5b, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterial, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5780296612314296313, guid: ca424f303f41b8f469d532169dd58cda, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterial, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 559782221328864910, guid: 1034177d1cd0f3c45842b26530bfc32e, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterial, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8320699217119199662, guid: e8e783d1d838fac498f117b76057d62a, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterial, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3981105636338222117, guid: 87346f543a018414c893f7ce732a353d, type: 3}
+        m_TargetAssemblyTypeName: ItemMaterial, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6057748316399199810, guid: 27b20aafbeb1896488e7a013b9669bda, type: 3}
+        m_TargetAssemblyTypeName: ItemTool, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5730780904794600870, guid: 3161e4723525a814aadcb9a4c94df569, type: 3}
+        m_TargetAssemblyTypeName: ItemTool, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6151042530270224082, guid: 57b28de3e3cb245c2a524b67d8790ff3, type: 3}
+        m_TargetAssemblyTypeName: ItemTool, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 721363909}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &390710426
 GameObject:
   m_ObjectHideFlags: 0
@@ -12373,7 +12867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 80930750}
+  m_AnchoredPosition: {x: -399.9992, y: 87193180}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -15131,7 +15625,7 @@ GameObject:
   - component: {fileID: 1178572191}
   - component: {fileID: 1178572190}
   m_Layer: 5
-  m_Name: Amount Value
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16007,7 +16501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae64de88416c488ab3ed889076ab1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInformation: {fileID: 421394339}
+  gameInformationMonitorPlayer: {fileID: 421394339}
 --- !u!1 &1248169756
 GameObject:
   m_ObjectHideFlags: 0
@@ -23909,7 +24403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2100143624}
   m_Layer: 5
-  m_Name: Inventory Amount Indicator
+  m_Name: Inventory Space Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

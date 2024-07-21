@@ -2,44 +2,36 @@ using TMPro;
 using UnityEngine;
 
 public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
-    [SerializeField] private GameObject searchRandomObject;
+    [Space(25f)]
 
-    [Space(10f)]
-
-    [Header("Require Status")]
-    [field: SerializeField] private GameControlDictionary.RequireStatus requireStatuses;
-    
-    [Space(10f)]
-
+    [Header("Behaviour Result Panel")]
     [SerializeField] private GameObject searchResultPanel;
     [SerializeField] private TMP_Text searchResultTitle;
     [SerializeField] private TMP_Text searchResultContent;
 
-    [Space(10f)]
+    [Space(25f)]
     
+    [Header("Behaviour Loading Panel")]
     [SerializeField] private GameObject searchLoadingPanel;
     [SerializeField] private TMP_Text searchLoadingTitle;
 
-    private GameRandomEvent randomEvent;
     private int spendTime;
     
 
     public override void Init() {
+        this.OnPlayerStatusUpdate = new();
         this.spendTime = 5;
     }
 
     public override void Behaviour() {
         // Player Status Update
-        foreach (var VARIABLE in this.requireStatuses) {
-            PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
-        }
+        this.OnPlayerStatusUpdate.Invoke();
         
         // Player Status Effects Invoke
         PlayerStatusEffectManager.Instance.StatusEffectInvoke();
         
         // Random Event; Search
-        this.randomEvent = GameRandomEventManager.Instance.RandomEventPercentSelect();
-        this.randomEvent.Event();
+        PlayerBehaviourManager.Instance.RandomEvent();
         
         // Word Info. Update
         World.Instance.TimeUpdate(this.spendTime);
@@ -47,7 +39,7 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         // Game Data Update
         GameInformationManager.OnGameDataSaveEvent();
         
-        PanelUpdate(this.randomEvent.EventResult());
+        // PanelUpdate(this.randomEvent.EventResult());
     }
     
     private void PanelUpdate((string, string) value) {

@@ -1,12 +1,16 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
     [field: SerializeField] public GameControlDictionary.PlayerStatus Statuses { get; private set; }
     
+    [Space(25f)]
+
+    [SerializeField] private UnityEvent OnPlayerStatusInit;
+    
     
     public void Init() {
-        foreach (var VARIABLE in this.Statuses) {
-            VARIABLE.Value.Init();
-        }
+        this.OnPlayerStatusInit = new();
+        this.OnPlayerStatusInit.Invoke();
     }
 }

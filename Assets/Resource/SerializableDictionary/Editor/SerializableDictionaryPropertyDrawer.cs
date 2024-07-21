@@ -6,9 +6,7 @@ using System;
 
 [CustomPropertyDrawer(typeof(GameControlDictionary.StatusEffectText))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.StatusGaugeSlider))]
-[CustomPropertyDrawer(typeof(GameControlDictionary.ItemTool))]
-[CustomPropertyDrawer(typeof(GameControlDictionary.ItemMaterial))]
-[CustomPropertyDrawer(typeof(GameControlDictionary.ItemFood))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.Item))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.RequireItem))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.RequireStatus))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.PlayerStatus))]

@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class World : GameControlSingleton<World> {  // Model
     private const int DAYTERM = 500;
     
-    [FormerlySerializedAs("worldInformation")] [SerializeField] private GameInformationMonitorWorld gameInformationMonitorWorld;
+    [SerializeField] private GameInformationMonitorWorld gameInformationMonitorWorld;
     
     private GameInformationWorldData data;
     private float weatherPercent;

@@ -5,52 +5,58 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerBehaviourInventory : PlayerBehaviour {
+    [Space(25f)]
+    
     [Header("Item Information Panel")]
     [SerializeField] private TMP_Text itemInfoTitle;
     [SerializeField] private TMP_Text itemInfoContent;
-
+    
     [Space(25f)]
     
-    [Header("Inventory Indicator")]
-    [SerializeField] private Slider inventoryAmountIndicator;
-    [SerializeField] private TMP_Text inventoryAmountValueText;
+    [Header("Inventory Space Indicator")]
+    [SerializeField] private TMP_Text inventorySpaceText;
+    [SerializeField] private Slider inventorySpaceIndicator;
 
-    private int inventoryCurrentValue;
-    private int inventoryMaxValue;
+    private int inventorySpaceValue;
+    private int inventorySpaceMaxValue;
     
-    public static UnityEvent<string, string> OnItemInfoUpdate;
-    public static UnityEvent OnItemUpdate;
+    public static UnityEvent<(string, string)> OnItemInfoPanelUpdate;
+    public static UnityEvent OnItemUse;
 
 
     public override void Init() {
-        this.inventoryMaxValue = 25;
-        this.inventoryCurrentValue = Player.Instance.Inventory.Sum(x => x.Value);
+        this.itemInfoTitle.text = "인벤토리";
+        this.itemInfoContent.text = "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다.";
+        this.inventorySpaceMaxValue = 25;
+        this.inventorySpaceValue = Player.Instance.Inventory.Sum(x => x.Value);
         
-        OnItemInfoUpdate = new();
-        OnItemInfoUpdate.AddListener(PanelUpdate);
+        OnItemInfoPanelUpdate = new();
+        OnItemInfoPanelUpdate.AddListener(PanelUpdateItemInfo);
 
-        OnItemUpdate = new();
-        OnItemUpdate.AddListener(Behaviour);
+        OnItemUse = new();
+        OnItemUse.AddListener(Behaviour);
     }
 
     public override void Behaviour() {
-        this.itemInfoTitle.text = "인벤토리";
-        this.itemInfoContent.text = "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다.";
-        
-        foreach (var VARIABLE in Player.Instance.Inventory) {
-            ItemManager.Instance.Items[VARIABLE.Key].InventoryCountUpdate(VARIABLE.Value > 0 ? VARIABLE.Value : 0);
-        }
+        // Player Inventory Invoke
+        PlayerBehaviourManager.Instance.InventoryInvoke();
 
-        this.inventoryCurrentValue = Player.Instance.Inventory.Sum(x => x.Value);
-        this.inventoryAmountIndicator.maxValue = this.inventoryMaxValue;
-        this.inventoryAmountIndicator.value = this.inventoryCurrentValue;
-        this.inventoryAmountValueText.text = this.inventoryCurrentValue + " / " + this.inventoryMaxValue;
+        // Inventory Info Panel Update
+        PanelUpdateInventoryInfo();
         
+        // Game Data Update
         GameInformationManager.OnGameDataSaveEvent();
     }
+    
+    private void PanelUpdateInventoryInfo() {
+        this.inventorySpaceValue = Player.Instance.Inventory.Sum(x => x.Value);
+        this.inventorySpaceIndicator.maxValue = this.inventorySpaceMaxValue;
+        this.inventorySpaceIndicator.value = this.inventorySpaceValue;
+        this.inventorySpaceText.text = this.inventorySpaceValue + " / " + this.inventorySpaceMaxValue;
+    }
 
-    private void PanelUpdate(string title, string content) {
-        this.itemInfoTitle.text = title;
-        this.itemInfoContent.text = content;
+    private void PanelUpdateItemInfo((string, string) value) {
+        this.itemInfoTitle.text = value.Item1;
+        this.itemInfoContent.text = value.Item2;
     }
 }
