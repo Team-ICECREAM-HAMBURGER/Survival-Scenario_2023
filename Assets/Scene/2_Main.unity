@@ -3242,12 +3242,6 @@ MonoBehaviour:
   outsideCanvas: {fileID: 1589722235}
   informationCanvas: {fileID: 2025123718}
   sideMenuCanvas: {fileID: 205796672}
-  requireItemsFire:
-    m_keys: 0d0000000c0000000e000000
-    m_values: 020000000100000001000000
-  requireItemsAddWood:
-    m_keys: 0d000000
-    m_values: 01000000
   fireResultPanel: {fileID: 2048229646}
   fireResultTitle: {fileID: 929636683}
   fireResultContent: {fileID: 951291988}
@@ -6064,6 +6058,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnItemCountUpdate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &390710426
 GameObject:
   m_ObjectHideFlags: 0
@@ -12867,7 +12864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 87193180}
+  m_AnchoredPosition: {x: -399.9992, y: 87731200}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
