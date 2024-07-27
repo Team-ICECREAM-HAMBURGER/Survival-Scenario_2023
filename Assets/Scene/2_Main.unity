@@ -2958,7 +2958,7 @@ Transform:
   m_GameObject: {fileID: 232328977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 267.30215, y: 618.79706, z: -39.198044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3027,6 +3027,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  searchRandomEventWeight:
+    m_keys: 000000000100000002000000
+    m_values:
+    - 90
+    - 10
+    - 5
+  RandomCollectableItemWeightfarming:
+    m_keys: 
+    m_values: []
+  huntingRandomCollectableItemWeight:
+    m_keys: 
+    m_values: []
+  huntingRequireItem:
+    m_keys: 
+    m_values: 
   searchResultPanel: {fileID: 2048229646}
   searchResultTitle: {fileID: 929636683}
   searchResultContent: {fileID: 951291988}
@@ -3082,6 +3097,8 @@ MonoBehaviour:
   OnPlayerStatusUpdate:
     m_PersistentCalls:
       m_Calls: []
+  shelterCanvas: {fileID: 0}
+  outsideCanvas: {fileID: 0}
   shelterResultPanel: {fileID: 2048229646}
   shelterResultTitle: {fileID: 929636683}
   shelterResultContent: {fileID: 951291988}
@@ -3184,7 +3201,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnPlayerInventoryUpdateMakeFire:
+  OnItemUseIgnition:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3981105636338222117, guid: 87346f543a018414c893f7ce732a353d, type: 3}
@@ -3223,7 +3240,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnPlayerInventoryUpdateAddWood:
+  OnItemUseAddWood:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3981105636338222117, guid: 87346f543a018414c893f7ce732a353d, type: 3}
@@ -11298,7 +11315,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 860275340}
-  - component: {fileID: 860275339}
   - component: {fileID: 860275338}
   m_Layer: 0
   m_Name: Game Controller
@@ -11317,18 +11333,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b2eff0177ad6ca4b9c6f819c8aa7c71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &860275339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860275337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a40f41198d2707489742f09a496acb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &860275340
@@ -12864,7 +12868,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 87731200}
+  m_AnchoredPosition: {x: -399.9992, y: 92365770}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -17670,95 +17674,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393290924}
   m_CullTransparentMesh: 1
---- !u!1 &1430104342
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1430104343}
-  - component: {fileID: 1430104347}
-  - component: {fileID: 1430104346}
-  - component: {fileID: 1430104345}
-  - component: {fileID: 1430104344}
-  m_Layer: 0
-  m_Name: Random Event Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1430104343
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430104342}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1430104344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430104342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0761460988c34ba58b92feb0642d1eee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1430104345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430104342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6af915c769f471fb092addf43f385c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1430104346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430104342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbee7bb5386248f8b6df8cdc87b5605b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1430104347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430104342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d420b360867c4ba787d8b3db2a675d75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <GameRandomEvents>k__BackingField:
-    m_keys: 000000000100000002000000
-    m_values:
-    - {fileID: 1430104346}
-    - {fileID: 1430104345}
-    - {fileID: 1430104344}
 --- !u!1 &1473396064
 GameObject:
   m_ObjectHideFlags: 0
@@ -20316,9 +20231,9 @@ RectTransform:
   - {fileID: 1956464781}
   m_Father: {fileID: 969297691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760321712
@@ -24667,7 +24582,6 @@ SceneRoots:
   - {fileID: 464852526}
   - {fileID: 860275340}
   - {fileID: 387495488}
-  - {fileID: 1430104343}
   - {fileID: 348895937}
   - {fileID: 1234693839}
   - {fileID: 1589722236}

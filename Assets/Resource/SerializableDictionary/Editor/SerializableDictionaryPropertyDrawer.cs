@@ -12,7 +12,8 @@ using System;
 [CustomPropertyDrawer(typeof(GameControlDictionary.PlayerStatus))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.PlayerStatusEffect))]
 [CustomPropertyDrawer(typeof(GameControlDictionary.PlayerBehaviour))]
-[CustomPropertyDrawer(typeof(GameControlDictionary.GameRandomEvent))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.GameRandomEventWeight))]
+[CustomPropertyDrawer(typeof(GameControlDictionary.GameRandomItemWeight))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
 	const string KeysFieldName = "m_keys";

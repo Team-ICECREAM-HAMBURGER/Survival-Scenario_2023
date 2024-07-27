@@ -4,6 +4,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 enum FirePanelType {
@@ -18,8 +19,8 @@ public class PlayerBehaviourFire : PlayerBehaviour {
     [Space(25f)] 
     
     [Header("Behaviour Require Item")]
-    [SerializeField] private UnityEvent OnPlayerInventoryUpdateMakeFire;
-    [SerializeField] private UnityEvent OnPlayerInventoryUpdateAddWood;
+    [SerializeField] private UnityEvent OnItemUseIgnition;
+    [SerializeField] private UnityEvent OnItemUseAddWood;
     
     [Space(25f)]
     
@@ -52,7 +53,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
     private static int FIRE_TINDER = 1;
     private static int FIRE_TOOL = 1;
 
-    private readonly List<(GameControlType.Item, int)> makeFireMaterialList = new() {
+    private readonly List<(GameControlType.Item, int)> ignitionMaterialList = new() {
         (GameControlType.Item.WOOD, FIRE_WOOD),
         (GameControlType.Item.TINDER, FIRE_TINDER),
         (GameControlType.Item.FIRE_TOOL, FIRE_TOOL)
@@ -62,9 +63,9 @@ public class PlayerBehaviourFire : PlayerBehaviour {
     private int fireTermRandomMin;
     private int fireTermRandomMax;
     
-    private int makeFireSpendTime;
+    private int ignitionSpendTime;
     
-    private float makeFireSuccessWeight;
+    private float ignitionSuccessWeight;
     
     private string fireResultTitleText;
     private StringBuilder fireResultContentText;
@@ -72,8 +73,8 @@ public class PlayerBehaviourFire : PlayerBehaviour {
 
     
     public override void Init() {
-        this.makeFireSuccessWeight = 50f;
-        this.makeFireSpendTime = 0;
+        this.ignitionSuccessWeight = 50f;
+        this.ignitionSpendTime = 0;
         
         this.fireTermRandomMin = 2;
         this.fireTermRandomMax = 10;
@@ -107,24 +108,24 @@ public class PlayerBehaviourFire : PlayerBehaviour {
             return;
         }
         
-        if (CanBehaviour(this.makeFireMaterialList)) {   // Can Make fire; Success or Fail
-            var isSuccess = PlayerBehaviourManager.Instance.RandomEventWeightSelect(this.makeFireSuccessWeight);
+        if (CanBehaviour(this.ignitionMaterialList)) {   // Can Make fire; Success or Fail
+            var isSuccess = BehaviourIgnition(this.ignitionSuccessWeight);
             
             this.fireResultPanelChangeType = (isSuccess) ? FirePanelType.SUCCESS : FirePanelType.FAIL;
-            this.makeFireSpendTime = 5;
+            this.ignitionSpendTime = 5;
             
             // Player Status Update
             this.OnPlayerStatusUpdate.Invoke();
 
             // Player Inventory Update
-            this.OnPlayerInventoryUpdateMakeFire.Invoke();
+            this.OnItemUseIgnition.Invoke();
             
             // Player Status Effect Invoke
             PlayerBehaviourManager.Instance.StatusEffectInvoke();
             
             // Word Info. Update
-            PlayerBehaviourManager.Instance.WorldTimeUpdate(this.makeFireSpendTime);
-            PlayerBehaviourManager.Instance.WorldFireSet((isSuccess, (isSuccess) ? (Random.Range(this.fireTermRandomMin, this.fireTermRandomMax) + this.makeFireSpendTime) : 0));
+            PlayerBehaviourManager.Instance.WorldTimeUpdate(this.ignitionSpendTime);
+            PlayerBehaviourManager.Instance.WorldFireSet((isSuccess, (isSuccess) ? (Random.Range(this.fireTermRandomMin, this.fireTermRandomMax) + this.ignitionSpendTime) : 0));
             
             // Game Data Update
             PlayerBehaviourManager.Instance.GameDataSaveInvoke();
@@ -132,16 +133,17 @@ public class PlayerBehaviourFire : PlayerBehaviour {
         }
         else {  // Not Enough Materials
             this.fireResultPanelChangeType = FirePanelType.NO_MATERIAL;
-            this.makeFireSpendTime = 0;
+            this.ignitionSpendTime = 0;
         }
         
+        // Panel Update
         PanelUpdate(this.fireResultPanelChangeType);
     }
 
     public void BehaviourAddWoods() {
         if (CanBehaviour((GameControlType.Item.WOOD, ADD_WOOD))) { // Can Add Woods
             // Player Inventory Update
-            this.OnPlayerInventoryUpdateAddWood.Invoke();
+            this.OnItemUseAddWood.Invoke();
             
             // World Info. Update
             PlayerBehaviourManager.Instance.WorldFireTermUpdate(this.fireTermAddWood);
@@ -155,8 +157,9 @@ public class PlayerBehaviourFire : PlayerBehaviour {
             PanelUpdate(FirePanelType.NO_WOODS);
         }
     }
-
-    public void BehaviourCooking() {
+    
+    private bool BehaviourIgnition(float weight) {
+        return true;
     }
     
     private void PanelUpdate(FirePanelType type) {
@@ -228,7 +231,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
                 this.fireResultContentText.Append("- 필요한 아이템\n");
 
                 // Require Items for Add Wood;
-                this.fireResultContentText.Append("나무 ");
+                this.fireResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.WOOD));
                 this.fireResultContentText.Append(ADD_WOOD);
                 this.fireResultContentText.Append("개\n");
                 
@@ -246,16 +249,16 @@ public class PlayerBehaviourFire : PlayerBehaviour {
                 return;
         }
 
-        // Require Items for Make Fire;
-        this.fireResultContentText.Append("나무 ");
+        // Require Items for Ignition;
+        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.WOOD));
         this.fireResultContentText.Append(FIRE_WOOD);
         this.fireResultContentText.Append("개\n");
         
-        this.fireResultContentText.Append("불쏘시개 ");
+        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.TINDER));
         this.fireResultContentText.Append(FIRE_TINDER);
         this.fireResultContentText.Append("개\n");
         
-        this.fireResultContentText.Append("점화도구 ");
+        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.FIRE_TOOL));
         this.fireResultContentText.Append(FIRE_TOOL);
         this.fireResultContentText.Append("개\n");
         

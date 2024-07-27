@@ -12,7 +12,7 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     
     [SerializeField] private UnityEvent OnItemInit;
     
-    public UnityEvent OnItemCountUpdate;
+    [HideInInspector] public UnityEvent OnItemCountUpdate;
     
     
     private void Init() {
@@ -36,7 +36,13 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         this.Item[value.Item1].ItemUse(value.Item2);
     }
 
-    public void ItemAdd((GameControlType.Item, int) value) {
+    public string ItemAdd((GameControlType.Item, int) value) {
         this.Item[value.Item1].ItemAdd(value.Item2);
+        
+        return this.Item[value.Item1].Name;
+    }
+
+    public string GetItemName(GameControlType.Item type) {
+        return this.Item[type].Name;
     }
 }

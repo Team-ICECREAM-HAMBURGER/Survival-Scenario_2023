@@ -8,6 +8,9 @@ public class GameControlType {
         RAIN_GUTTER,
         REST,
         SEARCH,
+        SEARCH_FARM,
+        SEARCH_HUNT,
+        SEARCH_INJURED,
         SHELTER,
         SLEEP
     }

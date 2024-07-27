@@ -10,12 +10,13 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
 
     [SerializeField] private UnityEvent OnPlayerBehaviourInit;
 
-    // TODO: Apply UnityEvent
+
     public void Init() {
         this.OnPlayerBehaviourInit = new();
         this.OnPlayerBehaviourInit.Invoke();
     }
     
+    // PlayerBehaviour -> PlayerBehaviourManager -> (OUT) //
     public bool CanBehaviour(List<(GameControlType.Item, int)> values) {
         return values.All(VARIABLE => Player.Instance.Inventory[VARIABLE.Item1] >= VARIABLE.Item2);
     }
@@ -29,10 +30,11 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
             GameControlType.Behaviour.FIRE => World.Instance.HasFire,
             GameControlType.Behaviour.SHELTER => World.Instance.HasShelter,
             GameControlType.Behaviour.RAIN_GUTTER => World.Instance.HasRainGutter,
+            GameControlType.Behaviour.SEARCH_HUNT => Player.Instance.Inventory.ContainsKey(GameControlType.Item.HUNTING_TOOL),
             _ => true
         };
     }
-
+    
     public void InventoryInvoke() {
         ItemManager.Instance.ItemCountUpdate();
     }
@@ -49,20 +51,20 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         ItemManager.Instance.ItemUse(value);
     }
 
-    public void ItemAdd((GameControlType.Item, int) value) {
-        ItemManager.Instance.ItemAdd(value);
+    public string ItemAdd((GameControlType.Item, int) value) {
+        return ItemManager.Instance.ItemAdd(value);
     }
 
-    public void RandomEventWeightSelect() {
-        GameRandomEventManager.Instance.RandomEventWeightSelect();
-    }
-    
-    public bool RandomEventWeightSelect(float weight) {
-        return GameRandomEventManager.Instance.RandomEventWeightSelect();
+    public string ItemGet(GameControlType.Item type) {
+        return ItemManager.Instance.GetItemName(type);
     }
 
     public void StatusEffectInvoke() {
         PlayerStatusEffectManager.Instance.StatusEffectInvoke();
+    }
+
+    public void StatusEffectAdd(GameControlType.StatusEffect type) {
+        PlayerStatusEffectManager.Instance.StatusEffectAdd(type);
     }
 
     public void WorldTimeUpdate(int time) {
@@ -102,7 +104,16 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         return (World.Instance.Weather.Item1 == type);
     }
 
+    public void WorldCurrentLocationUpdate(string value) {
+        GameInformationMonitorManager.Instance.CurrentLocationUpdate(value);
+    }
+    
     public void GameDataSaveInvoke() {
         GameInformationManager.Instance.GameDataSaveInvoke();
     }
+    
+    
+    // PlayerBehaviour <- PlayerBehaviourManager <- (OUT) //
+    
+    
 }

@@ -4,18 +4,27 @@ using TMPro;
 using UnityEngine;
 
 public class PlayerBehaviourShelter : PlayerBehaviour {
+    [Space(25f)] 
+    [Header("Game Screen Update Resource")] 
+    [SerializeField] private Canvas shelterCanvas;
+    [SerializeField] private Canvas outsideCanvas;
+    
     [Space(25f)]
     
+    [Header("Behaviour Result Panel")]
     [SerializeField] private GameObject shelterResultPanel;
     [SerializeField] private TMP_Text shelterResultTitle;
     [SerializeField] private TMP_Text shelterResultContent;
 
     [Space(10f)]
 
+    [Header("Behaviour Loading Panel")]
     [SerializeField] private GameObject shelterLoadingPanel;
     [SerializeField] private TMP_Text shelterLoadingTitle;
 
     private int makeShelterSpendTime;
+    
+    private string currentLocationText;
     
     private string shelterResultTitleText;
     private StringBuilder shelterResultContentText;
@@ -23,6 +32,9 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
     
     public override void Init() {
         this.makeShelterSpendTime = 2;
+
+        this.currentLocationText = "휴식처";
+        
         this.shelterResultTitleText = String.Empty;
         this.shelterResultContentText = new();
     }
@@ -41,11 +53,12 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
             
             PanelUpdate();
         }
-        
-        // GameInformationMonitorWorld.OnCurrentLocationUpdate.Invoke("휴식처");
+
+        PlayerBehaviourManager.Instance.WorldCurrentLocationUpdate(this.currentLocationText);
     }
 
     private void PanelUpdate() {
+        // RESET
         this.shelterResultTitleText = String.Empty;
         this.shelterResultContentText.Clear();
         
@@ -62,5 +75,12 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
         
         this.shelterLoadingPanel.SetActive(true);
         this.shelterResultPanel.SetActive(true);
+        
+        PanelUpdateCanvasSet();
+    }
+
+    private void PanelUpdateCanvasSet() {
+        this.shelterCanvas.enabled = true;
+        this.outsideCanvas.enabled = false;
     }
 }
