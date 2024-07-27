@@ -15,32 +15,34 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
     [SerializeField] private GameObject shelterLoadingPanel;
     [SerializeField] private TMP_Text shelterLoadingTitle;
 
-    private int spendTime;
+    private int makeShelterSpendTime;
+    
     private string shelterResultTitleText;
     private StringBuilder shelterResultContentText;
 
     
     public override void Init() {
-        this.spendTime = 2;
+        this.makeShelterSpendTime = 2;
         this.shelterResultTitleText = String.Empty;
         this.shelterResultContentText = new();
     }
 
     private bool CanBehaviour() {
-        return World.Instance.HasShelter;
+        return PlayerBehaviourManager.Instance.CanBehaviour(GameControlType.Behaviour.SHELTER);
     }
 
     public override void Behaviour() {
         if (!CanBehaviour()) {
-            World.Instance.HasShelter = true; // TODO: World -> PlayerBehaviourManager
+            PlayerBehaviourManager.Instance.WorldShelterSet(true);
+            
+            PlayerBehaviourManager.Instance.WorldTimeUpdate(this.makeShelterSpendTime);
+            
+            PlayerBehaviourManager.Instance.GameDataSaveInvoke();
             
             PanelUpdate();
-            
-            World.Instance.TimeUpdate(this.spendTime);  // TODO: World -> PlayerBehaviourManager
-            GameInformationManager.OnGameDataSaveEvent();
         }
         
-        GameInformationMonitorWorld.OnCurrentLocationUpdate.Invoke("휴식처");
+        // GameInformationMonitorWorld.OnCurrentLocationUpdate.Invoke("휴식처");
     }
 
     private void PanelUpdate() {

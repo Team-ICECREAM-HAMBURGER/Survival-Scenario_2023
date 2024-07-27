@@ -7,9 +7,9 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     [FormerlySerializedAs("playerInformationData")] public GameInformationPlayerData gameInformationPlayerData;
     [FormerlySerializedAs("worldInformationData")] public GameInformationWorldData gameInformationWorldData;
     
-    public delegate void GameDataEventHandler();
-    public static GameDataEventHandler OnGameDataSaveEvent;
-    public static GameDataEventHandler OnGameDataDeleteEvent;
+    private delegate void GameDataEventHandler();
+    private GameDataEventHandler OnGameDataSaveEvent;
+    private GameDataEventHandler OnGameDataDeleteEvent;
     
     
     private void Init() {
@@ -38,6 +38,10 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
 
     private void Awake() {
         Init();
+    }
+
+    public void GameDataSaveInvoke() {
+        this.OnGameDataSaveEvent.Invoke();
     }
     
     private void PlayerDataSave() {

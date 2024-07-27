@@ -15,12 +15,14 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
     [SerializeField] private GameObject searchLoadingPanel;
     [SerializeField] private TMP_Text searchLoadingTitle;
 
-    private int spendTime;
+    private int searchSpendTime;
+    
+    private float searchRandomEventWeight;
     
 
     public override void Init() {
         this.OnPlayerStatusUpdate = new();
-        this.spendTime = 5;
+        this.searchSpendTime = 5;
     }
 
     public override void Behaviour() {
@@ -28,16 +30,19 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         this.OnPlayerStatusUpdate.Invoke();
         
         // Player Status Effects Invoke
-        PlayerStatusEffectManager.Instance.StatusEffectInvoke();
+        PlayerBehaviourManager.Instance.StatusEffectInvoke();
         
         // Random Event; Search
-        PlayerBehaviourManager.Instance.RandomEvent();
+        PlayerBehaviourManager.Instance.RandomEventWeightSelect();
         
         // Word Info. Update
-        World.Instance.TimeUpdate(this.spendTime);
+        PlayerBehaviourManager.Instance.WorldTimeUpdate(this.searchSpendTime);
         
         // Game Data Update
-        GameInformationManager.OnGameDataSaveEvent();
+        PlayerBehaviourManager.Instance.GameDataSaveInvoke();
+        
+        //PanelUpdate();
+        
         
         // PanelUpdate(this.randomEvent.EventResult());
     }

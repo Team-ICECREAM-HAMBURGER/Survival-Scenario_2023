@@ -181,7 +181,8 @@ public class World : GameControlSingleton<World> {  // Model
             return;
         }
         
-        if (GameRandomEventManager.Instance.RandomEventPercentSelect(this.weatherPercent)) {
+        // GameRandomEventManager.Instance.RandomEventPercentSelect(this.weatherPercent)
+        if (false) {
             this.Weather = !this.IsWinter ? 
                 (GameControlType.Weather.RAIN, "비") : (GameControlType.Weather.SNOW, "눈보라");
             this.weatherTime = Random.Range(3, 6) * DAYTERM;

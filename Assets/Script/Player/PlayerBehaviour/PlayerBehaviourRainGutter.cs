@@ -24,32 +24,34 @@ public class PlayerBehaviourRainGutter : PlayerBehaviour {
     [SerializeField] private GameObject rainGutterLoadingPanel;
     [SerializeField] private TMP_Text rainGutterLoadingTitle;
 
-    private int spendTime;
+    private int makeRainGutterSpendTime;
+    
     private string rainGutterResultTitleText;
     private StringBuilder rainGutterResultContentText;
 
     
     public override void Init() {
-        this.spendTime = 1;
+        this.makeRainGutterSpendTime = 1;
+        
         this.rainGutterResultTitleText = String.Empty;
         this.rainGutterResultContentText = new();
     }
 
     private bool CanBehaviour() {
-        return World.Instance.HasRainGutter;
+        return PlayerBehaviourManager.Instance.CanBehaviour(GameControlType.Behaviour.RAIN_GUTTER);
     }
     
     public override void Behaviour() {
         if (!CanBehaviour()) {    // Hasn't Rain Gutter
-            World.Instance.HasRainGutter = true;
+            PlayerBehaviourManager.Instance.WorldRainGutterSet(true);
             
             PanelUpdate(RainGutterPanelType.PASS);
         }
         else {    // Has Rain Gutter; 
-            var emptyCans = Player.Instance.Inventory[GameControlType.Item.CAN];
+            var emptyCans = PlayerBehaviourManager.Instance.InventoryGet(GameControlType.Item.CAN);
 
-            if (World.Instance.Weather.Item1 == GameControlType.Weather.RAIN) { // Weather: Rainy
-                World.Instance.HasWater = true;
+            if (PlayerBehaviourManager.Instance.WorldCurrentWeatherCheck(GameControlType.Weather.RAIN)) { // Weather: Rainy
+                PlayerBehaviourManager.Instance.WorldRainWaterSet(true);
                 
                 if (emptyCans > 0) { // Has Empty Can;
                     // Get Water
@@ -65,7 +67,7 @@ public class PlayerBehaviourRainGutter : PlayerBehaviour {
                 }
             }
             else {
-                if (World.Instance.HasWater) { // Water Left
+                if (PlayerBehaviourManager.Instance.WorldRainWaterGet()) { // Water Left
                     if (emptyCans > 0) {  // Has Empty Can
                         // Get Water
                         PlayerBehaviourManager.Instance.ItemUse((GameControlType.Item.CAN, emptyCans));
@@ -79,7 +81,7 @@ public class PlayerBehaviourRainGutter : PlayerBehaviour {
                         PanelUpdate(RainGutterPanelType.NO_CANS);
                     }
                     
-                    World.Instance.HasWater = false;
+                    PlayerBehaviourManager.Instance.WorldRainWaterSet(false);
                 }
                 else {
                     // ERROR; NO_WATER
@@ -88,8 +90,11 @@ public class PlayerBehaviourRainGutter : PlayerBehaviour {
             }
         }
         
-        World.Instance.TimeUpdate(this.spendTime);
-        GameInformationManager.OnGameDataSaveEvent();
+        // World Info. Update
+        PlayerBehaviourManager.Instance.WorldTimeUpdate(this.makeRainGutterSpendTime);
+        
+        // Game Data Save
+        PlayerBehaviourManager.Instance.GameDataSaveInvoke();
     }
 
     private void PanelUpdate(RainGutterPanelType type) {

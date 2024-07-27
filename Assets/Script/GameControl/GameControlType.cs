@@ -1,11 +1,15 @@
 public class GameControlType {
     public enum Behaviour {
-        OUTSIDE,
-        MOVE,
-        SEARCH,
+        CRAFT,
         FIRE,
+        INVENTORY,
+        MOVE,
+        OUTSIDE,
+        RAIN_GUTTER,
+        REST,
+        SEARCH,
         SHELTER,
-        INVENTORY
+        SLEEP
     }
     
     public enum RandomEvent {

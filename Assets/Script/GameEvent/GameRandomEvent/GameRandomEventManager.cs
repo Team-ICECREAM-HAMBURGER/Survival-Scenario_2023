@@ -17,7 +17,7 @@ public class GameRandomEventManager : GameControlSingleton<GameRandomEventManage
         Init();
     }
     
-    public void RandomEventWeightSelect() {
-        // TODO: 2024.07.21 --
+    public bool RandomEventWeightSelect() {
+        return true;
     }
 }

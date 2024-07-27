@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -28,7 +27,7 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
         this.itemInfoTitle.text = "인벤토리";
         this.itemInfoContent.text = "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다.";
         this.inventorySpaceMaxValue = 25;
-        this.inventorySpaceValue = Player.Instance.Inventory.Sum(x => x.Value);
+        this.inventorySpaceValue = PlayerBehaviourManager.Instance.InventoryGet();
         
         OnItemInfoPanelUpdate = new();
         OnItemInfoPanelUpdate.AddListener(PanelUpdateItemInfo);
@@ -45,11 +44,11 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
         PanelUpdateInventoryInfo();
         
         // Game Data Update
-        GameInformationManager.OnGameDataSaveEvent();
+        PlayerBehaviourManager.Instance.GameDataSaveInvoke();
     }
     
     private void PanelUpdateInventoryInfo() {
-        this.inventorySpaceValue = Player.Instance.Inventory.Sum(x => x.Value);
+        this.inventorySpaceValue = PlayerBehaviourManager.Instance.InventoryGet();
         this.inventorySpaceIndicator.maxValue = this.inventorySpaceMaxValue;
         this.inventorySpaceIndicator.value = this.inventorySpaceValue;
         this.inventorySpaceText.text = this.inventorySpaceValue + " / " + this.inventorySpaceMaxValue;

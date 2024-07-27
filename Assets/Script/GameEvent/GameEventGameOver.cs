@@ -97,6 +97,6 @@ public class GameEventGameOver : MonoBehaviour {
     }
 
     public void GameReset() {
-        GameInformationManager.OnGameDataDeleteEvent();
+        // GameInformationManager.OnGameDataDeleteEvent();
     }
 }

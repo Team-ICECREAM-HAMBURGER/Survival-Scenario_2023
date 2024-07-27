@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -53,7 +52,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
     private static int FIRE_TINDER = 1;
     private static int FIRE_TOOL = 1;
 
-    private readonly List<(GameControlType.Item, int)> canFireList = new() {
+    private readonly List<(GameControlType.Item, int)> makeFireMaterialList = new() {
         (GameControlType.Item.WOOD, FIRE_WOOD),
         (GameControlType.Item.TINDER, FIRE_TINDER),
         (GameControlType.Item.FIRE_TOOL, FIRE_TOOL)
@@ -62,16 +61,20 @@ public class PlayerBehaviourFire : PlayerBehaviour {
     private int fireTermAddWood;
     private int fireTermRandomMin;
     private int fireTermRandomMax;
-    private int spendTime;
-    private float successPercent;
+    
+    private int makeFireSpendTime;
+    
+    private float makeFireSuccessWeight;
+    
     private string fireResultTitleText;
     private StringBuilder fireResultContentText;
     private FirePanelType fireResultPanelChangeType;
 
     
     public override void Init() {
-        this.successPercent = 50f;
-        this.spendTime = 0;
+        this.makeFireSuccessWeight = 50f;
+        this.makeFireSpendTime = 0;
+        
         this.fireTermRandomMin = 2;
         this.fireTermRandomMax = 10;
         this.fireTermAddWood = 3;
@@ -92,47 +95,44 @@ public class PlayerBehaviourFire : PlayerBehaviour {
         return PlayerBehaviourManager.Instance.CanBehaviour(value);
     }
     
-    private bool CanBehaviour() {
-        return World.Instance.HasFire;
+    private bool CanBehaviour(GameControlType.Behaviour type) {
+        return PlayerBehaviourManager.Instance.CanBehaviour(type);
     }
     
     public override void Behaviour() {
-        if (CanBehaviour()) {   // Already Have Fire; Change Panel
+        if (CanBehaviour(GameControlType.Behaviour.FIRE)) {   // Already Have Fire; Change Panel
             this.fireResultPanelChangeType = FirePanelType.PASS;
-            
             PanelUpdate(this.fireResultPanelChangeType);
             
             return;
         }
         
-        if (CanBehaviour(this.canFireList)) {   // Can Make fire; Success or Fail
-            var isSuccess = GameRandomEventManager.Instance.RandomEventPercentSelect(this.successPercent);
+        if (CanBehaviour(this.makeFireMaterialList)) {   // Can Make fire; Success or Fail
+            var isSuccess = PlayerBehaviourManager.Instance.RandomEventWeightSelect(this.makeFireSuccessWeight);
             
-            this.fireResultPanelChangeType = (isSuccess) ? 
-                FirePanelType.SUCCESS : FirePanelType.FAIL;
-            this.spendTime = 5;
+            this.fireResultPanelChangeType = (isSuccess) ? FirePanelType.SUCCESS : FirePanelType.FAIL;
+            this.makeFireSpendTime = 5;
             
             // Player Status Update
             this.OnPlayerStatusUpdate.Invoke();
-            
-            // Player Status Effect Invoke
-            PlayerStatusEffectManager.Instance.StatusEffectInvoke();
-            
+
             // Player Inventory Update
             this.OnPlayerInventoryUpdateMakeFire.Invoke();
             
+            // Player Status Effect Invoke
+            PlayerBehaviourManager.Instance.StatusEffectInvoke();
+            
             // Word Info. Update
-            World.Instance.HasFire = isSuccess;
-            World.Instance.FireTerm = (isSuccess) ? 
-                (Random.Range(this.fireTermRandomMin, this.fireTermRandomMax) + this.spendTime) : 0;
-            World.Instance.TimeUpdate(this.spendTime);
+            PlayerBehaviourManager.Instance.WorldTimeUpdate(this.makeFireSpendTime);
+            PlayerBehaviourManager.Instance.WorldFireSet((isSuccess, (isSuccess) ? (Random.Range(this.fireTermRandomMin, this.fireTermRandomMax) + this.makeFireSpendTime) : 0));
             
             // Game Data Update
-            GameInformationManager.OnGameDataSaveEvent();
+            PlayerBehaviourManager.Instance.GameDataSaveInvoke();
+            
         }
         else {  // Not Enough Materials
             this.fireResultPanelChangeType = FirePanelType.NO_MATERIAL;
-            this.spendTime = 0;
+            this.makeFireSpendTime = 0;
         }
         
         PanelUpdate(this.fireResultPanelChangeType);
@@ -144,10 +144,10 @@ public class PlayerBehaviourFire : PlayerBehaviour {
             this.OnPlayerInventoryUpdateAddWood.Invoke();
             
             // World Info. Update
-            World.Instance.FireTerm += this.fireTermAddWood;
+            PlayerBehaviourManager.Instance.WorldFireTermUpdate(this.fireTermAddWood);
 
             // Game Data Update
-            GameInformationManager.OnGameDataSaveEvent();
+            PlayerBehaviourManager.Instance.GameDataSaveInvoke();
             
             PanelUpdateFireTerm();
         }
@@ -269,13 +269,13 @@ public class PlayerBehaviourFire : PlayerBehaviour {
     }
     
     private void PanelUpdateCanvasSet() {
-        GameControlCanvas.OnCanvasUpdate.Invoke(this.fireCanvas, true);
-        GameControlCanvas.OnCanvasUpdate.Invoke(this.outsideCanvas, false);
-        GameControlCanvas.OnCanvasUpdate.Invoke(this.informationCanvas, false);
-        GameControlCanvas.OnCanvasUpdate.Invoke(this.sideMenuCanvas, false);
+        this.fireCanvas.enabled = true;
+        this.outsideCanvas.enabled = false;
+        this.informationCanvas.enabled = false;
+        this.sideMenuCanvas.enabled = false;
     }
 
     private void PanelUpdateFireTerm() {
-        this.fireTermText.text = World.Instance.FireTerm + "텀 남음";
+        this.fireTermText.text = PlayerBehaviourManager.Instance.WorldFireTermGet() + "텀 남음";
     }
 }
