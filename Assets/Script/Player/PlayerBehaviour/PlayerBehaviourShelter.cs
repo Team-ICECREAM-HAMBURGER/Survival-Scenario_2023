@@ -53,6 +53,8 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
             
             PanelUpdate();
         }
+        
+        PanelUpdateCanvasSet();
 
         PlayerBehaviourManager.Instance.WorldCurrentLocationUpdate(this.currentLocationText);
     }
@@ -76,7 +78,6 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
         this.shelterLoadingPanel.SetActive(true);
         this.shelterResultPanel.SetActive(true);
         
-        PanelUpdateCanvasSet();
     }
 
     private void PanelUpdateCanvasSet() {

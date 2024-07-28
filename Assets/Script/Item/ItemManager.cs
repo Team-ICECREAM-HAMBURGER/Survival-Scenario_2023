@@ -16,8 +16,6 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     
     
     private void Init() {
-        this.Item = new();
-        this.OnItemInit = new();
         this.OnItemCountUpdate = new();
         
         // Items Init

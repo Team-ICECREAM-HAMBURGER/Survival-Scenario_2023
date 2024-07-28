@@ -5,7 +5,6 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
@@ -16,9 +15,9 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
 
     [Space(25f)] 
     
-    [Header("Random Collectable Item")] 
-    [field: SerializeField] private GameControlDictionary.GameRandomItemWeight RandomCollectableItemWeightfarming;
-    [field: SerializeField] private GameControlDictionary.GameRandomItemWeight RandomCollectableItemWeighthunting;
+    [Header("Random Collectable Item Weight")] 
+    [field: SerializeField] private GameControlDictionary.GameRandomItemWeight RandomCollectableItemWeightFarming;
+    [field: SerializeField] private GameControlDictionary.GameRandomItemWeight RandomCollectableItemWeightHunting;
 
     [Space(25f)] 
     
@@ -101,8 +100,8 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         RandomEvent FarmEvent = delegate() {
             Debug.Log("FarmEvent");
             
-            var totalWeight = this.RandomCollectableItemWeightfarming.Sum(variable => variable.Value);
-            var weightDictionary = this.RandomCollectableItemWeightfarming
+            var totalWeight = this.RandomCollectableItemWeightFarming.Sum(variable => variable.Value);
+            var weightDictionary = this.RandomCollectableItemWeightFarming
                 .ToDictionary(
                     variable => variable.Key,
                     variable => (variable.Value / totalWeight)
@@ -151,8 +150,8 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         RandomEvent HuntEvent = delegate() {
             Debug.Log("HuntEvent");
             
-            var totalWeight = this.RandomCollectableItemWeighthunting.Sum(variable => variable.Value);
-            var weightDictionary = this.RandomCollectableItemWeighthunting
+            var totalWeight = this.RandomCollectableItemWeightHunting.Sum(variable => variable.Value);
+            var weightDictionary = this.RandomCollectableItemWeightHunting
                 .ToDictionary(
                     variable => variable.Key,
                     variable => (variable.Value / totalWeight)

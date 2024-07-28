@@ -12,7 +12,7 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
 
 
     public void Init() {
-        this.OnPlayerBehaviourInit = new();
+        // this.OnPlayerBehaviourInit = new();
         this.OnPlayerBehaviourInit.Invoke();
     }
     
