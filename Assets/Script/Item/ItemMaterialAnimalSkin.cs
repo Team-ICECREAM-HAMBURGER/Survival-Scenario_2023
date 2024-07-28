@@ -1,8 +1,4 @@
 public class ItemMaterialAnimalSkin : Item {
-    public override void ItemCountUpdate() {
-        throw new System.NotImplementedException();
-    }
-
     public override void ItemUse(int value = 1) {
     }
 

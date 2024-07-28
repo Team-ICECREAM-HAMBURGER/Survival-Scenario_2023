@@ -201,7 +201,7 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
                 this.OnItemUseHunting.Invoke();
 
                 this.searchResultContentText.Append("- 소모한 아이템\n");
-                this.searchResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.HUNTING_TOOL));
+                this.searchResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.HUNTING_TOOL));
                 this.searchResultContentText.Append(HUNTING_TOOL);
                 this.searchResultContentText.Append("개\n");
             }

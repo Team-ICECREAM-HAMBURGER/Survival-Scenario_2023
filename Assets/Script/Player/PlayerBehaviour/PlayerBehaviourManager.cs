@@ -35,15 +35,15 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         };
     }
     
-    public void InventoryInvoke() {
-        ItemManager.Instance.ItemCountUpdate();
+    public void InventorySync() {
+        ItemManager.Instance.InventorySync(Player.Instance.Inventory);
     }
 
-    public int InventoryGet() {
+    public int GetInventoryAmountTotal() {
         return Player.Instance.Inventory.Sum(x => x.Value);
     }
 
-    public int InventoryGet(GameControlType.Item type) {
+    public int GetInventoryAmountItem(GameControlType.Item type) {
         return Player.Instance.Inventory[type];
     }
 
@@ -55,7 +55,7 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         return ItemManager.Instance.ItemAdd(value);
     }
 
-    public string ItemGet(GameControlType.Item type) {
+    public string GetItemName(GameControlType.Item type) {
         return ItemManager.Instance.GetItemName(type);
     }
 

@@ -48,7 +48,7 @@ public class PlayerBehaviourRainGutter : PlayerBehaviour {
             PanelUpdate(RainGutterPanelType.PASS);
         }
         else {    // Has Rain Gutter; 
-            var emptyCans = PlayerBehaviourManager.Instance.InventoryGet(GameControlType.Item.CAN);
+            var emptyCans = PlayerBehaviourManager.Instance.GetInventoryAmountItem(GameControlType.Item.CAN);
 
             if (PlayerBehaviourManager.Instance.WorldCurrentWeatherCheck(GameControlType.Weather.RAIN)) { // Weather: Rainy
                 PlayerBehaviourManager.Instance.WorldRainWaterSet(true);

@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 7705494895803520206}
   - component: {fileID: 6898993953825804262}
   m_Layer: 5
-  m_Name: Count
+  m_Name: Amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,7 +405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7163442005428921675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -439,18 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc6daca115934ed6aca798f7c89f6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemType>k__BackingField: 9
-  <ItemGetType>k__BackingField: 2
-  <Name>k__BackingField: "\uBE44\uB2D0\uBD09\uC9C0"
-  <Content>k__BackingField: "\uB3C4\uD1B5 \uC369\uC9C0\uB97C \uC54A\uC544\uC11C \uBBF8\uC6C0
-    \uBC1B\uB294 \uC874\uC7AC\uC600\uC9C0\uB9CC, \uC9C0\uAE08\uB9CC\uD07C\uC740 \uC544\uB2D9\uB2C8\uB2E4."
-  <RandomPercent>k__BackingField: 10
-  <RandomWeight>k__BackingField: 0
-  <RandomMaxValue>k__BackingField: 1
-  <InventoryNameText>k__BackingField: {fileID: 2114880492592998726}
-  <InventoryCountText>k__BackingField: {fileID: 6898993953825804262}
-  itemInfoButton: {fileID: 4284825822570010420}
-  itemDropButton: {fileID: 7913771573400558039}
+  itemName: {fileID: 2114880492592998726}
+  itemAmount: {fileID: 6898993953825804262}
 --- !u!1 &5584659337231158659
 GameObject:
   m_ObjectHideFlags: 0

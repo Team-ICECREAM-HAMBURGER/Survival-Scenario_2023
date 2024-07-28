@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     [field: SerializeField] public GameControlDictionary.Item Item { get; private set; }
@@ -12,12 +8,10 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     
     [SerializeField] private UnityEvent OnItemInit;
     
-    [HideInInspector] public UnityEvent OnItemCountUpdate;
+    [HideInInspector] public UnityEvent<GameControlDictionary.Inventory> OnInventorySync;
     
     
     private void Init() {
-        this.OnItemCountUpdate = new();
-        
         // Items Init
         this.OnItemInit.Invoke();
     }
@@ -26,21 +20,23 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         Init();
     }
 
-    public void ItemCountUpdate() {
-        this.OnItemCountUpdate.Invoke();
+    public void InventorySync(GameControlDictionary.Inventory value) {
+        this.OnInventorySync.Invoke(value);
     }
 
     public void ItemUse((GameControlType.Item, int) value) {
-        this.Item[value.Item1].ItemUse(value.Item2);
+        if (Player.Instance.Inventory.ContainsKey(value.Item1) && Player.Instance.Inventory[value.Item1] >= value.Item2) {
+            this.Item[value.Item1].ItemUse(value.Item2);
+        }
     }
 
     public string ItemAdd((GameControlType.Item, int) value) {
         this.Item[value.Item1].ItemAdd(value.Item2);
         
-        return this.Item[value.Item1].Name;
+        return this.Item[value.Item1].ItemNameText;
     }
 
     public string GetItemName(GameControlType.Item type) {
-        return this.Item[type].Name;
+        return this.Item[type].ItemNameText;
     }
 }

@@ -231,7 +231,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
                 this.fireResultContentText.Append("- 필요한 아이템\n");
 
                 // Require Items for Add Wood;
-                this.fireResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.WOOD));
+                this.fireResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.WOOD));
                 this.fireResultContentText.Append(ADD_WOOD);
                 this.fireResultContentText.Append("개\n");
                 
@@ -250,15 +250,15 @@ public class PlayerBehaviourFire : PlayerBehaviour {
         }
 
         // Require Items for Ignition;
-        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.WOOD));
+        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.WOOD));
         this.fireResultContentText.Append(FIRE_WOOD);
         this.fireResultContentText.Append("개\n");
         
-        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.TINDER));
+        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.TINDER));
         this.fireResultContentText.Append(FIRE_TINDER);
         this.fireResultContentText.Append("개\n");
         
-        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.ItemGet(GameControlType.Item.FIRE_TOOL));
+        this.fireResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.FIRE_TOOL));
         this.fireResultContentText.Append(FIRE_TOOL);
         this.fireResultContentText.Append("개\n");
         

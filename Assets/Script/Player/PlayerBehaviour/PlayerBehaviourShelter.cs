@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class PlayerBehaviourShelter : PlayerBehaviour {
     [Space(25f)] 
+    
     [Header("Game Screen Update Resource")] 
     [SerializeField] private Canvas shelterCanvas;
     [SerializeField] private Canvas outsideCanvas;
+    [SerializeField] private Canvas informationMonitorCanvas;
     
     [Space(25f)]
     
@@ -83,5 +85,6 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
     private void PanelUpdateCanvasSet() {
         this.shelterCanvas.enabled = true;
         this.outsideCanvas.enabled = false;
+        this.informationMonitorCanvas.enabled = true;
     }
 }

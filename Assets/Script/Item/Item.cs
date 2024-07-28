@@ -1,29 +1,33 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class Item : MonoBehaviour {
-    public GameControlType.Item ItemType { get; }
-    public GameControlType.ItemGetRoot ItemGetType { get; }
-    public string Name { get; }
-    public string Content { get; }
+    public GameControlType.Item ItemType { get; protected set; }
+    public string ItemNameText { get; protected set; }
+    public string ItemExplanationText { get; protected set; }
+
+    [SerializeField] protected TMP_Text itemName;
+    [SerializeField] protected TMP_Text itemAmount;
+
     
-    public float RandomPercent { get; }
-    public float RandomWeight { get; set; }
-    public int RandomMaxValue { get; }
-
-    public TMP_Text InventoryNameText { get; }
-    public TMP_Text InventoryCountText { get; }
-
-
-    public void Init(Transform content) {
-        ItemManager.Instance.OnItemCountUpdate.AddListener(ItemCountUpdate);
+    public virtual void Init() {
+        ItemManager.Instance.OnInventorySync.AddListener(InventorySync);
+        Instantiate(gameObject, GameObject.FindGameObjectWithTag("Inventory").transform);
     }
-
-    public void InventoryInfoUpdate() {
-        
+    
+    public virtual void InventorySync(GameControlDictionary.Inventory value) {
+        if (value.ContainsKey(ItemType) && value[ItemType] > 0) {
+            gameObject.SetActive(true);
+            
+            itemName.text = ItemNameText;
+            itemAmount.text = value[ItemType].ToString();
+        }
+        else {
+            gameObject.SetActive(false);
+        }
     }
-
-    public abstract void ItemCountUpdate();
+    
     public abstract void ItemUse(int value = 1);
     public abstract void ItemDrop(int value = 1);
     public abstract void ItemAdd(int value = 1);

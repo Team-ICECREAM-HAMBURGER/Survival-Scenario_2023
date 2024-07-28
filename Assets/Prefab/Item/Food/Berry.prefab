@@ -272,7 +272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -315,23 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e074d453e2024efdb7ee79f094768781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemType>k__BackingField: 0
-  <ItemGetType>k__BackingField: 2
-  <Name>k__BackingField: "\uC5F4\uB9E4"
-  content: "\uADF8\uB0E5 \uBA39\uC5B4\uB3C4 \uBCA0\uB9AC\uBCA0\uB9AC \uB9DB\uC788\uB294
-    \uC5F4\uB9E4\uC785\uB2C8\uB2E4.\n\n- \uD6A8\uACFC\n\uCCB4\uB825 +5, \uC218\uBD84
-    +5, \uCE7C\uB85C\uB9AC +3"
-  <RandomPercent>k__BackingField: 12
-  <RandomWeight>k__BackingField: 0.05660377
-  <RandomMaxValue>k__BackingField: 1
-  <InventoryNameText>k__BackingField: {fileID: 4605849062581616038}
-  <InventoryCountText>k__BackingField: {fileID: 4517365856469001835}
-  itemInfoButton: {fileID: 5323388429148911471}
-  itemUseButton: {fileID: 3263660297054884913}
-  itemDropButton: {fileID: 1221039130360904124}
-  requireStatuses:
-    m_keys: 
-    m_values: []
+  itemName: {fileID: 4605849062581616038}
+  itemAmount: {fileID: 4517365856469001835}
 --- !u!1 &3760642227140698493
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +718,7 @@ GameObject:
   - component: {fileID: 8844345005377906874}
   - component: {fileID: 4517365856469001835}
   m_Layer: 5
-  m_Name: Count
+  m_Name: Amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
