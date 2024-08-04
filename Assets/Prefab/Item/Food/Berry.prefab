@@ -315,6 +315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e074d453e2024efdb7ee79f094768781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObject: {fileID: 0}
+  itemType: 0
+  itemNameText: "\uC5F4\uB9E4"
+  itemExplanationText: "\uBCA0\uB9AC\uBCA0\uB9AC \uB9DB\uC788\uB294 \uBCA0\uB9AC\uC785\uB2C8\uB2E4."
   itemName: {fileID: 4605849062581616038}
   itemAmount: {fileID: 4517365856469001835}
 --- !u!1 &3760642227140698493

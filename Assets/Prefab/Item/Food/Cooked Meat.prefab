@@ -51,6 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdc9e1fbe63e46f8b3ee9da334e0540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObject: {fileID: 0}
+  itemType: 2
+  itemNameText: "\uC870\uB9AC\uB41C \uACE0\uAE30"
+  itemExplanationText: "\uB0A8\uC758 \uC0B4\uC774 \uC81C\uC77C \uB9DB\uC788\uB294
+    \uBC95\uC774\uC8E0. \uC800\uB294 \uC544\uB2D9\uB2C8\uB2E4. \uC800\uB9AC \uAC00\uC138\uC694. "
   itemName: {fileID: 7549235769122116041}
   itemAmount: {fileID: 736188550071392558}
 --- !u!1 &2017592467983963135

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -272,7 +272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7163442005428921675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -306,6 +306,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985f4e30fb9f84d34bba58cda530ee4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObject: {fileID: 0}
+  itemType: 10
+  itemNameText: "\uB178\uB048"
+  itemExplanationText: "\uC808\uB300 \uACE0\uB9AC\uC5D0 \uBAA9\uC744 \uB123\uC9C0
+    \uB9C8\uC2DC\uC624."
   itemName: {fileID: 4211739019172871455}
   itemAmount: {fileID: 1742940553086782904}
 --- !u!1 &3802969617064496774

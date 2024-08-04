@@ -32,11 +32,12 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
 
     public string ItemAdd((GameControlType.Item, int) value) {
         this.Item[value.Item1].ItemAdd(value.Item2);
+        Player.Instance.Inventory[value.Item1] += value.Item2;
         
-        return this.Item[value.Item1].ItemNameText;
+        return this.Item[value.Item1].itemNameText;
     }
 
     public string GetItemName(GameControlType.Item type) {
-        return this.Item[type].ItemNameText;
+        return this.Item[type].itemNameText;
     }
 }

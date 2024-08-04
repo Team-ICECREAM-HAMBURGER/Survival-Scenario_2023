@@ -172,6 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a87ddfd5b8f4a13bdf27be55f63149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObject: {fileID: 0}
+  itemType: 1
+  itemNameText: "\uC2DD\uC218"
+  itemExplanationText: "\uBC14\uB85C \uB9C8\uC2E4 \uC218 \uC788\uB294 \uADC0\uD55C
+    \uBB3C\uC785\uB2C8\uB2E4. \uC0AC\uB9C9\uBCF5\uC744 \uD0C4\uC0DD\uC2DC\uD0A8 \uB300\uB2E8\uD55C
+    \uB140\uC11D\uC774\uC8E0."
   itemName: {fileID: 3978047483713807224}
   itemAmount: {fileID: 6573451885190723700}
 --- !u!1 &3004367668337177863

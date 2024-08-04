@@ -306,6 +306,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4961b8b725b74d12ba22c58289ad6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObject: {fileID: 0}
+  itemType: 3
+  itemNameText: "\uC5D0\uB108\uC9C0 \uBC14"
+  itemExplanationText: "\uD55C \uC785 \uBA39\uC73C\uB2C8 \uD798\uC138\uACE0 \uAC15\uD55C
+    \uAE30\uC6B4\uC774 \uB4DC\uB294\uB370, \uD639\uC2DC \uC544\uCE68\uC778\uAC00\uC694?"
   itemName: {fileID: 8868298379003469149}
   itemAmount: {fileID: 8369707773206011318}
 --- !u!1 &2260304791493953664

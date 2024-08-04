@@ -3,29 +3,36 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public abstract class Item : MonoBehaviour {
-    public GameControlType.Item ItemType { get; protected set; }
-    public string ItemNameText { get; protected set; }
-    public string ItemExplanationText { get; protected set; }
-
+    [HideInInspector] public GameObject itemObject;
+    [HideInInspector] public Item itemObjectComponent;
+    
+    public GameControlType.Item itemType;
+    public string itemNameText;
+    public string itemExplanationText;
+    
+    [Space(25f)]
+    
     [SerializeField] protected TMP_Text itemName;
     [SerializeField] protected TMP_Text itemAmount;
 
     
     public virtual void Init() {
         ItemManager.Instance.OnInventorySync.AddListener(InventorySync);
-        Instantiate(gameObject, GameObject.FindGameObjectWithTag("Inventory").transform);
+        
+        itemObject = Instantiate(gameObject, GameObject.FindGameObjectWithTag("Inventory").transform);
+        itemObjectComponent = itemObject.GetComponent<Item>();
     }
     
     public virtual void InventorySync(GameControlDictionary.Inventory value) {
-        if (value.ContainsKey(ItemType) && value[ItemType] > 0) {
-            gameObject.SetActive(true);
-            
-            itemName.text = ItemNameText;
-            itemAmount.text = value[ItemType].ToString();
+        if (value.ContainsKey(itemType) && value[itemType] > 0) {
+            itemObject.SetActive(true);
         }
         else {
-            gameObject.SetActive(false);
+            itemObject.SetActive(false);
         }
+        
+        itemObjectComponent.itemName.text = itemNameText;
+        itemObjectComponent.itemAmount.text = value[itemType].ToString();
     }
     
     public abstract void ItemUse(int value = 1);

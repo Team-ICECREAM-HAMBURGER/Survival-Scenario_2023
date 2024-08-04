@@ -185,6 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a00cd2e22ee464aaff4796ae91b014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObject: {fileID: 0}
+  itemType: 5
+  itemNameText: "\uB0A0 \uACE0\uAE30"
+  itemExplanationText: "\uB0A0 \uAC83\uC785\uB2C8\uB2E4. \uC721\uD68C\uB791\uC740
+    \uB2E4\uB985\uB2C8\uB2E4. \uADF8\uB7EC\uC9C0 \uB9C8\uC138\uC694."
   itemName: {fileID: 8474799780358504244}
   itemAmount: {fileID: 7629732754995591007}
 --- !u!1 &2426688847127081161

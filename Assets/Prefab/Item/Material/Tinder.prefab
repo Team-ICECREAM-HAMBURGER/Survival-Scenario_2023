@@ -172,6 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398c58351c0ab41cea054128bbe4d34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObject: {fileID: 0}
+  itemType: 12
+  itemNameText: "\uBD88\uC3D8\uC2DC\uAC1C"
+  itemExplanationText: "\uBD88\uC744 \uD53C\uC6B0\uB294 \uD544\uC218 \uC7AC\uB8CC\uC785\uB2C8\uB2E4.
+    \uBB3C\uB860, \uCC45\uC744 \uB9D0\uD55C \uAC8C \uC544\uB2D9\uB2C8\uB2E4."
   itemName: {fileID: 2512477819133001024}
   itemAmount: {fileID: 2067429436990442474}
 --- !u!1 &5061351023105218412
@@ -373,7 +378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1\uAC1C"
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

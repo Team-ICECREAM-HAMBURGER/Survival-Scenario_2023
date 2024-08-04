@@ -695,5 +695,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e3b2c89acc748a281c1ec51220d74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObject: {fileID: 0}
+  itemType: 15
+  itemNameText: "\uCC44\uC9D1 \uB3C4\uAD6C"
+  itemExplanationText: "\uB9E8\uC190\uC758 \uC2DC\uB300\uB294 \uB05D\uB0AC\uC2B5\uB2C8\uB2E4.
+    \uCC44\uC9D1\uC758 \uD6A8\uC728\uC744 \uADF9\uB300\uD654\uD558\uB294 \uB3C4\uAD6C\uC785\uB2C8\uB2E4.
+    DNA\uAC00 \uC790\uB791\uC2A4\uB7EC\uC6CC\uC9C0\uB294 \uC21C\uAC04\uC785\uB2C8\uB2E4."
   itemName: {fileID: 1834472795672702041}
   itemAmount: {fileID: 100552946856780677}

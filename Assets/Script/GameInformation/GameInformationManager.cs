@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public class GameInformationManager : GameControlSingleton<GameInformationManager> {
-    [FormerlySerializedAs("playerInformationData")] public GameInformationPlayerData gameInformationPlayerData;
-    [FormerlySerializedAs("worldInformationData")] public GameInformationWorldData gameInformationWorldData;
+    public GameInformationPlayerData gameInformationPlayerData;
+    public GameInformationWorldData gameInformationWorldData;
     
     private delegate void GameDataEventHandler();
     private GameDataEventHandler OnGameDataSaveEvent;
@@ -45,7 +45,7 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     }
     
     private void PlayerDataSave() {
-        Debug.Log("Player Data Saved");
+        // Debug.Log("Player Data Saved");
         
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.gameInformationPlayerData);
         
@@ -53,7 +53,7 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     }
 
     private void WorldDataSave() {
-        Debug.Log("World Data Saved");
+        // Debug.Log("World Data Saved");
 
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.gameInformationWorldData);
         
