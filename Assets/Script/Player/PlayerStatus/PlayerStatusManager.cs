@@ -10,7 +10,6 @@ public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
     
     
     public void Init() {
-        this.OnPlayerStatusInit = new();
         this.OnPlayerStatusInit.Invoke();
     }
 }

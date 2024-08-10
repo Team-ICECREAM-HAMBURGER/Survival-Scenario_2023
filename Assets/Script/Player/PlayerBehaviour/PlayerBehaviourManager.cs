@@ -47,6 +47,10 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         return Player.Instance.Inventory[type];
     }
 
+    public bool GetInventoryContainItem(GameControlType.Item type) {
+        return (Player.Instance.Inventory[type] > 0);
+    }
+
     public void ItemUse((GameControlType.Item, int) value) {
         ItemManager.Instance.ItemUse(value);
     }
@@ -58,7 +62,7 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
     public string GetItemName(GameControlType.Item type) {
         return ItemManager.Instance.GetItemName(type);
     }
-
+    
     public void StatusEffectInvoke() {
         PlayerStatusEffectManager.Instance.StatusEffectInvoke();
     }

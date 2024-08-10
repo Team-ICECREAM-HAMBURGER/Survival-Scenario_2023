@@ -7,7 +7,6 @@ public class PlayerStatusBodyHeat : PlayerStatus {  // Presenter
         this.LimitValue = 20f;
         this.CurrentValue = Player.Instance.Status[this.Type];
         
-        Debug.Log(this.CurrentValue + " : " + Player.Instance.Status[this.Type]);
         GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
     }
 
