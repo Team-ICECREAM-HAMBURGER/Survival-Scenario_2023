@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,12 +9,20 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     [Space(25f)]
     
     [SerializeField] private UnityEvent OnItemInit;
-    
+
+
     [HideInInspector] public UnityEvent<GameControlDictionary.Inventory> OnInventorySync;
+
+    public TMP_Text itemInfoTitle;
+    public TMP_Text itemInfoExplanation;
     
     
     private void Init() {
         // Items Init
+        foreach (var VARIABLE in this.Item) {
+            Instantiate(VARIABLE.Value.gameObject, GameObject.FindGameObjectWithTag("Inventory").transform);
+        }
+        
         this.OnItemInit.Invoke();
     }
     
@@ -29,15 +39,15 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
             this.Item[value.Item1].ItemUse(value.Item2);
         }
     }
-
+    
     public string ItemAdd((GameControlType.Item, int) value) {
         this.Item[value.Item1].ItemAdd(value.Item2);
         Player.Instance.Inventory[value.Item1] += value.Item2;
         
-        return this.Item[value.Item1].itemNameText;
+        return this.Item[value.Item1].itemInfoTitleText;
     }
 
     public string GetItemName(GameControlType.Item type) {
-        return this.Item[type].itemNameText;
+        return this.Item[type].itemInfoTitleText;
     }
 }

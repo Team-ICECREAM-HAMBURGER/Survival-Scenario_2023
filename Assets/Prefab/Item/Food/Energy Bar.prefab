@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -254,7 +254,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1356631870188315796}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3163646709705015387}
+        m_TargetAssemblyTypeName: ItemFoodEnergyBar, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1920890236755596896
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,13 +318,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4961b8b725b74d12ba22c58289ad6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
   itemType: 3
-  itemNameText: "\uC5D0\uB108\uC9C0 \uBC14"
-  itemExplanationText: "\uD55C \uC785 \uBA39\uC73C\uB2C8 \uD798\uC138\uACE0 \uAC15\uD55C
-    \uAE30\uC6B4\uC774 \uB4DC\uB294\uB370, \uD639\uC2DC \uC544\uCE68\uC778\uAC00\uC694?"
+  itemInfoTitleText: "\uC5D0\uB108\uC9C0 \uBC14"
+  itemInfoExplanationText: "\uD55C \uC785\uB9CC\uC73C\uB85C\uB3C4 \uD798\uC138\uACE0
+    \uAC15\uD55C \uC544\uCE68\uC774 \uB290\uAEF4\uC9D1\uB2C8\uB2E4."
   itemName: {fileID: 8868298379003469149}
   itemAmount: {fileID: 8369707773206011318}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &2260304791493953664
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,10 +686,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 31.55
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -836,7 +849,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6375390334514545516}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3163646709705015387}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7410911963202406724
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,4 +982,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3568862390412863845}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3163646709705015387}
+        m_TargetAssemblyTypeName: ItemFoodEnergyBar, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

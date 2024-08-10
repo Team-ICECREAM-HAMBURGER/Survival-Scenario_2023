@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3291393544939109221}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1898179926880879642}
+        m_TargetAssemblyTypeName: ItemFoodBottleOfWater, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1920890236755596896
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,14 +184,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a87ddfd5b8f4a13bdf27be55f63149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
   itemType: 1
-  itemNameText: "\uC2DD\uC218"
-  itemExplanationText: "\uBC14\uB85C \uB9C8\uC2E4 \uC218 \uC788\uB294 \uADC0\uD55C
-    \uBB3C\uC785\uB2C8\uB2E4. \uC0AC\uB9C9\uBCF5\uC744 \uD0C4\uC0DD\uC2DC\uD0A8 \uB300\uB2E8\uD55C
-    \uB140\uC11D\uC774\uC8E0."
+  itemInfoTitleText: "\uC0DD\uC218"
+  itemInfoExplanationText: "\uB9C8\uC2E4 \uC218 \uC788\uB294 \uBB3C\uC785\uB2C8\uB2E4.
+    \uD55C \uBAA8\uAE08\uB9CC \uC788\uC5B4\uB3C4 \uCC9C\uD558\uAC00 \uB450\uB835\uC9C0
+    \uC54A\uC2B5\uB2C8\uB2E4."
   itemName: {fileID: 3978047483713807224}
   itemAmount: {fileID: 6573451885190723700}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &3004367668337177863
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +313,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3758920960579126834}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1898179926880879642}
+        m_TargetAssemblyTypeName: ItemFoodBottleOfWater, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3681491202756644034
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBB3C"
+  m_text: "\uC0DD\uC218"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -690,7 +715,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1725665863191261113}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1898179926880879642}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7003714757513311777
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +793,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

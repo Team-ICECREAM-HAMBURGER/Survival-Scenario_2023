@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2951656827764993637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5435927613267526264}
+        m_TargetAssemblyTypeName: ItemMaterialCan, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1866768637826153973
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1\uAC1C"
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -439,14 +451,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f44e387aab9469ea33c07618bc65ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
   itemType: 7
-  itemNameText: "\uBE48 \uCE94"
-  itemExplanationText: "\uAC00\uBCCD\uACE0 \uD2BC\uD2BC\uD558\uBA70 \uBB3C\uC744
-    \uB2F4\uC744 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uCC38\uD638\uC804\uC758 \uC601\uC6D0\uD55C
-    \uCE5C\uAD6C\uC8E0."
+  itemInfoTitleText: "\uBE48 \uCE94"
+  itemInfoExplanationText: "\uBB3C\uC744 \uB2F4\uC744 \uC218 \uC788\uB294 \uBE48
+    \uCE94\uC785\uB2C8\uB2E4."
   itemName: {fileID: 7623360576718629756}
   itemAmount: {fileID: 960839418929021007}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &8477839619546100302
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +580,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4734561499629531922}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5435927613267526264}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9034949894623169426
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCE94"
+  m_text: "\uBE48 \uCE94"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

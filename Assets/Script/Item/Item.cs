@@ -1,38 +1,46 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public abstract class Item : MonoBehaviour {
-    [HideInInspector] public GameObject itemObject;
-    [HideInInspector] public Item itemObjectComponent;
-    
+    [Header("Item Information")]
     public GameControlType.Item itemType;
-    public string itemNameText;
-    public string itemExplanationText;
+    public string itemInfoTitleText;
+    public string itemInfoExplanationText;
     
     [Space(25f)]
     
+    [Header("UI Component")]
     [SerializeField] protected TMP_Text itemName;
     [SerializeField] protected TMP_Text itemAmount;
 
+    public TMP_Text itemInfoTitle;
+    public TMP_Text itemInfoExplanation;
+    
     
     public virtual void Init() {
         ItemManager.Instance.OnInventorySync.AddListener(InventorySync);
         
-        itemObject = Instantiate(gameObject, GameObject.FindGameObjectWithTag("Inventory").transform);
-        itemObjectComponent = itemObject.GetComponent<Item>();
+        itemInfoTitle = ItemManager.Instance.itemInfoTitle;
+        itemInfoExplanation = ItemManager.Instance.itemInfoExplanation;
+    }
+
+    public virtual void ItemInfo() {
+        itemInfoTitle.text = itemInfoTitleText;
+        itemInfoExplanation.text = itemInfoExplanationText;
     }
     
     public virtual void InventorySync(GameControlDictionary.Inventory value) {
         if (value.ContainsKey(itemType) && value[itemType] > 0) {
-            itemObject.SetActive(true);
+            gameObject.SetActive(true);
         }
         else {
-            itemObject.SetActive(false);
+            gameObject.SetActive(false);
         }
         
-        itemObjectComponent.itemName.text = itemNameText;
-        itemObjectComponent.itemAmount.text = value[itemType].ToString();
+        itemAmount.text = value[itemType].ToString();
+        
+        itemInfoTitle.text = "인벤토리";
+        itemInfoExplanation.text = "아이템 항목을 선택하면 상세 설명을 볼 수 있습니다.";
     }
     
     public abstract void ItemUse(int value = 1);

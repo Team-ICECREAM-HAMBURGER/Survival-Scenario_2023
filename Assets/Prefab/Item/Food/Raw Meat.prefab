@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -150,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1753789140353585682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -185,14 +185,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a00cd2e22ee464aaff4796ae91b014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
-  itemObjectComponent: {fileID: 0}
+  itemPrefab: {fileID: 1920890236755596896}
+  itemComponent: {fileID: 3474361351651763349}
   itemType: 5
-  itemNameText: "\uC0DD\uACE0\uAE30"
-  itemExplanationText: "\uB0A0 \uAC83\uC785\uB2C8\uB2E4. \uC721\uD68C\uB791\uC740
-    \uB2E4\uB985\uB2C8\uB2E4. \uBA3C\uC800 \uBD88\uC5D0\uAC8C \uC591\uBCF4\uD558\uC138\uC694."
+  itemInfoTitleText: "\uC0DD\uACE0\uAE30"
+  itemInfoExplanationText: "\uC774\uAC74 \uB0A0 \uAC83\uC785\uB2C8\uB2E4. \uC721\uD68C\uB791
+    \uB2E4\uB985\uB2C8\uB2E4."
   itemName: {fileID: 8474799780358504244}
   itemAmount: {fileID: 7629732754995591007}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &2426688847127081161
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +315,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4296379789092062481}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3474361351651763349}
+        m_TargetAssemblyTypeName: ItemFoodRawMeat, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4550391349009263081
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +448,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8242112767746205279}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3474361351651763349}
+        m_TargetAssemblyTypeName: ItemFoodRawMeat, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4578914220321990088
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +582,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8124141935891311650}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3474361351651763349}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4729520829619667144
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB0A0 \uACE0\uAE30"
+  m_text: "\uC0DD\uACE0\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

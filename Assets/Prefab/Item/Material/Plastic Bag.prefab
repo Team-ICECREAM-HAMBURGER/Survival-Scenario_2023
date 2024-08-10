@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBE44\uB2D0 \uBD09\uC9C0"
+  m_text: "\uBE44\uB2D0\uBD09\uD22C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -388,7 +388,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2794525447860040500}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4522060015118556093}
+        m_TargetAssemblyTypeName: ItemMaterialPlasticBag, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3344575430677846928
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7163442005428921675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -439,14 +451,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc6daca115934ed6aca798f7c89f6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
+  itemPrefab: {fileID: 3344575430677846928}
+  itemComponent: {fileID: 4522060015118556093}
   itemType: 9
-  itemNameText: "\uBE44\uB2D0 \uBD09\uD22C"
-  itemExplanationText: "\uD55C \uB54C\uB294 \uC678\uBA74\uBC1B\uC558\uC9C0\uB9CC,
-    \uC9C0\uAE08\uC740 \uADF8 \uC9C8\uAE34 \uC0DD\uC874\uB825\uC744 \uC874\uACBD\uD558\uAC8C
-    \uB429\uB2C8\uB2E4."
+  itemInfoTitleText: "\uBE44\uB2D0\uBD09\uD22C"
+  itemInfoExplanationText: "\uC9C0\uAE08\uB9CC\uD07C\uC740 \uC369\uC9C0 \uC54A\uB294
+    \uADF8 \uC9C8\uAE34 \uC0DD\uC874\uB825\uC744 \uC874\uACBD\uD558\uAC8C \uB429\uB2C8\uB2E4."
   itemName: {fileID: 2114880492592998726}
   itemAmount: {fileID: 6898993953825804262}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &5584659337231158659
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,4 +716,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6826993686483337320}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4522060015118556093}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

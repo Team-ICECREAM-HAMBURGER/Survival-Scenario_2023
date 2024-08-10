@@ -254,7 +254,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5630618470137716293}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6151042530270224082}
+        m_TargetAssemblyTypeName: ItemToolHuntingTool, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3796082510778022344
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,13 +451,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3547f4e803994c86803862f63658194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
   itemType: 16
-  itemNameText: "\uC0AC\uB0E5 \uB3C4\uAD6C"
-  itemExplanationText: "\uC0AC\uB0E5\uAC10\uC744 \uC0AC\uB0E5\uD560 \uC218 \uC788\uB294
-    \uB3C4\uAD6C\uC785\uB2C8\uB2E4. \uC55E\uBA74\uC744 \uBAA9\uD45C\uBB3C\uC5D0 \uC870\uC900\uD558\uC138\uC694."
+  itemInfoTitleText: "\uC0AC\uB0E5 \uB3C4\uAD6C"
+  itemInfoExplanationText: "\uC804\uBC29, \uBAA9\uD45C\uBB3C \uBC29\uD5A5"
   itemName: {fileID: 238689021114385992}
   itemAmount: {fileID: 231731210522771364}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &7544982586518944155
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +579,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2859553388586342772}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6151042530270224082}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7908802593828200717
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

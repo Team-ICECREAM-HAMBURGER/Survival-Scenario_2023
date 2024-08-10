@@ -1,3 +1,6 @@
+using TMPro;
+using UnityEngine;
+
 public class ItemMaterialWood : Item {
     public override void ItemUse(int value = 1) {
     }

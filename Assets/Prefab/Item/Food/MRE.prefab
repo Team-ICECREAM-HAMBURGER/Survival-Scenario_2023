@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2056129649518564551}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 841545645020198800}
+        m_TargetAssemblyTypeName: ItemFoodMRE, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1920890236755596896
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,13 +184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cc30d3ef3084d26b49f67a2626bad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
   itemType: 4
-  itemNameText: "\uBE44\uC0C1\uC2DD\uB7C9"
-  itemExplanationText: "\uD3EC\uC7A5\uC9C0 \uC131\uBD84\uD45C\uB9CC \uBD10\uB3C4
-    \uC774\uAC8C \uC65C '\uBE44\uC0C1' \uC2DD\uB7C9\uC778\uC9C0 \uC54C \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  itemInfoTitleText: "\uBE44\uC0C1\uC2DD\uB7C9"
+  itemInfoExplanationText: "'\uBE44\uC0C1'\uC778\uB370 \uB9DB\uC744 \uAE30\uB300\uD588\uC2B5\uB2C8\uAE4C?
+    \uCE7C\uB85C\uB9AC\uB85C \uB9CC\uC871\uD558\uC2ED\uC2DC\uC624."
   itemName: {fileID: 6087905720250922807}
   itemAmount: {fileID: 7978739272713828630}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &4175095550553291557
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +313,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3996749648412373933}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 841545645020198800}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4585763131098095051
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -555,7 +580,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1402013274392993162}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 841545645020198800}
+        m_TargetAssemblyTypeName: ItemFoodMRE, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6419909801277283686
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBE44\uC0C1 \uC2DD\uB7C9"
+  m_text: "\uBE44\uC0C1\uC2DD\uB7C9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -648,10 +685,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 34.1
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

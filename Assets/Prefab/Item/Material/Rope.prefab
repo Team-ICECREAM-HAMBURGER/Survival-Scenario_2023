@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1782540522617267677}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5780296612314296313}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3331959003386905436
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -306,13 +318,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985f4e30fb9f84d34bba58cda530ee4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
+  itemPrefab: {fileID: 3344575430677846928}
+  itemComponent: {fileID: 5780296612314296313}
   itemType: 10
-  itemNameText: "\uB178\uB048"
-  itemExplanationText: "\uC808\uB300 \uACE0\uB9AC\uC5D0 \uBAA9\uC744 \uB123\uC9C0
+  itemInfoTitleText: "\uB178\uB048"
+  itemInfoExplanationText: "\uC808\uB300 \uACE0\uB9AC\uC5D0 \uBA38\uB9AC\uB97C \uB123\uC9C0
     \uB9C8\uC2DC\uC624."
   itemName: {fileID: 4211739019172871455}
   itemAmount: {fileID: 1742940553086782904}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &3802969617064496774
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +448,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6892602846176512266}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5780296612314296313}
+        m_TargetAssemblyTypeName: ItemMaterialRope, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6883516968675676693
 GameObject:
   m_ObjectHideFlags: 0

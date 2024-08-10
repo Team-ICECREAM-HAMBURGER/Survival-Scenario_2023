@@ -8,7 +8,7 @@ public class GameControlDictionary {
     
     
     [System.Serializable] public class Item : SerializableDictionary<GameControlType.Item, global::Item> { }
-    
+
     [System.Serializable] public class StatusGaugeSlider : SerializableDictionary<GameControlType.Status, Slider> { }
     [System.Serializable] public class StatusEffectText : SerializableDictionary<GameControlType.StatusEffect, GameObject> { }
     

@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3417404229923236754}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4047896815937595676}
+        m_TargetAssemblyTypeName: ItemFoodBerry, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &502212430289992642
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,13 +255,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1920890236755596896}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 4047896815937595676}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -315,12 +327,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e074d453e2024efdb7ee79f094768781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
   itemType: 0
-  itemNameText: "\uC5F4\uB9E4"
-  itemExplanationText: "\uBCA0\uB9AC\uBCA0\uB9AC \uB9DB\uC788\uB294 \uBCA0\uB9AC\uC785\uB2C8\uB2E4."
+  itemInfoTitleText: "\uC5F4\uB9E4"
+  itemInfoExplanationText: "\uBCA0\uB9AC\uBCA0\uB9AC \uB9DB\uC788\uB294 \uBCA0\uB9AC\uC785\uB2C8\uB2E4."
   itemName: {fileID: 4605849062581616038}
   itemAmount: {fileID: 4517365856469001835}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &3760642227140698493
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +454,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1286202308538390789}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4047896815937595676}
+        m_TargetAssemblyTypeName: ItemFoodBerry, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5303166244667698078
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +800,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0\uAC1C"
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

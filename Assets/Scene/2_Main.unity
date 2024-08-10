@@ -3003,7 +3003,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  searchRandomEventWeight:
+  RandomEventWeight:
     m_keys: 000000000100000002000000
     m_values:
     - 90
@@ -6083,6 +6083,8 @@ MonoBehaviour:
   OnInventorySync:
     m_PersistentCalls:
       m_Calls: []
+  itemInfoTitle: {fileID: 744930007}
+  itemInfoExplanation: {fileID: 1141790513}
 --- !u!1 &390710426
 GameObject:
   m_ObjectHideFlags: 0
@@ -10231,7 +10233,7 @@ GameObject:
   - component: {fileID: 744930007}
   m_Layer: 5
   m_Name: Name
-  m_TagString: Untagged
+  m_TagString: Item Info (Title)
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12873,7 +12875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 100601540}
+  m_AnchoredPosition: {x: -399.9992, y: 129383400}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -15061,7 +15063,7 @@ GameObject:
   - component: {fileID: 1141790513}
   m_Layer: 5
   m_Name: Explanation
-  m_TagString: Untagged
+  m_TagString: Item Info (Explanation)
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

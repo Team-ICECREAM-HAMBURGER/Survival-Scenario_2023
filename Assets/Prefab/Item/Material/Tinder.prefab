@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7939221038295460720}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8320699217119199662}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: ItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3344575430677846928
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7163442005428921675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -172,13 +184,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398c58351c0ab41cea054128bbe4d34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
+  itemPrefab: {fileID: 3344575430677846928}
+  itemComponent: {fileID: 8320699217119199662}
   itemType: 12
-  itemNameText: "\uBD88\uC3D8\uC2DC\uAC1C"
-  itemExplanationText: "\uBD88\uC744 \uD53C\uC6B0\uB294 \uD544\uC218 \uC7AC\uB8CC\uC785\uB2C8\uB2E4.
-    \uBB3C\uB860, \uCC45\uC744 \uB9D0\uD55C \uAC8C \uC544\uB2D9\uB2C8\uB2E4."
+  itemInfoTitleText: "\uBD88\uC3D8\uC2DC\uAC1C"
+  itemInfoExplanationText: "\uC808\uB300 \uCC45\uC744 \uB9D0\uD558\uB294 \uAC83\uC774
+    \uC544\uB2D9\uB2C8\uB2E4."
   itemName: {fileID: 2512477819133001024}
   itemAmount: {fileID: 2067429436990442474}
+  itemInfoTitle: {fileID: 0}
+  itemInfoExplanation: {fileID: 0}
 --- !u!1 &5061351023105218412
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -701,4 +716,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4304407158400024359}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8320699217119199662}
+        m_TargetAssemblyTypeName: ItemMaterialTinder, Assembly-CSharp
+        m_MethodName: ItemDrop
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

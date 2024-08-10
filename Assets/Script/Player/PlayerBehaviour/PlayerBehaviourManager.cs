@@ -54,7 +54,7 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
     public void ItemUse((GameControlType.Item, int) value) {
         ItemManager.Instance.ItemUse(value);
     }
-
+    
     public string ItemAdd((GameControlType.Item, int) value) {
         return ItemManager.Instance.ItemAdd(value);
     }

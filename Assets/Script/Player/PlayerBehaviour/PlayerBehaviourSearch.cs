@@ -37,13 +37,16 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
     [Header("Behaviour Loading Panel")]
     [SerializeField] private GameObject searchLoadingPanel;
     [SerializeField] private TMP_Text searchLoadingTitle;
-
-    private static int HUNTING_TOOL = 1;
     
     private int searchSpendTime;
+
+    private Dictionary<GameControlType.Item, int> tempGotItemDictionary;
     
     private float randomCollectableItemWeightFarmingTotal;
     private Dictionary<GameControlType.Item, float> randomCollectableItemWeightFarmingDictionary;
+
+    private float randomCollectableItemWeightHuntingTotal;
+    private Dictionary<GameControlType.Item, float> randomCollectableItemWeightHuntingDictionary;
     
     private float randomEventWeightTotal;
     private Dictionary<GameControlType.RandomEvent, float> randomEventWeightDictionary;
@@ -55,12 +58,16 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
     
     private delegate void RandomEvent();
     
+    private static int HUNTING_TOOL = 1;
+
     
     public override void Init() {
         this.searchSpendTime = 5;
 
         this.searchResultTitleText = String.Empty;
         this.searchResultContentText = new();
+
+        this.tempGotItemDictionary = new();
         
         this.randomEventDictionary = new() {
             { GameControlType.RandomEvent.FARM, RandomEventFarming },
@@ -70,6 +77,9 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         
         this.randomCollectableItemWeightFarmingTotal = this.RandomCollectableItemWeightFarming.Sum(variable => variable.Value);
         this.randomCollectableItemWeightFarmingDictionary = DictionaryWeightSort(this.RandomCollectableItemWeightFarming, this.randomCollectableItemWeightFarmingTotal); 
+        
+        this.randomCollectableItemWeightHuntingTotal = this.RandomCollectableItemWeightHunting.Sum(variable => variable.Value);
+        this.randomCollectableItemWeightHuntingDictionary = DictionaryWeightSort(this.RandomCollectableItemWeightHunting, randomCollectableItemWeightHuntingTotal);
         
         this.randomEventWeightTotal = this.RandomEventWeight.Sum(variable => variable.Value);
         this.randomEventWeightDictionary = DictionaryWeightSort(this.RandomEventWeight, this.randomEventWeightTotal);
@@ -115,7 +125,6 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         Debug.Log("FarmEvent");
             
         var itemAmount = Random.Range(1, 4);
-        Dictionary<GameControlType.Item, int> tempItemDictionaryFarming = new();
         
         // Panel Update
         this.searchResultTitleText = "탐색 결과";
@@ -129,6 +138,8 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         this.searchResultContentText.Append("- 획득한 아이템\n");
             
         // Player Inventory Update
+        this.tempGotItemDictionary.Clear();
+
         for (var i = 0; i < itemAmount; i++) {
             var weightSum = 0f;
             var randomPivot = Random.Range(0, 1f);
@@ -139,8 +150,8 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
                 if (weightSum >= randomPivot) {
                     PlayerBehaviourManager.Instance.ItemAdd((VARIABLE.Key, 1));
                             
-                    if (!tempItemDictionaryFarming.TryAdd(VARIABLE.Key, 1)) {
-                        tempItemDictionaryFarming[VARIABLE.Key] += 1;
+                    if (!this.tempGotItemDictionary.TryAdd(VARIABLE.Key, 1)) {
+                        this.tempGotItemDictionary[VARIABLE.Key] += 1;
                     }
                         
                     break;
@@ -148,7 +159,7 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
             }
         }
         
-        foreach (var VARIABLE in tempItemDictionaryFarming) {
+        foreach (var VARIABLE in this.tempGotItemDictionary) {
             this.searchResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(VARIABLE.Key));
             this.searchResultContentText.Append(" ");
             this.searchResultContentText.Append(VARIABLE.Value);
@@ -159,13 +170,8 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
     private void RandomEventHunting() {
         Debug.Log("HuntEvent");
         
-        var totalWeight = this.RandomCollectableItemWeightHunting.Sum(variable => variable.Value);
-        var weightDictionary = DictionaryWeightSort(this.RandomCollectableItemWeightHunting, totalWeight);
-        
         var itemAmount = Random.Range(1, 4);
-        var weightSum = 0f;
-        var randomPivot = Random.Range(0, 1f);
-
+        
         if (CanBehaviour(GameControlType.Behaviour.SEARCH_HUNT)) {                
             // Panel Update
             this.searchResultTitleText = "탐색 결과";
@@ -179,31 +185,43 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
             this.searchResultContentText.Append("- 획득한 아이템\n");
             
             // Player Inventory Update
+            this.tempGotItemDictionary.Clear();
+            
             for (var i = 0; i < itemAmount; i++) {
-                foreach (var VARIABLE in weightDictionary) {
+                var weightSum = 0f;
+                var randomPivot = Random.Range(0, 1f);
+                
+                foreach (var VARIABLE in this.randomCollectableItemWeightHuntingDictionary) {
                     weightSum += VARIABLE.Value;
                     
                     if (weightSum >= randomPivot) {
-                        var getItem = PlayerBehaviourManager.Instance.ItemAdd((VARIABLE.Key, itemAmount));
+                        PlayerBehaviourManager.Instance.ItemAdd((VARIABLE.Key, 1));
+                            
+                        if (!this.tempGotItemDictionary.TryAdd(VARIABLE.Key, 1)) {
+                            this.tempGotItemDictionary[VARIABLE.Key] += 1;
+                        }
                         
-                        this.searchResultContentText.Append(getItem);
-                        this.searchResultContentText.Append(" ");
-                        this.searchResultContentText.Append(itemAmount);
-                        this.searchResultContentText.Append("개\n");
-                        
-                        weightSum = 0f;
-
                         break;
                     }
                 }
             }
-
+            
+            // Item Use
             this.OnItemUseHunting.Invoke();
-
+            
+            // TODO: Hard Coding Problem
             this.searchResultContentText.Append("- 소모한 아이템\n");
             this.searchResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.HUNTING_TOOL));
             this.searchResultContentText.Append(HUNTING_TOOL);
             this.searchResultContentText.Append("개\n");
+            
+            // Item Get
+            foreach (var VARIABLE in this.tempGotItemDictionary) {
+                this.searchResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(VARIABLE.Key));
+                this.searchResultContentText.Append(" ");
+                this.searchResultContentText.Append(VARIABLE.Value);
+                this.searchResultContentText.Append("개\n");
+            }
         }
         else {
             this.searchResultTitleText = "탐색 결과";
