@@ -59,6 +59,10 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         return ItemManager.Instance.ItemAdd(value);
     }
 
+    public void ItemDrop((GameControlType.Item, int) value) {
+        ItemManager.Instance.ItemDrop(value);
+    }
+
     public string GetItemName(GameControlType.Item type) {
         return ItemManager.Instance.GetItemName(type);
     }

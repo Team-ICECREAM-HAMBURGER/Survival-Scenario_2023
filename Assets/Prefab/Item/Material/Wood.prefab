@@ -50,8 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20a14befc937457b9d2098b31b40e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 3344575430677846928}
-  itemComponent: {fileID: 3981105636338222117}
   itemType: 13
   itemInfoTitleText: "\uB098\uBB34"
   itemInfoExplanationText: "\uC544\uB08C\uC5C6\uC774 \uC8FC\uB294 \uB098\uBB34\uC785\uB2C8\uB2E4.

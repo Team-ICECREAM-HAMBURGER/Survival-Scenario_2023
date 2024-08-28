@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -12,16 +13,20 @@ public abstract class Item : MonoBehaviour {
     [Header("UI Component")]
     [SerializeField] protected TMP_Text itemName;
     [SerializeField] protected TMP_Text itemAmount;
-
-    public TMP_Text itemInfoTitle;
-    public TMP_Text itemInfoExplanation;
+    [SerializeField] protected TMP_Text itemInfoTitle;
+    [SerializeField] protected TMP_Text itemInfoExplanation;
     
     
-    public virtual void Init() {
-        ItemManager.Instance.OnInventorySync.AddListener(InventorySync);
+    public virtual void Init() { 
+        this.itemInfoTitle = ItemManager.Instance.itemInfoTitle;
+        this.itemInfoExplanation = ItemManager.Instance.itemInfoExplanation;
         
-        itemInfoTitle = ItemManager.Instance.itemInfoTitle;
-        itemInfoExplanation = ItemManager.Instance.itemInfoExplanation;
+        ItemManager.Instance.OnInventorySync.AddListener(InventorySync);
+        ItemManager.Instance.ItemObject.TryAdd(this.itemType, this);
+    }
+
+    private void Awake() {
+        Init();
     }
 
     public virtual void ItemInfo() {
@@ -43,6 +48,7 @@ public abstract class Item : MonoBehaviour {
         itemInfoExplanation.text = "아이템 항목을 선택하면 상세 설명을 볼 수 있습니다.";
     }
     
+    // TODO: 추상 메서드 구현 필요; Manager는 설정 완료.
     public abstract void ItemUse(int value = 1);
     public abstract void ItemDrop(int value = 1);
     public abstract void ItemAdd(int value = 1);

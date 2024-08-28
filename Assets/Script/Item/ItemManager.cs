@@ -1,29 +1,32 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ItemManager : GameControlSingleton<ItemManager> {  // Model
-    [field: SerializeField] public GameControlDictionary.Item Item { get; private set; }
-    
-    [Space(25f)]
-    
-    [SerializeField] private UnityEvent OnItemInit;
-
-
+    [field: SerializeField] private GameControlDictionary.Item ItemPrefab { get; set; }
+    [HideInInspector] public GameControlDictionary.Item ItemObject { get; private set; }
     [HideInInspector] public UnityEvent<GameControlDictionary.Inventory> OnInventorySync;
 
+    [Space(25f)]
+
+    [Header("UI Component")]
     public TMP_Text itemInfoTitle;
     public TMP_Text itemInfoExplanation;
     
+    [Space(10f)]
+    
+    public Transform itemInventoryListViewContent;
+    
     
     private void Init() {
-        // Items Init
-        foreach (var VARIABLE in this.Item) {
-            Instantiate(VARIABLE.Value.gameObject, GameObject.FindGameObjectWithTag("Inventory").transform);
-        }
+        this.ItemObject = new();
         
-        this.OnItemInit.Invoke();
+        // Items Init
+        foreach (var VARIABLE in this.ItemPrefab) {
+            Instantiate(VARIABLE.Value.gameObject, this.itemInventoryListViewContent);
+        }
     }
     
     private void Awake() {
@@ -36,18 +39,26 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
 
     public void ItemUse((GameControlType.Item, int) value) {
         if (Player.Instance.Inventory.ContainsKey(value.Item1) && Player.Instance.Inventory[value.Item1] >= value.Item2) {
-            this.Item[value.Item1].ItemUse(value.Item2);
+            this.ItemObject[value.Item1].ItemUse(value.Item2);
+            Player.Instance.Inventory[value.Item1] -= value.Item2;
+        }
+    }
+
+    public string ItemAdd((GameControlType.Item, int) value) {
+        this.ItemObject[value.Item1].ItemAdd(value.Item2);
+        Player.Instance.Inventory[value.Item1] += value.Item2;
+
+        return this.ItemObject[value.Item1].itemInfoTitleText;
+    }
+
+    public void ItemDrop((GameControlType.Item, int) value) {
+        if (Player.Instance.Inventory.ContainsKey(value.Item1) && Player.Instance.Inventory[value.Item1] >= value.Item2) {
+            this.ItemObject[value.Item1].ItemDrop(value.Item2);
+            Player.Instance.Inventory[value.Item1] -= value.Item2;
         }
     }
     
-    public string ItemAdd((GameControlType.Item, int) value) {
-        this.Item[value.Item1].ItemAdd(value.Item2);
-        Player.Instance.Inventory[value.Item1] += value.Item2;
-        
-        return this.Item[value.Item1].itemInfoTitleText;
-    }
-
     public string GetItemName(GameControlType.Item type) {
-        return this.Item[type].itemInfoTitleText;
+        return this.ItemObject[type].itemInfoTitleText;
     }
 }

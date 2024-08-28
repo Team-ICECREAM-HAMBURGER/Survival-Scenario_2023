@@ -184,8 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26e7d1d4f6cd4618a494e32200ab725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 3344575430677846928}
-  itemComponent: {fileID: 559782221328864910}
   itemType: 11
   itemInfoTitleText: "\uB3CC"
   itemInfoExplanationText: "\uC11D\uAE30 \uC2DC\uB300\uC5D0 \uC628 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4."
@@ -258,9 +256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '0
-
-'
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}

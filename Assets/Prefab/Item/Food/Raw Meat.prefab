@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
   m_sharedMaterial: {fileID: -7119376693722304302, guid: 26315f38d7fa24485abe6f1473eaf208, type: 2}
@@ -185,8 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a00cd2e22ee464aaff4796ae91b014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 1920890236755596896}
-  itemComponent: {fileID: 3474361351651763349}
   itemType: 5
   itemInfoTitleText: "\uC0DD\uACE0\uAE30"
   itemInfoExplanationText: "\uC774\uAC74 \uB0A0 \uAC83\uC785\uB2C8\uB2E4. \uC721\uD68C\uB791

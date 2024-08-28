@@ -452,8 +452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ed7282da5cd47de85e68382ae7e990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 3344575430677846928}
-  itemComponent: {fileID: 2813977879788944730}
   itemType: 6
   itemInfoTitleText: "\uB3D9\uBB3C \uAC00\uC8FD"
   itemInfoExplanationText: "\uC0AC\uB78C\uC740 \uC774\uB984 \uB54C\uBB38\uC5D0 \uC8FD\uACE0,
