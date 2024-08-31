@@ -48,9 +48,7 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
     public override void Behaviour() {
         if (!CanBehaviour()) {
             PlayerBehaviourManager.Instance.WorldShelterSet(true);
-            
             PlayerBehaviourManager.Instance.WorldTimeUpdate(this.makeShelterSpendTime);
-            
             PlayerBehaviourManager.Instance.GameDataSaveInvoke();
             
             PanelUpdate();

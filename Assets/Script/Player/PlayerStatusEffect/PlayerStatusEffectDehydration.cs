@@ -16,7 +16,7 @@ public class PlayerStatusEffectDehydration : PlayerStatusEffect {
 
     public override void StatusEffect() {
         foreach (var VARIABLE in this.StatusReducePercents) {
-            PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
+            PlayerStatusManager.Instance.Status[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
         }
     }
     

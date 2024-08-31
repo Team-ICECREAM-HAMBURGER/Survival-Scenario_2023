@@ -41,7 +41,7 @@ public class PlayerStatusEffectInjured : PlayerStatusEffect {   // Presenter
         }
         
         foreach (var VARIABLE in this.StatusReducePercents) {
-            PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
+            PlayerStatusManager.Instance.Status[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
         }
         
         GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);

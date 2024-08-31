@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Manager -> Inside : Event or Reference
+// Outside -> Manager : Method
+
 public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     [field: SerializeField] private GameControlDictionary.Item ItemPrefab { get; set; }
     [HideInInspector] public GameControlDictionary.Item ItemObject { get; private set; }
@@ -33,32 +36,35 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         Init();
     }
 
-    public void InventorySync(GameControlDictionary.Inventory value) {
-        this.OnInventorySync.Invoke(value);
+    public void InventorySync() {
+        this.OnInventorySync.Invoke(Player.Instance.Inventory);
+        PlayerBehaviourManager.Instance.GameDataSaveInvoke();
+        PlayerBehaviourManager.Instance.PanelUpdateInventoryInfo();
     }
 
-    public void ItemUse((GameControlType.Item, int) value) {
-        if (Player.Instance.Inventory.ContainsKey(value.Item1) && Player.Instance.Inventory[value.Item1] >= value.Item2) {
-            this.ItemObject[value.Item1].ItemUse(value.Item2);
-            Player.Instance.Inventory[value.Item1] -= value.Item2;
-        }
+    public string ItemUse((GameControlType.Item, int) value) {
+        this.ItemObject[value.Item1].ItemUse(value.Item2);
+        
+        return this.ItemObject[value.Item1].itemInfoTitleText;
     }
 
     public string ItemAdd((GameControlType.Item, int) value) {
-        this.ItemObject[value.Item1].ItemAdd(value.Item2);
-        Player.Instance.Inventory[value.Item1] += value.Item2;
+        this.ItemObject[value.Item1].ItemAdd(value);
 
         return this.ItemObject[value.Item1].itemInfoTitleText;
     }
 
-    public void ItemDrop((GameControlType.Item, int) value) {
-        if (Player.Instance.Inventory.ContainsKey(value.Item1) && Player.Instance.Inventory[value.Item1] >= value.Item2) {
-            this.ItemObject[value.Item1].ItemDrop(value.Item2);
-            Player.Instance.Inventory[value.Item1] -= value.Item2;
-        }
+    public string ItemDrop((GameControlType.Item, int) value) {
+        this.ItemObject[value.Item1].ItemUse(value.Item2);
+        
+        return this.ItemObject[value.Item1].itemInfoTitleText;
     }
     
     public string GetItemName(GameControlType.Item type) {
         return this.ItemObject[type].itemInfoTitleText;
+    }
+
+    public void ItemEffectStatusUpdate(List<(GameControlType.Status, float)> value) {
+        PlayerStatusManager.Instance.StatusUpdate(value);
     }
 }

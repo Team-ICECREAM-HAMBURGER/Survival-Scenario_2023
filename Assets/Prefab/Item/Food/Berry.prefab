@@ -334,6 +334,9 @@ MonoBehaviour:
   itemAmount: {fileID: 4517365856469001835}
   itemInfoTitle: {fileID: 0}
   itemInfoExplanation: {fileID: 0}
+  staminaValue: 7
+  hydrationValue: 5
+  caloriesValue: 10
 --- !u!1 &3760642227140698493
 GameObject:
   m_ObjectHideFlags: 0

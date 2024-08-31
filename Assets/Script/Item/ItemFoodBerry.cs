@@ -1,10 +1,40 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 public class ItemFoodBerry : Item {
-    public override void ItemUse(int value = 1) {
+    [Space(25f)]
+    
+    [Header("Status Update Value")]
+    [SerializeField] private float staminaValue;
+    [SerializeField] private float hydrationValue;
+    [SerializeField] private float caloriesValue;
+
+    private List<(GameControlType.Status, float)> itemEffectStatusValue;
+
+
+    public override void Init() {
+        base.Init();
+        
+        this.itemEffectStatusValue = new() {
+            (GameControlType.Status.STAMINA, this.staminaValue),
+            (GameControlType.Status.HYDRATION, this.hydrationValue),
+            (GameControlType.Status.CALORIES, this.caloriesValue)
+        };
     }
 
-    public override void ItemDrop(int value = 1) {
+    public override void ItemUse(int value) {
+        base.ItemUse(value);
+        
+        ItemManager.Instance.ItemEffectStatusUpdate(this.itemEffectStatusValue);
+        ItemManager.Instance.InventorySync();
     }
 
-    public override void ItemAdd(int value = 1) {
+    public override void ItemDrop(int value) {
+        base.ItemDrop(value);
+        
+        ItemManager.Instance.InventorySync();
+    }
+
+    public override void ItemAdd((GameControlType.Item, int) value) {
     }
 }

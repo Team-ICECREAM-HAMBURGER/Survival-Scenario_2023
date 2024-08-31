@@ -49,7 +49,19 @@ public abstract class Item : MonoBehaviour {
     }
     
     // TODO: 추상 메서드 구현 필요; Manager는 설정 완료.
-    public abstract void ItemUse(int value = 1);
-    public abstract void ItemDrop(int value = 1);
-    public abstract void ItemAdd(int value = 1);
+    public virtual void ItemUse(int value) { // GUI Button
+        if (Player.Instance.Inventory.ContainsKey(this.itemType) && Player.Instance.Inventory[this.itemType] >= value) {
+            Player.Instance.Inventory[this.itemType] -= value;
+        }
+    }
+
+    public virtual void ItemDrop(int value) { // GUI Button
+        if (Player.Instance.Inventory.ContainsKey(this.itemType) && Player.Instance.Inventory[this.itemType] >= value) {
+            Player.Instance.Inventory[this.itemType] -= value;
+        }
+    }
+
+    public virtual void ItemAdd((GameControlType.Item, int) value) {    // Event
+        Player.Instance.Inventory[value.Item1] += value.Item2;   
+    }
 }

@@ -3,6 +3,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Manager -> Inside : Event or Reference
+// Outside -> Manager : Method
+
 public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManager> {
     [field: SerializeField] public GameControlDictionary.PlayerBehaviour Behaviour { get; private set; }
     
@@ -16,7 +19,6 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         this.OnPlayerBehaviourInit.Invoke();
     }
     
-    // PlayerBehaviour -> PlayerBehaviourManager -> (OUT) //
     public bool CanBehaviour(List<(GameControlType.Item, int)> values) {
         return values.All(VARIABLE => Player.Instance.Inventory[VARIABLE.Item1] >= VARIABLE.Item2);
     }
@@ -36,7 +38,7 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
     }
     
     public void InventorySync() {
-        ItemManager.Instance.InventorySync(Player.Instance.Inventory);
+        ItemManager.Instance.InventorySync();
     }
 
     public int GetInventoryAmountTotal() {
@@ -51,6 +53,10 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         return (Player.Instance.Inventory[type] > 0);
     }
 
+    public void PanelUpdateInventoryInfo() {
+        PlayerBehaviourInventory.OnInventoryInfoPanelUpdate.Invoke();
+    }
+    
     public void ItemUse((GameControlType.Item, int) value) {
         ItemManager.Instance.ItemUse(value);
     }
@@ -119,7 +125,4 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
     public void GameDataSaveInvoke() {
         GameInformationManager.Instance.GameDataSaveInvoke();
     }
-    
-    
-    // PlayerBehaviour <- PlayerBehaviourManager <- (OUT) //
 }

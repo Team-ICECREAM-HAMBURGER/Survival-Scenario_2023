@@ -28,6 +28,7 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
     private int inventorySpaceMaxValue;
     
     public static UnityEvent<(string, string)> OnItemInfoPanelUpdate;
+    public static UnityEvent OnInventoryInfoPanelUpdate;
     public static UnityEvent OnItemUse;
 
 
@@ -39,6 +40,9 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
         
         OnItemInfoPanelUpdate = new();
         OnItemInfoPanelUpdate.AddListener(PanelUpdateItemInfo);
+
+        OnInventoryInfoPanelUpdate = new();
+        OnInventoryInfoPanelUpdate.AddListener(PanelUpdateInventoryInfo);
 
         OnItemUse = new();
         OnItemUse.AddListener(Behaviour);
