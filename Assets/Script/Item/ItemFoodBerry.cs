@@ -28,13 +28,4 @@ public class ItemFoodBerry : Item {
         ItemManager.Instance.ItemEffectStatusUpdate(this.itemEffectStatusValue);
         ItemManager.Instance.InventorySync();
     }
-
-    public override void ItemDrop(int value) {
-        base.ItemDrop(value);
-        
-        ItemManager.Instance.InventorySync();
-    }
-
-    public override void ItemAdd((GameControlType.Item, int) value) {
-    }
 }

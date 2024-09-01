@@ -59,6 +59,8 @@ public abstract class Item : MonoBehaviour {
         if (Player.Instance.Inventory.ContainsKey(this.itemType) && Player.Instance.Inventory[this.itemType] >= value) {
             Player.Instance.Inventory[this.itemType] -= value;
         }
+        
+        ItemManager.Instance.InventorySync();
     }
 
     public virtual void ItemAdd((GameControlType.Item, int) value) {    // Event

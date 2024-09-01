@@ -17,9 +17,6 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     [Header("UI Component")]
     public TMP_Text itemInfoTitle;
     public TMP_Text itemInfoExplanation;
-    
-    [Space(10f)]
-    
     public Transform itemInventoryListViewContent;
     
     
