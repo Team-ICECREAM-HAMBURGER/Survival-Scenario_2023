@@ -72,7 +72,7 @@ public class Player : GameControlSingleton<Player> { // Model
             this.PlayerID = this.data.id;
             
             this.gameInformationMonitorPlayer.Init();
-
+            
             PlayerStatusManager.Instance.Init();
             PlayerStatusEffectManager.Instance.Init();
             PlayerBehaviourManager.Instance.Init();

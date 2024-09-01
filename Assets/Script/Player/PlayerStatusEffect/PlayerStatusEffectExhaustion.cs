@@ -5,11 +5,9 @@ public class PlayerStatusEffectExhaustion : PlayerStatusEffect {
     public override void Init() {
         this.Name = "탈진";
         this.Term = 1;
-        // this.PanelText;
         this.Type = GameControlType.StatusEffect.EXHAUSTION;
-        // this.StatusReducePercents
         
-        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        base.Init();
     }
     
     public override void StatusEffectAdd() {
@@ -17,7 +15,7 @@ public class PlayerStatusEffectExhaustion : PlayerStatusEffect {
         GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
     
-    public override void StatusEffect() {
+    public override void StatusEffect(int value) {
         foreach (var VARIABLE in this.StatusReducePercents) {
             PlayerStatusManager.Instance.Status[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
         }

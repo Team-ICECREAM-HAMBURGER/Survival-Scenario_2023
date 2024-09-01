@@ -73,8 +73,8 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         return ItemManager.Instance.GetItemName(type);
     }
     
-    public void StatusEffectInvoke() {
-        PlayerStatusEffectManager.Instance.StatusEffectInvoke();
+    public void StatusEffectInvoke(int value) {
+        PlayerStatusEffectManager.Instance.StatusEffectInvoke(value);
     }
 
     public void StatusEffectAdd(GameControlType.StatusEffect type) {

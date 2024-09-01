@@ -106,7 +106,7 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         OnPlayerStatusUpdate.Invoke();
         
         // Player Status Effects Invoke
-        PlayerBehaviourManager.Instance.StatusEffectInvoke();
+        PlayerBehaviourManager.Instance.StatusEffectInvoke(this.searchSpendTime);
         
         // Random Event; Search
         RandomEventWeightSelect();

@@ -1,21 +1,14 @@
-using System.Text;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerStatusEffectInjured : PlayerStatusEffect {   // Presenter
     private int limitTimeTerm;
     
     public override void Init() {
         this.Name = "부상";
-        this.Term = 1;
+        this.Term = 0;
         this.Type = GameControlType.StatusEffect.INJURED;
         
-        this.limitTimeTerm = World.Instance.TimeTerm + this.Term;
-        
-        if (Player.Instance.StatusEffect.ContainsKey(this.Type)) {
-            this.Term = Player.Instance.StatusEffect[this.Type];
-            GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
-        }
+        base.Init();
     }
 
     public override void StatusEffectAdd() {
@@ -28,15 +21,16 @@ public class PlayerStatusEffectInjured : PlayerStatusEffect {   // Presenter
             this.Term += value;
         }
         
-        this.limitTimeTerm = World.Instance.TimeTerm + this.Term;
-        
         Player.Instance.StatusEffect.TryAdd(this.Type, this.Term);
         GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
     
-    public override void StatusEffect() {
-        if (this.limitTimeTerm <= World.Instance.TimeTerm) {    // TIME OUT
+    public override void StatusEffect(int value) {
+        this.Term -= value;
+        
+        if (this.Term <= 0) {    // TIME OUT
             PlayerStatusEffectManager.Instance.StatusEffectRemove(this.Type);
+            
             return;
         }
         
@@ -45,6 +39,7 @@ public class PlayerStatusEffectInjured : PlayerStatusEffect {   // Presenter
         }
         
         GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        Player.Instance.StatusEffect[this.Type] = this.Term;
     }
     
     public override void StatusEffectRemove() {

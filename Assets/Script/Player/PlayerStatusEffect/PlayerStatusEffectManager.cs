@@ -4,12 +4,12 @@ using UnityEngine.Events;
 public class PlayerStatusEffectManager : GameControlSingleton<PlayerStatusEffectManager> {
     [field: SerializeField] public GameControlDictionary.PlayerStatusEffect StatusEffects { get; private set; }
 
-    private UnityEvent OnStatusEffect;
+    [HideInInspector] public UnityEvent<int> OnStatusEffect;
 
 
     public void Init() {
         this.OnStatusEffect = new();
-
+        
         foreach (var VARIABLE in this.StatusEffects) {
             VARIABLE.Value.Init();
         }
@@ -20,8 +20,8 @@ public class PlayerStatusEffectManager : GameControlSingleton<PlayerStatusEffect
         this.OnStatusEffect.AddListener(this.StatusEffects[type].StatusEffect);
     }
     
-    public void StatusEffectInvoke() {
-        this.OnStatusEffect.Invoke();
+    public void StatusEffectInvoke(int value) {
+        this.OnStatusEffect.Invoke(value);
     }
     
     public void StatusEffectRemove(GameControlType.StatusEffect type) {

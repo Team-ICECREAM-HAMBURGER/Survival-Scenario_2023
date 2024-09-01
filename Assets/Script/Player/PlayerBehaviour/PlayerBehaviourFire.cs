@@ -121,7 +121,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
             this.OnItemUseIgnition.Invoke();
             
             // Player Status Effect Invoke
-            PlayerBehaviourManager.Instance.StatusEffectInvoke();
+            PlayerBehaviourManager.Instance.StatusEffectInvoke(this.ignitionSpendTime);
             
             // Word Info. Update
             PlayerBehaviourManager.Instance.WorldTimeUpdate(this.ignitionSpendTime);

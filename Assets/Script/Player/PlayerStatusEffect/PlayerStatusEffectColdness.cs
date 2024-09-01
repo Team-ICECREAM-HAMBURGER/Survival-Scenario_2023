@@ -1,10 +1,12 @@
+using UnityEngine;
+
 public class PlayerStatusEffectColdness : PlayerStatusEffect {  // Presenter
     public override void Init() {
         this.Name = "저채온증";
         this.Term = 1;
         this.Type = GameControlType.StatusEffect.COLDNESS;
         
-        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        base.Init();
     }
     
     public override void StatusEffectAdd() {
@@ -12,7 +14,7 @@ public class PlayerStatusEffectColdness : PlayerStatusEffect {  // Presenter
         GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
     }
     
-    public override void StatusEffect() {
+    public override void StatusEffect(int value) {
         foreach (var VARIABLE in this.StatusReducePercents) {
             PlayerStatusManager.Instance.Status[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
         }
