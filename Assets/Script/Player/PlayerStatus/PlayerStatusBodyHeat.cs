@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class PlayerStatusBodyHeat : PlayerStatus {  // Presenter
     public override void Init() {
         this.Name = "체온";
@@ -11,15 +9,12 @@ public class PlayerStatusBodyHeat : PlayerStatus {  // Presenter
     }
 
     public override void StatusUpdate(float value) {
-        this.CurrentValue += value;
-        Player.Instance.Status[this.Type] = this.CurrentValue;
-        
-        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        base.StatusUpdate(value);
         
         if (this.CurrentValue <= 0) {   // Player Death
             GameEventGameOver.OnBadEnding.Invoke("동사했습니다.", "추위가 더위로 바뀌어갑니다.\n문득 몰려오는 아늑함에 눈꺼풀이 감깁니다...");
         }
-        else if (this.CurrentValue <= LimitValue) {
+        else if (this.CurrentValue <= this.LimitValue) {
             PlayerStatusEffectManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.COLDNESS);
         } 
         else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.COLDNESS)) { 

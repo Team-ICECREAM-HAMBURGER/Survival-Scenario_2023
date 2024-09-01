@@ -9,10 +9,7 @@ public class PlayerStatusCalories : PlayerStatus {  // Presenter
     }
 
     public override void StatusUpdate(float value) {
-        this.CurrentValue += value;
-        Player.Instance.Status[this.Type] = this.CurrentValue;
-        
-        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        base.StatusUpdate(value);
         
         if (this.CurrentValue <= 0) {   // Player Death
             GameEventGameOver.OnBadEnding.Invoke("아사했습니다.", "굶주림을 느낄 기력조차 남지 않았습니다.\n이제 남은 건 졸음 뿐입니다...");

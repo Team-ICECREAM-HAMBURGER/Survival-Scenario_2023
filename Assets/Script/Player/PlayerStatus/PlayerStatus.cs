@@ -8,5 +8,11 @@ public abstract class PlayerStatus : MonoBehaviour {
     
     
     public abstract void Init();
-    public abstract void StatusUpdate(float value);
+
+    public virtual void StatusUpdate(float value) {
+        this.CurrentValue = Mathf.Clamp(this.CurrentValue + value, 0f, 100f);
+        Player.Instance.Status[this.Type] = this.CurrentValue;
+        
+        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+    }
 }

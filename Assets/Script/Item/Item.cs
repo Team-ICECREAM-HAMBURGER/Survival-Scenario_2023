@@ -48,7 +48,6 @@ public abstract class Item : MonoBehaviour {
         itemInfoExplanation.text = "아이템 항목을 선택하면 상세 설명을 볼 수 있습니다.";
     }
     
-    // TODO: 추상 메서드 구현 필요; Manager는 설정 완료.
     public virtual void ItemUse(int value) { // GUI Button
         if (Player.Instance.Inventory.ContainsKey(this.itemType) && Player.Instance.Inventory[this.itemType] >= value) {
             Player.Instance.Inventory[this.itemType] -= value;
