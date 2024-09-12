@@ -54,6 +54,14 @@ public class GameControlType {
         SHELTER,
     }
     
+    public enum PlayerDeath {
+        DEATH_COLDNESS,
+        DEATH_DEHYDRATION,
+        DEATH_EXHAUSTION,
+        DEATH_HUNGER,
+        DEATH_INJURED
+    }
+    
     public enum Status {
         STAMINA = 0,    // 체력
         BODY_HEAT = 1,  // 체온
@@ -68,4 +76,14 @@ public class GameControlType {
         HUNGER,         // 기아 (칼로리)
         INJURED,        // 부상
     }
+    
+    public enum GameSaveType {
+        DATA_SAVE = 1,
+        DATA_DELETE = 0
+    }
+    
+    public enum StatusEffectUpdateType {
+        EFFECT_ADD = 1,
+        EFFECT_REMOVE = 0,
+    } 
 }

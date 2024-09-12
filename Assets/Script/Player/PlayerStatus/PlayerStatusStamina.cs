@@ -12,10 +12,10 @@ public class PlayerStatusStamina : PlayerStatus {   // Presenter
         base.StatusUpdate(value);
         
         if (this.CurrentValue <= this.LimitValue) {
-            PlayerStatusEffectManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.EXHAUSTION);
+            PlayerStatusManager.Instance.StatusEffectUpdate((GameControlType.StatusEffect.EXHAUSTION, GameControlType.StatusEffectUpdateType.EFFECT_ADD));
         }
         else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.EXHAUSTION)) {
-            PlayerStatusEffectManager.Instance.StatusEffectRemove(GameControlType.StatusEffect.EXHAUSTION);
+            PlayerStatusManager.Instance.StatusEffectUpdate((GameControlType.StatusEffect.EXHAUSTION, GameControlType.StatusEffectUpdateType.EFFECT_REMOVE));
         }
     }
 }

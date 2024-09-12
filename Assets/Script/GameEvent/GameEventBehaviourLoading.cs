@@ -13,7 +13,7 @@ public class GameEventBehaviourLoading : MonoBehaviour {
     [SerializeField] private TMP_Text loadingTitle;
     
     
-    public void OnBehaviour() {
+    public void BehaviourLoading() {
         this.loadingTitle.text = String.Empty;
         
         this.resultTitle.text = String.Empty;

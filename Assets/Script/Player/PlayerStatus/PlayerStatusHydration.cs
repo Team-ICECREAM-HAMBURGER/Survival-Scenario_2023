@@ -12,13 +12,13 @@ public class PlayerStatusHydration : PlayerStatus { // Presenter
         base.StatusUpdate(value);
         
         if (this.CurrentValue <= 0) {   // Player Death
-            GameEventGameOver.OnBadEnding.Invoke("갈사했습니다.", "목이 타들어갑니다.\n한계를 느낄 무렵 시야가 흐려지기 시작합니다...");
+            PlayerStatusManager.Instance.PlayerDeath(GameControlType.PlayerDeath.DEATH_DEHYDRATION);
         } 
         else if (this.CurrentValue <= this.LimitValue) {    // Player Status Effect Active
-            PlayerStatusEffectManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.DEHYDRATION);
+            PlayerStatusManager.Instance.StatusEffectUpdate((GameControlType.StatusEffect.DEHYDRATION, GameControlType.StatusEffectUpdateType.EFFECT_ADD));
         }
         else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.DEHYDRATION)) {
-            PlayerStatusEffectManager.Instance.StatusEffectRemove(GameControlType.StatusEffect.DEHYDRATION);
+            PlayerStatusManager.Instance.StatusEffectUpdate((GameControlType.StatusEffect.DEHYDRATION, GameControlType.StatusEffectUpdateType.EFFECT_REMOVE));
         }
     }
 }

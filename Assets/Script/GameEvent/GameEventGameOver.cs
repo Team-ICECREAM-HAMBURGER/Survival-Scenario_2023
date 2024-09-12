@@ -2,7 +2,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameEventGameOver : MonoBehaviour {
@@ -97,6 +96,7 @@ public class GameEventGameOver : MonoBehaviour {
     }
 
     public void GameReset() {
-        // GameInformationManager.OnGameDataDeleteEvent();
+        GameEventManager.Instance.GameReset();
+        Debug.Log("Game Reset");
     }
 }

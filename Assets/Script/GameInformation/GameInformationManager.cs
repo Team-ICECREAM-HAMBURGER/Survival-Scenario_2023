@@ -1,7 +1,7 @@
-using System;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Serialization;
+
+
 
 public class GameInformationManager : GameControlSingleton<GameInformationManager> {
     public GameInformationPlayerData gameInformationPlayerData;
@@ -40,8 +40,15 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
         Init();
     }
 
-    public void GameDataSaveInvoke() {
-        this.OnGameDataSaveEvent.Invoke();
+    public void GameDataUpdate(GameControlType.GameSaveType type) {
+        switch (type) {
+            case GameControlType.GameSaveType.DATA_SAVE :
+                this.OnGameDataSaveEvent.Invoke();
+                break;
+            case GameControlType.GameSaveType.DATA_DELETE :
+                this.OnGameDataDeleteEvent.Invoke();
+                break;
+        }
     }
     
     private void PlayerDataSave() {

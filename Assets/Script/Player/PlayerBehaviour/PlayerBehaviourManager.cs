@@ -123,6 +123,6 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
     }
     
     public void GameDataSaveInvoke() {
-        GameInformationManager.Instance.GameDataSaveInvoke();
+        GameInformationManager.Instance.GameDataUpdate(GameControlType.GameSaveType.DATA_SAVE);
     }
 }

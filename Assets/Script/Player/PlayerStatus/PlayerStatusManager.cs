@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
     [field: SerializeField] public GameControlDictionary.PlayerStatus Status { get; private set; }
     
@@ -14,6 +15,17 @@ public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
         this.OnPlayerStatusInit.Invoke();
     }
 
+    public void StatusEffectUpdate((GameControlType.StatusEffect, GameControlType.StatusEffectUpdateType) value) {
+        switch (value.Item2) {
+            case GameControlType.StatusEffectUpdateType.EFFECT_ADD:
+                PlayerStatusEffectManager.Instance.StatusEffectAdd(value.Item1);
+                break;
+            case GameControlType.StatusEffectUpdateType.EFFECT_REMOVE:
+                PlayerStatusEffectManager.Instance.StatusEffectRemove(value.Item1);
+                break;
+        }
+    }
+    
     public void StatusUpdate((GameControlType.Status, float) value) {
         this.Status[value.Item1].StatusUpdate(value.Item2);
     }
@@ -21,6 +33,24 @@ public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
     public void StatusUpdate(List<(GameControlType.Status, float)> value) {
         foreach (var VARIABLE in value) {
             this.Status[VARIABLE.Item1].StatusUpdate(VARIABLE.Item2);
+        }
+    }
+    
+    public void PlayerDeath(GameControlType.PlayerDeath type) {
+        switch (type) {
+            case GameControlType.PlayerDeath.DEATH_COLDNESS :
+                GameEventManager.Instance.GameOverBadEnding(("동사했습니다.", "추위가 더위로 바뀌어갑니다.\n문득 몰려오는 아늑함에 눈꺼풀이 감깁니다..."));
+                break;
+            case GameControlType.PlayerDeath.DEATH_DEHYDRATION :
+                GameEventManager.Instance.GameOverBadEnding(("갈사했습니다.", "목이 타들어갑니다.\n한계를 느낄 무렵 시야가 흐려지기 시작합니다..."));
+                break;
+            case GameControlType.PlayerDeath.DEATH_EXHAUSTION :
+                break;
+            case GameControlType.PlayerDeath.DEATH_HUNGER :
+                GameEventManager.Instance.GameOverBadEnding(("아사했습니다.", "굶주림을 느낄 기력조차 남지 않았습니다.\n이제 남은 건 졸음 뿐입니다..."));
+                break;
+            case GameControlType.PlayerDeath.DEATH_INJURED :
+                break;
         }
     }
 }

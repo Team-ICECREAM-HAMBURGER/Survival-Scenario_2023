@@ -12,13 +12,13 @@ public class PlayerStatusBodyHeat : PlayerStatus {  // Presenter
         base.StatusUpdate(value);
         
         if (this.CurrentValue <= 0) {   // Player Death
-            GameEventGameOver.OnBadEnding.Invoke("동사했습니다.", "추위가 더위로 바뀌어갑니다.\n문득 몰려오는 아늑함에 눈꺼풀이 감깁니다...");
+            PlayerStatusManager.Instance.PlayerDeath(GameControlType.PlayerDeath.DEATH_COLDNESS);
         }
         else if (this.CurrentValue <= this.LimitValue) {
-            PlayerStatusEffectManager.Instance.StatusEffectAdd(GameControlType.StatusEffect.COLDNESS);
+            PlayerStatusManager.Instance.StatusEffectUpdate((GameControlType.StatusEffect.COLDNESS, GameControlType.StatusEffectUpdateType.EFFECT_ADD));
         } 
         else if (Player.Instance.StatusEffect.ContainsKey(GameControlType.StatusEffect.COLDNESS)) { 
-            PlayerStatusEffectManager.Instance.StatusEffectRemove(GameControlType.StatusEffect.COLDNESS);
+            PlayerStatusManager.Instance.StatusEffectUpdate((GameControlType.StatusEffect.COLDNESS, GameControlType.StatusEffectUpdateType.EFFECT_REMOVE));
         }
     }
 }
