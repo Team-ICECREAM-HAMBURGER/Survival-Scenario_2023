@@ -30,6 +30,7 @@ public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
         this.Status[value.Item1].StatusUpdate(value.Item2);
     }
 
+    // TODO: 아이템의 효과가 복수의 Status에 영향을 미치면 해당 메서드를 사용 중; 이벤트 메서드로 변경 가능 여부 확인 필요.
     public void StatusUpdate(List<(GameControlType.Status, float)> value) {
         foreach (var VARIABLE in value) {
             this.Status[VARIABLE.Item1].StatusUpdate(VARIABLE.Item2);
