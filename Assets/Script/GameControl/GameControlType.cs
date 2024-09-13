@@ -15,6 +15,14 @@ public class GameControlType {
         SLEEP
     }
     
+    public enum FirePanelType {
+        SUCCESS,
+        FAIL,
+        NO_MATERIAL,
+        NO_WOODS,
+        PASS
+    }
+    
     public enum RandomEvent {
         FARM,    // 아이템 수집
         HUNT,    // 동물 사냥

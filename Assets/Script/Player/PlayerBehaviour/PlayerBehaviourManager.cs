@@ -3,9 +3,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-// Manager -> Inside : Event or Reference
-// Outside -> Manager : Method
-
 public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManager> {
     [field: SerializeField] public GameControlDictionary.PlayerBehaviour Behaviour { get; private set; }
     
@@ -15,7 +12,6 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
 
 
     public void Init() {
-        // this.OnPlayerBehaviourInit = new();
         this.OnPlayerBehaviourInit.Invoke();
     }
     

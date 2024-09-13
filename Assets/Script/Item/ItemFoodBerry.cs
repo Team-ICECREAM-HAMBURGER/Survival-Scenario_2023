@@ -4,6 +4,7 @@ using UnityEngine;
 public class ItemFoodBerry : Item {
     [Space(25f)]
     
+    // TODO: PlayerBehaviour의 Behaviour Require Status 항목 참고
     [Header("Status Update Value")]
     [SerializeField] private float staminaValue;
     [SerializeField] private float hydrationValue;

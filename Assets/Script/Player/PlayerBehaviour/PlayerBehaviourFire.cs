@@ -4,16 +4,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
-
-enum FirePanelType {
-    SUCCESS,
-    FAIL,
-    NO_MATERIAL,
-    NO_WOODS,
-    PASS
-}
 
 public class PlayerBehaviourFire : PlayerBehaviour {
     [Space(25f)] 
@@ -66,30 +57,31 @@ public class PlayerBehaviourFire : PlayerBehaviour {
     private int ignitionSpendTime;
     
     private float ignitionSuccessWeight;
+    private float ignitionSuccessWeightModifier;
     
     private string fireResultTitleText;
     private StringBuilder fireResultContentText;
-    private FirePanelType fireResultPanelChangeType;
+    private GameControlType.FirePanelType fireResultPanelChangeType;
 
     
     public override void Init() {
-        this.ignitionSuccessWeight = 50f;
+        this.ignitionSuccessWeight = 25f;
         this.ignitionSpendTime = 0;
         
         this.fireTermRandomMin = 2;
         this.fireTermRandomMax = 10;
-        this.fireTermAddWood = 3;
+        this.fireTermAddWood = 1;
 
         this.fireResultTitleText = String.Empty;
         this.fireResultContentText = new();
 
-        this.OnPlayerStatusUpdate = new();
+        // this.OnPlayerStatusUpdate = new();
         
         PanelUpdateFireTerm();
     }
     
-    private bool CanBehaviour(List<(GameControlType.Item, int)> values) {
-        return PlayerBehaviourManager.Instance.CanBehaviour(values);
+    private bool CanBehaviour(List<(GameControlType.Item, int)> value) {
+        return PlayerBehaviourManager.Instance.CanBehaviour(value);
     }
 
     private bool CanBehaviour((GameControlType.Item, int) value) {
@@ -102,7 +94,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
     
     public override void Behaviour() {
         if (CanBehaviour(GameControlType.Behaviour.FIRE)) {   // Already Have Fire; Change Panel
-            this.fireResultPanelChangeType = FirePanelType.PASS;
+            this.fireResultPanelChangeType = GameControlType.FirePanelType.PASS;
             PanelUpdate(this.fireResultPanelChangeType);
             
             return;
@@ -111,7 +103,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
         if (CanBehaviour(this.ignitionMaterialList)) {   // Can Make fire; Success or Fail
             var isSuccess = BehaviourIgnition(this.ignitionSuccessWeight);
             
-            this.fireResultPanelChangeType = (isSuccess) ? FirePanelType.SUCCESS : FirePanelType.FAIL;
+            this.fireResultPanelChangeType = (isSuccess) ? GameControlType.FirePanelType.SUCCESS : GameControlType.FirePanelType.FAIL;
             this.ignitionSpendTime = 5;
             
             // Player Status Update
@@ -129,10 +121,9 @@ public class PlayerBehaviourFire : PlayerBehaviour {
             
             // Game Data Update
             PlayerBehaviourManager.Instance.GameDataSaveInvoke();
-            
         }
         else {  // Not Enough Materials
-            this.fireResultPanelChangeType = FirePanelType.NO_MATERIAL;
+            this.fireResultPanelChangeType = GameControlType.FirePanelType.NO_MATERIAL;
             this.ignitionSpendTime = 0;
         }
         
@@ -154,15 +145,31 @@ public class PlayerBehaviourFire : PlayerBehaviour {
             PanelUpdateFireTerm();
         }
         else {  // Not Enough Woods;
-            PanelUpdate(FirePanelType.NO_WOODS);
+            PanelUpdate(GameControlType.FirePanelType.NO_WOODS);
         }
     }
     
     private bool BehaviourIgnition(float weight) {
-        return true;
+        var randomPercent = Random.Range(0, 101);
+        
+        if (PlayerBehaviourManager.Instance.WorldCurrentWeatherCheck(GameControlType.Weather.CLEAR)) {
+            this.ignitionSuccessWeightModifier = 0; // DEFAULT: 25
+            
+            Debug.Log(weight + " " + randomPercent);
+        }
+        else if (PlayerBehaviourManager.Instance.WorldCurrentWeatherCheck(GameControlType.Weather.RAIN)) {
+            this.ignitionSuccessWeightModifier = -8;
+        }
+        else if (PlayerBehaviourManager.Instance.WorldCurrentWeatherCheck(GameControlType.Weather.SNOW)) {
+            this.ignitionSuccessWeightModifier = -7;
+        }
+
+        weight += this.ignitionSuccessWeightModifier;
+
+        return (weight >= randomPercent);
     }
     
-    private void PanelUpdate(FirePanelType type) {
+    private void PanelUpdate(GameControlType.FirePanelType type) {
         var needLoading = true;
         
         this.fireResultTitleText = String.Empty;
@@ -171,7 +178,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
         PanelUpdateFireTerm();
         
         switch (type) {
-            case FirePanelType.SUCCESS :    // Success!
+            case GameControlType.FirePanelType.SUCCESS :    // Success!
                 needLoading = true;
 
                 this.fireResultTitleText = "불이 붙었다!";
@@ -188,7 +195,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
 
                 break;
             
-            case FirePanelType.FAIL :     // Fail!
+            case GameControlType.FirePanelType.FAIL :     // Fail!
                 needLoading = true;
                 
                 this.fireResultTitleText = "실패했다.";
@@ -203,7 +210,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
 
                 break;
             
-            case FirePanelType.NO_MATERIAL :    // Not Enough Materials
+            case GameControlType.FirePanelType.NO_MATERIAL :    // Not Enough Materials
                 needLoading = false;
                 
                 this.fireResultTitleText = "재료가 부족하다.";
@@ -218,7 +225,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
 
                 break;
             
-            case FirePanelType.NO_WOODS :   // Not Enough Woods
+            case GameControlType.FirePanelType.NO_WOODS :   // Not Enough Woods
                 needLoading = false;
                 
                 this.fireResultTitleText = "나무가 없다.";
@@ -232,6 +239,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
 
                 // Require Items for Add Wood;
                 this.fireResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.WOOD));
+                this.fireResultContentText.Append(" ");
                 this.fireResultContentText.Append(ADD_WOOD);
                 this.fireResultContentText.Append("개\n");
                 
@@ -241,7 +249,7 @@ public class PlayerBehaviourFire : PlayerBehaviour {
                 
                 return;
             
-            case FirePanelType.PASS :   // Already Have fire;
+            case GameControlType.FirePanelType.PASS :   // Already Have fire;
                 needLoading = false;
                 
                 PanelUpdateCanvasSet();
@@ -251,14 +259,17 @@ public class PlayerBehaviourFire : PlayerBehaviour {
 
         // Require Items for Ignition;
         this.fireResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.WOOD));
+        this.fireResultContentText.Append(" ");
         this.fireResultContentText.Append(FIRE_WOOD);
         this.fireResultContentText.Append("개\n");
         
         this.fireResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.TINDER));
+        this.fireResultContentText.Append(" ");
         this.fireResultContentText.Append(FIRE_TINDER);
         this.fireResultContentText.Append("개\n");
         
         this.fireResultContentText.Append(PlayerBehaviourManager.Instance.GetItemName(GameControlType.Item.FIRE_TOOL));
+        this.fireResultContentText.Append(" ");
         this.fireResultContentText.Append(FIRE_TOOL);
         this.fireResultContentText.Append("개\n");
         
@@ -276,6 +287,13 @@ public class PlayerBehaviourFire : PlayerBehaviour {
         this.outsideCanvas.enabled = false;
         this.informationCanvas.enabled = false;
         this.sideMenuCanvas.enabled = false;
+    }
+    
+    public void PanelUpdateCanvasSetReturn() {
+        this.fireCanvas.enabled = false;
+        this.outsideCanvas.enabled = true;
+        this.informationCanvas.enabled = true;
+        this.sideMenuCanvas.enabled = true;
     }
 
     private void PanelUpdateFireTerm() {
