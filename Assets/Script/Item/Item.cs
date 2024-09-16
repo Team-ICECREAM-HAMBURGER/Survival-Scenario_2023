@@ -13,16 +13,16 @@ public abstract class Item : MonoBehaviour {
     [Header("UI Component")]
     [SerializeField] protected TMP_Text itemName;
     [SerializeField] protected TMP_Text itemAmount;
+    
+    [Space(10f)]
+    
     [SerializeField] protected TMP_Text itemInfoTitle;
     [SerializeField] protected TMP_Text itemInfoExplanation;
     
     
     public virtual void Init() { 
-        this.itemInfoTitle = ItemManager.Instance.itemInfoTitle;
-        this.itemInfoExplanation = ItemManager.Instance.itemInfoExplanation;
-        
         ItemManager.Instance.OnInventorySync.AddListener(InventorySync);
-        ItemManager.Instance.ItemObject.TryAdd(this.itemType, this);
+        ItemManager.Instance.ItemsAdd((this.itemType, this));
     }
 
     private void Awake() {

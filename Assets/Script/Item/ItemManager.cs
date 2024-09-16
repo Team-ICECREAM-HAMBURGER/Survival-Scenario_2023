@@ -8,57 +8,50 @@ using UnityEngine.Events;
 // Outside -> Manager : Method
 
 public class ItemManager : GameControlSingleton<ItemManager> {  // Model
-    [field: SerializeField] private GameControlDictionary.Item ItemPrefab { get; set; }
-    [HideInInspector] public GameControlDictionary.Item ItemObject { get; private set; }
-    [HideInInspector] public UnityEvent<GameControlDictionary.Inventory> OnInventorySync;
+    private GameControlDictionary.Item items;
 
-    [Space(25f)]
+    public UnityEvent<GameControlDictionary.Inventory> OnInventorySync;
 
-    [Header("UI Component")]
-    public TMP_Text itemInfoTitle;
-    public TMP_Text itemInfoExplanation;
-    public Transform itemInventoryListViewContent;
-    
-    
+
     private void Init() {
-        this.ItemObject = new();
-        
-        // Items Init
-        foreach (var VARIABLE in this.ItemPrefab) {
-            Instantiate(VARIABLE.Value.gameObject, this.itemInventoryListViewContent);
-        }
+        this.items = new();
+    }
+
+    public void ItemsAdd((GameControlType.Item, Item) value) {
+        this.items.TryAdd(value.Item1, value.Item2);
     }
     
     private void Awake() {
         Init();
     }
-
+    
     public void InventorySync() {
         this.OnInventorySync.Invoke(Player.Instance.Inventory);
+        
         PlayerBehaviourManager.Instance.GameDataSaveInvoke();
         PlayerBehaviourManager.Instance.PanelUpdateInventoryInfo();
     }
 
     public string ItemUse((GameControlType.Item, int) value) {
-        this.ItemObject[value.Item1].ItemUse(value.Item2);
+        this.items[value.Item1].ItemUse(value.Item2);
         
-        return this.ItemObject[value.Item1].itemInfoTitleText;
+        return this.items[value.Item1].itemInfoTitleText;
     }
 
     public string ItemAdd((GameControlType.Item, int) value) {
-        this.ItemObject[value.Item1].ItemAdd(value);
+        this.items[value.Item1].ItemAdd(value);
 
-        return this.ItemObject[value.Item1].itemInfoTitleText;
+        return this.items[value.Item1].itemInfoTitleText;
     }
 
     public string ItemDrop((GameControlType.Item, int) value) {
-        this.ItemObject[value.Item1].ItemUse(value.Item2);
+        this.items[value.Item1].ItemUse(value.Item2);
         
-        return this.ItemObject[value.Item1].itemInfoTitleText;
+        return this.items[value.Item1].itemInfoTitleText;
     }
     
     public string GetItemName(GameControlType.Item type) {
-        return this.ItemObject[type].itemInfoTitleText;
+        return this.items[type].itemInfoTitleText;
     }
 
     public void ItemEffectStatusUpdate(List<(GameControlType.Status, float)> value) {
