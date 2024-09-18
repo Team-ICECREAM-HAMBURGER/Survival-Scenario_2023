@@ -85,6 +85,14 @@ public class GameControlType {
         INJURED,        // 부상
     }
     
+    public enum RainGutterPanelType {
+        NO_CANS,
+        NO_WATER,
+        SUCCESS,
+        PASS,
+        NO_MATERIALS
+    }
+    
     public enum GameSaveType {
         DATA_SAVE = 1,
         DATA_DELETE = 0
