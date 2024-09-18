@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +9,7 @@ using UnityEngine.Events;
 public class ItemManager : GameControlSingleton<ItemManager> {  // Model
     private GameControlDictionary.Item items;
 
-    public UnityEvent<GameControlDictionary.Inventory> OnInventorySync;
+    [HideInInspector] public UnityEvent<GameControlDictionary.Inventory> OnInventorySync;
 
 
     private void Init() {

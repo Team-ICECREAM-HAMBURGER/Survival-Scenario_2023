@@ -52,7 +52,7 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     }
     
     private void PlayerDataSave() {
-        // Debug.Log("Player Data Saved");
+        Debug.Log("Player Data Saved");
         
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.gameInformationPlayerData);
         
@@ -60,7 +60,7 @@ public class GameInformationManager : GameControlSingleton<GameInformationManage
     }
 
     private void WorldDataSave() {
-        // Debug.Log("World Data Saved");
+        Debug.Log("World Data Saved");
 
         var saveData = GameControlSaveLoad.Instance.ObjectToJson(this.gameInformationWorldData);
         

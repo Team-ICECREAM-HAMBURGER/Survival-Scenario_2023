@@ -1,6 +1,6 @@
-using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Item : MonoBehaviour {
     [Header("Item Information")]
@@ -18,6 +18,11 @@ public abstract class Item : MonoBehaviour {
     
     [SerializeField] protected TMP_Text itemInfoTitle;
     [SerializeField] protected TMP_Text itemInfoExplanation;
+
+    [Space(25f)] 
+    
+    [Header("Status Update Value")]
+    public UnityEvent OnPlayerStatusUpdate;
     
     
     public virtual void Init() { 
@@ -52,6 +57,8 @@ public abstract class Item : MonoBehaviour {
         if (Player.Instance.Inventory.ContainsKey(this.itemType) && Player.Instance.Inventory[this.itemType] >= value) {
             Player.Instance.Inventory[this.itemType] -= value;
         }
+        
+        ItemManager.Instance.InventorySync();
     }
 
     public virtual void ItemDrop(int value) { // GUI Button
