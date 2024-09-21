@@ -7,7 +7,7 @@ using UnityEngine.Events;
 // Outside -> Manager : Method
 
 public class ItemManager : GameControlSingleton<ItemManager> {  // Model
-    private GameControlDictionary.Item items;
+    private GameControlDictionary.Item items; // TODO: Public으로 변경, 에디터에서 직접 추가하고 시작
 
     [HideInInspector] public UnityEvent<GameControlDictionary.Inventory> OnInventorySync;
 
@@ -20,7 +20,7 @@ public class ItemManager : GameControlSingleton<ItemManager> {  // Model
         this.items.TryAdd(value.Item1, value.Item2);
     }
     
-    private void Awake() {
+    private void Awake() {      // TODO: 불필요한 Awake를 지운다.
         Init();
     }
     

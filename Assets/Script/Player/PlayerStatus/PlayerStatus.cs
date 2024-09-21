@@ -5,9 +5,11 @@ public abstract class PlayerStatus : MonoBehaviour {
     public GameControlType.Status Type { get; protected set; }
     public float LimitValue { get; protected set; }
     public float CurrentValue { get; protected set; }
-    
-    
-    public abstract void Init();
+
+
+    public virtual void Init() {
+        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+    }
 
     public virtual void StatusUpdate(float value) {
         this.CurrentValue = Mathf.Clamp(this.CurrentValue + value, 0f, 100f);

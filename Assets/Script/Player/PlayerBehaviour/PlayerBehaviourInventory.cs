@@ -58,7 +58,7 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
         // Game Data Update
         PlayerBehaviourManager.Instance.GameDataSaveInvoke();
     }
-    
+
     private void PanelUpdateInventoryInfo() {
         this.inventorySpaceValue = PlayerBehaviourManager.Instance.GetInventoryAmountTotal();
         this.inventorySpaceIndicator.maxValue = this.inventorySpaceMaxValue;

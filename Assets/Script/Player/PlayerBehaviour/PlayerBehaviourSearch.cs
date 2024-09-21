@@ -5,6 +5,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
@@ -37,8 +38,6 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
     [SerializeField] private GameObject searchLoadingPanel;
     [SerializeField] private TMP_Text searchLoadingTitle;
     
-    private int searchSpendTime;
-
     private Dictionary<GameControlType.Item, int> tempGotItemDictionary;
     
     private float randomCollectableItemWeightFarmingTotal;
@@ -61,7 +60,7 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
 
     
     public override void Init() {
-        this.searchSpendTime = 5;
+        this.behaviourSpendTime = 5;    // TODO: Unity Editor에서 처리한다.
 
         this.searchResultTitleText = String.Empty;
         this.searchResultContentText = new();
@@ -105,13 +104,13 @@ public class PlayerBehaviourSearch : PlayerBehaviour {   // Presenter
         OnPlayerStatusUpdate.Invoke();
         
         // Player Status Effects Invoke
-        PlayerBehaviourManager.Instance.StatusEffectInvoke(this.searchSpendTime);
+        PlayerBehaviourManager.Instance.StatusEffectInvoke(this.behaviourSpendTime);
         
         // Random Event; Search
         RandomEventWeightSelect();
         
         // Word Info. Update
-        PlayerBehaviourManager.Instance.WorldTimeUpdate(this.searchSpendTime);
+        PlayerBehaviourManager.Instance.WorldTimeUpdate(this.behaviourSpendTime);
         
         // Game Data Update
         PlayerBehaviourManager.Instance.GameDataSaveInvoke();

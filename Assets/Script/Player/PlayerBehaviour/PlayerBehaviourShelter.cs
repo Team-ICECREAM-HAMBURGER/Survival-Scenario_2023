@@ -77,7 +77,6 @@ public class PlayerBehaviourShelter : PlayerBehaviour {
         
         this.shelterLoadingPanel.SetActive(true);
         this.shelterResultPanel.SetActive(true);
-        
     }
 
     private void PanelUpdateCanvasSet() {

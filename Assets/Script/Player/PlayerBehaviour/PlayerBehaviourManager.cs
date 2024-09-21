@@ -1,18 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManager> {
-    [field: SerializeField] public GameControlDictionary.PlayerBehaviour Behaviour { get; private set; }
+    [field: SerializeField] public GameControlDictionary.PlayerBehaviour Behaviours { get; private set; }
     
-    [Space(25f)]
-
-    [SerializeField] private UnityEvent OnPlayerBehaviourInit;
-
 
     public void Init() {
-        this.OnPlayerBehaviourInit.Invoke();
+        foreach (var VARIABLE in this.Behaviours) {
+            VARIABLE.Value.Init();
+        }
     }
     
     public bool CanBehaviour(List<(GameControlType.Item, int)> values) {
@@ -77,6 +74,8 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         PlayerStatusEffectManager.Instance.StatusEffectAdd(type);
     }
 
+    
+    // TODO: Player, World의 Setter, Getter는 Manager 없이 접근 허용; 하위 항목들 점검 후 단순 return 메서드는 삭제할 것.
     public void WorldTimeUpdate(int time) {
         World.Instance.TimeUpdate(time);
     }

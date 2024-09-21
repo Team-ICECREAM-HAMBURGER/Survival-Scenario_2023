@@ -1,18 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
 
 public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
-    [field: SerializeField] public GameControlDictionary.PlayerStatus Status { get; private set; }
-    
-    [Space(25f)]
-
-    [SerializeField] private UnityEvent OnPlayerStatusInit;
+    [field: SerializeField] public GameControlDictionary.PlayerStatus Statuses { get; private set; }
     
     
     public void Init() {
-        this.OnPlayerStatusInit.Invoke();
+        // TODO: foreach문을 이용한 Init() 방식을 개선; 애초에 개선이 가능한가?
+        foreach (var VARIABLE in this.Statuses) {   
+            VARIABLE.Value.Init();
+        }
     }
 
     public void StatusEffectUpdate((GameControlType.StatusEffect, GameControlType.StatusEffectUpdateType) value) {
@@ -27,13 +24,13 @@ public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
     }
     
     public void StatusUpdate((GameControlType.Status, float) value) {
-        this.Status[value.Item1].StatusUpdate(value.Item2);
+        this.Statuses[value.Item1].StatusUpdate(value.Item2);
     }
 
-    // TODO: 아이템의 효과가 복수의 Status에 영향을 미치면 해당 메서드를 사용 중; 이벤트 메서드로 변경 가능 여부 확인 필요.
     public void StatusUpdate(List<(GameControlType.Status, float)> value) {
+        // TODO: 아이템의 효과가 복수의 Status에 영향을 미치면 해당 메서드를 사용 중; 이벤트 메서드로 변경 가능 여부 확인 필요.
         foreach (var VARIABLE in value) {
-            this.Status[VARIABLE.Item1].StatusUpdate(VARIABLE.Item2);
+            this.Statuses[VARIABLE.Item1].StatusUpdate(VARIABLE.Item2);
         }
     }
     

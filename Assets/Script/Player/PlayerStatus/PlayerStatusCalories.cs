@@ -5,7 +5,7 @@ public class PlayerStatusCalories : PlayerStatus {  // Presenter
         this.LimitValue = 15f;
         this.CurrentValue = Player.Instance.Status[this.Type];
 
-        GameInformationMonitorPlayer.OnStatusGaugeUpdate.Invoke(this.Type, this.CurrentValue);
+        base.Init();
     }
 
     public override void StatusUpdate(float value) {

@@ -1616,7 +1616,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.45
+  m_fontSize: 30
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3050,7 +3050,10 @@ GameObject:
   - component: {fileID: 232328985}
   - component: {fileID: 232328981}
   - component: {fileID: 232328982}
+  - component: {fileID: 232328989}
+  - component: {fileID: 232328988}
   - component: {fileID: 232328984}
+  - component: {fileID: 232328987}
   m_Layer: 0
   m_Name: Player Behaviour
   m_TagString: Untagged
@@ -3136,6 +3139,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  behaviourSpendTime: 0
   RandomEventWeight:
     m_keys: 000000000100000002000000
     m_values:
@@ -3181,6 +3185,7 @@ MonoBehaviour:
   OnPlayerStatusUpdate:
     m_PersistentCalls:
       m_Calls: []
+  behaviourSpendTime: 0
 --- !u!114 &232328981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3208,6 +3213,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  behaviourSpendTime: 0
   OnItemUseRainGutter:
     m_PersistentCalls:
       m_Calls:
@@ -3267,6 +3273,7 @@ MonoBehaviour:
   OnPlayerStatusUpdate:
     m_PersistentCalls:
       m_Calls: []
+  behaviourSpendTime: 0
   shelterCanvas: {fileID: 390710429}
   outsideCanvas: {fileID: 1589722235}
   informationMonitorCanvas: {fileID: 2025123718}
@@ -3290,6 +3297,7 @@ MonoBehaviour:
   OnPlayerStatusUpdate:
     m_PersistentCalls:
       m_Calls: []
+  behaviourSpendTime: 0
   shelterCanvas: {fileID: 390710429}
   outsideCanvas: {fileID: 1589722235}
 --- !u!114 &232328984
@@ -3307,6 +3315,7 @@ MonoBehaviour:
   OnPlayerStatusUpdate:
     m_PersistentCalls:
       m_Calls: []
+  behaviourSpendTime: 0
   inventoryCanvas: {fileID: 1149816858}
   shelterCanvas: {fileID: 390710429}
   informationMonitorCanvas: {fileID: 2025123718}
@@ -3378,6 +3387,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  behaviourSpendTime: 0
   OnItemUseIgnition:
     m_PersistentCalls:
       m_Calls:
@@ -3454,102 +3464,120 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5caca88a15a42209dd599685be6d81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Behaviour>k__BackingField:
-    m_keys: 000000000100000002000000030000000400000005000000
+  <Behaviours>k__BackingField:
+    m_keys: 04000000030000000700000001000000050000000b000000060000000c0000000200000000000000
     m_values:
     - {fileID: 232328983}
     - {fileID: 232328980}
     - {fileID: 232328979}
     - {fileID: 232328985}
+    - {fileID: 232328981}
     - {fileID: 232328982}
+    - {fileID: 232328989}
+    - {fileID: 232328988}
     - {fileID: 232328984}
-  OnPlayerBehaviourInit:
+    - {fileID: 232328987}
+--- !u!114 &232328987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232328977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909b28adf3d74cc3a48ca113da93ad4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  behaviourSpendTime: 0
+--- !u!114 &232328988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232328977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2819c7c411d4336ba0ae39e6c1bd2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  behaviourSpendTime: 0
+--- !u!114 &232328989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232328977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d21e7498ca4c5a9bad7848645e8341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPlayerStatusUpdate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 232328983}
-        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
+      - m_Target: {fileID: 244481242}
+        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 8
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 232328980}
-        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
+      - m_Target: {fileID: 244481241}
+        m_TargetAssemblyTypeName: PlayerStatusBodyHeat, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 7
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 232328979}
-        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
+      - m_Target: {fileID: 244481240}
+        m_TargetAssemblyTypeName: PlayerStatusHydration, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: -3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 232328985}
-        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
+      - m_Target: {fileID: 244481239}
+        m_TargetAssemblyTypeName: PlayerStatusCalories, Assembly-CSharp
+        m_MethodName: StatusUpdate
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: -2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 232328981}
-        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 232328982}
-        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 232328984}
-        m_TargetAssemblyTypeName: PlayerBehaviourSearch, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  behaviourSpendTime: 125
+  restResultPanel: {fileID: 2048229646}
+  restResultTitle: {fileID: 929636683}
+  restResultContent: {fileID: 951291988}
+  restLoadingPanel: {fileID: 1540002798}
+  restLoadingTitle: {fileID: 1317410252}
 --- !u!1 &241293607
 GameObject:
   m_ObjectHideFlags: 0
@@ -3780,64 +3808,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e74b42229e24be88c16409b40dae18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Status>k__BackingField:
+  <Statuses>k__BackingField:
     m_keys: 00000000010000000200000003000000
     m_values:
     - {fileID: 244481242}
     - {fileID: 244481241}
     - {fileID: 244481240}
     - {fileID: 244481239}
-  OnPlayerStatusInit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 244481242}
-        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 244481241}
-        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 244481240}
-        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 244481239}
-        m_TargetAssemblyTypeName: PlayerStatusStamina, Assembly-CSharp
-        m_MethodName: Init
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &245254216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4401,7 +4378,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39
+  m_fontSize: 50
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4906,9 +4883,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Test, Assembly-CSharp
-        m_MethodName: BackToIntro
+      - m_Target: {fileID: 232328989}
+        m_TargetAssemblyTypeName: PlayerBehaviourRest, Assembly-CSharp
+        m_MethodName: Behaviour
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13325,7 +13302,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 161641920}
+  m_AnchoredPosition: {x: -399.9992, y: 165458850}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -17089,9 +17066,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Test, Assembly-CSharp
-        m_MethodName: BackToIntro
+      - m_Target: {fileID: 232328988}
+        m_TargetAssemblyTypeName: PlayerBehaviourSleep, Assembly-CSharp
+        m_MethodName: Behaviour
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

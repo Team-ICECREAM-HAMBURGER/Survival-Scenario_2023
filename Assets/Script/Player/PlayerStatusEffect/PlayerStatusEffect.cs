@@ -11,9 +11,10 @@ public abstract class PlayerStatusEffect : MonoBehaviour {
         if (Player.Instance.StatusEffect.ContainsKey(this.Type)) {
             this.Term = Player.Instance.StatusEffect[this.Type];
             GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
-            PlayerStatusEffectManager.Instance.OnStatusEffect.AddListener(PlayerStatusEffectManager.Instance.StatusEffects[this.Type].StatusEffect);
+            PlayerStatusEffectManager.Instance.OnStatusEffect.AddListener(this.StatusEffect);
         }
     }
+    
     public abstract void StatusEffectAdd();
     public abstract void StatusEffect(int value);
     public abstract void StatusEffectRemove();

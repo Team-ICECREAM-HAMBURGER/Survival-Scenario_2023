@@ -17,7 +17,7 @@ public class PlayerStatusEffectHunger : PlayerStatusEffect {
     
     public override void StatusEffect(int value) {
         foreach (var VARIABLE in this.StatusReducePercents) {
-            PlayerStatusManager.Instance.Status[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
+            PlayerStatusManager.Instance.Statuses[VARIABLE.Key].StatusUpdate(-VARIABLE.Value);
         }
     }
     
