@@ -19,7 +19,6 @@ public class PlayerBehaviourRest : PlayerBehaviour {
     
     
     public override void Init() {
-        // this.behaviourSpendTime = 125;
         this.restResultContentText = new();
     }
 
