@@ -7,8 +7,6 @@ using Random = UnityEngine.Random;
 public class World : GameControlSingleton<World> {  // Model
     private const int DAYTERM = 500;
     
-    [SerializeField] private GameInformationMonitorWorld gameInformationMonitorWorld;
-    
     private GameInformationWorldData data;
     private float weatherPercent;
     private int weatherTime;
@@ -141,9 +139,6 @@ public class World : GameControlSingleton<World> {  // Model
 
             this.weatherTime = 0;
             this.weatherPercent = 20f;
-            
-            // Presenter Init //
-            this.gameInformationMonitorWorld.Init();
         }
         catch (NullReferenceException e) {
             Debug.Log("Game Over");
@@ -166,7 +161,8 @@ public class World : GameControlSingleton<World> {  // Model
             FireTimeUpdate(-value);
         }
         
-        GameInformationMonitorWorld.OnCurrentTimeDayCounterUpdate.Invoke(World.Instance.TimeDay);
+        GameInformationMonitorManager.Instance.CurrentTimeDayCounterUpdate(this.TimeDay);
+
         WeatherUpdate(value);
     }
 
@@ -181,7 +177,6 @@ public class World : GameControlSingleton<World> {  // Model
             return;
         }
         
-        // GameRandomEventManager.Instance.RandomEventPercentSelect(this.weatherPercent)
         if (false) {
             this.Weather = !this.IsWinter ? 
                 (GameControlType.Weather.RAIN, "비") : (GameControlType.Weather.SNOW, "눈보라");
@@ -189,7 +184,8 @@ public class World : GameControlSingleton<World> {  // Model
         }
         
         Debug.Log("날씨: " + this.Weather.Item2);
-        GameInformationMonitorWorld.OnCurrentWeatherUpdate.Invoke(this.Weather.Item2);
+        
+        GameInformationMonitorManager.Instance.CurrentWeatherUpdate(this.Weather);
     }
     
     private void FireTimeUpdate(int value) {

@@ -6002,6 +6002,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc06f6a664c049499438b788f89cf622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items:
+    m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f00000010000000
+    m_values:
+    - {fileID: 4047896815656666736}
+    - {fileID: 1898179928034146352}
+    - {fileID: 6303732777849457957}
+    - {fileID: 3163646709024430965}
+    - {fileID: 841545644484817850}
+    - {fileID: 3474361352443547565}
+    - {fileID: 2813977877863052833}
+    - {fileID: 5435927614960217902}
+    - {fileID: 4432992011154256837}
+    - {fileID: 4522060014275061110}
+    - {fileID: 5780296611804421401}
+    - {fileID: 559782221414420984}
+    - {fileID: 8320699216837397170}
+    - {fileID: 3981105636575697288}
+    - {fileID: 1397232957}
+    - {fileID: 431352423}
+    - {fileID: 647120002}
   OnInventorySync:
     m_PersistentCalls:
       m_Calls: []
@@ -6360,21 +6380,6 @@ MonoBehaviour:
   statusEffectMonitorPanel: {fileID: 31902414}
   statusEffectMonitorContent: {fileID: 1248169756}
   statusEffectMonitorToggleIndicator: {fileID: 1685579045}
-  statusEffectText:
-    m_keys: 0000000001000000020000000300000004000000
-    m_values:
-    - {fileID: 1911829650}
-    - {fileID: 1905097137}
-    - {fileID: 2046152433}
-    - {fileID: 683325594}
-    - {fileID: 1731001000}
-  statusGaugeSlider:
-    m_keys: 00000000010000000200000003000000
-    m_values:
-    - {fileID: 557702705}
-    - {fileID: 170220096}
-    - {fileID: 260111966}
-    - {fileID: 1381146738}
 --- !u!1 &431352421
 GameObject:
   m_ObjectHideFlags: 0
@@ -6884,7 +6889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 476379969}
   m_Layer: 5
-  m_Name: Status Effect Monitor
+  m_Name: Status Effect Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13302,7 +13307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -399.9992, y: 165458850}
+  m_AnchoredPosition: {x: -399.9992, y: 169827340}
   m_SizeDelta: {x: 800, y: 0.00030518}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &969297692
@@ -17313,7 +17318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae64de88416c488ab3ed889076ab1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameInformationMonitorPlayer: {fileID: 421394339}
 --- !u!1 &1248169756
 GameObject:
   m_ObjectHideFlags: 0
@@ -17346,11 +17350,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1911829651}
-  - {fileID: 1905097138}
   - {fileID: 2046152434}
   - {fileID: 683325595}
+  - {fileID: 1905097138}
   - {fileID: 1731001001}
+  - {fileID: 1911829651}
   m_Father: {fileID: 31902415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -21591,9 +21595,9 @@ RectTransform:
   - {fileID: 1956464781}
   m_Father: {fileID: 969297691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760321712
@@ -24897,6 +24901,7 @@ GameObject:
   - component: {fileID: 2025123718}
   - component: {fileID: 2025123717}
   - component: {fileID: 2025123716}
+  - component: {fileID: 2025123720}
   m_Layer: 5
   m_Name: Canvas Information Monitor
   m_TagString: Untagged
@@ -24988,6 +24993,35 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2025123720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025123715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 884e190d43e740e496bac889b35e025a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <StatusGaugeSliders>k__BackingField:
+    m_keys: 00000000010000000200000003000000
+    m_values:
+    - {fileID: 557702705}
+    - {fileID: 170220096}
+    - {fileID: 260111966}
+    - {fileID: 1381146738}
+  <StatusEffectText>k__BackingField:
+    m_keys: 0000000001000000020000000300000004000000
+    m_values:
+    - {fileID: 2046152433}
+    - {fileID: 683325594}
+    - {fileID: 1905097137}
+    - {fileID: 1731001000}
+    - {fileID: 1911829650}
+  gameInformationMonitorWorld: {fileID: 2119271096}
+  gameInformationMonitorPlayer: {fileID: 421394339}
 --- !u!1 &2025197559
 GameObject:
   m_ObjectHideFlags: 0

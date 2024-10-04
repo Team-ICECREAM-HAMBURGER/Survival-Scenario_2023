@@ -12,7 +12,7 @@ public class PlayerStatusEffectHunger : PlayerStatusEffect {
     
     public override void StatusEffectAdd() {
         Player.Instance.StatusEffect.TryAdd(this.Type, this.Term);
-        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        GameInformationMonitorManager.Instance.StatusEffectPanelUpdate(this.Type, this.Name);
     }
     
     public override void StatusEffect(int value) {
@@ -23,6 +23,6 @@ public class PlayerStatusEffectHunger : PlayerStatusEffect {
     
     public override void StatusEffectRemove() {
         Player.Instance.StatusEffect.Remove(this.Type);
-        GameInformationMonitorPlayer.OnStatusEffectPanelUpdate.Invoke(this.Type, this.Name);
+        GameInformationMonitorManager.Instance.StatusEffectPanelUpdate(this.Type, this.Name);
     }
 }

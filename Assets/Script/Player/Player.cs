@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 
 public class Player : GameControlSingleton<Player> { // Model
-    [SerializeField] private GameInformationMonitorPlayer gameInformationMonitorPlayer;
 
     private GameInformationPlayerData data;
     
@@ -71,8 +70,7 @@ public class Player : GameControlSingleton<Player> { // Model
             this.PlayerName = this.data.name;
             this.PlayerID = this.data.id;
             
-            this.gameInformationMonitorPlayer.Init();
-            
+            GameInformationMonitorManager.Instance.Init();
             PlayerStatusManager.Instance.Init();
             PlayerStatusEffectManager.Instance.Init();
             PlayerBehaviourManager.Instance.Init();

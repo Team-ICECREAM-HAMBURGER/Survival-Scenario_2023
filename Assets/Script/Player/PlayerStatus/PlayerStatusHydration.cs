@@ -4,8 +4,6 @@ public class PlayerStatusHydration : PlayerStatus { // Presenter
         this.Type = GameControlType.Status.HYDRATION;
         this.LimitValue = 30f;
         this.CurrentValue = Player.Instance.Status[this.Type];
-        
-        base.Init();
     }
 
     public override void StatusUpdate(float value) {

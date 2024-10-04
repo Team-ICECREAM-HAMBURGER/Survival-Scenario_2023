@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class PlayerStatusManager : GameControlSingleton<PlayerStatusManager> {
     [field: SerializeField] public GameControlDictionary.PlayerStatus Statuses { get; private set; }
-    
-    
+
     public void Init() {
-        // TODO: foreach문을 이용한 Init() 방식을 개선; 애초에 개선이 가능한가?
         foreach (var VARIABLE in this.Statuses) {   
             VARIABLE.Value.Init();
         }
