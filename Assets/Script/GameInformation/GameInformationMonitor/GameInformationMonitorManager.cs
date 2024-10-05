@@ -7,7 +7,7 @@ public class GameInformationMonitorManager : GameControlSingleton<GameInformatio
     
     [Space(25f)]
     
-    [Header("Game Information Monitor")]
+    [Header("Game Information Monitor")] // TODO: Unity Event?
     [SerializeField] private GameInformationMonitorWorld gameInformationMonitorWorld;
     [SerializeField] private GameInformationMonitorPlayer gameInformationMonitorPlayer;
 

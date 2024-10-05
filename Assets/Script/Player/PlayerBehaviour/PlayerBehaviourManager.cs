@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManager> {
     [field: SerializeField] public GameControlDictionary.PlayerBehaviour Behaviours { get; private set; }
+
+    public int InventorySpace { get; private set; }
+    public int InventorySpaceMax { get; private set; }
     
 
     public void Init() {
+        this.InventorySpace = Player.Instance.Inventory.Sum(x => x.Value);
+        this.InventorySpaceMax = 25;
+        
         foreach (var VARIABLE in this.Behaviours) {
             VARIABLE.Value.Init();
         }
@@ -34,8 +40,8 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
         ItemManager.Instance.InventorySync();
     }
 
-    public int GetInventoryAmountTotal() {
-        return Player.Instance.Inventory.Sum(x => x.Value);
+    public int UpdateInventoryAmountTotal() {
+        return this.InventorySpace = Player.Instance.Inventory.Sum(x => x.Value);
     }
 
     public int GetInventoryAmountItem(GameControlType.Item type) {
