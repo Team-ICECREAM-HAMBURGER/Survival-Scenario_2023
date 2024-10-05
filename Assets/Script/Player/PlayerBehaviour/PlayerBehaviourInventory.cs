@@ -24,9 +24,6 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
     [SerializeField] private TMP_Text inventorySpaceText;
     [SerializeField] private Slider inventorySpaceIndicator;
 
-    // private int inventorySpaceValue;
-    // private int inventorySpaceMaxValue;
-    
     // TODO: Manager에서 접근하여 호출하는 하위 클래스의 메서드는 참조 없이 이벤트로 호출한다. 
     public static UnityEvent<(string, string)> OnItemInfoPanelUpdate;
     public static UnityEvent OnInventoryInfoPanelUpdate;
@@ -36,8 +33,6 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
     public override void Init() {
         this.itemInfoTitle.text = "인벤토리";
         this.itemInfoContent.text = "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다.";
-        // this.inventorySpaceMaxValue = 25;
-        // this.inventorySpaceValue = PlayerBehaviourManager.Instance.GetInventoryAmountTotal();
         
         OnItemInfoPanelUpdate = new();
         OnItemInfoPanelUpdate.AddListener(PanelUpdateItemInfo);
@@ -61,11 +56,6 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
     }
 
     private void PanelUpdateInventoryInfo() {
-        // this.inventorySpaceValue = PlayerBehaviourManager.Instance.GetInventoryAmountTotal();
-        // this.inventorySpaceIndicator.maxValue = this.inventorySpaceMaxValue;
-        // this.inventorySpaceIndicator.value = this.inventorySpaceValue;
-        // this.inventorySpaceText.text = this.inventorySpaceValue + " / " + this.inventorySpaceMaxValue;
-        
         this.inventorySpaceIndicator.value = PlayerBehaviourManager.Instance.UpdateInventoryAmountTotal();
         this.inventorySpaceIndicator.maxValue = PlayerBehaviourManager.Instance.InventorySpaceMax;
         this.inventorySpaceText.text = PlayerBehaviourManager.Instance.InventorySpace + " / " + PlayerBehaviourManager.Instance.InventorySpaceMax;
