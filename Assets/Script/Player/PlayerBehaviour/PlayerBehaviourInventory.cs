@@ -31,8 +31,7 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
 
 
     public override void Init() {
-        this.itemInfoTitle.text = "인벤토리";
-        this.itemInfoContent.text = "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다.";
+        PanelUpdateItemInfo(("인벤토리", "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다."));
         
         OnItemInfoPanelUpdate = new();
         OnItemInfoPanelUpdate.AddListener(PanelUpdateItemInfo);
@@ -61,6 +60,7 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
         this.inventorySpaceText.text = PlayerBehaviourManager.Instance.InventorySpace + " / " + PlayerBehaviourManager.Instance.InventorySpaceMax;
     }
 
+    // TODO: 꼭 이 메서드가 있어야 하나?
     private void PanelUpdateItemInfo((string, string) value) {
         this.itemInfoTitle.text = value.Item1;
         this.itemInfoContent.text = value.Item2;

@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerBehaviourCraft : PlayerBehaviour {
     [Space(25f)]
     
     [Header("Game Screen Update Resource")] 
-    [SerializeField] private Canvas craftCanvas;
+    [SerializeField] private Canvas craftingCanvas;
     [SerializeField] private Canvas shelterCanvas;
     [SerializeField] private Canvas informationMonitorCanvas;
     [SerializeField] private Canvas sideMenuCanvas;
@@ -30,8 +31,7 @@ public class PlayerBehaviourCraft : PlayerBehaviour {
 
     
     public override void Init() {
-        this.itemInfoTitle.text = "제작하기";
-        this.itemInfoContent.text = "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다.";
+        PanelUpdateItemInfo(("제작하기", "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다."));
 
         OnItemInfoPanelUpdate = new();
         OnItemInfoPanelUpdate.AddListener(PanelUpdateItemInfo);
@@ -41,6 +41,8 @@ public class PlayerBehaviourCraft : PlayerBehaviour {
     }
     
     public override void Behaviour() {
+        PanelUpdateItemInfo(("제작하기", "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다."));
+
         // Player Inventory Invoke
         PlayerBehaviourManager.Instance.InventorySync();
 
@@ -64,14 +66,14 @@ public class PlayerBehaviourCraft : PlayerBehaviour {
 
     public void PanelUpdateCanvasSetEnter() {
         this.shelterCanvas.enabled = false;
-        this.craftCanvas.enabled = true;
+        this.craftingCanvas.enabled = true;
         this.sideMenuCanvas.enabled = false;
         this.informationMonitorCanvas.enabled = false;
     }
 
     public void PanelUpdateCanvasSetReturn() {
         this.shelterCanvas.enabled = true;
-        this.craftCanvas.enabled = false;
+        this.craftingCanvas.enabled = false;
         this.sideMenuCanvas.enabled = true;
         this.informationMonitorCanvas.enabled = true;
     }
