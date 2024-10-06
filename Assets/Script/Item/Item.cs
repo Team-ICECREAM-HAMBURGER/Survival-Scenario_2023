@@ -26,6 +26,7 @@ public abstract class Item : MonoBehaviour {
     
     
     public virtual void Init() { 
+        ItemManager.Instance.OnInventorySync.RemoveListener(InventorySync); // 제작하기, 인벤토리 리스너 중복 해결
         ItemManager.Instance.OnInventorySync.AddListener(InventorySync);
         ItemManager.Instance.ItemsAdd((this.itemType, this));
     }
@@ -36,7 +37,7 @@ public abstract class Item : MonoBehaviour {
 
     public virtual void ItemInfo() {
         itemInfoTitle.text = itemInfoTitleText;
-        itemInfoExplanation.text = itemInfoExplanationText;
+        itemInfoExplanation.text = itemInfoExplanationText; // TODO: 아이템 정보 텍스트는 조합법, 효과 등에 대한 정보를 담아야
     }
     
     public virtual void InventorySync(GameControlDictionary.Inventory value) {

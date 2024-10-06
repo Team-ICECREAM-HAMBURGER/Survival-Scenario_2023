@@ -61,4 +61,18 @@ public class PlayerBehaviourCraft : PlayerBehaviour {
         this.itemInfoTitle.text = value.Item1;
         this.itemInfoContent.text = value.Item2;
     }
+
+    public void PanelUpdateCanvasSetEnter() {
+        this.shelterCanvas.enabled = false;
+        this.craftCanvas.enabled = true;
+        this.sideMenuCanvas.enabled = false;
+        this.informationMonitorCanvas.enabled = false;
+    }
+
+    public void PanelUpdateCanvasSetReturn() {
+        this.shelterCanvas.enabled = true;
+        this.craftCanvas.enabled = false;
+        this.sideMenuCanvas.enabled = true;
+        this.informationMonitorCanvas.enabled = true;
+    }
 }

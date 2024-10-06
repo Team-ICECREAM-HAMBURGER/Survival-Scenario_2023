@@ -77,7 +77,7 @@ public class Player : GameControlSingleton<Player> { // Model
             PlayerBehaviourManager.Instance.Init();
         }
         catch (NullReferenceException e) {
-            Debug.Log("Game Over");
+            Debug.Log(e);
         }
     }
     
