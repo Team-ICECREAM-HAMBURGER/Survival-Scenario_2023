@@ -42,7 +42,9 @@ public class PlayerBehaviourCraft : PlayerBehaviour {
     
     public override void Behaviour() {
         PanelUpdateItemInfo(("제작하기", "아이템 항목을 선택하면 세부 사항을 볼 수 있습니다."));
-
+        
+        
+        
         // Player Inventory Invoke
         PlayerBehaviourManager.Instance.InventorySync();
 

@@ -27,7 +27,7 @@ public class ItemCraft : MonoBehaviour {
         InventorySync();
     }
 
-    private void InventorySync() {
+    private void InventorySync() {  // TODO: PlayerBehaviourCraft.Behaviour() 단계에서 실행되어야 개수가 업데이트된다.
         this.itemAmount.text = Player.Instance.Inventory[this.itemType].ToString();
     }
     
