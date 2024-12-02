@@ -59,8 +59,7 @@ public class PlayerBehaviourInventory : PlayerBehaviour {
         this.inventorySpaceIndicator.maxValue = PlayerBehaviourManager.Instance.InventorySpaceMax;
         this.inventorySpaceText.text = PlayerBehaviourManager.Instance.InventorySpace + " / " + PlayerBehaviourManager.Instance.InventorySpaceMax;
     }
-
-    // TODO: 꼭 이 메서드가 있어야 하나?
+    
     private void PanelUpdateItemInfo((string, string) value) {
         this.itemInfoTitle.text = value.Item1;
         this.itemInfoContent.text = value.Item2;

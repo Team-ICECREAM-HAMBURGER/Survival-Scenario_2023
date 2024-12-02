@@ -53,7 +53,9 @@ public class PlayerBehaviourManager : GameControlSingleton<PlayerBehaviourManage
     }
 
     public void PanelUpdateInventoryInfo() {
+        // TODO: 이벤트를 Manager에 만들고, Inventory, Craft에서 Add
         PlayerBehaviourInventory.OnInventoryInfoPanelUpdate.Invoke();
+        PlayerBehaviourCraft.OnInventoryInfoPanelUpdate.Invoke();
     }
     
     public void ItemUse((GameControlType.Item, int) value) {

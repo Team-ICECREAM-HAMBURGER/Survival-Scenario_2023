@@ -20,18 +20,26 @@ public class ItemCraft : MonoBehaviour {
     [SerializeField] protected TMP_Text itemInfoExplanation;
 
 
-    public void Init() {
-        this.itemInfoTitle.text = this.itemInfoTitleText;
-        this.itemInfoExplanation.text = this.itemInfoExplanationText;
-
-        InventorySync();
+    private void Init() {
+        ItemManager.Instance.OnInventorySync.AddListener(InventorySync);
     }
 
-    private void InventorySync() {  // TODO: PlayerBehaviourCraft.Behaviour() 단계에서 실행되어야 개수가 업데이트된다.
-        this.itemAmount.text = Player.Instance.Inventory[this.itemType].ToString();
+    private void Awake() {
+        Init();
     }
     
-    public void Craft() {
+    public void InventorySync(GameControlDictionary.Inventory value) {
+        this.itemAmount.text = value[this.itemType].ToString();
+    }
+    
+    public void Craft() { 
+        // TODO: 메서드 제작
         ItemManager.Instance.ItemAdd((this.itemType, this.itemCraftAmount));
+        ItemManager.Instance.InventorySync();
+    }
+
+    public void ItemInfo() {
+        this.itemInfoTitle.text = this.itemInfoTitleText;
+        this.itemInfoExplanation.text = this.itemInfoExplanationText;
     }
 }

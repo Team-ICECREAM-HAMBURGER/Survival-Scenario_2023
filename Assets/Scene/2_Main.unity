@@ -1430,7 +1430,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 639961040}
         m_TargetAssemblyTypeName: ItemCraft, Assembly-CSharp
-        m_MethodName: Init
+        m_MethodName: ItemInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6879,9 +6879,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 688073398}
+      - m_Target: {fileID: 639961040}
         m_TargetAssemblyTypeName: ItemCraft, Assembly-CSharp
-        m_MethodName: Init
+        m_MethodName: ItemInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7258,9 +7258,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2087482526}
+      - m_Target: {fileID: 639961040}
         m_TargetAssemblyTypeName: ItemCraft, Assembly-CSharp
-        m_MethodName: Init
+        m_MethodName: ItemInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16178,9 +16178,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1372854287}
+      - m_Target: {fileID: 639961040}
         m_TargetAssemblyTypeName: ItemCraft, Assembly-CSharp
-        m_MethodName: Init
+        m_MethodName: ItemInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19775,7 +19775,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1931204354}
         m_TargetAssemblyTypeName: ItemCraft, Assembly-CSharp
-        m_MethodName: Init
+        m_MethodName: ItemInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
